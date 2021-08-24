@@ -29,4 +29,4 @@ jobs:
       shell: bash -l {0}
       run: |
         source activate IOOS
-        pytest --nbval --nbval-lax notebooks/
+        pytest --nbval --nbval-lax jupyterbook/
