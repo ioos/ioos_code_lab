@@ -54,13 +54,13 @@ export PATH=$HOME/miniconda3/bin:$PATH
 
 ## Create the IOOS Anaconda environment
 
-Download the [environment.yml](https://raw.githubusercontent.com/ioos/notebooks_demos/master/.binder/environment.yml),
-or the [environment-python_and_r.yml](https://raw.githubusercontent.com/ioos/notebooks_demos/master/.binder/environment-python_and_r.yml) for a bigger environment with the R packages,
+Download the [environment.yml](https://raw.githubusercontent.com/ioos/ioos_code_lab/master/.binder/environment.yml),
+or the [environment-python_and_r.yml](https://raw.githubusercontent.com/ioos/ioos_code_lab/master/.binder/environment-python_and_r.yml) for a bigger environment with the R packages,
 by right clicking with the mouse and choosing `save as...`,
 or, on `OS X` and `Linux`, use these commands to download:
 
 ```bash
-url=https://raw.githubusercontent.com/ioos/notebooks_demos/master/environment.yml
+url=https://raw.githubusercontent.com/ioos/ioos_code_lab/master/environment.yml
 curl $url -o environment.yml
 ```
 
@@ -125,5 +125,5 @@ Check out [Travis Oliphant's blog piece](http://technicaldiscovery.blogspot.com/
 
 ## How to get help
 
-* Raise an issue [here](https://github.com/ioos/notebooks_demos/issues)
+* Raise an issue [here](https://github.com/ioos/ioos_code_lab/issues)
 * Please get help on the [IOOS-tech Google Group](https://groups.google.com/forum/?hl=en#!forum/ioos_tech)
