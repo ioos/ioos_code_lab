@@ -9,4 +9,4 @@ To suggest a notebook or ask questions please open an issue at: https://github.c
 
 ## Citation
 
-<!-- [![DOI](https://zenodo.org/badge/58492405.svg)](https://zenodo.org/badge/latestdoi/58492405) -->
+[![DOI](https://zenodo.org/badge/399546690.svg)](https://zenodo.org/badge/latestdoi/399546690)
