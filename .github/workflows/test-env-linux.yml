@@ -1,4 +1,4 @@
-name: Test Notebooks
+name: Build Env on Linux
 
 on:
   pull_request:
@@ -23,9 +23,4 @@ jobs:
       run: |
          conda create --name IOOS --file .binder/conda-linux-64.lock
          source activate IOOS
-
-    - name: Notebook tests
-      shell: bash -l {0}
-      run: |
-        source activate IOOS
-        pytest --nbval --nbval-lax jupyterbook/
+         python -c 'import osgeo.gdal; print(dir(osgeo.gdal))'
