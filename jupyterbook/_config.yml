@@ -53,7 +53,7 @@ html:
                               SSMC3, 2nd Floor <br>
                               Silver Spring, MD 20910 <br>
                               (240) 533-9444
-  google_analytics_id       : "G-6PET6017GE"
+  google_analytics_id       : "G-546J258RCJ"
   home_page_in_navbar       : false  # Whether to include your home page in the left Navigation Bar
   baseurl                   : ""  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
   comments:
