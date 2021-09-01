@@ -33,7 +33,7 @@ it is best uncheck the boxes and use the `Anaconda Command Prompt` or `Anaconda 
 
 ### Linux/macOS
 
-Copy-and-paste this:
+Copy-and-paste this in the terminal:
 
 ```shell
 if [[ $(uname) == "Darwin" ]]; then
@@ -46,7 +46,7 @@ sh miniconda.sh
 export PATH=$HOME/miniconda3/bin:$PATH
 ```
 
-and use all the default options, expect for the license agreement where you must actively change it to `yes`.
+and use all the default options, except for the license agreement where you must actively change it to `yes`.
 
 ## Create the IOOS conda environment
 
