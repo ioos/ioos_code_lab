@@ -8,22 +8,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup Conda
-      uses: s-weigand/setup-conda@v1
-      with:
-        activate-conda: false
-        conda-channels: conda-forge
+      - name: Setup Conda
+        uses: s-weigand/setup-conda@v1
+        with:
+          activate-conda: false
+          conda-channels: conda-forge
 
-    - name: Build environment
-      shell: bash -l {0}
-      run: |
-         conda create --name IOOS --file .binder/conda-linux-64.lock
-         source activate IOOS
+      - name: Build environment
+        shell: bash -l {0}
+        run: |
+          conda create --name IOOS --file .binder/conda-linux-64.lock
+          source activate IOOS
 
-    - name: Notebook tests
-      shell: bash -l {0}
-      run: |
-        source activate IOOS
-        pytest --nbval --nbval-lax jupyterbook/
+      - name: Notebook tests
+        shell: bash -l {0}
+        run: |
+          source activate IOOS
+          pytest --nbval --nbval-lax jupyterbook/
