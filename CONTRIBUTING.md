@@ -114,16 +114,16 @@ Keep your local master up-to-date with the upstream master ([walkthough](https:/
 
 ```
 $ git fetch upstream
-$ git pull upstream/master master
+$ git pull upstream/main main
 ```
 OR
 ```
-$ git merge upstream/master master
+$ git merge upstream/main main
 ```
 
 Rebase (if needed):
 ```
-$ git rebase upstream/master
+$ git rebase upstream/main
 ```
 
 Push your local repo up to your fork in GitHub.
