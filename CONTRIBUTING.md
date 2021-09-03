@@ -110,7 +110,7 @@ Set the upstream branch to the ioos/notebooks_demos repository:
 
 ```$ git remote add upstream https://github.com/ioos/ioos_code_lab.git```
 
-Keep your local master up-to-date with the upstream master ([walkthough](https://stefanbauer.me/articles/how-to-keep-your-git-fork-up-to-date)):
+Keep your local main up-to-date with the upstream main ([walkthough](https://stefanbauer.me/articles/how-to-keep-your-git-fork-up-to-date)):
 
 ```
 $ git fetch upstream
