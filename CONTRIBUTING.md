@@ -37,12 +37,11 @@ If you would like to work on a notebook that has been proposed, follow these ste
          2. `data_analysis_and_visualization_notebooks` -
          3. `data_management_notebooks` - 
    2. Typically, it's best to copy an existing (working) notebook to a new file. If you are creating a python notebook, copy one of the python notebooks. If you are creating an R notebook, copy one of the R notebooks, etc
-   3. Name the notebook following the convention `DRAFT-[short name].ipynb`. Where, `[short name]` is an abbreviation for what the notebook will cover. Look at the existing notebook filenames to get a sense of the short names used. 
+   3. Name the notebook following the convention `[date]-[short name].ipynb`. Where, `[date]` is the date (YYYY-MM-DD) you started the new notebook and `[short name]` is an abbreviation for what the notebook will cover. Look at the existing notebook filenames to get a sense of the short names used. 
 1. Edit the notebook following the [Jupyter Notebook documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html).
 1. Once you feel comfortable with your notebook, [commit](https://github.com/git-guides/git-commit) your work to the branch on your fork on your local machine. 
 1. [Push](https://github.com/git-guides/git-push) your commit up to the branch on your fork in GitHub.
-1. [Create a Draft Pull Request (PR)](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
-   1. This is the same as creating a PR, you just use the drop-down and select Create Draft Pull Request, then click Draft Pull Request.
+1. [Create a Pull Request (PR)](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
 1. Link the PR to the ticket requesting the new notebook. 
    1. On the right hand side of the PR there is an option for `Linked issues`. Type the number for the issue there (or scroll through the tickets until you find the one of interest). 
    1. **Admin** Move the Project card from `Backlog` to `Working`.
