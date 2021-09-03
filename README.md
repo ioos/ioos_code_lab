@@ -1,4 +1,9 @@
-# IOOS demonstrations and examples notebooks
+# IOOS CodeLab
+
+The [IOOS CodeLab](https://ioos.github.io/ioos_code_lab) is a collection of tutorials and examples of how to access and 
+utilize the many IOOS technologies and data sources available. This site is geared towards scientists and environmental 
+managers interested in “diving deep” into the numbers and creating original plots and data analysis. Most notebook 
+examples are written in Python, however, we also have a growing number of notebooks written in Matlab, and R.
 
 See the rendered version at https://ioos.github.io/ioos_code_lab
 
