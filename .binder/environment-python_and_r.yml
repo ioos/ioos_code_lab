@@ -40,6 +40,7 @@ dependencies:
   - palettable
   - phantomjs
   - pocean-core
+  - pre-commit
   - pyoos
   - pyresample
   - pysgrid

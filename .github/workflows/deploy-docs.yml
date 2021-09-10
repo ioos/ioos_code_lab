@@ -2,36 +2,39 @@ name: Build and Deploy docs
 
 on:
   push:
-    branches: [master]
+    branches:
+      - main
+  pull_request:
 
 jobs:
   build-docs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup Conda
-      uses: s-weigand/setup-conda@v1
-      with:
-        activate-conda: false
-        conda-channels: conda-forge
+      - name: Setup Conda
+        uses: s-weigand/setup-conda@v1
+        with:
+          activate-conda: false
+          conda-channels: conda-forge
 
-    - name: Build environment
-      shell: bash -l {0}
-      run: |
-         conda create --name IOOS --file .binder/conda-linux-64.lock
-         source activate IOOS
+      - name: Build environment
+        shell: bash -l {0}
+        run: |
+          conda create --name IOOS --file .binder/conda-linux-64.lock
+          source activate IOOS
 
-    - name: Build documentation
-      shell: bash -l {0}
-      run: |
-        set -e
-        source activate IOOS
-        jupyter-book build jupyterbook
+      - name: Build documentation
+        shell: bash -l {0}
+        run: |
+          set -e
+          source activate IOOS
+          jupyter-book build jupyterbook
 
-    - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3.6.1
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: jupyterbook/_build/html
+      - name: GitHub Pages action
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3.6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: jupyterbook/_build/html
