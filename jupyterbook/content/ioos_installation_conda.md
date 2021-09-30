@@ -1,4 +1,5 @@
 # Installing the IOOS conda environment
+
 For IOOS python users we recommend the free
 [Miniconda](http://conda.pydata.org/miniconda.html) Python distribution,
 a lightweight version of the [Anaconda Scientific Python Distribution](https://store.continuum.io/cshop/anaconda/).
@@ -19,7 +20,7 @@ Windows users also need to choose between 32-bit (old Windows XP) or 64-bit (mod
 ### Windows
 
 Run the installer
-Choose *Just Me* (not *All Users*),
+Choose _Just Me_ (not _All Users_),
 and choose a Install Location owned by you.
 The default `%USERPROFILE%\AppData\Local\Continuum\Miniconda3` is fine,
 but kind of long,
@@ -101,5 +102,5 @@ Check out [Travis Oliphant's blog piece](http://technicaldiscovery.blogspot.com/
 
 ## How to get help
 
-* Raise an issue [here](https://github.com/ioos/ioos_code_lab/issues)
-* Please get help on the [IOOS-tech Google Group](https://groups.google.com/forum/?hl=en#!forum/ioos_tech)
+- Raise an issue [here](https://github.com/ioos/ioos_code_lab/issues)
+- Please get help on the [IOOS-tech Google Group](https://groups.google.com/forum/?hl=en#!forum/ioos_tech)
