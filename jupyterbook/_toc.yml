@@ -2,38 +2,38 @@ format: jb-book
 root: content/intro.md
 title: The IOOS Data Demo Center
 parts:
-- caption: Code Gallery
-  chapters:
-  - file: content/Code Gallery/data_access.md
-    sections:
-    - glob: content/Code Gallery/data_access_notebooks/*
+  - caption: Code Gallery
+    chapters:
+      - file: content/code_gallery/data_access.md
+        sections:
+          - glob: content/code_gallery/data_access_notebooks/*
 
-  - file: content/Code Gallery/data_analysis_and_visualization.md
-    sections:
-    - glob: content/Code Gallery/data_analysis_and_visualization_notebooks/*
+      - file: content/code_gallery/data_analysis_and_visualization.md
+        sections:
+          - glob: content/code_gallery/data_analysis_and_visualization_notebooks/*
 
-  - file: content/Code Gallery/data_management.md
-    sections:
-    - glob: content/Code Gallery/data_management_notebooks/*
+      - file: content/code_gallery/data_management.md
+        sections:
+          - glob: content/code_gallery/data_management_notebooks/*
 
-- caption: Video Tutorials
-  chapters:
-    - glob: content/Video_Demo_Markdown/*
+  - caption: Video Tutorials
+    chapters:
+      - glob: content/Video_Demo_Markdown/*
 
-- caption: Other Resources
-  chapters:
-  - file: content/ioos_installation_conda.md
-    title: Installing the IOOS Conda Environment
-  - url: https://help.aodn.org.au/aodn-data-tools/user-code-library/
-    title: Opening netCDF files - hints from AODN
-  - url: http://unidata.github.io/notebook-gallery/
-    title: Unidata Jupyter Notebook Gallery
-  - url: http://iobis.org/tutorial/
-    title: Extracting and Enriching OBIS data with R
-  - url: https://github.com/USGS-R
-    title: USGS-R Examples
+  - caption: Other Resources
+    chapters:
+      - file: content/ioos_installation_conda.md
+        title: Installing the IOOS Conda Environment
+      - url: https://help.aodn.org.au/aodn-data-tools/user-code-library/
+        title: Opening netCDF files - hints from AODN
+      - url: http://unidata.github.io/notebook-gallery/
+        title: Unidata Jupyter Notebook Gallery
+      - url: http://iobis.org/tutorial/
+        title: Extracting and Enriching OBIS data with R
+      - url: https://github.com/USGS-R
+        title: USGS-R Examples
 
-- caption: Contact Us
-  chapters:
-  - file: content/contact_us.md
-    title: Contact Us
+  - caption: Contact Us
+    chapters:
+      - file: content/contact_us.md
+        title: Contact Us
