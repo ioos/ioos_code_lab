@@ -12,8 +12,8 @@ you can install it by typing `conda install anaconda` using miniconda.
 ## Install
 
 Download and install the appropriate Miniconda installer from [http://conda.pydata.org/miniconda.html](http://conda.pydata.org/miniconda.html).
-With conda you can create environments that use any Python version (e.g. Python 2.7 or Python 3.9),
-so install the latest Python 3 and if find out later you need a Python 2.7 environment,
+With conda you can create environments that use any Python version (e.g. Python 2.7 or Python 3.x),
+so install the latest Python 3.x and if find out later you need a Python 2.7 environment,
 you can create one.
 Windows users also need to choose between 32-bit (old Windows XP) or 64-bit (modern Windows) versions.
 
@@ -90,6 +90,24 @@ you can type
 conda deactivate
 ```
 
+## Updating the IOOS environment
+
+To update an existing environment you can do,
+
+```bash
+conda update --all --yes
+```
+
+Sometimes that operation can be slow if you have a really old version of the environment, or even impossible to update.
+In that case we recommend removing and re-creating the environment. To remove an existing environment you have to run:
+
+```shell
+conda env remove -name IOOS
+```
+
+and follow the instructions from above to re-create. Note that you don't need to re-install miniconda.
+Just download a fresh version of the environment file and re-create it.
+
 ## Why we use and recommend conda
 
 Conda users can just `conda install`,
@@ -104,3 +122,23 @@ Check out [Travis Oliphant's blog piece](http://technicaldiscovery.blogspot.com/
 
 - Raise an issue [here](https://github.com/ioos/ioos_code_lab/issues)
 - Please get help on the [IOOS-tech Google Group](https://groups.google.com/forum/?hl=en#!forum/ioos_tech)
+
+## Appendix: conda-lock
+
+Locking environments can be useful for reproducibility, Continuous Integration (CI), or when one requires faster installation.
+The reason is because a locked environment saves the "solved" list of packages and only downloads them.
+Making it much faster than creating from the environment file and ensuring that the same packages from the time you locked will be used.
+
+To lock an environment you will need to install conda-lock,
+
+```shell
+conda install conda-lock
+```
+
+then execute the locking command targeting the environment file you want to lock and the platforms, like:
+
+```shell
+conda-lock -f environment.yml -p osx-64 -p linux-64 -p win-64
+```
+
+In the example above we are locking for macOS, Linux and Windows.
