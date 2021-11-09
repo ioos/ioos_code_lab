@@ -39,7 +39,7 @@ If you would like to work on a notebook that has been proposed, follow these ste
 1. On your fork, [create a branch](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository) where you will start working on the new notebook.
    1. Give the branch a name that conveys what the new notebook is. For example, a notebook on converting data into Darwin Core could have a branch name of `data2dwc`. This makes it easier to know which branch is dedicated to which new notebook.
 1. On the new branch in your fork, start creating the new notebook.
-   1. Notebooks are kept in the [jupyterbook/content/code_gallery](https://github.com/ioos/ioos_code_lab/tree/master/jupyterbook/content/code_gallery) directory of this repository.
+   1. Notebooks are kept in the [jupyterbook/content/code_gallery](https://github.com/ioos/ioos_code_lab/tree/main/jupyterbook/content/code_gallery) directory of this repository.
       1. There are three directories where notebooks can be placed:
          1. `data_access_notebooks` -
          2. `data_analysis_and_visualization_notebooks` -
