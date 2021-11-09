@@ -51,13 +51,13 @@ and use all the default options, except for the license agreement where you must
 
 ## Create the IOOS conda environment
 
-Download the [environment.yml](https://raw.githubusercontent.com/ioos/ioos_code_lab/master/.binder/environment.yml),
-or the [environment-python_and_r.yml](https://raw.githubusercontent.com/ioos/ioos_code_lab/master/.binder/environment-python_and_r.yml) for a bigger environment with the R packages,
+Download the [environment.yml](https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment.yml),
+or the [environment-python_and_r.yml](https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment-python_and_r.yml) for a bigger environment with the R packages,
 by right clicking with the mouse and choosing `save as...`,
 or, on `macOS` and `Linux`, use these commands to download:
 
 ```bash
-url=https://raw.githubusercontent.com/ioos/ioos_code_lab/master/environment.yml
+url=https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment.yml
 curl $url -o environment.yml
 ```
 
