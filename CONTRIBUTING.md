@@ -46,7 +46,10 @@ If you would like to work on a notebook that has been proposed, follow these ste
          3. `data_management_notebooks` -
    2. Typically, it's best to copy an existing (working) notebook to a new file. If you are creating a python notebook, copy one of the python notebooks. If you are creating an R notebook, copy one of the R notebooks, etc
    3. Name the notebook following the convention `[date]-[short name].ipynb`. Where, `[date]` is the date (YYYY-MM-DD) you started the new notebook and `[short name]` is an abbreviation for what the notebook will cover. Look at the existing notebook filenames to get a sense of the short names used.
-1. Edit the notebook following the [Jupyter Notebook documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html).
+1. Edit the notebook following the [Jupyter Notebook documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html). The notebook should include the following information:
+   1. Descriptive title for what the notebook is doing.
+   1. A short summary providing context and expanding on the title.
+   1. The date you started (or updated) the notebook.
 1. Once you feel comfortable with your notebook, [commit](https://github.com/git-guides/git-commit) your work to the branch on your fork on your local machine.
 1. [Push](https://github.com/git-guides/git-push) your commit up to the branch on your fork in GitHub.
 1. [Create a Pull Request (PR)](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
