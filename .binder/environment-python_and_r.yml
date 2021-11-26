@@ -27,7 +27,7 @@ dependencies:
   - ipyleaflet
   - joblib
   - jupyter
-  - jupyter-book >=0.11.3
+  - jupyter-book >=0.12.1
   - jupyter_contrib_nbextensions
   - jupyter_nbextensions_configurator
   - matplotlib-base
