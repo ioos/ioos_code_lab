@@ -51,6 +51,7 @@ dependencies:
   - seaborn
   - selenium
   - sensorml2iso
+  - simplekml
   - siphon
   - sympy
   - thredds_crawler
