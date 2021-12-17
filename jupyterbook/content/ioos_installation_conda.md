@@ -127,7 +127,6 @@ Check out [Travis Oliphant's blog piece](http://technicaldiscovery.blogspot.com/
 
 ### What to do when everything seems to be broken?
 
-
 1. If you believe that only your environment is broken you can follow the [update environment](##Updating-the-IOOS-environment) instructions from above;
 1. Sometimes conda updates can break backwards compatibility and updating is broken. In those cases remove the Miniforge3 directory and perform a fresh install of the new version.
 1. In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by [downloading the lock file your your system](https://github.com/ioos/ioos_code_lab/tree/main/.binder) and issuing the command:
