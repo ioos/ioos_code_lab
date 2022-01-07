@@ -127,15 +127,15 @@ Check out [Travis Oliphant's blog piece](http://technicaldiscovery.blogspot.com/
 
 ### What to do when everything seems to be broken?
 
-1. If you believe that only your environment is broken you can follow the [update environment](##Updating-the-IOOS-environment) instructions from above;
+1. If you believe that only your environment is broken you can follow the [update environment](#updating-the-ioos-environment) instructions from above;
 1. Sometimes conda updates can break backwards compatibility and updating is broken. In those cases remove the Miniforge3 directory and perform a fresh install of the new version.
-1. In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by [downloading the lock file your your system](https://github.com/ioos/ioos_code_lab/tree/main/.binder) and issuing the command:
+1. In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by [downloading the lock file your system](https://github.com/ioos/ioos_code_lab/tree/main/.binder) and issuing the command:
 
 ```shell
 conda create --name IOOS --file .binder/conda-linux-64.lock
 ```
 
-Be sure to change `Linux` to the appropriated lock file name for your system that you downloaded.
+Be sure to change `linux-64` in the lock file name according to your system (`win-64` or `osx-64`).
 
 ### conda-lock
 
@@ -165,5 +165,5 @@ In the example above we are locking for macOS, Linux and Windows.
 Windows can be complicated and here are a few tips to help you troubleshoot it:
 
 1. If you did not install Miniforge on your C:\ drive you may have a "long path error." Usually that happens when you see failures in the environment creation;
-1. Installed is "successful" but nothing was installed. Please see https://github.com/ContinuumIO/anaconda-issues/issues/6258 for some reasons to why that us happening. Most common ones are aggressive anti-virus or bank apps blocking the installation;
-1. Installation was successful but calling `jupyter notebook` just hangs while "waiting for localhost:" that is probably a firewall setting blocking the notebook or you need to update your packages. See [update environment](##Updating-the-IOOS-environment).
+1. Installation is "successful" but nothing was installed. Please see https://github.com/ContinuumIO/anaconda-issues/issues/6258 for some reasons to why that us happening. Most common ones are aggressive anti-virus or bank apps blocking the installation;
+1. Installation was successful but calling `jupyter notebook` just hangs while "waiting for localhost:" that is probably a firewall setting blocking the notebook or you need to update your packages. See [update environment](#updating-the-ioos-environment).
