@@ -514,9 +514,26 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#appendix-conda-lock">
-   Appendix: conda-lock
+  <a class="reference internal nav-link" href="#appendix">
+   Appendix:
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-to-do-when-everything-seems-to-be-broken">
+     What to do when everything seems to be broken?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conda-lock">
+     conda-lock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trouble-shooting-windows">
+     Trouble-shooting Windows
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -531,49 +548,46 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="installing-the-ioos-conda-environment">
 <h1>Installing the IOOS conda environment<a class="headerlink" href="#installing-the-ioos-conda-environment" title="Permalink to this headline">¶</a></h1>
-<p>For IOOS python users we recommend the free
-<a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a> Python distribution,
-a lightweight version of the <a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda Scientific Python Distribution</a>.
+<p>For IOOS Python/R users we recommend the free
+<a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a> distribution,
+a lightweight version of the <a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda Scientific Python Distribution</a> with the conda-forge channel pre-configured.
 While the full Anaconda distribution will also work,
-it’s faster to install Miniconda,
-and you install only the packages you need.
+it is faster to install Miniforge,
+and you can install only the packages you need.
 If for some reason you decide later that you want the full Anaconda distribution,
-you can install it by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">anaconda</span></code> using miniconda.</p>
+you can install it by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">defaults</span> <span class="pre">anaconda</span></code> using Miniforge.</p>
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<p>Download and install the appropriate Miniconda installer from <a class="reference external" href="http://conda.pydata.org/miniconda.html">http://conda.pydata.org/miniconda.html</a>.
-With conda you can create environments that use any Python version (e.g. Python 2.7 or Python 3.x),
-so install the latest Python 3.x and if find out later you need a Python 2.7 environment,
-you can create one.
-Windows users also need to choose between 32-bit (old Windows XP) or 64-bit (modern Windows) versions.</p>
+<p>Download and install the appropriate Miniforge installer from
+<a class="reference external" href="https://github.com/conda-forge/miniforge">https://github.com/conda-forge/miniforge</a>.</p>
 <div class="section" id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
 <p>Run the installer
 Choose <em>Just Me</em> (not <em>All Users</em>),
-and choose a Install Location owned by you.
-The default <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%\AppData\Local\Continuum\Miniconda3</span></code> is fine,
-but kind of long,
-so if you have created some shorter directory like <code class="docutils literal notranslate"><span class="pre">c:\programs</span></code> that you own,
-you might choose <code class="docutils literal notranslate"><span class="pre">c:\programs\Miniconda3</span></code>.</p>
+and choose a install location owned by you.
+The default is fine but kind of long.
+We recommend something on your C drive like <code class="docutils literal notranslate"><span class="pre">C:\Miniforge3</span></code>.</p>
 <p>On the “Advanced Installation Options” screen,
-leave the boxes checked if you want Miniconda 3 to be your default python.
-If you are going to be switching from Python 2 to Python 3 or perhaps some other Python distribution,
-it is best uncheck the boxes and use the <code class="docutils literal notranslate"><span class="pre">Anaconda</span> <span class="pre">Command</span> <span class="pre">Prompt</span></code> or <code class="docutils literal notranslate"><span class="pre">Anaconda</span> <span class="pre">Navigator</span></code> (see below for instructions) to start Anaconda.</p>
+uncheck the boxes to make Miniforge3 your default Python to avoid conflicts with any existing installation.</p>
 </div>
 <div class="section" id="linux-macos">
 <h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Permalink to this headline">¶</a></h3>
 <p>Copy-and-paste this in the terminal:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> <span class="k">$(</span>uname<span class="k">)</span> <span class="o">==</span> <span class="s2">&quot;Darwin&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-  <span class="nv">url</span><span class="o">=</span>https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+  <span class="nv">url</span><span class="o">=</span>https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh
 <span class="k">elif</span> <span class="o">[[</span> <span class="k">$(</span>uname<span class="k">)</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-  <span class="nv">url</span><span class="o">=</span>https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  <span class="nv">url</span><span class="o">=</span>https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
 <span class="k">fi</span>
-curl <span class="nv">$url</span> -o miniconda.sh
-sh miniconda.sh
-<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/miniconda3/bin:<span class="nv">$PATH</span>
+curl <span class="nv">$url</span> -o Miniforge.sh
+sh Miniforge.sh
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/Miniforge3/bin:<span class="nv">$PATH</span>
 </pre></div>
 </div>
-<p>and use all the default options, except for the license agreement where you must actively change it to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p>
+<p>and use all the default options,
+except for the license agreement where you must actively change it to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p>
+<p>Note: if you have the latest macOS with the arm chip you may want to install
+<a class="reference external" href="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh">https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh</a>
+instead to avoid using emulation via rosetta.</p>
 </div>
 </div>
 <div class="section" id="create-the-ioos-conda-environment">
@@ -586,16 +600,14 @@ or, on <code class="docutils literal notranslate"><span class="pre">macOS</span>
 curl <span class="nv">$url</span> -o environment.yml
 </pre></div>
 </div>
-<p>Then from the directory where you saved the file above,
+<p>Then, from the directory where you saved the file above,
 type the following commands in the terminal or Windows command prompt:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels conda-forge --force
-conda config --set channel_priority strict
-conda update --yes --all
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda update --yes --all
 conda env create --quiet --file environment.yml
 </pre></div>
 </div>
-<p>The last line creates the IOOS environment,
-and since lots of packages are downloaded,
+<p>That will update the packages in your base environment and then install the IOOS environment.
+This will trigger the download and installation of many packages,
 you should probably go get a coffee.</p>
 <p>Once the environment is done building, you can activate it by typing:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate IOOS
@@ -613,15 +625,19 @@ you can type</p>
 <div class="section" id="updating-the-ioos-environment">
 <h2>Updating the IOOS environment<a class="headerlink" href="#updating-the-ioos-environment" title="Permalink to this headline">¶</a></h2>
 <p>To update an existing environment you can do,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda update --all --yes
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate IOOS
+conda update --all --yes
 </pre></div>
 </div>
-<p>Sometimes that operation can be slow if you have a really old version of the environment, or even impossible to update.
-In that case we recommend removing and re-creating the environment. To remove an existing environment you have to run:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda env remove -name IOOS
+<p>Sometimes that operation can be slow if you have a really old version of the environment,
+or even impossible to update due to package conflicts.
+In that case we recommend removing and re-creating the environment.
+To remove an existing environment you have to run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda env remove --name IOOS
 </pre></div>
 </div>
-<p>and follow the instructions from above to re-create. Note that you don’t need to re-install miniconda.
+<p>and follow the instructions from above to re-create.
+Note that you don’t need to re-install Miniforge.
 Just download a fresh version of the environment file and re-create it.</p>
 </div>
 <div class="section" id="why-we-use-and-recommend-conda">
@@ -641,11 +657,28 @@ Check out <a class="reference external" href="http://technicaldiscovery.blogspot
 <li><p>Please get help on the <a class="reference external" href="https://groups.google.com/forum/?hl=en#%21forum/ioos_tech">IOOS-tech Google Group</a></p></li>
 </ul>
 </div>
-<div class="section" id="appendix-conda-lock">
-<h2>Appendix: conda-lock<a class="headerlink" href="#appendix-conda-lock" title="Permalink to this headline">¶</a></h2>
-<p>Locking environments can be useful for reproducibility, Continuous Integration (CI), or when one requires faster installation.
+<div class="section" id="appendix">
+<h2>Appendix:<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-to-do-when-everything-seems-to-be-broken">
+<h3>What to do when everything seems to be broken?<a class="headerlink" href="#what-to-do-when-everything-seems-to-be-broken" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>If you believe that only your environment is broken you can follow the <a class="reference external" href="#updating-the-ioos-environment">update environment</a> instructions from above;</p></li>
+<li><p>Sometimes conda updates can break backwards compatibility and updating is broken. In those cases remove the Miniforge3 directory and perform a fresh install of the new version.</p></li>
+<li><p>In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by <a class="reference external" href="https://github.com/ioos/ioos_code_lab/tree/main/.binder">downloading the lock file your system</a> and issuing the command:</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda create --name IOOS --file .binder/conda-linux-64.lock
+</pre></div>
+</div>
+<p>Be sure to change <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> in the lock file name according to your system (<code class="docutils literal notranslate"><span class="pre">win-64</span></code> or <code class="docutils literal notranslate"><span class="pre">osx-64</span></code>).</p>
+</div>
+<div class="section" id="conda-lock">
+<h3>conda-lock<a class="headerlink" href="#conda-lock" title="Permalink to this headline">¶</a></h3>
+<p>Locking environments can be useful for reproducibility,
+Continuous Integration (CI),
+or when one requires faster installation.
 The reason is because a locked environment saves the “solved” list of packages and only downloads them.
-Making it much faster than creating from the environment file and ensuring that the same packages from the time you locked will be used.</p>
+Making it much faster than creating from the environment file,
+and ensuring that the same packages from the time you locked will be used.</p>
 <p>To lock an environment you will need to install conda-lock,</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install conda-lock
 </pre></div>
@@ -655,6 +688,16 @@ Making it much faster than creating from the environment file and ensuring that 
 </pre></div>
 </div>
 <p>In the example above we are locking for macOS, Linux and Windows.</p>
+</div>
+<div class="section" id="trouble-shooting-windows">
+<h3>Trouble-shooting Windows<a class="headerlink" href="#trouble-shooting-windows" title="Permalink to this headline">¶</a></h3>
+<p>Windows can be complicated and here are a few tips to help you troubleshoot it:</p>
+<ol class="simple">
+<li><p>If you did not install Miniforge on your C:\ drive you may have a “long path error.” Usually that happens when you see failures in the environment creation;</p></li>
+<li><p>Installation is “successful” but nothing was installed. Please see <a class="reference external" href="https://github.com/ContinuumIO/anaconda-issues/issues/6258">https://github.com/ContinuumIO/anaconda-issues/issues/6258</a> for some reasons to why that us happening. Most common ones are aggressive anti-virus or bank apps blocking the installation;</p></li>
+<li><p>Installation was successful but calling <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> just hangs while “waiting for localhost:” that is probably a firewall setting blocking the notebook or you need to update your packages. See <a class="reference external" href="#updating-the-ioos-environment">update environment</a>.</p></li>
+</ol>
+</div>
 </div>
 </div>
 
