@@ -499,9 +499,10 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="exploring-the-thredds-catalog-with-unidatas-siphon">
 <h1>Exploring the THREDDS catalog with Unidata’s Siphon<a class="headerlink" href="#exploring-the-thredds-catalog-with-unidatas-siphon" title="Permalink to this headline">¶</a></h1>
 <p>Created: 2017-01-18</p>
-<p><a class="reference external" href="http://siphon.readthedocs.io/en/latest/">Siphon</a> is a Python module for accessing data hosted on a THREDDS data server.
+<p><a class="reference external" href="https://unidata.github.io/siphon/latest">Siphon</a> is a Python module for accessing data hosted on a THREDDS data server.
 Siphon works by parsing the catalog XML and exposing it with higher level functions.</p>
-<p>In this notebook we will explore data available on the Central &amp; Northern California Ocean Observing System (CeNCOOS) THREDDS. The cell below extracts the catalog information</p>
+<p>In this notebook we will explore data available on the Central &amp; Northern California Ocean Observing System (CeNCOOS) THREDDS. The cell below extracts the catalog information.</p>
+<p>PS: There are many interesting examples at <a class="reference external" href="https://unidata.github.io/siphon/latest/examples/index.html">https://unidata.github.io/siphon/latest/examples/index.html</a>, be sure to check them out.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">siphon.catalog</span> <span class="kn">import</span> <span class="n">TDSCatalog</span>
@@ -548,6 +549,7 @@ Metadata: {}
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>all
 allandsos
+allandsosandfile
 wms
 </pre></div>
 </div>
@@ -561,12 +563,24 @@ wms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>California Coastal Regional Ocean Modeling System (ROMS) Nowcast
-California Coastal Regional Ocean Modeling System (ROMS) Forecast
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Global 1-km Sea Surface Temperature (G1SST)
+High Resolution Chlorophyll-a concentration from MODIS/Aqua (1 Day Composite)
+High Resolution Chlorophyll-a concentration from MODIS/Aqua (8 Day Composite)
+High Resolution Chlorophyll-a concentration from MODIS/Aqua (1 Month Composite)
+High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (1 Day Composite)
+High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (8 Day Composite)
+High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (1 Month Composite)
+Ocean Surface Currents Monthly Averaged - CORDC High-Frequency Radar (US West Coast), 6 km
+NOAA COOPS SFBOFS: regular grid
+AIS Vessel Traffic Data - Continental US - US Coast Guard Terrestrial - Yearly Totals
+AIS Vessel Traffic Data - Continental US - US Coast Guard Satellite - Monthly Totals
+California Coastal Regional Ocean Modeling System (ROMS) 3km Nowcast
+California Coastal Regional Ocean Modeling System (ROMS) 3km Forecast
 Monterey Bay (MB) Regional Ocean Modeling System (ROMS) Nowcast
 Monterey Bay (MB) Regional Ocean Modeling System (ROMS) Forecast
 Southern California Bight (SCB) Regional Ocean Modeling System (ROMS) Nowcast
 UCSC California Current System Model
+C-HARM HAB Nowcast
 HAB Cellular Domoic Acid Forecast
 HAB Cellular Domoic Acid Nowcast
 HAB Particulate Domoic Acid Forecast
@@ -588,16 +602,13 @@ Coupled Ocean/Atmosphere Mesoscale Prediction System (COAMPS) Wind 10 m (Histori
 Coupled Ocean/Atmosphere Mesoscale Prediction System (COAMPS) Ground and Sea Temp (Historical)
 Coupled Ocean/Atmosphere Mesoscale Prediction System (COAMPS) Air Temp 2 m (Historical)
 Hybrid Coordinate Ocean Model
+0.25 degree Global Forecast System for the CeNCOOS Region
+3km NCEP High Resolution Rapid Refresh (HRRR)
 Southern California Regional NCOM Model
 Maurer Meteorological Data
-Global 1-km Sea Surface Temperature (G1SST)
-High Resolution Chlorophyll-a concentration from MODIS/Aqua (1 Day Composite)
-High Resolution Chlorophyll-a concentration from MODIS/Aqua (8 Day Composite)
-High Resolution Chlorophyll-a concentration from MODIS/Aqua (1 Month Composite)
-High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (1 Day Composite)
-High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (8 Day Composite)
-High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (1 Month Composite)
-Ocean Surface Currents Monthly Averaged - CORDC High-Frequency Radar (US West Coast), 6 km
+Wave Watch III (NMWW3) - West Coast - 10m
+Wave Watch III (NMWW3) - West Coast - 4m
+West Coast Operational Forecast System (WCOFS)
 </pre></div>
 </div>
 </div>
@@ -681,7 +692,11 @@ Here are the data from the <em>Global</em> subset.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NCEP Reanalysis Daily Averages Surface Flux
 Global 1-km Sea Surface Temperature (G1SST)
+OSTIA: Operational Sea Surface Temperature and Sea Ice Analysis
 NCEP Global Forecast System Model (GFS)
+NCEP 0.25-degree Global Forecast System v16 (2021) Wave
+World Ocean Atlas (WOA) 2018 Statistical Averages - 1 degree
+World Ocean Atlas (WOA) 2018 Statistical Averages - 1/4 degree
 Aquarius V 3.0 Scatterometer Daily Aggregate
 Aquarius V 3.0 Scatterometer Seven-Day Aggregate
 Aquarius V 3.0 Scatterometer Monthly Aggregate
@@ -731,12 +746,23 @@ forming proper queries as well as parsing the returned data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>California Coastal Regional Ocean Modeling System (ROMS) Nowcast
-California Coastal Regional Ocean Modeling System (ROMS) Forecast
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>High Resolution Chlorophyll-a concentration from MODIS/Aqua (1 Day Composite)
+High Resolution Chlorophyll-a concentration from MODIS/Aqua (8 Day Composite)
+High Resolution Chlorophyll-a concentration from MODIS/Aqua (1 Month Composite)
+High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (1 Day Composite)
+High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (8 Day Composite)
+High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (1 Month Composite)
+Ocean Surface Currents Monthly Averaged - CORDC High-Frequency Radar (US West Coast), 6 km
+NOAA COOPS SFBOFS: regular grid
+AIS Vessel Traffic Data - Continental US - US Coast Guard Terrestrial - Yearly Totals
+AIS Vessel Traffic Data - Continental US - US Coast Guard Satellite - Monthly Totals
+California Coastal Regional Ocean Modeling System (ROMS) 3km Nowcast
+California Coastal Regional Ocean Modeling System (ROMS) 3km Forecast
 Monterey Bay (MB) Regional Ocean Modeling System (ROMS) Nowcast
 Monterey Bay (MB) Regional Ocean Modeling System (ROMS) Forecast
 Southern California Bight (SCB) Regional Ocean Modeling System (ROMS) Nowcast
 UCSC California Current System Model
+C-HARM HAB Nowcast
 HAB Cellular Domoic Acid Forecast
 HAB Cellular Domoic Acid Nowcast
 HAB Particulate Domoic Acid Forecast
@@ -758,36 +784,26 @@ Coupled Ocean/Atmosphere Mesoscale Prediction System (COAMPS) Wind 10 m (Histori
 Coupled Ocean/Atmosphere Mesoscale Prediction System (COAMPS) Ground and Sea Temp (Historical)
 Coupled Ocean/Atmosphere Mesoscale Prediction System (COAMPS) Air Temp 2 m (Historical)
 Hybrid Coordinate Ocean Model
+0.25 degree Global Forecast System for the CeNCOOS Region
+3km NCEP High Resolution Rapid Refresh (HRRR)
 Southern California Regional NCOM Model
 Maurer Meteorological Data
-High Resolution Chlorophyll-a concentration from MODIS/Aqua (1 Day Composite)
-High Resolution Chlorophyll-a concentration from MODIS/Aqua (8 Day Composite)
-High Resolution Chlorophyll-a concentration from MODIS/Aqua (1 Month Composite)
-High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (1 Day Composite)
-High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (8 Day Composite)
-High Resolution Sea Surface Temperature from the Advanced Very-High Resolution Radiometer (1 Month Composite)
-Ocean Surface Currents Monthly Averaged - CORDC High-Frequency Radar (US West Coast), 6 km
+Wave Watch III (NMWW3) - West Coast - 10m
+Wave Watch III (NMWW3) - West Coast - 4m
+West Coast Operational Forecast System (WCOFS)
 </pre></div>
 </div>
 </div>
 </div>
 <p>All <code class="docutils literal notranslate"><span class="pre">access_urls</span></code> returned empty… Maybe that is just a metadata issue because there is <code class="docutils literal notranslate"><span class="pre">NetcdfSubset</span></code> access when navigating in the webpage.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
 
-<span class="n">iframe</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s1">&#39;&lt;iframe src=&quot;</span><span class="si">{src}</span><span class="s1">&quot; width=&quot;800&quot; height=&quot;550&quot; style=&quot;border:none;&quot;&gt;&lt;/iframe&gt;&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="p">)</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://thredds.cencoos.org/thredds/catalog.html?dataset=G1_SST_US_WEST_COAST&quot;</span>
-<span class="n">HTML</span><span class="p">(</span><span class="n">iframe</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">url</span><span class="p">))</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">550</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><iframe src="https://thredds.cencoos.org/thredds/catalog.html?dataset=G1_SST_US_WEST_COAST" width="800" height="550" style="border:none;"></iframe></div></div>
-</div>
+<p><img alt="" src="../../../_images/2017-01-18-siphon-explore-thredds-iframe.png" /></p>
 <p>To finish the post let’s check if there is any WMS service available and overlay the data in a slippy (interactive) map.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -798,7 +814,7 @@ Ocean Surface Currents Monthly Averaged - CORDC High-Frequency Radar (US West Co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;siphon.catalog.SimpleService at 0x7fd651b720f0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;siphon.catalog.SimpleService at 0x7ffa200e6df0&gt;]
 </pre></div>
 </div>
 </div>
@@ -809,13 +825,12 @@ Ocean Surface Currents Monthly Averaged - CORDC High-Frequency Radar (US West Co
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">service</span> <span class="o">=</span> <span class="n">services</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">base</span>
-
-<span class="n">url</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;https://data.axds.co/ncWMS/wms&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://data.axds.co/ncWMS/wms
 </pre></div>
 </div>
 </div>
@@ -868,7 +883,7 @@ That is to save time because parsing the URL <a class="reference external" href=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><iframe src="data:text/html;charset=utf-8;base64,PCFET0NUWVBFIGh0bWw+CjxoZWFkPiAgICAKICAgIDxtZXRhIGh0dHAtZXF1aXY9ImNvbnRlbnQtdHlwZSIgY29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PVVURi04IiAvPgogICAgPHNjcmlwdD5MX1BSRUZFUl9DQU5WQVMgPSBmYWxzZTsgTF9OT19UT1VDSCA9IGZhbHNlOyBMX0RJU0FCTEVfM0QgPSBmYWxzZTs8L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2xlYWZsZXRAMS4yLjAvZGlzdC9sZWFmbGV0LmpzIj48L3NjcmlwdD4KICAgIDxzY3JpcHQgc3JjPSJodHRwczovL2FqYXguZ29vZ2xlYXBpcy5jb20vYWpheC9saWJzL2pxdWVyeS8xLjExLjEvanF1ZXJ5Lm1pbi5qcyI+PC9zY3JpcHQ+CiAgICA8c2NyaXB0IHNyYz0iaHR0cHM6Ly9tYXhjZG4uYm9vdHN0cmFwY2RuLmNvbS9ib290c3RyYXAvMy4yLjAvanMvYm9vdHN0cmFwLm1pbi5qcyI+PC9zY3JpcHQ+CiAgICA8c2NyaXB0IHNyYz0iaHR0cHM6Ly9jZG5qcy5jbG91ZGZsYXJlLmNvbS9hamF4L2xpYnMvTGVhZmxldC5hd2Vzb21lLW1hcmtlcnMvMi4wLjIvbGVhZmxldC5hd2Vzb21lLW1hcmtlcnMuanMiPjwvc2NyaXB0PgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2xlYWZsZXRAMS4yLjAvZGlzdC9sZWFmbGV0LmNzcyIgLz4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9tYXhjZG4uYm9vdHN0cmFwY2RuLmNvbS9ib290c3RyYXAvMy4yLjAvY3NzL2Jvb3RzdHJhcC5taW4uY3NzIiAvPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL21heGNkbi5ib290c3RyYXBjZG4uY29tL2Jvb3RzdHJhcC8zLjIuMC9jc3MvYm9vdHN0cmFwLXRoZW1lLm1pbi5jc3MiIC8+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vbWF4Y2RuLmJvb3RzdHJhcGNkbi5jb20vZm9udC1hd2Vzb21lLzQuNi4zL2Nzcy9mb250LWF3ZXNvbWUubWluLmNzcyIgLz4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cHM6Ly9jZG5qcy5jbG91ZGZsYXJlLmNvbS9hamF4L2xpYnMvTGVhZmxldC5hd2Vzb21lLW1hcmtlcnMvMi4wLjIvbGVhZmxldC5hd2Vzb21lLW1hcmtlcnMuY3NzIiAvPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL3Jhd2dpdC5jb20vcHl0aG9uLXZpc3VhbGl6YXRpb24vZm9saXVtL21hc3Rlci9mb2xpdW0vdGVtcGxhdGVzL2xlYWZsZXQuYXdlc29tZS5yb3RhdGUuY3NzIiAvPgogICAgPHN0eWxlPmh0bWwsIGJvZHkge3dpZHRoOiAxMDAlO2hlaWdodDogMTAwJTttYXJnaW46IDA7cGFkZGluZzogMDt9PC9zdHlsZT4KICAgIDxzdHlsZT4jbWFwIHtwb3NpdGlvbjphYnNvbHV0ZTt0b3A6MDtib3R0b206MDtyaWdodDowO2xlZnQ6MDt9PC9zdHlsZT4KICAgIAogICAgICAgICAgICA8c3R5bGU+ICNtYXBfMzg5MWU3NDVlY2EyNDM2NzljMzgyODQwMGU0YTBkODkgewogICAgICAgICAgICAgICAgcG9zaXRpb24gOiByZWxhdGl2ZTsKICAgICAgICAgICAgICAgIHdpZHRoIDogMTAwLjAlOwogICAgICAgICAgICAgICAgaGVpZ2h0OiAxMDAuMCU7CiAgICAgICAgICAgICAgICBsZWZ0OiAwLjAlOwogICAgICAgICAgICAgICAgdG9wOiAwLjAlOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICA8L3N0eWxlPgogICAgICAgIAo8L2hlYWQ+Cjxib2R5PiAgICAKICAgIAogICAgICAgICAgICA8ZGl2IGNsYXNzPSJmb2xpdW0tbWFwIiBpZD0ibWFwXzM4OTFlNzQ1ZWNhMjQzNjc5YzM4Mjg0MDBlNGEwZDg5IiA+PC9kaXY+CiAgICAgICAgCjwvYm9keT4KPHNjcmlwdD4gICAgCiAgICAKCiAgICAgICAgICAgIAogICAgICAgICAgICAgICAgdmFyIGJvdW5kcyA9IG51bGw7CiAgICAgICAgICAgIAoKICAgICAgICAgICAgdmFyIG1hcF8zODkxZTc0NWVjYTI0MzY3OWMzODI4NDAwZTRhMGQ4OSA9IEwubWFwKAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ21hcF8zODkxZTc0NWVjYTI0MzY3OWMzODI4NDAwZTRhMGQ4OScsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7Y2VudGVyOiBbMzkuNSwtMTIyLjVdLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgem9vbTogNCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1heEJvdW5kczogYm91bmRzLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGF5ZXJzOiBbXSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdvcmxkQ29weUp1bXA6IGZhbHNlLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY3JzOiBMLkNSUy5FUFNHMzg1NwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9KTsKICAgICAgICAgICAgCiAgICAgICAgCiAgICAKICAgICAgICAgICAgdmFyIHRpbGVfbGF5ZXJfNTRkMmU3YTQ0ODMzNGMxY2FjMjQ2M2UwNjI5MzJlMTMgPSBMLnRpbGVMYXllcigKICAgICAgICAgICAgICAgICdodHRwczovL3tzfS50aWxlLm9wZW5zdHJlZXRtYXAub3JnL3t6fS97eH0ve3l9LnBuZycsCiAgICAgICAgICAgICAgICB7CiAgImF0dHJpYnV0aW9uIjogbnVsbCwKICAiZGV0ZWN0UmV0aW5hIjogZmFsc2UsCiAgIm1heFpvb20iOiAxOCwKICAibWluWm9vbSI6IDEsCiAgIm5vV3JhcCI6IGZhbHNlLAogICJzdWJkb21haW5zIjogImFiYyIKfQogICAgICAgICAgICAgICAgKS5hZGRUbyhtYXBfMzg5MWU3NDVlY2EyNDM2NzljMzgyODQwMGU0YTBkODkpOwogICAgICAgIAogICAgCiAgICAgICAgICAgIHZhciBtYWNyb19lbGVtZW50XzMwYjI1Mzk2NTczNzQ2NzQ4YWFjNGEwYWY0NmUwODI0ID0gTC50aWxlTGF5ZXIud21zKAogICAgICAgICAgICAgICAgJ2h0dHBzOi8vZGF0YS5heGRzLmNvL25jV01TL3dtcycsCiAgICAgICAgICAgICAgICB7CiAgImF0dHJpYnV0aW9uIjogIiIsCiAgImNycyI6IG51bGwsCiAgImZvcm1hdCI6ICJpbWFnZS9wbmciLAogICJsYXllcnMiOiAiRzFfU1NUX1VTX1dFU1RfQ09BU1QvYW5hbHlzZWRfc3N0IiwKICAic3R5bGVzIjogIiIsCiAgInRyYW5zcGFyZW50IjogdHJ1ZSwKICAidXBwZXJjYXNlIjogZmFsc2UsCiAgInZlcnNpb24iOiAiMS4xLjEiCn0KICAgICAgICAgICAgICAgICkuYWRkVG8obWFwXzM4OTFlNzQ1ZWNhMjQzNjc5YzM4Mjg0MDBlNGEwZDg5KTsKCiAgICAgICAgCiAgICAKICAgICAgICAgICAgdmFyIGxheWVyX2NvbnRyb2xfMDFiNWY5MzI5ZDlmNDU4MWIxZGJlMjg0M2E2ZDU4YzIgPSB7CiAgICAgICAgICAgICAgICBiYXNlX2xheWVycyA6IHsgIm9wZW5zdHJlZXRtYXAiIDogdGlsZV9sYXllcl81NGQyZTdhNDQ4MzM0YzFjYWMyNDYzZTA2MjkzMmUxMywgfSwKICAgICAgICAgICAgICAgIG92ZXJsYXlzIDogeyAiU2VhIFN1cmZhY2UgVGVtcGVyYXR1cmUgYXQgdW5kZWZpbmVkIiA6IG1hY3JvX2VsZW1lbnRfMzBiMjUzOTY1NzM3NDY3NDhhYWM0YTBhZjQ2ZTA4MjQsIH0KICAgICAgICAgICAgICAgIH07CiAgICAgICAgICAgIEwuY29udHJvbC5sYXllcnMoCiAgICAgICAgICAgICAgICBsYXllcl9jb250cm9sXzAxYjVmOTMyOWQ5ZjQ1ODFiMWRiZTI4NDNhNmQ1OGMyLmJhc2VfbGF5ZXJzLAogICAgICAgICAgICAgICAgbGF5ZXJfY29udHJvbF8wMWI1ZjkzMjlkOWY0NTgxYjFkYmUyODQzYTZkNThjMi5vdmVybGF5cywKICAgICAgICAgICAgICAgIHtwb3NpdGlvbjogJ3RvcHJpZ2h0JywKICAgICAgICAgICAgICAgICBjb2xsYXBzZWQ6IHRydWUsCiAgICAgICAgICAgICAgICAgYXV0b1pJbmRleDogdHJ1ZQogICAgICAgICAgICAgICAgfSkuYWRkVG8obWFwXzM4OTFlNzQ1ZWNhMjQzNjc5YzM4Mjg0MDBlNGEwZDg5KTsKICAgICAgICAKPC9zY3JpcHQ+" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe src="about:blank" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" data-html=%3C%21DOCTYPE%20html%3E%0A%3Chead%3E%20%20%20%20%0A%20%20%20%20%3Cmeta%20http-equiv%3D%22content-type%22%20content%3D%22text/html%3B%20charset%3DUTF-8%22%20/%3E%0A%20%20%20%20%0A%20%20%20%20%20%20%20%20%3Cscript%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20L_NO_TOUCH%20%3D%20false%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20L_DISABLE_3D%20%3D%20false%3B%0A%20%20%20%20%20%20%20%20%3C/script%3E%0A%20%20%20%20%0A%20%20%20%20%3Cstyle%3Ehtml%2C%20body%20%7Bwidth%3A%20100%25%3Bheight%3A%20100%25%3Bmargin%3A%200%3Bpadding%3A%200%3B%7D%3C/style%3E%0A%20%20%20%20%3Cstyle%3E%23map%20%7Bposition%3Aabsolute%3Btop%3A0%3Bbottom%3A0%3Bright%3A0%3Bleft%3A0%3B%7D%3C/style%3E%0A%20%20%20%20%3Cscript%20src%3D%22https%3A//cdn.jsdelivr.net/npm/leaflet%401.6.0/dist/leaflet.js%22%3E%3C/script%3E%0A%20%20%20%20%3Cscript%20src%3D%22https%3A//code.jquery.com/jquery-1.12.4.min.js%22%3E%3C/script%3E%0A%20%20%20%20%3Cscript%20src%3D%22https%3A//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js%22%3E%3C/script%3E%0A%20%20%20%20%3Cscript%20src%3D%22https%3A//cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js%22%3E%3C/script%3E%0A%20%20%20%20%3Clink%20rel%3D%22stylesheet%22%20href%3D%22https%3A//cdn.jsdelivr.net/npm/leaflet%401.6.0/dist/leaflet.css%22/%3E%0A%20%20%20%20%3Clink%20rel%3D%22stylesheet%22%20href%3D%22https%3A//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css%22/%3E%0A%20%20%20%20%3Clink%20rel%3D%22stylesheet%22%20href%3D%22https%3A//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css%22/%3E%0A%20%20%20%20%3Clink%20rel%3D%22stylesheet%22%20href%3D%22https%3A//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css%22/%3E%0A%20%20%20%20%3Clink%20rel%3D%22stylesheet%22%20href%3D%22https%3A//cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css%22/%3E%0A%20%20%20%20%3Clink%20rel%3D%22stylesheet%22%20href%3D%22https%3A//cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css%22/%3E%0A%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cmeta%20name%3D%22viewport%22%20content%3D%22width%3Ddevice-width%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20initial-scale%3D1.0%2C%20maximum-scale%3D1.0%2C%20user-scalable%3Dno%22%20/%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cstyle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23map_054ccbfde84d4f8486d70fc63af56d45%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20position%3A%20relative%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20100.0%25%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20height%3A%20100.0%25%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20left%3A%200.0%25%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20top%3A%200.0%25%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/style%3E%0A%20%20%20%20%20%20%20%20%0A%3C/head%3E%0A%3Cbody%3E%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22folium-map%22%20id%3D%22map_054ccbfde84d4f8486d70fc63af56d45%22%20%3E%3C/div%3E%0A%20%20%20%20%20%20%20%20%0A%3C/body%3E%0A%3Cscript%3E%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20map_054ccbfde84d4f8486d70fc63af56d45%20%3D%20L.map%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22map_054ccbfde84d4f8486d70fc63af56d45%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20center%3A%20%5B39.5%2C%20-122.5%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20crs%3A%20L.CRS.EPSG3857%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zoom%3A%204%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zoomControl%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20preferCanvas%3A%20false%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20tile_layer_a0ac089f5e2e402b94b38831b252e486%20%3D%20L.tileLayer%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22https%3A//%7Bs%7D.tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22attribution%22%3A%20%22Data%20by%20%5Cu0026copy%3B%20%5Cu003ca%20href%3D%5C%22http%3A//openstreetmap.org%5C%22%5Cu003eOpenStreetMap%5Cu003c/a%5Cu003e%2C%20under%20%5Cu003ca%20href%3D%5C%22http%3A//www.openstreetmap.org/copyright%5C%22%5Cu003eODbL%5Cu003c/a%5Cu003e.%22%2C%20%22detectRetina%22%3A%20false%2C%20%22maxNativeZoom%22%3A%2018%2C%20%22maxZoom%22%3A%2018%2C%20%22minZoom%22%3A%200%2C%20%22noWrap%22%3A%20false%2C%20%22opacity%22%3A%201%2C%20%22subdomains%22%3A%20%22abc%22%2C%20%22tms%22%3A%20false%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%29.addTo%28map_054ccbfde84d4f8486d70fc63af56d45%29%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20macro_element_2f41f33387b14b02a6b6df56f4aa057e%20%3D%20L.tileLayer.wms%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22https%3A//data.axds.co/ncWMS/wms%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22attribution%22%3A%20%22%22%2C%20%22format%22%3A%20%22image/png%22%2C%20%22layers%22%3A%20%22G1_SST_US_WEST_COAST/analysed_sst%22%2C%20%22styles%22%3A%20%22%22%2C%20%22transparent%22%3A%20true%2C%20%22version%22%3A%20%221.1.1%22%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%29.addTo%28map_054ccbfde84d4f8486d70fc63af56d45%29%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20layer_control_ecabf8023bdc49e8994412b8957bd6fe%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20base_layers%20%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22openstreetmap%22%20%3A%20tile_layer_a0ac089f5e2e402b94b38831b252e486%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20overlays%20%3A%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Sea%20Surface%20Temperature%20at%20undefined%22%20%3A%20macro_element_2f41f33387b14b02a6b6df56f4aa057e%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20L.control.layers%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20layer_control_ecabf8023bdc49e8994412b8957bd6fe.base_layers%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20layer_control_ecabf8023bdc49e8994412b8957bd6fe.overlays%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22autoZIndex%22%3A%20true%2C%20%22collapsed%22%3A%20true%2C%20%22position%22%3A%20%22topright%22%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%29.addTo%28map_054ccbfde84d4f8486d70fc63af56d45%29%3B%0A%20%20%20%20%20%20%20%20%0A%3C/script%3E onload="this.contentDocument.open();this.contentDocument.write(    decodeURIComponent(this.getAttribute('data-html')));this.contentDocument.close();" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
 </div>
 <p>Last but not least a static image for the page thumbnail.</p>
 <div class="cell docutils container">
