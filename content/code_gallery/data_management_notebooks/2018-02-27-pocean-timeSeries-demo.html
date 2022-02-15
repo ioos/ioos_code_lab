@@ -567,7 +567,7 @@
   <tbody>
     <tr>
       <th>95</th>
-      <td>2019-05-24 17:27:54.693087</td>
+      <td>2022-05-10 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -577,7 +577,7 @@
     </tr>
     <tr>
       <th>96</th>
-      <td>2019-05-25 17:27:54.693087</td>
+      <td>2022-05-11 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -587,7 +587,7 @@
     </tr>
     <tr>
       <th>97</th>
-      <td>2019-05-26 17:27:54.693087</td>
+      <td>2022-05-12 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -597,7 +597,7 @@
     </tr>
     <tr>
       <th>98</th>
-      <td>2019-05-27 17:27:54.693087</td>
+      <td>2022-05-13 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -607,7 +607,7 @@
     </tr>
     <tr>
       <th>99</th>
-      <td>2019-05-28 17:27:54.693087</td>
+      <td>2022-05-14 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -640,7 +640,18 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2018-02-27-pocean-timeSeries-demo_3_0.png" src="../../../_images/2018-02-27-pocean-timeSeries-demo_3_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([19024., 19038., 19052., 19066., 19083., 19097., 19113., 19127.]),
+ [Text(0, 0, &#39;&#39;),
+  Text(0, 0, &#39;&#39;),
+  Text(0, 0, &#39;&#39;),
+  Text(0, 0, &#39;&#39;),
+  Text(0, 0, &#39;&#39;),
+  Text(0, 0, &#39;&#39;),
+  Text(0, 0, &#39;&#39;),
+  Text(0, 0, &#39;&#39;)])
+</pre></div>
+</div>
+<img alt="../../../_images/2018-02-27-pocean-timeSeries-demo_3_1.png" src="../../../_images/2018-02-27-pocean-timeSeries-demo_3_1.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">pocean.dsg</span></code> is relatively simple to use. The user must provide a DataFrame, like the one above, and a dictionary of attributes that maps to the data and adhere to the DSG conventions desired.</p>
@@ -654,6 +665,17 @@
         <span class="s2">&quot;institution&quot;</span><span class="p">:</span> <span class="s2">&quot;Restaurant at the end of the universe&quot;</span><span class="p">,</span>
         <span class="s2">&quot;cdm_timeseries_variables&quot;</span><span class="p">:</span> <span class="s2">&quot;station&quot;</span><span class="p">,</span>
         <span class="s2">&quot;subsetVariables&quot;</span><span class="p">:</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
+        <span class="c1"># These are only the required attributions from</span>
+        <span class="c1"># https://ioos.github.io/ioos-metadata/ioos-metadata-profile-v1-2.html#attribution</span>
+        <span class="s2">&quot;creator_country&quot;</span><span class="p">:</span> <span class="s2">&quot;USA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;creator_email&quot;</span><span class="p">:</span> <span class="s2">&quot;fake_email@somedomain.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;creator_institution&quot;</span><span class="p">:</span> <span class="s2">&quot;IOOS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;creator_sector&quot;</span><span class="p">:</span> <span class="s2">&quot;academic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;creator_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://ioos.github.io/ioos_code_lab/content/intro.html&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;publisher_country&quot;</span><span class="p">:</span> <span class="s2">&quot;USA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;publisher_email&quot;</span><span class="p">:</span> <span class="s2">&quot;fake_email@somedomain.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;publisher_institution&quot;</span><span class="p">:</span> <span class="s2">&quot;IOOS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;publisher_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://ioos.github.io/ioos_code_lab/content/intro.html&quot;</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;degrees_east&quot;</span><span class="p">,</span> <span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,},</span>
     <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;degrees_north&quot;</span><span class="p">,</span> <span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,},</span>
@@ -732,7 +754,7 @@ variables:
 
 // global attributes:
 		:Conventions = &quot;CF-1.6&quot; ;
-		:date_created = &quot;2019-02-25T20:27:00Z&quot; ;
+		:date_created = &quot;2022-02-11T18:18:00Z&quot; ;
 		:featureType = &quot;timeseries&quot; ;
 		:cdm_data_type = &quot;Timeseries&quot; ;
 		:title = &quot;Fake mooring&quot; ;
@@ -740,6 +762,15 @@ variables:
 		:institution = &quot;Restaurant at the end of the universe&quot; ;
 		:cdm_timeseries_variables = &quot;station&quot; ;
 		:subsetVariables = &quot;depth&quot; ;
+		:creator_country = &quot;USA&quot; ;
+		:creator_email = &quot;fake_email@somedomain.org&quot; ;
+		:creator_institution = &quot;IOOS&quot; ;
+		:creator_sector = &quot;academic&quot; ;
+		:creator_url = &quot;https://ioos.github.io/ioos_code_lab/content/intro.html&quot; ;
+		:publisher_country = &quot;USA&quot; ;
+		:publisher_email = &quot;fake_email@somedomain.org&quot; ;
+		:publisher_institution = &quot;IOOS&quot; ;
+		:publisher_url = &quot;https://ioos.github.io/ioos_code_lab/content/intro.html&quot; ;
 }
 </pre></div>
 </div>
@@ -897,7 +928,7 @@ variables:
   <tbody>
     <tr>
       <th>0</th>
-      <td>2019-02-18 17:27:54.693087</td>
+      <td>2022-02-04 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -907,7 +938,7 @@ variables:
     </tr>
     <tr>
       <th>1</th>
-      <td>2019-02-19 17:27:54.693087</td>
+      <td>2022-02-05 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -917,7 +948,7 @@ variables:
     </tr>
     <tr>
       <th>2</th>
-      <td>2019-02-20 17:27:54.693087</td>
+      <td>2022-02-06 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -927,7 +958,7 @@ variables:
     </tr>
     <tr>
       <th>3</th>
-      <td>2019-02-21 17:27:54.693087</td>
+      <td>2022-02-07 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -937,7 +968,7 @@ variables:
     </tr>
     <tr>
       <th>4</th>
-      <td>2019-02-22 17:27:54.693087</td>
+      <td>2022-02-08 15:18:50.687502</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
