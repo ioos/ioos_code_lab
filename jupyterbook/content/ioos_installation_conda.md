@@ -30,14 +30,10 @@ uncheck the boxes to make Miniforge3 your default Python to avoid conflicts with
 Copy-and-paste this in the terminal:
 
 ```shell
-if [[ $(uname) == "Darwin" ]]; then
-  url=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh
-elif [[ $(uname) == "Linux" ]]; then
-  url=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
-fi
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+bash Mambaforge-$(uname)-$(uname -m).sh
 curl $url -o Miniforge.sh
 sh Miniforge.sh
-export PATH=$HOME/Miniforge3/bin:$PATH
 ```
 
 and use all the default options,
