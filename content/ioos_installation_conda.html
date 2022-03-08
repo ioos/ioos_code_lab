@@ -552,13 +552,13 @@
 <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a> distribution,
 a lightweight version of the <a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda Scientific Python Distribution</a> with the conda-forge channel pre-configured.
 While the full Anaconda distribution will also work,
-it is faster to install Miniforge,
+it is faster to install Miniforge or Mambaforge (which provides mamba, a faster drop-in replacement for conda)
 and you can install only the packages you need.
 If for some reason you decide later that you want the full Anaconda distribution,
-you can install it by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">defaults</span> <span class="pre">anaconda</span></code> using Miniforge.</p>
+you can install it by typing <code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">defaults</span> <span class="pre">anaconda</span></code> using Mambaforge.</p>
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<p>Download and install the appropriate Miniforge installer from
+<p>Download and install the appropriate Mambaforge installer from
 <a class="reference external" href="https://github.com/conda-forge/miniforge">https://github.com/conda-forge/miniforge</a>.</p>
 <div class="section" id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
@@ -566,28 +566,19 @@ you can install it by typing <code class="docutils literal notranslate"><span cl
 Choose <em>Just Me</em> (not <em>All Users</em>),
 and choose a install location owned by you.
 The default is fine but kind of long.
-We recommend something on your C drive like <code class="docutils literal notranslate"><span class="pre">C:\Miniforge3</span></code>.</p>
+We recommend something on your C drive like <code class="docutils literal notranslate"><span class="pre">C:\Mambaforge</span></code>.</p>
 <p>On the “Advanced Installation Options” screen,
-uncheck the boxes to make Miniforge3 your default Python to avoid conflicts with any existing installation.</p>
+uncheck the boxes to make Mambaforge your default Python to avoid conflicts with any existing installation.</p>
 </div>
 <div class="section" id="linux-macos">
 <h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Permalink to this headline">¶</a></h3>
 <p>Copy-and-paste this in the terminal:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> <span class="k">$(</span>uname<span class="k">)</span> <span class="o">==</span> <span class="s2">&quot;Darwin&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-  <span class="nv">url</span><span class="o">=</span>https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh
-<span class="k">elif</span> <span class="o">[[</span> <span class="k">$(</span>uname<span class="k">)</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-  <span class="nv">url</span><span class="o">=</span>https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
-<span class="k">fi</span>
-curl <span class="nv">$url</span> -o Miniforge.sh
-sh Miniforge.sh
-<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/Miniforge3/bin:<span class="nv">$PATH</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl -L -O <span class="s2">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-</span><span class="k">$(</span>uname<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname -m<span class="k">)</span><span class="s2">.sh&quot;</span>
+bash Mambaforge-<span class="k">$(</span>uname<span class="k">)</span>-<span class="k">$(</span>uname -m<span class="k">)</span>.sh
 </pre></div>
 </div>
 <p>and use all the default options,
 except for the license agreement where you must actively change it to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p>
-<p>Note: if you have the latest macOS with the arm chip you may want to install
-<a class="reference external" href="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh">https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh</a>
-instead to avoid using emulation via rosetta.</p>
 </div>
 </div>
 <div class="section" id="create-the-ioos-conda-environment">
@@ -602,8 +593,8 @@ curl <span class="nv">$url</span> -o environment.yml
 </div>
 <p>Then, from the directory where you saved the file above,
 type the following commands in the terminal or Windows command prompt:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda update --yes --all
-conda env create --quiet --file environment.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba update --yes --all
+mamba env create --quiet --file environment.yml
 </pre></div>
 </div>
 <p>That will update the packages in your base environment and then install the IOOS environment.

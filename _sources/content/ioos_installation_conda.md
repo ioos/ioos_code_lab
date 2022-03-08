@@ -4,14 +4,14 @@ For IOOS Python/R users we recommend the free
 [Miniforge](https://github.com/conda-forge/miniforge) distribution,
 a lightweight version of the [Anaconda Scientific Python Distribution](https://store.continuum.io/cshop/anaconda/) with the conda-forge channel pre-configured.
 While the full Anaconda distribution will also work,
-it is faster to install Miniforge,
+it is faster to install Miniforge or Mambaforge (which provides mamba, a faster drop-in replacement for conda)
 and you can install only the packages you need.
 If for some reason you decide later that you want the full Anaconda distribution,
-you can install it by typing `conda install -c defaults anaconda` using Miniforge.
+you can install it by typing `mamba install -c defaults anaconda` using Mambaforge.
 
 ## Install
 
-Download and install the appropriate Miniforge installer from
+Download and install the appropriate Mambaforge installer from
 [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge).
 
 ### Windows
@@ -20,32 +20,22 @@ Run the installer
 Choose _Just Me_ (not _All Users_),
 and choose a install location owned by you.
 The default is fine but kind of long.
-We recommend something on your C drive like `C:\Miniforge3`.
+We recommend something on your C drive like `C:\Mambaforge`.
 
 On the "Advanced Installation Options" screen,
-uncheck the boxes to make Miniforge3 your default Python to avoid conflicts with any existing installation.
+uncheck the boxes to make Mambaforge your default Python to avoid conflicts with any existing installation.
 
 ### Linux/macOS
 
 Copy-and-paste this in the terminal:
 
 ```shell
-if [[ $(uname) == "Darwin" ]]; then
-  url=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh
-elif [[ $(uname) == "Linux" ]]; then
-  url=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
-fi
-curl $url -o Miniforge.sh
-sh Miniforge.sh
-export PATH=$HOME/Miniforge3/bin:$PATH
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+bash Mambaforge-$(uname)-$(uname -m).sh
 ```
 
 and use all the default options,
 except for the license agreement where you must actively change it to `yes`.
-
-Note: if you have the latest macOS with the arm chip you may want to install
-[https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)
-instead to avoid using emulation via rosetta.
 
 ## Create the IOOS conda environment
 
@@ -63,8 +53,8 @@ Then, from the directory where you saved the file above,
 type the following commands in the terminal or Windows command prompt:
 
 ```bash
-conda update --yes --all
-conda env create --quiet --file environment.yml
+mamba update --yes --all
+mamba env create --quiet --file environment.yml
 ```
 
 That will update the packages in your base environment and then install the IOOS environment.
