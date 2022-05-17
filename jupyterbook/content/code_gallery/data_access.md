@@ -1,9 +1,5 @@
 # Data Access
 
-```{image} https://cdn.ioos.noaa.gov/attachments/2018/08/ioos_data_portal_collage.jpg
-:width: 200px
-:align: center
-```
 IOOS data comes from a variety of technologies or data collection systems. While types of data available through any 
 one of our 11 regional associations may vary depending on the local area, the national IOOS data products include data 
 collected from buoys, high frequency radar systems and gliders. Modeling teams across regional associations also create 
