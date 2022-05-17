@@ -16,7 +16,11 @@ Matlab, R, etc).
 
 For more information on accessing IOOS data, see <https://ioos.noaa.gov/data/access-ioos-data/>.
 
+---
+
 ## Chapter table of contents
 
 ```{tableofcontents}
 ```
+
+---
