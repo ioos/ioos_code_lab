@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Fetching data from CO-OPS SOS with Python tools" href="data_access_notebooks/2016-10-12-fetching_data.html" />
-    <link rel="prev" title="IOOS CodeLab" href="../intro.html" />
+    <link rel="prev" title="Installing the IOOS conda environment" href="../ioos_installation_conda.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -100,6 +100,18 @@ const thebe_selector_output = ".output, .cell_output"
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ioos_installation_conda.html">
+   Installing the IOOS Conda Environment
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Code Gallery
  </span>
@@ -347,11 +359,6 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../ioos_installation_conda.html">
-   Installing the IOOS Conda Environment
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference external" href="https://help.aodn.org.au/aodn-data-tools/user-code-library/">
    Opening netCDF files - hints from AODN
   </a>
@@ -465,6 +472,19 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chapter-table-of-contents">
+   Chapter table of contents
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -477,6 +497,19 @@ const thebe_selector_output = ".output, .cell_output"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chapter-table-of-contents">
+   Chapter table of contents
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -485,8 +518,41 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="data-access">
 <h1>Data Access<a class="headerlink" href="#data-access" title="Permalink to this headline">¶</a></h1>
-<p>This chapter will consist of all the notebooks pertaining to data access</p>
+<p>IOOS data comes from a variety of technologies or data collection systems. While types of data available through any
+one of our 11 regional associations may vary depending on the local area, the national IOOS data products include data
+collected from buoys, high frequency radar systems and gliders. Modeling teams across regional associations also create
+data products including physical and environmental models of coastal systems.</p>
+<p>IOOS data can be accessed through a variety of access services and tools through IOOS interactive maps, Data Assembly
+Centers (DACs), and individual Regional Association portals. This chapter provides examples of the various data access
+services (SOS, THREDDS, ERDDAP, etc) and tools for scientists and managers looking to access data using various programing languages (Python,
+Matlab, R, etc).</p>
+<p>For more information on accessing IOOS data, see <a class="reference external" href="https://ioos.noaa.gov/data/access-ioos-data/">https://ioos.noaa.gov/data/access-ioos-data/</a>.</p>
+<hr class="docutils" />
+<div class="section" id="chapter-table-of-contents">
+<h2>Chapter table of contents<a class="headerlink" href="#chapter-table-of-contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2016-10-12-fetching_data.html">Fetching data from CO-OPS SOS with Python tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2016-11-15-glider_data_example.html">Plotting Glider data with Python tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2016-12-19-exploring_csw.html">How to search the IOOS CSW catalog with Python tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2016-12-20-searching_glider_deployments.html">Accessing glider data via the Glider DAC API with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2016-12-22-boston_light_swim.html">The Boston Light Swim temperature analysis with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2017-01-18-siphon-explore-thredds.html">Exploring the THREDDS catalog with Unidata’s Siphon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.html">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html">Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2017-07-25-HFRadar_currents.html">Near real-time HF-Radar currents in the proximity of the Deepwater Horizon site</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2017-08-01-xtractoR.html">Using the <code class="docutils literal notranslate"><span class="pre">xtractomatic</span></code> R package to track Pacific Blue Marlin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2017-09-09-hurricane_irma.html">Exploring the NHC Advisories and Sea Surface Height during Hurricane Irma</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2017-11-30-rerddap.html">Calling R libraries from Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2017-12-15-finding_HFRadar_currents.html">Fetching data from a CSW catalog with Python tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2018-03-01-erddapy.html">erddapy: a python client/URL builder for ERDDAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2019-02-26-hurricane_gis_part01.html">Accessing data from SOS using NHC GIS files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2019-03-08-grids-temperature.html">IOOS models: Temperature Horizontal Slices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2019-05-27-hurricane_gis_part02.html">Accessing data from SOS using NHC GIS files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_access_notebooks/2021-10-19-multiple-erddap-search.html">Searching multiple ERDDAP servers</a></li>
+</ul>
+</div>
+<hr class="docutils" />
 </div>
 </div>
 
@@ -515,11 +581,11 @@ const thebe_selector_output = ".output, .cell_output"
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../ioos_installation_conda.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">IOOS CodeLab</p>
+            <p class="prev-next-title">Installing the IOOS conda environment</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="data_access_notebooks/2016-10-12-fetching_data.html" title="next page">
