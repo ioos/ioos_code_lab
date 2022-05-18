@@ -1,10 +1,9 @@
 name: Build and Deploy docs
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
+  push:
+    branches: [main]
 
 jobs:
   build-docs:
@@ -13,23 +12,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Conda
-        uses: s-weigand/setup-conda@v1
+      - name: Setup Micromamba
+        uses: mamba-org/provision-with-micromamba@main
         with:
-          activate-conda: false
-          conda-channels: conda-forge
+          environment-file: false
 
       - name: Build environment
         shell: bash -l {0}
         run: |
-          conda create --name IOOS --file .binder/conda-linux-64.lock
-          source activate IOOS
+          micromamba create --name IOOS --file .binder/conda-linux-64.lock
+          micromamba activate IOOS
 
       - name: Build documentation
         shell: bash -l {0}
         run: |
           set -e
-          source activate IOOS
+          micromamba activate IOOS
           jupyter-book build jupyterbook
 
       - name: GitHub Pages action
