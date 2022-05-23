@@ -527,33 +527,32 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-<div class="bk-root">
-    <a href="https://bokeh.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
-    <span id="1002">Loading BokehJS ...</span>
-</div></div><script type="application/javascript">
-(function(root) {
+<div class="output text_html"><div class="bk-root">
+        <a href="https://bokeh.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
+        <span id="1002">Loading BokehJS ...</span>
+    </div>
+</div><script type="application/javascript">(function(root) {
   function now() {
     return new Date();
   }
 
-  var force = true;
+  const force = true;
 
   if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
     root._bokeh_onload_callbacks = [];
     root._bokeh_is_loading = undefined;
   }
 
-  var JS_MIME_TYPE = 'application/javascript';
-  var HTML_MIME_TYPE = 'text/html';
-  var EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
-  var CLASS_NAME = 'output_bokeh rendered_html';
+const JS_MIME_TYPE = 'application/javascript';
+  const HTML_MIME_TYPE = 'text/html';
+  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  const CLASS_NAME = 'output_bokeh rendered_html';
 
   /**
    * Render data to the DOM node
    */
   function render(props, node) {
-    var script = document.createElement("script");
+    const script = document.createElement("script");
     node.appendChild(script);
   }
 
@@ -561,10 +560,10 @@ const thebe_selector_output = ".output, .cell_output"
    * Handle when an output is cleared or removed
    */
   function handleClearOutput(event, handle) {
-    var cell = handle.cell;
+    const cell = handle.cell;
 
-    var id = cell.output_area._bokeh_element_id;
-    var server_id = cell.output_area._bokeh_server_id;
+    const id = cell.output_area._bokeh_element_id;
+    const server_id = cell.output_area._bokeh_server_id;
     // Clean up Bokeh references
     if (id != null && id in Bokeh.index) {
       Bokeh.index[id].model.document.clear();
@@ -573,11 +572,11 @@ const thebe_selector_output = ".output, .cell_output"
 
     if (server_id !== undefined) {
       // Clean up Bokeh references
-      var cmd = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
-      cell.notebook.kernel.execute(cmd, {
+      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd_clean, {
         iopub: {
           output: function(msg) {
-            var id = msg.content.text.trim();
+            const id = msg.content.text.trim();
             if (id in Bokeh.index) {
               Bokeh.index[id].model.document.clear();
               delete Bokeh.index[id];
@@ -586,8 +585,8 @@ const thebe_selector_output = ".output, .cell_output"
         }
       });
       // Destroy server and session
-      var cmd = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
-      cell.notebook.kernel.execute(cmd);
+      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd_destroy);
     }
   }
 
@@ -595,15 +594,15 @@ const thebe_selector_output = ".output, .cell_output"
    * Handle when a new output is added
    */
   function handleAddOutput(event, handle) {
-    var output_area = handle.output_area;
-    var output = handle.output;
+    const output_area = handle.output_area;
+    const output = handle.output;
 
     // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
     if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
       return
     }
 
-    var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
 
     if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
       toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
@@ -611,10 +610,10 @@ const thebe_selector_output = ".output, .cell_output"
       output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
     }
     if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
-      var bk_div = document.createElement("div");
+      const bk_div = document.createElement("div");
       bk_div.innerHTML = output.data[HTML_MIME_TYPE];
-      var script_attrs = bk_div.children[0].attributes;
-      for (var i = 0; i < script_attrs.length; i++) {
+      const script_attrs = bk_div.children[0].attributes;
+      for (let i = 0; i < script_attrs.length; i++) {
         toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
         toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
       }
@@ -627,14 +626,14 @@ const thebe_selector_output = ".output, .cell_output"
 
     function append_mime(data, metadata, element) {
       // create a DOM node to render to
-      var toinsert = this.create_output_subarea(
+      const toinsert = this.create_output_subarea(
         metadata,
         CLASS_NAME,
         EXEC_MIME_TYPE
       );
       this.keyboard_manager.register_events(toinsert);
       // Render to node
-      var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
       render(props, toinsert[toinsert.length - 1]);
       element.append(toinsert);
       return toinsert
@@ -660,21 +659,19 @@ const thebe_selector_output = ".output, .cell_output"
 
   // register the mime type if in Jupyter Notebook environment and previously unregistered
   if (root.Jupyter !== undefined) {
-    var events = require('base/js/events');
-    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    const events = require('base/js/events');
+    const OutputArea = require('notebook/js/outputarea').OutputArea;
 
     if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
       register_renderer(events, OutputArea);
     }
   }
-
-  
   if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
     root._bokeh_timeout = Date.now() + 5000;
     root._bokeh_failed_load = false;
   }
 
-  var NB_LOAD_WARNING = {'data': {'text/html':
+  const NB_LOAD_WARNING = {'data': {'text/html':
      "<div style='background-color: #fdd'>\n"+
      "<p>\n"+
      "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
@@ -691,7 +688,7 @@ const thebe_selector_output = ".output, .cell_output"
      "</div>"}};
 
   function display_loaded() {
-    var el = document.getElementById("1002");
+    const el = document.getElementById("1002");
     if (el != null) {
       el.textContent = "BokehJS is loading...";
     }
@@ -703,7 +700,6 @@ const thebe_selector_output = ".output, .cell_output"
       setTimeout(display_loaded, 100)
     }
   }
-
 
   function run_callbacks() {
     try {
@@ -757,8 +753,6 @@ const thebe_selector_output = ".output, .cell_output"
       document.body.appendChild(element);
     }
 
-    const hashes = {"https://cdn.bokeh.org/bokeh/release/bokeh-2.3.3.min.js": "dM3QQsP+wXdHg42wTqW85BjZQdLNNIXqlPw/BgKoExPmTG7ZLML4EGqLMfqHT6ON", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.3.min.js": "8x57I4YuIfu8XyZfFo0XVr2WAT8EK4rh/uDe3wF7YuW2FNUSNEpJbsPaB1nJ2fz2", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.3.min.js": "3QTqdz9LyAm2i0sG5XTePsHec3UHWwVsrOL68SYRoAXsafvfAyqtQ+h440+qIBhS"};
-
     for (let i = 0; i < js_urls.length; i++) {
       const url = js_urls[i];
       const element = document.createElement('script');
@@ -766,10 +760,6 @@ const thebe_selector_output = ".output, .cell_output"
       element.onerror = on_error.bind(null, url);
       element.async = false;
       element.src = url;
-      if (url in hashes) {
-        element.crossOrigin = "anonymous";
-        element.integrity = "sha384-" + hashes[url];
-      }
       console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
       document.head.appendChild(element);
     }
@@ -781,29 +771,22 @@ const thebe_selector_output = ".output, .cell_output"
     document.body.appendChild(element);
   }
 
-  
-  var js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.3.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.3.min.js"];
-  var css_urls = [];
-  
+  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.3.min.js"];
+  const css_urls = [];
 
-  var inline_js = [
-    function(Bokeh) {
+  const inline_js = [    function(Bokeh) {
       Bokeh.set_log_level("info");
     },
-    function(Bokeh) {
-    
-    
+function(Bokeh) {
     }
   ];
 
   function run_inline_js() {
-    
     if (root.Bokeh !== undefined || force === true) {
-      
-    for (var i = 0; i < inline_js.length; i++) {
+          for (let i = 0; i < inline_js.length; i++) {
       inline_js[i].call(root, root.Bokeh);
     }
-    if (force === true) {
+if (force === true) {
         display_loaded();
       }} else if (Date.now() < root._bokeh_timeout) {
       setTimeout(run_inline_js, 100);
@@ -811,10 +794,9 @@ const thebe_selector_output = ".output, .cell_output"
       console.log("Bokeh: BokehJS failed to load within specified timeout.");
       root._bokeh_failed_load = true;
     } else if (force !== true) {
-      var cell = $(document.getElementById("1002")).parents('.cell').data().cell;
+      const cell = $(document.getElementById("1002")).parents('.cell').data().cell;
       cell.output_area.append_execute_result(NB_LOAD_WARNING)
     }
-
   }
 
   if (root._bokeh_is_loading === 0) {
@@ -834,10 +816,7 @@ const thebe_selector_output = ".output, .cell_output"
 <a class="reference external" href="https://ioos.github.io/ioos_qc/api/ioos_qc.html#module-ioos_qc.qartod">https://ioos.github.io/ioos_qc/api/ioos_qc.html#module-ioos_qc.qartod</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variable_name</span> <span class="o">=</span> <span class="s2">&quot;sea_surface_height_above_sea_level_geoid_mhhw&quot;</span>
-
-
-<span class="n">qc_config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qc_config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;qartod&quot;</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">&quot;gross_range_test&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;fail_span&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
@@ -859,109 +838,65 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <p>Now we are ready to load the data, run tests and plot results!</p>
-<p>We will get the data from the <a class="reference external" href="http://erddap.aoos.org/erddap/">AOOS ERDDAP server</a>. Note that the data may change in the future. For reproducibility’s sake we will save the data downloaded into a CSV file.</p>
-<div class="cell docutils container">
+<p>We will get the data from the <a class="reference external" href="http://erddap.aoos.org/erddap/">AOOS ERDDAP server</a>.</p>
+<!-- Note that the data may change in the future. For reproducibility's sake we will save the data downloaded into a CSV file. --><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cf_xarray</span>
 <span class="kn">from</span> <span class="nn">erddapy</span> <span class="kn">import</span> <span class="n">ERDDAP</span>
 
 
-<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;water_level_example.csv&quot;</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span>
+    <span class="n">server</span><span class="o">=</span><span class="s2">&quot;http://erddap.aoos.org/erddap/&quot;</span><span class="p">,</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tabledap&quot;</span>
+<span class="p">)</span>
+<span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;kotzebue-alaska-water-level&quot;</span>
+<span class="n">e</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;time&gt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-09-05T21:00:00Z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;time&lt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-07-10T19:00:00Z&quot;</span><span class="p">,</span>
+<span class="p">}</span>
 
-<span class="k">if</span> <span class="n">fname</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">])</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span>
-        <span class="n">server</span><span class="o">=</span><span class="s2">&quot;http://erddap.aoos.org/erddap/&quot;</span><span class="p">,</span>
-        <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tabledap&quot;</span>
-    <span class="p">)</span>
-    <span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;kotzebue-alaska-water-level&quot;</span>
-    <span class="n">e</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;time&gt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-09-05T21:00:00Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;time&lt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-07-10T19:00:00Z&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
-    <span class="n">e</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">variable_name</span><span class="p">,</span>
-        <span class="s2">&quot;time&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;z&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span>
-        <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">,</span>
-        <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int64&quot;</span><span class="p">)</span> <span class="o">//</span> <span class="mf">1e9</span>
-    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_xarray</span><span class="p">()</span>
 
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">cf</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniforge3/envs/IOOS/lib/python3.10/site-packages/xarray/conventions.py:516: SerializationWarning: variable &#39;sea_surface_height_above_sea_level_geoid_mhhw_qc_agg&#39; has multiple fill values {-127, 4294967169}, decoding all values to NaN.
+  new_vars[k] = decode_cf_variable(
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coordinates:
+- CF Axes:   X: [&#39;longitude&#39;]
+             Y: [&#39;latitude&#39;]
+             T: [&#39;time&#39;]
+             Z: n/a
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+- CF Coordinates:   longitude: [&#39;longitude&#39;]
+                    latitude: [&#39;latitude&#39;]
+                    time: [&#39;time&#39;]
+                    vertical: n/a
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>time (UTC)</th>
-      <th>sea_surface_height_above_sea_level_geoid_mhhw (m)</th>
-      <th>z (m)</th>
-      <th>timestamp</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2018-09-05 21:00:00+00:00</td>
-      <td>0.4785</td>
-      <td>0.0</td>
-      <td>1.536181e+09</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2018-09-05 22:00:00+00:00</td>
-      <td>0.4420</td>
-      <td>0.0</td>
-      <td>1.536185e+09</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2018-09-05 23:00:00+00:00</td>
-      <td>0.4968</td>
-      <td>0.0</td>
-      <td>1.536188e+09</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2018-09-06 01:00:00+00:00</td>
-      <td>0.5456</td>
-      <td>0.0</td>
-      <td>1.536196e+09</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2018-09-06 02:00:00+00:00</td>
-      <td>0.5761</td>
-      <td>0.0</td>
-      <td>1.536199e+09</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+- Cell Measures:   area, volume: n/a
+
+- Standard Names:   latitude: [&#39;latitude&#39;]
+                    longitude: [&#39;longitude&#39;]
+                    time: [&#39;time&#39;]
+
+- Bounds:   n/a
+
+Data Variables:
+- Cell Measures:   area, volume: n/a
+
+- Standard Names:   aggregate_quality_flag: [&#39;sea_surface_height_above_sea_level_geoid_mhhw_qc_agg&#39;]
+                    altitude: [&#39;z&#39;]
+                    sea_surface_height_above_sea_level: [&#39;sea_surface_height_above_sea_level_geoid_mhhw&#39;]
+                    sea_surface_height_above_sea_level quality_flag: [&#39;sea_surface_height_above_sea_level_geoid_mhhw_qc_tests&#39;]
+
+- Bounds:   n/a
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -970,10 +905,12 @@ const thebe_selector_output = ".output, .cell_output"
 
 <span class="n">qc</span> <span class="o">=</span> <span class="n">QcConfig</span><span class="p">(</span><span class="n">qc_config</span><span class="p">)</span>
 
+<span class="c1"># The result is always a list but we only want the first, one and only in this case, variable.</span>
+<span class="n">variable_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">cf</span><span class="o">.</span><span class="n">standard_names</span><span class="p">[</span><span class="s2">&quot;sea_surface_height_above_sea_level&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
 <span class="n">qc_results</span> <span class="o">=</span>  <span class="n">qc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="n">inp</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sea_surface_height_above_sea_level_geoid_mhhw (m)&quot;</span><span class="p">],</span>
-    <span class="n">tinp</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">],</span>
-    <span class="n">zinp</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;z (m)&quot;</span><span class="p">],</span>
+    <span class="n">inp</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">variable_name</span><span class="p">],</span>
+    <span class="n">tinp</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 
 <span class="n">qc_results</span>
@@ -1002,18 +939,16 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Now we can write a plotting function that will read these results and flag the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
 
-<span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">test_name</span><span class="p">):</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span>
-    <span class="n">obs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">variable_name</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">test_name</span><span class="p">):</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">variable_name</span><span class="p">]</span>
     <span class="n">qc_test</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;qartod&quot;</span><span class="p">][</span><span class="n">test_name</span><span class="p">]</span>
 
     <span class="n">qc_pass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">qc_test</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span>
@@ -1046,7 +981,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_results</span><span class="p">(</span>
     <span class="n">data</span><span class="p">,</span>
-    <span class="s2">&quot;sea_surface_height_above_sea_level_geoid_mhhw (m)&quot;</span><span class="p">,</span>
+    <span class="n">variable_name</span><span class="p">,</span>
     <span class="n">qc_results</span><span class="p">,</span>
     <span class="n">title</span><span class="p">,</span>
     <span class="s2">&quot;gross_range_test&quot;</span>
@@ -1063,7 +998,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_results</span><span class="p">(</span>
     <span class="n">data</span><span class="p">,</span>
-    <span class="s2">&quot;sea_surface_height_above_sea_level_geoid_mhhw (m)&quot;</span><span class="p">,</span>
+    <span class="n">variable_name</span><span class="p">,</span>
     <span class="n">qc_results</span><span class="p">,</span>
     <span class="n">title</span><span class="p">,</span>
     <span class="s2">&quot;spike_test&quot;</span>
@@ -1081,7 +1016,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_results</span><span class="p">(</span>
     <span class="n">data</span><span class="p">,</span>
-    <span class="s2">&quot;sea_surface_height_above_sea_level_geoid_mhhw (m)&quot;</span><span class="p">,</span>
+    <span class="n">variable_name</span><span class="p">,</span>
     <span class="n">qc_results</span><span class="p">,</span>
     <span class="n">title</span><span class="p">,</span>
     <span class="s2">&quot;flat_line_test&quot;</span>
