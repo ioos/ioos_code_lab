@@ -37,9 +37,12 @@
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/togglebutton.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -49,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="shortcut icon" href="../../../_static/IOOS_logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -500,8 +503,8 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cf-1-6-with-iris">
-   CF-1.6 with iris
+  <a class="reference internal nav-link" href="#cf-1-6-with-cf-xarray">
+   CF-1.6 with cf_xarray
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -540,8 +543,8 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cf-1-6-with-iris">
-   CF-1.6 with iris
+  <a class="reference internal nav-link" href="#cf-1-6-with-cf-xarray">
+   CF-1.6 with cf_xarray
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -570,340 +573,514 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="parsing-conventions-and-standards-with-python">
 <h1>Parsing Conventions and standards with Python<a class="headerlink" href="#parsing-conventions-and-standards-with-python" title="Permalink to this headline">¶</a></h1>
-<p>Created: 2019-11-16</p>
+<p>Created: 2019-11-16
+Updated: 2022-05-25</p>
 <p>Metadata conventions, like the Climate and Forecast (CF) conventions,
 can be cumbersome to adhere to but it will be very handy when you or other users manipulate the data later in time.</p>
 <p>In this notebook we will explore three Python modules that parse <a class="reference external" href="http://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.html"><code class="docutils literal notranslate"><span class="pre">CF-1.6</span></code></a>,
 <a class="reference external" href="http://ugrid-conventions.github.io/ugrid-conventions/"><code class="docutils literal notranslate"><span class="pre">UGRID-1.0</span></code></a>,
 and <a class="reference external" href="http://sgrid.github.io/sgrid/"><code class="docutils literal notranslate"><span class="pre">SGRID-0.3</span></code></a></p>
-<div class="section" id="cf-1-6-with-iris">
-<h2>CF-1.6 with iris<a class="headerlink" href="#cf-1-6-with-iris" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cf-1-6-with-cf-xarray">
+<h2>CF-1.6 with cf_xarray<a class="headerlink" href="#cf-1-6-with-cf-xarray" title="Permalink to this headline">¶</a></h2>
 <p>There are many Python libraries to read and write CF metadata,
-but only <a class="reference external" href="http://scitools.org.uk/iris/"><code class="docutils literal notranslate"><span class="pre">iris</span></code></a> encapsulates CF in an object with an API.
-From iris own docs:</p>
-<p><em>Iris seeks to provide a powerful, easy to use, and community-driven Python library for analysing and visualising meteorological and oceanographic data sets.</em></p>
-<p>With iris you can:</p>
-<ul class="simple">
-<li><p>Use a single API to work on your data, irrespective of its original format.</p></li>
-<li><p>Read and write (CF-)netCDF, GRIB, and PP files.</p></li>
-<li><p>Easily produce graphs and maps via integration with matplotlib and cartopy.</p></li>
-</ul>
+including <a class="reference external" href="http://scitools.org.uk/iris/"><code class="docutils literal notranslate"><span class="pre">iris</span></code></a> and <a class="reference external" href="https://cf-xarray.readthedocs.io/"><code class="docutils literal notranslate"><span class="pre">cf_xarray</span></code></a>.</p>
+<p>We will explore <code class="docutils literal notranslate"><span class="pre">cf_xarray</span></code> in this notebook because it is built on top of the popular <code class="docutils literal notranslate"><span class="pre">xarray</span></code> package.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iris</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cf_xarray</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://tds.marine.rutgers.edu/thredds/dodsC/roms/espresso/2013_da/his/ESPRESSO_Real-Time_v2_History_fmrc.ncd&quot;</span>
-<span class="n">cubes</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">load_raw</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">drop_variables</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>  <span class="c1"># see https://github.com/pydata/xarray/issues/2233 for more context on dropping the time variable here.</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">cf</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/cf.py:1205: UserWarning: Ignoring formula terms variable &#39;zeta&#39; referenced by data variable &#39;v&#39; via variable &#39;s_rho&#39;: Dimensions (&#39;run&#39;, &#39;time&#39;, &#39;eta_rho&#39;, &#39;xi_rho&#39;) do not span (&#39;run&#39;, &#39;time&#39;, &#39;s_rho&#39;, &#39;eta_v&#39;, &#39;xi_v&#39;)
-  warnings.warn(msg)
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/cf.py:1205: UserWarning: Ignoring formula terms variable &#39;h&#39; referenced by data variable &#39;v&#39; via variable &#39;s_rho&#39;: Dimensions (&#39;eta_rho&#39;, &#39;xi_rho&#39;) do not span (&#39;run&#39;, &#39;time&#39;, &#39;s_rho&#39;, &#39;eta_v&#39;, &#39;xi_v&#39;)
-  warnings.warn(msg)
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/cf.py:1205: UserWarning: Ignoring formula terms variable &#39;zeta&#39; referenced by data variable &#39;u&#39; via variable &#39;s_rho&#39;: Dimensions (&#39;run&#39;, &#39;time&#39;, &#39;eta_rho&#39;, &#39;xi_rho&#39;) do not span (&#39;run&#39;, &#39;time&#39;, &#39;s_rho&#39;, &#39;eta_u&#39;, &#39;xi_u&#39;)
-  warnings.warn(msg)
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/cf.py:1205: UserWarning: Ignoring formula terms variable &#39;h&#39; referenced by data variable &#39;u&#39; via variable &#39;s_rho&#39;: Dimensions (&#39;eta_rho&#39;, &#39;xi_rho&#39;) do not span (&#39;run&#39;, &#39;time&#39;, &#39;s_rho&#39;, &#39;eta_u&#39;, &#39;xi_u&#39;)
-  warnings.warn(msg)
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/netcdf.py:679: UserWarning: Unable to find coordinate for variable &#39;zeta&#39;
-  warnings.warn(
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/netcdf.py:679: UserWarning: Unable to find coordinate for variable &#39;h&#39;
-  warnings.warn(
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/netcdf.py:870: UserWarning: Unable to construct Ocean s-coordinate, generic form 1 factory due to insufficient source coordinates.
-  warnings.warn(&quot;{}&quot;.format(e))
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/netcdf.py:679: UserWarning: Unable to find coordinate for variable &#39;zeta&#39;
-  warnings.warn(
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/netcdf.py:679: UserWarning: Unable to find coordinate for variable &#39;h&#39;
-  warnings.warn(
-/home/filipe/miniconda3/envs/IOOS/lib/python3.9/site-packages/iris/fileformats/netcdf.py:870: UserWarning: Unable to construct Ocean s-coordinate, generic form 1 factory due to insufficient source coordinates.
-  warnings.warn(&quot;{}&quot;.format(e))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coordinates:
+- CF Axes: * Z: [&#39;s_rho&#39;, &#39;s_w&#39;]
+           * T: [&#39;ocean_time&#39;]
+             X, Y: n/a
+
+- CF Coordinates:   longitude: [&#39;lon_psi&#39;, &#39;lon_rho&#39;, &#39;lon_u&#39;, &#39;lon_v&#39;]
+                    latitude: [&#39;lat_psi&#39;, &#39;lat_rho&#39;, &#39;lat_u&#39;, &#39;lat_v&#39;]
+                  * vertical: [&#39;s_rho&#39;, &#39;s_w&#39;]
+                  * time: [&#39;ocean_time&#39;]
+
+- Cell Measures:   area, volume: n/a
+
+- Standard Names: * forecast_reference_time: [&#39;run&#39;]
+                    latitude: [&#39;lat_psi&#39;, &#39;lat_rho&#39;, &#39;lat_u&#39;, &#39;lat_v&#39;]
+                    longitude: [&#39;lon_psi&#39;, &#39;lon_rho&#39;, &#39;lon_u&#39;, &#39;lon_v&#39;]
+                  * ocean_s_coordinate_g1: [&#39;s_rho&#39;, &#39;s_w&#39;]
+
+- Bounds:   n/a
+
+Data Variables:
+- Cell Measures:   area, volume: n/a
+
+- Standard Names:   sea_floor_depth_below_sea_surface: [&#39;h&#39;]
+                    sea_surface_elevation_anomaly: [&#39;zeta&#39;]
+                    sea_water_potential_temperature: [&#39;temp&#39;]
+                    sea_water_practical_salinity: [&#39;salt&#39;]
+                    sea_water_x_velocity: [&#39;u&#39;]
+                    sea_water_y_velocity: [&#39;v&#39;]
+
+- Bounds:   n/a
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Aside:</strong> using <code class="docutils literal notranslate"><span class="pre">iris.FUTURE.netcdf_promote</span> <span class="pre">=</span> <span class="pre">True</span></code> we can promote netCDF formula terms,
-like sea surface height, to first class cube objects.
-This behavior will be default in future versions of <code class="docutils literal notranslate"><span class="pre">iris</span></code> and that line will not be needed after the next version of iris is released.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cf_xarray</span></code> package does not compute the vertical coordinate (yet) as <code class="docutils literal notranslate"><span class="pre">iris</span></code>. However, we can easily compute it using the formula term in the metadata. To reduce the data download a bit we define a slice for the latest time step and a random point in the ocean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cubes</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">odvc.formulas</span> <span class="kn">import</span> <span class="n">ocean_s_coordinate_g1</span>
+
+
+<span class="c1"># Our ocean slice:</span>
+<span class="n">run</span><span class="p">,</span> <span class="n">ocean_time</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;s_rho&quot;</span><span class="p">]</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;Cs_r&quot;</span><span class="p">]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;zeta&quot;</span><span class="p">][</span><span class="n">run</span><span class="p">,</span> <span class="n">ocean_time</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">depth</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">][</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">depth_c</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;hc&quot;</span><span class="p">]</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">ocean_s_coordinate_g1</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">depth_c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: background vertical mixing coefficient for tracers / (meter2 second-1) (-- : 2)
-1: surface flux from wave dissipation / (unknown) (scalar cube)
-2: domain length in the XI-direction / (meter) (scalar cube)
-3: quadratic drag coefficient / (unknown) (scalar cube)
-4: NetCDF-4/HDF5 file format deflate filer flag / (unknown) (scalar cube)
-5: bottom roughness / (meter)          (scalar cube)
-6: 2D momentum nudging/relaxation inverse time scale / (day-1) (scalar cube)
-7: number of time-steps between restart records / (unknown) (scalar cube)
-8: background vertical mixing coefficient for length scale / (meter2 second-1) (scalar cube)
-9: tracer point sources and sink activation switch / (no_unit) (-- : 2)
-10: tracers outflow, nudging inverse time scale / (second-1) (-- : 4; -- : 2)
-11: starting time-step for accumulation of time-averaged fields / (unknown) (scalar cube)
-12: surface flux due to Craig and Banner wave breaking / (unknown) (scalar cube)
-13: shear production coefficient / (unknown) (scalar cube)
-14: grid type logical switch / (no_unit) (scalar cube)
-15: surface u-momentum stress / (newton meter-2) (forecast_reference_time: 1929; -- : 157; -- : 82; -- : 129)
-16: mask on U-points / (no_unit)        (-- : 82; -- : 129)
-17: bottom u-momentum stress / (newton meter-2) (forecast_reference_time: 1929; -- : 157; -- : 82; -- : 129)
-18: number of time-steps between the creation of average files / (unknown) (scalar cube)
-19: 3D momentum outflow, nudging inverse time scale / (second-1) (-- : 4)
-20: bottom v-momentum stress / (newton meter-2) (forecast_reference_time: 1929; -- : 157; -- : 81; -- : 130)
-21: wave amplitude factor for surface roughness / (unknown) (scalar cube)
-22: turbulent kinetic energy exponent / (unknown) (scalar cube)
-23: stability coefficient / (unknown)   (scalar cube)
-24: vertically integrated u-momentum component / (meter second-1) (forecast_reference_time: 1929; -- : 157; -- : 82; -- : 129)
-25: northward_sea_water_velocity / (meter second-1) (forecast_reference_time: 1929; -- : 157; ocean_s_coordinate_g1: 36; -- : 81; -- : 130)
-26: stability exponent / (unknown)      (scalar cube)
-27: Charnok factor for surface roughness / (unknown) (scalar cube)
-28: time averaged v-flux for 2D equations / (meter3 second-1) (forecast_reference_time: 1929; -- : 157; -- : 81; -- : 130)
-29: nonlinear model Laplacian mixing coefficient for momentum / (meter2 second-1) (scalar cube)
-30: time averaged u-flux for 2D equations / (meter3 second-1) (forecast_reference_time: 1929; -- : 157; -- : 82; -- : 129)
-31: number of time-steps between history records / (unknown) (scalar cube)
-32: angle between XI-axis and EAST / (radians) (-- : 82; -- : 130)
-33: number of long time-steps / (unknown) (scalar cube)
-34: NetCDF-4/HDF5 file format deflate level parameter / (unknown) (scalar cube)
-35: 2D momentum inflow, nudging inverse time scale / (second-1) (-- : 4)
-36: 2D momentum outflow, nudging inverse time scale / (second-1) (-- : 4)
-37: minimum value of specific turbulent kinetic energy / (unknown) (scalar cube)
-38: curvilinear coordinate metric in XI / (meter-1) (-- : 82; -- : 130)
-39: time stamp assigned to model initilization / (days since 2006-01-01 00:00:00) (scalar cube)
-40: constant Schmidt number for TKE / (unknown) (scalar cube)
-41: Power-law shape barotropic filter parameter / (unknown) (scalar cube)
-42: background vertical mixing coefficient for turbulent energy / (meter2 second-1) (scalar cube)
-43: curvilinear coordinate metric in ETA / (meter-1) (-- : 82; -- : 130)
-44: buoyancy production coefficient (minus) / (unknown) (scalar cube)
-45: vertically integrated v-momentum component / (meter second-1) (forecast_reference_time: 1929; -- : 157; -- : 81; -- : 130)
-46: time averaged u-flux for 3D equations coupling / (meter3 second-1) (forecast_reference_time: 1929; -- : 157; -- : 82; -- : 129)
-47: vertical momentum component / (meter second-1) (forecast_reference_time: 1929; -- : 157; ocean_s_coordinate_g1: 37; -- : 82; -- : 130)
-48: size of long time-steps / (second)  (scalar cube)
-49: free-surface outflow, nudging inverse time scale / (second-1) (-- : 4)
-50: buoyancy production coefficient (plus) / (unknown) (scalar cube)
-51: S-coordinate surface control parameter / (unknown) (scalar cube)
-52: 3D momentum nudging/relaxation inverse time scale / (day-1) (scalar cube)
-53: vertical terrain-following stretching function / (unknown) (scalar cube)
-54: nonlinear model Laplacian mixing coefficient for tracers / (meter2 second-1) (-- : 2)
-55: free-surface inflow, nudging inverse time scale / (second-1) (-- : 4)
-56: domain length in the ETA-direction / (meter) (scalar cube)
-57: S-coordinate surface/bottom layer width / (meter) (scalar cube)
-58: number of time-steps between the creation of history files / (unknown) (scalar cube)
-59: Coriolis parameter at RHO-points / (second-1) (-- : 82; -- : 130)
-60: surface net heat flux / (watt meter-2) (forecast_reference_time: 1929; -- : 157; -- : 82; -- : 130)
-61: mean density used in Boussinesq approximation / (kilogram meter-3) (scalar cube)
-62: slipperiness parameter / (unknown)  (scalar cube)
-63: S-coordinate bottom control parameter / (unknown) (scalar cube)
-64: vertical terrain-following transformation equation / (unknown) (scalar cube)
-65: sea_water_potential_temperature / (Celsius) (forecast_reference_time: 1929; -- : 157; ocean_s_coordinate_g1: 36; -- : 82; -- : 130)
-66: time averaged v-flux for 3D equations coupling / (meter3 second-1) (forecast_reference_time: 1929; -- : 157; -- : 81; -- : 130)
-67: constant Schmidt number for PSI / (unknown) (scalar cube)
-68: minimum Value of dissipation / (unknown) (scalar cube)
-69: NetCDF-4/HDF5 file format shuffle filer flag / (unknown) (scalar cube)
-70: tracers inflow, nudging inverse time scale / (second-1) (-- : 4; -- : 2)
-71: background vertical mixing coefficient for momentum / (meter2 second-1) (scalar cube)
-72: mask on V-points / (no_unit)        (-- : 81; -- : 130)
-73: mask on psi-points / (no_unit)      (-- : 81; -- : 129)
-74: Power-law shape barotropic filter parameter / (unknown) (scalar cube)
-75: linear drag coefficient / (meter second-1) (scalar cube)
-76: eastward_sea_water_velocity / (meter second-1) (forecast_reference_time: 1929; -- : 157; ocean_s_coordinate_g1: 36; -- : 82; -- : 129)
-77: Tracers nudging/relaxation inverse time scale / (day-1) (-- : 2)
-78: surface roughness / (meter)         (scalar cube)
-79: number of short time-steps / (unknown) (scalar cube)
-80: grid / (unknown)                    (scalar cube)
-81: dissipation coefficient / (unknown) (scalar cube)
-82: turbulent length scale exponent / (unknown) (scalar cube)
-83: 3D momentum inflow, nudging inverse time scale / (second-1) (-- : 4)
-84: size of short time-steps / (second) (scalar cube)
-85: Power-law shape barotropic filter parameter / (unknown) (scalar cube)
-86: free-surface nudging/relaxation inverse time scale / (day-1) (scalar cube)
-87: mask on RHO-points / (no_unit)      (-- : 82; -- : 130)
-88: sea_water_salinity / (unknown)      (forecast_reference_time: 1929; -- : 157; ocean_s_coordinate_g1: 36; -- : 82; -- : 130)
-89: surface v-momentum stress / (newton meter-2) (forecast_reference_time: 1929; -- : 157; -- : 81; -- : 130)
-90: number of time-steps between time-averaged records / (unknown) (scalar cube)
-91: sea_surface_height / (meter)        (forecast_reference_time: 1929; -- : 157; -- : 82; -- : 130)
-92: sea_floor_depth / (meter)           (-- : 82; -- : 130)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniforge3/envs/IOOS/lib/python3.10/site-packages/cf_xarray/accessor.py:1530: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
+  warnings.warn(
+/home/filipe/miniforge3/envs/IOOS/lib/python3.10/site-packages/cf_xarray/accessor.py:1530: UserWarning: Variables {&#39;&#39;} not found in object but are referred to in the CF attributes.
+  warnings.warn(
 </pre></div>
 </div>
 </div>
 </div>
-<p>The advantages of the CF data model here are:</p>
+<p>The main advantage of the CF data model are:</p>
 <ul class="simple">
-<li><p>high level variable access via <code class="docutils literal notranslate"><span class="pre">standard_name</span></code> or <code class="docutils literal notranslate"><span class="pre">long_name</span></code>;</p></li>
-<li><p>verbose warnings when there are compliance issues (see the units warnings above);</p></li>
+<li><p>high level variable access via standard_name or long_name;</p></li>
+<li><p>verbose warnings when there are compliance issues (see the warnings above);</p></li>
 <li><p>raise errors for non-compliant datasets;</p></li>
-<li><p>separation of each phenomena (<code class="docutils literal notranslate"><span class="pre">variable</span></code>) into its own cube*;</p></li>
-<li><p>each cube is a fully self-described format with all the original metadata;</p></li>
+<li><p>each CF object* is a fully self-described format with all the original metadata;</p></li>
 <li><p>round-trip load-save to netCDF is lossless;</p></li>
-<li><p>free interpretation of the <code class="docutils literal notranslate"><span class="pre">formula_terms</span></code>, <code class="docutils literal notranslate"><span class="pre">cell_methods</span></code>, and <code class="docutils literal notranslate"><span class="pre">axis</span></code> that helps with dimensionless coordinates, climatological variables, and plotting routines respectively.</p></li>
+<li><p>free interpretation of the formula_terms*, cell_methods, and axis that helps with dimensionless coordinates, climatological variables, and plotting routines respectively.</p></li>
 </ul>
-<p>* Most people miss the concept of a “dataset” when using <code class="docutils literal notranslate"><span class="pre">iris</span></code>,
-but that is a consequence of the CF model.
-Since there is no rule for unique names for the variables the dataset may contain the same phenomena with different coordinates,
-hence iris decides to create an individual cube for each phenomena.</p>
-<p>Aside: note that the <a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray</a> <strong>does</strong> have a dataset concept,
-but it infringes the CF model in many places to do so.
-We recommend <code class="docutils literal notranslate"><span class="pre">xarray</span></code> when CF compliance is not a requirement.</p>
-<p>For more on iris see <a class="reference external" href="http://bit.ly/2geJhGU">this example</a>.</p>
-<p>Moving on, let’s extract a single phenomena from the list of cubes above.</p>
+<p>* note that the pure xarray infringes the CF model in many places, see the <code class="docutils literal notranslate"><span class="pre">drop_variables=time</span></code> we used to be able to load the data. We recommend xarray when CF compliance is not a hard requirement.</p>
+<p>** only in iris at the moment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cube</span> <span class="o">=</span> <span class="n">cubes</span><span class="o">.</span><span class="n">extract_cube</span><span class="p">(</span><span class="s2">&quot;sea_surface_height&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
+<span class="n">temp</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sea_surface_height / (meter)           (forecast_reference_time: 1929; -- : 157; -- : 82; -- : 130)
-    Dimension coordinates:
-        forecast_reference_time                                x          -         -        -
-    Auxiliary coordinates:
-        time                                                   x          x         -        -
-        latitude                                               -          -         x        x
-        longitude                                              -          -         x        x
-    Attributes:
-        CPP_options                    MyCPP, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX, ANA_BTFLUX, ASSUMED_SHAPE, AVERAGES,...
-        Conventions                    CF-1.4, SGRID-0.3
-        DODS_EXTRA.Unlimited_Dimension ocean_time
-        EXTRA_DIMENSION.N              36
-        _ChunkSizes                    array([ 1, 82, 130], dtype=int32)
-        _CoordSysBuilder               ucar.nc2.dataset.conv.CF1Convention
-        ana_file                       ROMS/Functionals/ana_btflux.h, /home/julia/ROMS/espresso/RealTime/Comp...
-        avg_base                       espresso_avg_4638
-        bry_file                       ../Data/espresso_bdry_new.nc
-        cdm_data_type                  GRID
-        clm_file                       ../Data/espresso_clm_new.nc
-        code_dir                       /home/julia/ROMS/espresso/svn1409
-        compiler_command               /opt/pgisoft/openmpi/bin/mpif90
-        compiler_flags                  -O3 -Mfree
-        compiler_system                pgi
-        cpu                            x86_64
-        featureType                    GRID
-        field                          free-surface, scalar, series
-        file                           espresso_his_4638_0007.nc
-        flt_file                       espresso_flt_4638.nc
-        format                         netCDF-4/HDF5 file
-        fpos_file                      /home/om/cron/glider_floats/data/maracoos_floats.in
-        frc_file_01                    /home/om/roms/espresso/Data/espresso_tide_c05_20060101.nc
-        frc_file_02                    ../Data/espresso_river.nc
-        frc_file_03                    ../Data/rain_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_04                    ../Data/swrad_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_05                    ../Data/Tair_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_06                    ../Data/Pair_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_07                    ../Data/Qair_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_08                    ../Data/lwrad_down_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_09                    ../Data/Uwind_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_10                    ../Data/Vwind_ncepnam_3hourly_MAB_and_GoM.nc
-        grd_file                       /home/om/roms/espresso/Data/espresso_grid_c05.nc
-        header_dir                     /home/julia/ROMS/espresso/RealTime/Compile/fwd
-        header_file                    espresso.h
-        his_base                       espresso_his_4638
-        history                        &#39;ROMS/TOMS, Version 3.5, Sunday - September 16, 2018 -  5:16:50 AM ;\nFMRC...
-        ini_file                       /home/julia/ROMS/espresso/RealTime/Storage/run04/espresso_ini_4638.nc
-        location                       Proto fmrc:espresso_2013_da_his
-        os                             Linux
-        rst_file                       espresso_rst_4638.nc
-        script_file                    nl_ocean_espresso.in
-        summary                        Operational nowcast/forecast system version 2 for MARACOOS project (http://maracoos.org)....
-        svn_rev                        exported
-        svn_url                        https://www.myroms.org/svn/src/trunk
-        tiling                         004x002
-        time                           ocean_time
-        title                          ROMS ESPRESSO Real-Time Operational IS4DVAR Forecast System Version 2 (NEW)...
-        type                           ROMS/TOMS history file
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniforge3/envs/IOOS/lib/python3.10/site-packages/cf_xarray/accessor.py:1530: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
+  warnings.warn(
 </pre></div>
 </div>
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;temp&#x27; (run: 1929, time: 157, s_rho: 36, eta_rho: 82,
+                          xi_rho: 130)&gt;
+[116222867280 values with dtype=float32]
+Coordinates:
+  * s_rho    (s_rho) float64 -0.9861 -0.9583 -0.9306 ... -0.04167 -0.01389
+  * run      (run) datetime64[ns] 2013-05-18 2013-05-19 ... 2018-09-14
+    lat_rho  (eta_rho, xi_rho) float64 33.74 33.79 33.84 ... 42.78 42.82 42.87
+    lon_rho  (eta_rho, xi_rho) float64 -75.84 -75.78 -75.71 ... -71.49 -71.43
+Dimensions without coordinates: time, eta_rho, xi_rho
+Attributes:
+    units:          Celsius
+    long_name:      potential temperature
+    time:           ocean_time
+    field:          temperature, scalar, series
+    _ChunkSizes:    [  1  36  82 130]
+    standard_name:  sea_water_potential_temperature</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'temp'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>run</span>: 1929</li><li><span>time</span>: 157</li><li><span class='xr-has-index'>s_rho</span>: 36</li><li><span>eta_rho</span>: 82</li><li><span>xi_rho</span>: 130</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-06556417-8f1d-4b58-95e5-0b96410ff70d' class='xr-array-in' type='checkbox' checked><label for='section-06556417-8f1d-4b58-95e5-0b96410ff70d' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[116222867280 values with dtype=float32]</pre></div></div></li><li class='xr-section-item'><input id='section-3a37c4cc-4451-41a1-98a6-2cfb5b8543e7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3a37c4cc-4451-41a1-98a6-2cfb5b8543e7' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>s_rho</span></div><div class='xr-var-dims'>(s_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.9861 -0.9583 ... -0.01389</div><input id='attrs-cc2e0255-68e0-4cca-84b3-34475ae7a53f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-cc2e0255-68e0-4cca-84b3-34475ae7a53f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6e5e6ffb-63c7-4ecb-bf78-899da5f2355a' class='xr-var-data-in' type='checkbox'><label for='data-6e5e6ffb-63c7-4ecb-bf78-899da5f2355a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd></dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g1</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd></dl></div><div class='xr-var-data'><pre>array([-0.986111, -0.958333, -0.930556, -0.902778, -0.875   , -0.847222,
+       -0.819444, -0.791667, -0.763889, -0.736111, -0.708333, -0.680556,
+       -0.652778, -0.625   , -0.597222, -0.569444, -0.541667, -0.513889,
+       -0.486111, -0.458333, -0.430556, -0.402778, -0.375   , -0.347222,
+       -0.319444, -0.291667, -0.263889, -0.236111, -0.208333, -0.180556,
+       -0.152778, -0.125   , -0.097222, -0.069444, -0.041667, -0.013889])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>run</span></div><div class='xr-var-dims'>(run)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2013-05-18 ... 2018-09-14</div><input id='attrs-cd52bf8f-8892-4717-8242-ee9721b21cf5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-cd52bf8f-8892-4717-8242-ee9721b21cf5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-735133c9-3c1c-4396-a23a-6d1e7e8bb94e' class='xr-var-data-in' type='checkbox'><label for='data-735133c9-3c1c-4396-a23a-6d1e7e8bb94e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Run time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2013-05-18T00:00:00.000000000&#x27;, &#x27;2013-05-19T00:00:00.000000000&#x27;,
+       &#x27;2013-05-20T00:00:00.000000000&#x27;, ..., &#x27;2018-09-12T00:00:00.000000000&#x27;,
+       &#x27;2018-09-13T00:00:00.000000000&#x27;, &#x27;2018-09-14T00:00:00.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>33.74 33.79 33.84 ... 42.82 42.87</div><input id='attrs-1f98ca0f-a9c5-43b4-b317-9394642095d4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1f98ca0f-a9c5-43b4-b317-9394642095d4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-45a999e6-8df9-4ed8-9a84-9605af594a6f' class='xr-var-data-in' type='checkbox'><label for='data-45a999e6-8df9-4ed8-9a84-9605af594a6f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd></dl></div><div class='xr-var-data'><pre>array([[33.744605, 33.794267, 33.843908, ..., 39.803658, 39.849137, 39.894587],
+       [33.784963, 33.834601, 33.884218, ..., 39.840616, 39.886067, 39.93149 ],
+       [33.825301, 33.874916, 33.924509, ..., 39.877575, 39.923   , 39.968397],
+       ...,
+       [36.874968, 36.922822, 36.970654, ..., 42.708485, 42.752428, 42.796348],
+       [36.91383 , 36.961662, 37.009472, ..., 42.744764, 42.788691, 42.832595],
+       [36.952673, 37.000482, 37.04827 , ..., 42.781022, 42.824933, 42.868822]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-75.84 -75.78 ... -71.49 -71.43</div><input id='attrs-ee18895b-9bdc-4c36-8172-b409ae9e40d5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ee18895b-9bdc-4c36-8172-b409ae9e40d5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8f1eb77e-4e30-4a3e-89be-38d8e4cd9aca' class='xr-var-data-in' type='checkbox'><label for='data-8f1eb77e-4e30-4a3e-89be-38d8e4cd9aca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd></dl></div><div class='xr-var-data'><pre>array([[-75.838286, -75.775218, -75.712149, ..., -67.832953, -67.770109,
+        -67.707269],
+       [-75.884579, -75.821508, -75.758437, ..., -67.879134, -67.816286,
+        -67.753442],
+       [-75.930873, -75.8678  , -75.804727, ..., -67.925302, -67.862449,
+        -67.7996  ],
+       ...,
+       [-79.496038, -79.432795, -79.369551, ..., -71.464237, -71.400995,
+        -71.337752],
+       [-79.542336, -79.47909 , -79.415844, ..., -71.510168, -71.446923,
+        -71.383677],
+       [-79.588635, -79.525386, -79.462137, ..., -71.556099, -71.492851,
+        -71.429602]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-8251a025-a7f3-43f2-9c39-4c18128ee7b8' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8251a025-a7f3-43f2-9c39-4c18128ee7b8' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>long_name :</span></dt><dd>potential temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  36  82 130]</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd></dl></div></li></ul></div></div></div></div>
 </div>
-</div>
-<p>Requesting a vertical profile of temperature to see the <code class="docutils literal notranslate"><span class="pre">formula_terms</span></code> parsing in action.
-(Note that <code class="docutils literal notranslate"><span class="pre">ocean_s_coordinate_g1</span></code> is actually <code class="docutils literal notranslate"><span class="pre">CF-1.7</span></code> but was backported to <code class="docutils literal notranslate"><span class="pre">iris</span></code> because it is widely adopted and the CF conventions document evolves quite slowly.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">cubes</span><span class="o">.</span><span class="n">extract_cube</span><span class="p">(</span><span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sea_water_potential_temperature / (Celsius)          (forecast_reference_time: 1929; -- : 157; ocean_s_coordinate_g1: 36; -- : 82; -- : 130)
-    Dimension coordinates:
-        forecast_reference_time                                              x          -                           -        -        -
-        ocean_s_coordinate_g1                                                -          -                           x        -        -
-    Auxiliary coordinates:
-        time                                                                 x          x                           -        -        -
-        sea_surface_height                                                   x          x                           -        x        x
-        S-coordinate stretching curves at RHO-points                         -          -                           x        -        -
-        latitude                                                             -          -                           -        x        x
-        longitude                                                            -          -                           -        x        x
-        sea_floor_depth                                                      -          -                           -        x        x
-    Derived coordinates:
-        sea_surface_height_above_reference_ellipsoid                         x          x                           x        x        x
-    Scalar coordinates:
-        S-coordinate parameter, critical depth       5.0 meter
-    Attributes:
-        CPP_options                                  MyCPP, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX, ANA_BTFLUX, ASSUMED_SHAPE, AVERAGES,...
-        Conventions                                  CF-1.4, SGRID-0.3
-        DODS_EXTRA.Unlimited_Dimension               ocean_time
-        EXTRA_DIMENSION.N                            36
-        _ChunkSizes                                  array([ 1, 36, 82, 130], dtype=int32)
-        _CoordSysBuilder                             ucar.nc2.dataset.conv.CF1Convention
-        ana_file                                     ROMS/Functionals/ana_btflux.h, /home/julia/ROMS/espresso/RealTime/Comp...
-        avg_base                                     espresso_avg_4638
-        bry_file                                     ../Data/espresso_bdry_new.nc
-        cdm_data_type                                GRID
-        clm_file                                     ../Data/espresso_clm_new.nc
-        code_dir                                     /home/julia/ROMS/espresso/svn1409
-        compiler_command                             /opt/pgisoft/openmpi/bin/mpif90
-        compiler_flags                                -O3 -Mfree
-        compiler_system                              pgi
-        cpu                                          x86_64
-        featureType                                  GRID
-        field                                        temperature, scalar, series
-        file                                         espresso_his_4638_0007.nc
-        flt_file                                     espresso_flt_4638.nc
-        format                                       netCDF-4/HDF5 file
-        fpos_file                                    /home/om/cron/glider_floats/data/maracoos_floats.in
-        frc_file_01                                  /home/om/roms/espresso/Data/espresso_tide_c05_20060101.nc
-        frc_file_02                                  ../Data/espresso_river.nc
-        frc_file_03                                  ../Data/rain_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_04                                  ../Data/swrad_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_05                                  ../Data/Tair_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_06                                  ../Data/Pair_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_07                                  ../Data/Qair_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_08                                  ../Data/lwrad_down_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_09                                  ../Data/Uwind_ncepnam_3hourly_MAB_and_GoM.nc
-        frc_file_10                                  ../Data/Vwind_ncepnam_3hourly_MAB_and_GoM.nc
-        grd_file                                     /home/om/roms/espresso/Data/espresso_grid_c05.nc
-        header_dir                                   /home/julia/ROMS/espresso/RealTime/Compile/fwd
-        header_file                                  espresso.h
-        his_base                                     espresso_his_4638
-        history                                      &#39;ROMS/TOMS, Version 3.5, Sunday - September 16, 2018 -  5:16:50 AM ;\nFMRC...
-        ini_file                                     /home/julia/ROMS/espresso/RealTime/Storage/run04/espresso_ini_4638.nc
-        location                                     Proto fmrc:espresso_2013_da_his
-        os                                           Linux
-        rst_file                                     espresso_rst_4638.nc
-        script_file                                  nl_ocean_espresso.in
-        summary                                      Operational nowcast/forecast system version 2 for MARACOOS project (http://maracoos.org)....
-        svn_rev                                      exported
-        svn_url                                      https://www.myroms.org/svn/src/trunk
-        tiling                                       004x002
-        time                                         ocean_time
-        title                                        ROMS ESPRESSO Real-Time Operational IS4DVAR Forecast System Version 2 (NEW)...
-        type                                         ROMS/TOMS history file
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">cubes</span><span class="o">.</span><span class="n">extract_cube</span><span class="p">(</span><span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">)</span>
-
-<span class="c1"># Surface at the last time step.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Surface at the last time step.</span>
 <span class="n">T</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 
 <span class="c1"># Random profile at the last time step.</span>
@@ -914,95 +1091,25 @@ We recommend <code class="docutils literal notranslate"><span class="pre">xarray
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_profile</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[DimCoord(array([-0.98611111, -0.95833333, -0.93055556, -0.90277778, -0.875     ,
-        -0.84722222, -0.81944444, -0.79166667, -0.76388889, -0.73611111,
-        -0.70833333, -0.68055556, -0.65277778, -0.625     , -0.59722222,
-        -0.56944444, -0.54166667, -0.51388889, -0.48611111, -0.45833333,
-        -0.43055556, -0.40277778, -0.375     , -0.34722222, -0.31944444,
-        -0.29166667, -0.26388889, -0.23611111, -0.20833333, -0.18055556,
-        -0.15277778, -0.125     , -0.09722222, -0.06944444, -0.04166667,
-        -0.01388889]), standard_name=&#39;ocean_s_coordinate_g1&#39;, units=Unit(&#39;1&#39;), long_name=&#39;S-coordinate at RHO-points&#39;, var_name=&#39;s_rho&#39;, attributes={&#39;_CoordinateAxes&#39;: &#39;s_rho&#39;, &#39;_CoordinateAxisType&#39;: &#39;GeoZ&#39;, &#39;_CoordinateTransformType&#39;: &#39;Vertical&#39;, &#39;_CoordinateZisPositive&#39;: &#39;up&#39;, &#39;field&#39;: &#39;s_rho, scalar&#39;, &#39;positive&#39;: &#39;up&#39;, &#39;valid_max&#39;: 0.0, &#39;valid_min&#39;: -1.0}),
- AuxCoord(masked_array(data=[-27.951516510660785, -26.059303069671607,
-                    -24.384124213287187, -22.89464875895186,
-                    -21.562696436100815, -20.362612188354163,
-                    -19.270701231552074, -18.264739397273928,
-                    -17.3235917640554, -16.42699678498326,
-                    -15.555599667979164, -14.691337378046954,
-                    -13.818267733325536, -12.923866612931317,
-                    -12.000663674133458, -11.047856433978302,
-                    -10.072318055672692, -9.088358853495823,
-                    -8.115873334297476, -7.1770917524024735,
-                    -6.292781498350507, -5.479015518919441,
-                    -4.7453534147148115, -4.094654850148295,
-                    -3.5241580967286286, -3.027185090539729,
-                    -2.594890101973965, -2.2176940552106283,
-                    -1.8862775441376283, -1.5921597298211771,
-                    -1.3279593376447076, -1.087444521211529,
-                    -0.8654604836541105, -0.6577980350746284,
-                    -0.46104300943631427, -0.2724290764393475],
-              mask=[False, False, False, False, False, False, False, False,
-                    False, False, False, False, False, False, False, False,
-                    False, False, False, False, False, False, False, False,
-                    False, False, False, False, False, False, False, False,
-                    False, False, False, False],
-        fill_value=1e+20), standard_name=&#39;sea_surface_height_above_reference_ellipsoid&#39;, units=Unit(&#39;meter&#39;), attributes={&#39;positive&#39;: &#39;up&#39;})]
-</pre></div>
-</div>
+<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_7_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_7_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
-
-<span class="n">T</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-
-<span class="n">cs</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_profile</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_11_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_11_0.png" />
-</div>
-</div>
-<p>Iris knows about the metadata and can create fully annotated plots.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">iris.plot</span> <span class="k">as</span> <span class="nn">qplt</span>
-
-<span class="n">qplt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_profile</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_13_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_13_0.png" />
-</div>
-</div>
-<p>Be aware that too much automation may lead to some weird plots.</p>
-<p>For example, the z-coord is in the x-direction and the automatic naming of the z to Sea surface height is above the reference ellipsoid in the second plot. Another example is the lack of proper coordinates in the first plot.</p>
-<p>In these cases, manual plotting is more appropriate.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-
-<span class="n">t</span> <span class="o">=</span> <span class="n">t_profile</span><span class="o">.</span><span class="n">data</span>
-<span class="n">z</span> <span class="o">=</span> <span class="n">t_profile</span><span class="o">.</span><span class="n">coord</span><span class="p">(</span><span class="s2">&quot;sea_surface_height_above_reference_ellipsoid&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">points</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_15_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_15_0.png" />
+<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_8_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_8_0.png" />
 </div>
 </div>
 </div>
@@ -1067,11 +1174,9 @@ if the data is <code class="docutils literal notranslate"><span class="pre">UGRI
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_22_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_22_0.png" />
+<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_15_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_15_0.png" />
 </div>
 </div>
-<p>There is some effort in the development community to integrate <code class="docutils literal notranslate"><span class="pre">pyugrid</span></code> into <code class="docutils literal notranslate"><span class="pre">iris</span></code> to augment the cube object to be both CF and UGRID aware.
-It will add convenience plotting and slicing methods.</p>
 <p>Check a longer <code class="docutils literal notranslate"><span class="pre">pyugrid</span></code> example <a class="reference external" href="http://bit.ly/2gaZLCy">here</a>.</p>
 </div>
 <div class="section" id="sgrid-0-3-with-pysgrid">
@@ -1209,7 +1314,6 @@ There is plenty of room to create convenience methods using the low level access
 </div>
 </div>
 </div>
-<p>Ideally all the steps above could be performed in the background, in a high level object method call, like the <code class="docutils literal notranslate"><span class="pre">iris</span></code> cube plotting methods.</p>
 <p>Let’s subset and center the velocity for better visualization (not a mandatory step but recommended).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1293,7 +1397,7 @@ There is plenty of room to create convenience methods using the low level access
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_40_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_40_0.png" />
+<img alt="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_33_0.png" src="../../../_images/2016-11-16-CF-UGRID-SGRID-conventions_33_0.png" />
 </div>
 </div>
 <p>For more examples on <code class="docutils literal notranslate"><span class="pre">pysgrid</span></code> check this <a class="reference external" href="http://bit.ly/2fKVk0x">post</a> out.</p>
