@@ -1,0 +1,32 @@
+name: Test Environment
+
+on:
+  pull_request:
+
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        include:
+          - os: macos-latest
+            lockfile: conda-osx-64.lock
+          - os: ubuntu-latest
+            lockfile: conda-linux-64.lock
+          - os: windows-latest
+            lockfile: conda-win-64.lock
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Micromamba
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: false
+      - name: Build environment
+        shell: bash -l {0}
+        run: |
+          micromamba create --name IOOS --file .binder/${{ matrix.lockfile }}
+          micromamba activate IOOS
+          python -c 'import osgeo.gdal; print(dir(osgeo.gdal))'
