@@ -1,0 +1,53 @@
+name: Test Install instructions Section
+
+on:
+  pull_request:
+
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        include:
+          - os: macos-latest
+            INSTALLER: "Mambaforge-MacOSX-x86_64.sh"
+          - os: ubuntu-latest
+            INSTALLER: "Mambaforge-Linux-x86_64.sh"
+          - os: windows-latest
+            INSTALLER: "Mambaforge-Windows-x86_64.exe"
+      fail-fast: false
+
+    steps:
+      - name: Download Mambaforge
+        shell: bash -l {0}
+        run: |
+          curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/${{ matrix.INSTALLER }}
+
+      - name: Install on macOS
+        if: startsWith(matrix.os, 'macOS')
+        run: |
+          sh ${{ matrix.INSTALLER }} -b
+
+      - name: Install on Linux
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          sh ${{ matrix.INSTALLER }} -b
+
+      - name: Install on windows
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          start /wait "" ${{ matrix.INSTALLER }} /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Mambaforge
+
+      - name: Create Environment
+        shell: bash -l {0}
+        run: |
+          curl -L -O https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment.yml
+          mamba update --yes --all
+          mamba env create --quiet --file environment.yml
+
+      - name: Test environment
+        shell: bash -l {0}
+        run: |
+          conda activate IOOS
+          python -c 'import osgeo.gdal; print(dir(osgeo.gdal))'
