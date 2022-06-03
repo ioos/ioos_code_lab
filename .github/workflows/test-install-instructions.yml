@@ -1,0 +1,65 @@
+name: Test Install instructions Section
+
+on:
+  pull_request:
+
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          - os: macos-latest
+            INSTALLER: "Miniforge3-MacOSX-x86_64.sh"
+          - os: ubuntu-latest
+            INSTALLER: "Miniforge3-Linux-x86_64.sh"
+          - os: windows-latest
+            INSTALLER: "Miniforge3-Windows-x86_64.exe"
+      fail-fast: false
+
+    steps:
+      - name: Download Miniforge3 and the Env File
+        shell: bash -l {0}
+        run: >
+          curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/${{ matrix.INSTALLER }}
+          && curl -L -O https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment.yml
+
+      - name: Install Miniforge3 on *nix
+        shell: bash -l {0}
+        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macOS')
+        run: |
+          sh ${{ matrix.INSTALLER }} -b
+
+      - name: Install Miniforge3 on Windows
+        shell: cmd
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          start /wait "" ${{ matrix.INSTALLER }} /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=C:\miniforge3
+
+      - name: Create on *nix
+        shell: bash -l {0}
+        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macOS')
+        run: |
+          ~/miniforge3/bin/conda env create --quiet --file environment.yml
+
+      - name: Create on Windows
+        shell: cmd
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          C:\miniforge3\Scripts\conda.exe update --yes --all
+          C:\miniforge3\Scripts\conda.exe env create --quiet --file environment.yml
+
+      - name: Test environment on *nix
+        shell: bash -l {0}
+        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macOS')
+        run: >
+          source ~/miniforge3/bin/activate IOOS
+          && python -c 'import osgeo.gdal; print(dir(osgeo.gdal))'
+
+      - name: Test environment on Windows
+        shell: cmd
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          C:\miniforge3\Scripts\activate.bat IOOS
+          python -c "import osgeo.gdal; print(dir(osgeo.gdal))"
