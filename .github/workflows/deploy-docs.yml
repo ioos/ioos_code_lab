@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Micromamba
         uses: mamba-org/provision-with-micromamba@main
@@ -32,7 +32,7 @@ jobs:
 
       - name: GitHub Pages action
         if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3.6.1
+        uses: peaceiris/actions-gh-pages@v3.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: jupyterbook/_build/html
