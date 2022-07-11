@@ -20,7 +20,7 @@ jobs:
       - name: Build environment
         shell: bash -l {0}
         run: |
-          micromamba create --name IOOS --file .binder/conda-linux-64.lock
+          micromamba create --name IOOS --file .binder/conda-lock.yml
           micromamba activate IOOS
 
       - name: Build documentation
