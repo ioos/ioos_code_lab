@@ -1,4 +1,4 @@
-name: Test Notebooks
+name: Test Data Management Notebooks
 
 on:
   pull_request:
@@ -25,4 +25,4 @@ jobs:
         shell: bash -l {0}
         run: |
           micromamba activate IOOS
-          pytest --nbval --nbval-lax jupyterbook/
+          pytest --nbval --nbval-lax jupyterbook/content/code_gallery/data_management_notebooks/
