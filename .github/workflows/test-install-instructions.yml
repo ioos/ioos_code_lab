@@ -33,7 +33,8 @@ jobs:
       - name: Install Mambaforge on Windows
         shell: cmd
         if: startsWith(matrix.os, 'windows')
-        run: 'start /wait "" ${{ matrix.INSTALLER }} /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%UserProfile%\Mambaforge'
+        run: |
+          start /wait "" ${{ matrix.INSTALLER }} /InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=%UserProfile%\Mambaforge
 
       - name: Create on *nix
         shell: bash -l {0}
