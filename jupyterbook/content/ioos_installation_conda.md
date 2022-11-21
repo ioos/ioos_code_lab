@@ -1,17 +1,16 @@
 # Installing the IOOS conda environment
 
-For IOOS Python/R users we recommend the free
+For IOOS Python/R/Julia users we recommend the free
 [Miniforge](https://github.com/conda-forge/miniforge) distribution,
 a lightweight version of the [Anaconda Scientific Python Distribution](https://store.continuum.io/cshop/anaconda/) with the conda-forge channel pre-configured.
 While the full Anaconda distribution will also work,
-it is faster to install Miniforge or Mambaforge (which provides mamba, a faster drop-in replacement for conda)
-and you can install only the packages you need.
+it is faster to install Miniforge and you can install only the packages you need.
 If for some reason you decide later that you want the full Anaconda distribution,
-you can install it by typing `mamba install -c defaults anaconda` using Mambaforge.
+you can install it by typing `conda install -c defaults anaconda`.
 
 ## Install
 
-Download and install the appropriate Mambaforge installer from
+Download and install the appropriate Miniforge installer from
 [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge).
 
 ### Windows
@@ -20,22 +19,33 @@ Run the installer
 Choose _Just Me_ (not _All Users_),
 and choose a install location owned by you.
 The default is fine but kind of long.
-We recommend something on your C drive like `C:\Mambaforge`.
+We recommend something on your C drive like `C:\Miniforge`.
 
 On the "Advanced Installation Options" screen,
-uncheck the boxes to make Mambaforge your default Python to avoid conflicts with any existing installation.
+uncheck the boxes to make Miniforge your default Python to avoid conflicts with any existing installation.
 
 ### Linux/macOS
 
 Copy-and-paste this in the terminal:
 
 ```shell
-curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-bash Mambaforge-$(uname)-$(uname -m).sh
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+
+bash Miniforge-$(uname)-$(uname -m).sh
 ```
 
 and use all the default options,
 except for the license agreement where you must actively change it to `yes`.
+
+The first thing we will do is to install the mamba solver and add it to our `.condarc`.
+This make the faster mamba solver default in our installations.
+
+```
+conda install -n base conda-libmamba-solver
+$ conda config --set experimental_solver libmamba
+```
+
+For more info see: [https://github.com/conda/conda-libmamba-solver](https://github.com/conda/conda-libmamba-solver).
 
 ## Create the IOOS conda environment
 
@@ -53,8 +63,8 @@ Then, from the directory where you saved the file above,
 type the following commands in the terminal or Windows command prompt:
 
 ```bash
-mamba update --yes --all
-mamba env create --quiet --file environment.yml
+conda update --yes --all
+conda env create --quiet --file environment.yml
 ```
 
 That will update the packages in your base environment and then install the IOOS environment.
