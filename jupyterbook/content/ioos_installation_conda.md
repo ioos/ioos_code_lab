@@ -1,17 +1,22 @@
 # Installing the IOOS conda environment
 
-For IOOS Python/R users we recommend the free
+For IOOS Python/R/Julia users we recommend the free
 [Miniforge](https://github.com/conda-forge/miniforge) distribution,
 a lightweight version of the [Anaconda Scientific Python Distribution](https://store.continuum.io/cshop/anaconda/) with the conda-forge channel pre-configured.
 While the full Anaconda distribution will also work,
-it is faster to install Miniforge or Mambaforge (which provides mamba, a faster drop-in replacement for conda)
-and you can install only the packages you need.
+it is faster to install Miniforge and you can install only the packages you need.
 If for some reason you decide later that you want the full Anaconda distribution,
-you can install it by typing `mamba install -c defaults anaconda` using Mambaforge.
+you can install it by typing `conda install -c defaults anaconda`.
+
+Note that if you have the Anaconda Distribution,
+or any other installation,
+in your machine you may want to follow
+[these uninstall instructions](https://docs.anaconda.com/anaconda/install/uninstall)
+before proceeding.
 
 ## Install
 
-Download and install the appropriate Mambaforge installer from
+Download and install the appropriate Miniforge3 installer from
 [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge).
 
 ### Windows
@@ -20,22 +25,54 @@ Run the installer
 Choose _Just Me_ (not _All Users_),
 and choose a install location owned by you.
 The default is fine but kind of long.
-We recommend something on your C drive like `C:\Mambaforge`.
+We recommend something on your C drive like `C:\Miniforge`.
 
 On the "Advanced Installation Options" screen,
-uncheck the boxes to make Mambaforge your default Python to avoid conflicts with any existing installation.
+uncheck the boxes to make Miniforge your default Python to avoid conflicts with any existing installation.
+
+![miniforge_select_box](miniforge_select_box.png)
 
 ### Linux/macOS
 
 Copy-and-paste this in the terminal:
 
 ```shell
-curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-bash Mambaforge-$(uname)-$(uname -m).sh
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+
+bash Miniforge-$(uname)-$(uname -m).sh
 ```
 
 and use all the default options,
 except for the license agreement where you must actively change it to `yes`.
+
+## Add mamba solver
+
+The first thing we will do is to install the mamba solver and add it to our `.condarc`.
+This make the faster mamba solver default in our installations.
+
+```
+conda install --name base conda-libmamba-solver --yes
+conda config --set experimental_solver libmamba
+```
+
+If that worked you should see:
+
+```
+***
+
+NOTE: You are using the EXPERIMENTAL libmamba solver integration.
+
+If something is not working as expected, please:
+
+1. Go to https://github.com/conda/conda/issues/new/choose
+2. Choose the "Libmamba Solver Feedback (Experimental Feature)" option
+
+Thank you for your help!
+
+***
+```
+
+For more info see: [https://github.com/conda/conda-libmamba-solver](https://github.com/conda/conda-libmamba-solver).
 
 ## Create the IOOS conda environment
 
@@ -49,13 +86,27 @@ url=https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environmen
 curl $url -o environment.yml
 ```
 
+Open the Miniforge Prompt by click on the icon below:
+
+![prompt](prompt.png)
+
+or open the Linux/macOS terminal.
+
 Then, from the directory where you saved the file above,
-type the following commands in the terminal or Windows command prompt:
+type the following command to update the packages in your base environment,
 
 ```bash
-mamba update --yes --all
-mamba env create --quiet --file environment.yml
+conda update --yes --all
 ```
+
+and
+
+```bash
+conda env create --quiet --file environment.yml
+```
+
+to create the IOOS environment locally.
+Change the file name to environment-python_and_r.yml if you chose to use the IOOS environment with R.
 
 That will update the packages in your base environment and then install the IOOS environment.
 This will trigger the download and installation of many packages,
