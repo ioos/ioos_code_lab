@@ -45,12 +45,31 @@ bash Miniforge-$(uname)-$(uname -m).sh
 and use all the default options,
 except for the license agreement where you must actively change it to `yes`.
 
+## Add mamba solver
+
 The first thing we will do is to install the mamba solver and add it to our `.condarc`.
 This make the faster mamba solver default in our installations.
 
 ```
 conda install --name base conda-libmamba-solver --yes
 conda config --set experimental_solver libmamba
+```
+
+If that worked you should see:
+
+```
+***
+
+NOTE: You are using the EXPERIMENTAL libmamba solver integration.
+
+If something is not working as expected, please:
+
+1. Go to https://github.com/conda/conda/issues/new/choose
+2. Choose the "Libmamba Solver Feedback (Experimental Feature)" option
+
+Thank you for your help!
+
+***
 ```
 
 For more info see: [https://github.com/conda/conda-libmamba-solver](https://github.com/conda/conda-libmamba-solver).
