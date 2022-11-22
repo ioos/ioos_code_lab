@@ -74,12 +74,20 @@ Open the Miniforge Prompt by click on the icon below:
 or open the Linux/macOS terminal.
 
 Then, from the directory where you saved the file above,
-type the following commands:
+type the following command to update the packages in your base environment,
 
 ```bash
 conda update --yes --all
+```
+
+and
+
+```bash
 conda env create --quiet --file environment.yml
 ```
+
+to create the IOOS environment locally.
+Change the file name to environment-python_and_r.yml if you chose to use the IOOS environment with R.
 
 That will update the packages in your base environment and then install the IOOS environment.
 This will trigger the download and installation of many packages,
