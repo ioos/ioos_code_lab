@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="48291772-a7b1-48f0-a428-b0110f97f59e" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
   <dataset>
-    <alternateIdentifier>c118a726-aab5-11ec-8000-6f91ad4fa49c</alternateIdentifier>
+    <alternateIdentifier>924b78c2-6aa6-11ed-8000-8b789387aa8e</alternateIdentifier>
     <title>Grey seal (Halichoerus grypus) location data from a tag deployed from 2020-01-30 to 2020-06-15 in the Stellwagen Bank National Marine Sanctuary, and North Atlantic Ocean, ptt 195533</title>
     <creator>
       <individualName>
@@ -19,7 +19,7 @@
       <positionName/>
       <electronicMailAddress>kimberly.murray@noaa.gov</electronicMailAddress>
     </metadataProvider>
-    <pubDate>2022-03-23</pubDate>
+    <pubDate>2022-11-22</pubDate>
     <language>English</language>
     <abstract>
       <para>Wildlife Computers SPOT293 tag deployed on a Grey seal (Halichoerus grypus) by Kimberly Murray in Stellwagen Bank National Marine Sanctuary, and North Atlantic Ocean from 2020-01-30 to 2020-06-15. PTT tag number 195533.</para>
@@ -65,12 +65,8 @@
       </temporalCoverage>
       <taxonomicCoverage>
         <taxonomicClassification>
-          <taxonRankName>Genus</taxonRankName>
-          <taxonRankValue>Halichoerus</taxonRankValue>
-          <taxonomicClassification>
-            <taxonRankName>Species</taxonRankName>
-            <taxonRankValue>grypus</taxonRankValue>
-          </taxonomicClassification>
+          <taxonRankName>Species</taxonRankName>
+          <taxonRankValue>Halichoerus grypus</taxonRankValue>
         </taxonomicClassification>
       </taxonomicCoverage>
     </coverage>
