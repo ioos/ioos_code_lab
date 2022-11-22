@@ -30,6 +30,8 @@ We recommend something on your C drive like `C:\Miniforge`.
 On the "Advanced Installation Options" screen,
 uncheck the boxes to make Miniforge your default Python to avoid conflicts with any existing installation.
 
+![miniforge_select_box](miniforge_select_box.png)
+
 ### Linux/macOS
 
 Copy-and-paste this in the terminal:
@@ -65,8 +67,14 @@ url=https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environmen
 curl $url -o environment.yml
 ```
 
+Open the Miniforge Prompt by click on the icon below:
+
+![prompt](prompt.png)
+
+or open the Linux/macOS terminal.
+
 Then, from the directory where you saved the file above,
-type the following commands in the terminal or Windows command prompt:
+type the following commands:
 
 ```bash
 conda update --yes --all
