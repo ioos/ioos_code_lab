@@ -41,7 +41,7 @@ The first thing we will do is to install the mamba solver and add it to our `.co
 This make the faster mamba solver default in our installations.
 
 ```
-conda install -n base conda-libmamba-solver
+conda install --name base conda-libmamba-solver --yes
 conda config --set experimental_solver libmamba
 ```
 
