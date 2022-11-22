@@ -8,6 +8,12 @@ it is faster to install Miniforge and you can install only the packages you need
 If for some reason you decide later that you want the full Anaconda distribution,
 you can install it by typing `conda install -c defaults anaconda`.
 
+Note that if you have the Anaconda Distribution,
+or any other installation,
+in your machine you may want to follow
+[these uninstall instructions](https://docs.anaconda.com/anaconda/install/uninstall)
+before proceeding.
+
 ## Install
 
 Download and install the appropriate Miniforge installer from
