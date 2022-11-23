@@ -12,7 +12,6 @@ dependencies:
   - cftime
   - compliance-checker
   - cython
-  - datashader
   - descartes
   - easyargs
   - erddapy
