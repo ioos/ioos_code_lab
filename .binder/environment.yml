@@ -39,6 +39,7 @@ dependencies:
   - phantomjs
   - pocean-core >=3.1
   - pre-commit
+  - pyobis
   - pyoos
   - pyresample
   - pysgrid
