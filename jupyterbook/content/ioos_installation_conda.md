@@ -52,7 +52,7 @@ This make the faster mamba solver default in our installations.
 
 ```
 conda install --name base conda-libmamba-solver --yes
-conda config --set experimental_solver libmamba
+conda config --set solver libmamba
 ```
 
 If that worked you should see:
