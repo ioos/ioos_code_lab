@@ -53,6 +53,7 @@ dependencies:
   - simplekml
   - siphon
   - sympy
+  - tabulate
   - thredds_crawler
   - tqdm
   - utide
