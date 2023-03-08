@@ -1,9 +1,11 @@
 # NANOOS
 
 ```{image} ../../images/NANOOS.png
-:alt: IOOS
-:width: 150px
-:align: center
+---
+alt: IOOS
+width: 150px
+align: center
+---
 ```
 
 - [NANOOS Visualization System](https://www.youtube.com/watch?v=MEVz0jOsqmI)

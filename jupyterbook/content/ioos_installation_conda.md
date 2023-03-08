@@ -205,6 +205,6 @@ In the example above we are locking for macOS, Linux and Windows.
 
 Windows can be complicated and here are a few tips to help you troubleshoot it:
 
-1. If you did not install Miniforge on your C:\ drive you may have a "long path error." Usually that happens when you see failures in the environment creation;
+1. If you did not install Miniforge on your C:\\ drive you may have a "long path error." Usually that happens when you see failures in the environment creation;
 1. Installation is "successful" but nothing was installed. Please see https://github.com/ContinuumIO/anaconda-issues/issues/6258 for some reasons to why that us happening. Most common ones are aggressive anti-virus or bank apps blocking the installation;
 1. Installation was successful but calling `jupyter notebook` just hangs while "waiting for localhost:" that is probably a firewall setting blocking the notebook or you need to update your packages. See [update environment](#updating-the-ioos-environment).

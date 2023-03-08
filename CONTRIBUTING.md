@@ -42,10 +42,10 @@ If you would like to work on a notebook that has been proposed, follow these ste
    1. Notebooks are kept in the [jupyterbook/content/code_gallery](https://github.com/ioos/ioos_code_lab/tree/main/jupyterbook/content/code_gallery) directory of this repository.
       1. There are three directories where notebooks can be placed:
          1. `data_access_notebooks` -
-         2. `data_analysis_and_visualization_notebooks` -
-         3. `data_management_notebooks` -
-   2. Typically, it's best to copy an existing (working) notebook to a new file. If you are creating a python notebook, copy one of the python notebooks. If you are creating an R notebook, copy one of the R notebooks, etc
-   3. Name the notebook following the convention `[date]-[short name].ipynb`. Where, `[date]` is the date (YYYY-MM-DD) you started the new notebook and `[short name]` is an abbreviation for what the notebook will cover. Look at the existing notebook filenames to get a sense of the short names used.
+         1. `data_analysis_and_visualization_notebooks` -
+         1. `data_management_notebooks` -
+   1. Typically, it's best to copy an existing (working) notebook to a new file. If you are creating a python notebook, copy one of the python notebooks. If you are creating an R notebook, copy one of the R notebooks, etc
+   1. Name the notebook following the convention `[date]-[short name].ipynb`. Where, `[date]` is the date (YYYY-MM-DD) you started the new notebook and `[short name]` is an abbreviation for what the notebook will cover. Look at the existing notebook filenames to get a sense of the short names used.
 1. Edit the notebook following the [Jupyter Notebook documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html). The notebook should include the following information:
    1. Descriptive title for what the notebook is doing.
    1. A short summary providing context and expanding on the title.
