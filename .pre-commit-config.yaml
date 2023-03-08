@@ -20,14 +20,8 @@ repos:
     rev: v3.0.0-alpha.6
     hooks:
       - id: prettier
+        types_or: [html]
         exclude: "_templates/layout.html"
-
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
-    hooks:
-      - id: flake8
-        exclude: docs/source/conf.py
-        args: [--max-line-length=105]
 
   - repo: https://github.com/psf/black
     rev: 23.1.0
@@ -39,6 +33,25 @@ repos:
     rev: v2.4.0
     hooks:
       - id: add-trailing-comma
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.0.254
+    hooks:
+      - id: ruff
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.6.3
+    hooks:
+      # mdformat works on the CLI but not as pre-commit yet.
+      # Use `nbqa mdformat jupyterbook --nbqa-md` to run it locally.
+      # - id: mdformat
+      - id: nbqa-check-ast
+      - id: nbqa-black
+      - id: nbqa-ruff
+        args: [--fix, --extend-ignore=E402]
+        # Skipping b/c These notebooks mix R and Python and
+        # will return false positive for "F821 Undefined name.""
+        exclude: 2017-11-30-rerddap\.ipynb$|2018-02-20-obis.ipynb$
 
 ci:
   autofix_commit_msg: |

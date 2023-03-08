@@ -13,7 +13,7 @@ To suggest a notebook or ask questions please open an issue at: https://github.c
 
 [![DOI](https://zenodo.org/badge/399546690.svg)](https://zenodo.org/badge/latestdoi/399546690)
 
----
+______________________________________________________________________
 
 ## Build the JupyterBook locally
 
@@ -24,7 +24,7 @@ To suggest a notebook or ask questions please open an issue at: https://github.c
 ### Requirements:
 
 - Git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-- Jupyter{Book}: https://jupyterbook.org/intro.html
+- Jupyter\{Book}: https://jupyterbook.org/intro.html
 - Web Browser
 
 ### Installation
