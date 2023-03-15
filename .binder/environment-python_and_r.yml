@@ -21,6 +21,7 @@ dependencies:
   - geojsonio
   - geolinks
   - geopandas
+  - geoplot
   - gridgeo
   - hvplot
   - ioos_qc
