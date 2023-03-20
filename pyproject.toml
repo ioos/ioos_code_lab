@@ -1,0 +1,8 @@
+[tool.ruff]
+select = [
+    "F", # flakes
+    "I", # import sorting
+    "U", # upgrade
+]
+target-version = "py37"
+line-length = 120

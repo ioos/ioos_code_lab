@@ -2,7 +2,7 @@ name: IOOS
 channels:
   - conda-forge
 dependencies:
-  - python=3.10
+  - python=3.11
   - bagit
   - bokeh
   - cartopy
@@ -23,14 +23,11 @@ dependencies:
   - geopandas
   - gridgeo
   - hvplot
-  - ioos-tools
   - ioos_qc
   - ipyleaflet
   - joblib
   - jupyter
   - jupyter-book >=0.12.1
-  - jupyter_contrib_nbextensions
-  - jupyter_nbextensions_configurator
   - matplotlib-base
   - nbdime
   - nbval
