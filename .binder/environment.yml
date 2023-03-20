@@ -21,6 +21,7 @@ dependencies:
   - geolinks
   - geopandas
   - gridgeo
+  - humanize
   - hvplot
   - ioos_qc
   - ipyleaflet
