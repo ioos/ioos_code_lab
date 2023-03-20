@@ -63,3 +63,4 @@ dependencies:
   - xarray
   - xlrd
   - xmltodict
+  - zarr

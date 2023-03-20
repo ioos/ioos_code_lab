@@ -64,6 +64,7 @@ dependencies:
   - xarray
   - xlrd
   - xmltodict
+  - zarr
   # R packages.
   - rpy2
   - r-base=4
