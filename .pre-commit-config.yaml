@@ -35,12 +35,12 @@ repos:
       - id: add-trailing-comma
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.254
+    rev: v0.0.257
     hooks:
       - id: ruff
 
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.6.3
+    rev: 1.6.4
     hooks:
       # mdformat works on the CLI but not as pre-commit yet.
       # Use `nbqa mdformat jupyterbook --nbqa-md` to run it locally.
