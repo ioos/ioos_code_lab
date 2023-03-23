@@ -53,6 +53,11 @@ repos:
         # will return false positive for "F821 Undefined name.""
         exclude: 2017-11-30-rerddap\.ipynb$|2018-02-20-obis.ipynb$
 
+  - repo: https://github.com/bdice/nb-strip-paths
+    rev: 'v0.1.0'
+    hooks:
+      - id: nb-strip-paths
+
 ci:
   autofix_commit_msg: |
     [pre-commit.ci] auto fixes from pre-commit.com hooks
