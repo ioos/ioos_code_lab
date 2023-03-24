@@ -20,6 +20,7 @@ dependencies:
   - geojsonio
   - geolinks
   - geopandas
+  - geoplot
   - gridgeo
   - hvplot
   - ioos_qc
@@ -39,6 +40,7 @@ dependencies:
   - phantomjs
   - pocean-core >=3.1
   - pre-commit
+  - pyobis
   - pyoos
   - pyresample
   - pysgrid
@@ -52,6 +54,7 @@ dependencies:
   - simplekml
   - siphon
   - sympy
+  - tabulate
   - thredds_crawler
   - tqdm
   - utide
