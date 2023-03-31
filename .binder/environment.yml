@@ -30,6 +30,7 @@ dependencies:
   - jupyter
   - jupyter_server <2.0.0
   - jupyter-book >=0.12.1
+  - jupyterlab
   - matplotlib-base
   - nbdime
   - nbval
