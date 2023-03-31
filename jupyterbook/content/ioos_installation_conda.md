@@ -172,7 +172,7 @@ Check out [Travis Oliphant's blog piece](http://technicaldiscovery.blogspot.com/
 
 ### What to do when everything seems to be broken?
 
-For example, if you are seeing kernel erros like the one below.
+For example, if you are seeing kernel errors like the one below.
 
 ![kernel_error](kernel_error.png)
 
