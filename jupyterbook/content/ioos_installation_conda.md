@@ -118,6 +118,10 @@ Once the environment is done building, you can activate it by typing:
 conda activate IOOS
 ```
 
+Now you can start hacking the notebook with `jupyter nbclassic`,
+for the old style notebooks,
+ or `jupyter-lab` for the new IDE interface.
+
 ## Exiting the IOOS environment
 
 If you want to leave the IOOS environment and return to the root environment,
@@ -211,4 +215,4 @@ Windows can be complicated and here are a few tips to help you troubleshoot it:
 
 1. If you did not install Miniforge on your C:\\ drive you may have a "long path error." Usually that happens when you see failures in the environment creation;
 1. Installation is "successful" but nothing was installed. Please see https://github.com/ContinuumIO/anaconda-issues/issues/6258 for some reasons to why that us happening. Most common ones are aggressive anti-virus or bank apps blocking the installation;
-1. Installation was successful but calling `jupyter notebook` just hangs while "waiting for localhost:" that is probably a firewall setting blocking the notebook or you need to update your packages. See [update environment](#updating-the-ioos-environment).
+1. Installation was successful but calling `jupyter nbclassic` just hangs while "waiting for localhost:" that is probably a firewall setting blocking the notebook or you need to update your packages. See [update environment](#updating-the-ioos-environment).
