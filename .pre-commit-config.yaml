@@ -24,7 +24,7 @@ repos:
         exclude: "_templates/layout.html"
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
         language_version: python3
@@ -35,12 +35,12 @@ repos:
       - id: add-trailing-comma
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.257
+    rev: v0.0.260
     hooks:
       - id: ruff
 
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.6.4
+    rev: 1.7.0
     hooks:
       # mdformat works on the CLI but not as pre-commit yet.
       # Use `nbqa mdformat jupyterbook --nbqa-md` to run it locally.
