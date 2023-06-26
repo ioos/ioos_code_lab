@@ -16,11 +16,10 @@ before proceeding.
 
 ## Install
 
-Download and install the appropriate Miniforge3 installer from
-[https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge).
+Download and install the appropriate Miniforge3 installer for your platform.
 
 ### Windows
-
+Download it from [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge).
 Run the installer
 Choose _Just Me_ (not _All Users_),
 and choose a install location owned by you.
