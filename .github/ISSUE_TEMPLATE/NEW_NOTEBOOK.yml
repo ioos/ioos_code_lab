@@ -1,0 +1,38 @@
+---
+name: New Notebook
+description: Request to add a new notebook
+title: "[New Notebook]: "
+labels: ["Notebook idea"]
+assignees:
+  - mathewbiddle
+  - ocefpaf
+body:
+  - type: markdown
+    attributes:
+      value: |
+      If you want to suggest a notebook for the [IOOS CodeLab](https://ioos.github.io/ioos_code_lab/content/intro.html#) please answer these questions:
+  - type: input
+    id: language
+    attributes:
+      label: Programming Language
+      description: What programming language(s) will be used in the example?
+      placeholder: Python
+  - type: input
+    id: tool
+    attributes:
+      label: Module/Software/IOOS data service?
+      description: Is it focused on a particular module/software or an IOOS data service?
+      placeholder: ERDDAP
+  - type: input
+    id: example
+    attributes:
+      label: Module/Software/IOOS data service?
+      description: Can you provide a minimum example of the expected code and results in a notebook?
+      placeholder:
+  - type: input
+    id: description
+    attributes:
+      label: Provide a description.
+      description: Please provide a detailed description of the suggested example below
+      placeholder:
+---
