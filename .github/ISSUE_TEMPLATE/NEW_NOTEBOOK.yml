@@ -33,6 +33,6 @@ body:
     id: description
     attributes:
       label: Provide a description.
-      description: Please provide a detailed description of the suggested example below
+      description: Please provide a detailed description of the suggested example below.
       placeholder:
 ---
