@@ -1,4 +1,3 @@
----
 name: New Notebook
 description: Request to add a new notebook
 title: "[New Notebook]: "
@@ -28,11 +27,10 @@ body:
     attributes:
       label: Module/Software/IOOS data service?
       description: Can you provide a minimum example of the expected code and results in a notebook?
-      placeholder:
+      placeholder: ""
   - type: input
     id: description
     attributes:
       label: Provide a description.
       description: Please provide a detailed description of the suggested example below.
-      placeholder:
----
+      placeholder: ""
