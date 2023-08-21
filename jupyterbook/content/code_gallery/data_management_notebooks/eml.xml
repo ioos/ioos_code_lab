@@ -1,82 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="48291772-a7b1-48f0-a428-b0110f97f59e" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="ff554ebf-bf4b-5a82-8a90-9c0ceb799d96" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
   <dataset>
-    <alternateIdentifier>924b78c2-6aa6-11ed-8000-8b789387aa8e</alternateIdentifier>
-    <title>Grey seal (Halichoerus grypus) location data from a tag deployed from 2020-01-30 to 2020-06-15 in the Stellwagen Bank National Marine Sanctuary, and North Atlantic Ocean, ptt 195533</title>
+    <alternateIdentifier>304cc35a-3c66-11ee-8000-3d1ecc1cf28c</alternateIdentifier>
+    <title>Great white shark (Carcharodon carcharias) location data from a satellite telemetry tag (ptt id 45866) in the North Pacific Ocean deployed from 2009-09-23 to 2009-11-23, deployment id 5f0668a86321be13bc7ef628</title>
     <creator>
       <individualName>
-        <givenName>Kimberly Murray</givenName>
-        <surName>Kimberly Murray</surName>
+        <givenName>Chris G. Lowe</givenName>
+        <surName>Chris G. Lowe</surName>
       </individualName>
-      <positionName/>
-      <electronicMailAddress>kimberly.murray@noaa.gov</electronicMailAddress>
+      <positionName>academic</positionName>
+      <electronicMailAddress>chris.lowe@csulb.edu</electronicMailAddress>
     </creator>
     <metadataProvider>
       <individualName>
-        <givenName>Kimberly Murray</givenName>
-        <surName>Kimberly Murray</surName>
+        <givenName>Chris G. Lowe</givenName>
+        <surName>Chris G. Lowe</surName>
       </individualName>
-      <positionName/>
-      <electronicMailAddress>kimberly.murray@noaa.gov</electronicMailAddress>
+      <positionName>academic</positionName>
+      <electronicMailAddress>chris.lowe@csulb.edu</electronicMailAddress>
     </metadataProvider>
-    <pubDate>2022-11-22</pubDate>
+    <pubDate>2023-08-16</pubDate>
     <language>English</language>
     <abstract>
-      <para>Wildlife Computers SPOT293 tag deployed on a Grey seal (Halichoerus grypus) by Kimberly Murray in Stellwagen Bank National Marine Sanctuary, and North Atlantic Ocean from 2020-01-30 to 2020-06-15. PTT tag number 195533.</para>
+      <para>Wildlife Computers SPOT5 tag (ptt id 45866) deployed on a Great white shark (Carcharodon carcharias) by Chris G. Lowe in the North Pacific Ocean from 2009-09-23 to 2009-11-23</para>
     </abstract>
     <keywordSet>
-      <keyword>animal telemetry network</keyword>
-      <keyword>ATN</keyword>
-      <keyword>IOOS</keyword>
-      <keyword>Integrated Ocean Observing System</keyword>
-      <keyword>trajectory</keyword>
-      <keyword>gray seal</keyword>
-      <keyword>Halichoerus grypus</keyword>
-      <keyword>Spot 6 </keyword>
-      <keywordThesaurus>None</keywordThesaurus>
+      <keyword>EARTH SCIENCE &gt; AGRICULTURE &gt; ANIMAL SCIENCE &gt; ANIMAL ECOLOGY AND BEHAVIOR</keyword>
+      <keyword>EARTH SCIENCE &gt; BIOSPHERE &gt; ECOLOGICAL DYNAMICS &gt; SPECIES/POPULATION INTERACTIONS &gt; MIGRATORY RATES/ROUTES</keyword>
+      <keyword>EARTH SCIENCE &gt; OCEANS</keyword>
+      <keyword>EARTH SCIENCE &gt; CLIMATE INDICATORS &gt; BIOSPHERIC INDICATORS &gt; SPECIES MIGRATION</keyword>
+      <keyword>EARTH SCIENCE &gt; BIOLOGICAL CLASSIFICATION &gt; ANIMALS/VERTEBRATES</keyword>
+      <keyword>EARTH SCIENCE &gt; BIOSPHERE &gt; ECOSYSTEMS &gt; MARINE ECOSYSTEMS</keyword>
+      <keyword>PROVIDERS &gt; GOVERNMENT AGENCIES-U.S. FEDERAL AGENCIES &gt; DOC &gt; NOAA &gt; IOOS</keyword>
+      <keyword>PROVIDERS &gt; COMMERCIAL &gt; Axiom Data Science</keyword>
+      <keywordThesaurus>GCMD Science Keywords v15.1</keywordThesaurus>
     </keywordSet>
     <intellectualRights>
       <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
     </intellectualRights>
     <coverage>
       <geographicCoverage>
-        <geographicDescription>Stellwagen Bank National Marine Sanctuary, and North Atlantic Ocean</geographicDescription>
+        <geographicDescription>North Pacific Ocean</geographicDescription>
         <boundingCoordinates>
-          <westBoundingCoordinate>-71.3079</westBoundingCoordinate>
-          <eastBoundingCoordinate>-66.0281</eastBoundingCoordinate>
-          <northBoundingCoordinate>43.8355</northBoundingCoordinate>
-          <southBoundingCoordinate>40.2363</southBoundingCoordinate>
-          <boundingAltitudes>
-            <altitudeMinimum>0</altitudeMinimum>
-            <altitudeMaximum>0</altitudeMaximum>
-            <altitudeUnits>meter</altitudeUnits>
-          </boundingAltitudes>
+          <westBoundingCoordinate>-166.18</westBoundingCoordinate>
+          <eastBoundingCoordinate>-118.504</eastBoundingCoordinate>
+          <northBoundingCoordinate>34.045</northBoundingCoordinate>
+          <southBoundingCoordinate>23.59</southBoundingCoordinate>
         </boundingCoordinates>
       </geographicCoverage>
       <temporalCoverage>
         <rangeOfDates>
           <beginDate>
-            <calendarDate>2020-01-30</calendarDate>
+            <calendarDate>2009-09-23</calendarDate>
           </beginDate>
           <endDate>
-            <calendarDate>2020-06-15</calendarDate>
+            <calendarDate>2009-11-23</calendarDate>
           </endDate>
         </rangeOfDates>
       </temporalCoverage>
       <taxonomicCoverage>
         <taxonomicClassification>
           <taxonRankName>Species</taxonRankName>
-          <taxonRankValue>Halichoerus grypus</taxonRankValue>
+          <taxonRankValue>Carcharodon carcharias</taxonRankValue>
         </taxonomicClassification>
       </taxonomicCoverage>
     </coverage>
     <contact>
       <individualName>
-        <givenName>Kimberly Murray</givenName>
-        <surName>Kimberly Murray</surName>
+        <givenName>Chris G. Lowe</givenName>
+        <surName>Chris G. Lowe</surName>
       </individualName>
-      <positionName/>
-      <electronicMailAddress>kimberly.murray@noaa.gov</electronicMailAddress>
+      <positionName>academic</positionName>
+      <electronicMailAddress>chris.lowe@csulb.edu</electronicMailAddress>
     </contact>
   </dataset>
 </eml:eml>
