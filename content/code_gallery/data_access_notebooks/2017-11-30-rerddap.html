@@ -474,8 +474,8 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The first line below has a <code class="docutils literal notranslate"><span class="pre">%%R</span></code> to make it an <code class="docutils literal notranslate"><span class="pre">R</span></code> cell. The code below specify the <code class="docutils literal notranslate"><span class="pre">GCOOS</span></code> server and fetches the data information for the <a class="reference external" href="http://gcoos4.tamu.edu:8080/erddap/tabledap/cremp_fk_v2_1996.html"><code class="docutils literal notranslate"><span class="pre">cremp_fk_v2_1996</span></code></a> dataset.</p>
-<p>For more information on <code class="docutils literal notranslate"><span class="pre">rerddap</span></code> please see <a class="reference external" href="https://rmendels.github.io/Using_rerddap.nb.html">https://rmendels.github.io/Using_rerddap.nb.html</a>.</p>
+<p>The first line below has a <code class="docutils literal notranslate"><span class="pre">%%R</span></code> to make it an <code class="docutils literal notranslate"><span class="pre">R</span></code> cell. The code below specify the <code class="docutils literal notranslate"><span class="pre">GCOOS</span></code> server and fetches the data information for the <a class="reference external" href="https://gcoos4.tamu.edu/erddap/tabledap/fk_CREMP_yearly_revisited_DATA_v3_1996.html"><code class="docutils literal notranslate"><span class="pre">fk_CREMP_yearly_revisited_DATA_v3_1996</span></code></a> dataset.</p>
+<p>For more information on <code class="docutils literal notranslate"><span class="pre">rerddap</span></code> please see <a class="reference external" href="https://docs.ropensci.org/rerddap/">https://docs.ropensci.org/rerddap/</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span>
@@ -483,14 +483,14 @@ document.write(`
 library(&#39;rerddap&#39;)
 
 url &lt;- &#39;https://gcoos4.tamu.edu/erddap&#39;
-data_info &lt;- rerddap::info(&#39;fk_CREMP_Rev_DATA_v2_3_1_1996&#39;, url=url)
+data_info &lt;- rerddap::info(&#39;fk_CREMP_yearly_revisited_DATA_v3_1996&#39;, url=url)
 
 data_info
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ERDDAP info&gt; fk_CREMP_Rev_DATA_v2_3_1_1996 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ERDDAP info&gt; fk_CREMP_yearly_revisited_DATA_v3_1996 
  Base URL: https://gcoos4.tamu.edu/erddap 
  Dataset Type: tabledap 
  Variables:  
@@ -498,12 +498,13 @@ data_info
      acceptedNameUsage: 
      acceptedNameUsageID: 
      averageNumberOfPoints: 
-         Range: 1045, 2625 
+         Range: 407, 900 
          Units: count 
      basisOfRecord: 
      bottomType: 
      class: 
      country: 
+     crs: 
      datasetID: 
      datasetName: 
      depth: 
@@ -511,18 +512,18 @@ data_info
          Units: m 
      eventDate: 
          Range: 1996, 1996 
+         Units: unknown 
      eventID: 
      family: 
      firstYear: 
          Range: 1996, 1996 
+         Units: unknown 
      genus: 
      geodeticDatum: 
      habitat: 
      habitatID: 
      kingdom: 
      language: 
-     lastYear: 
-         Range: 2000, 2015 
      latitude: 
          Range: 24.4517, 25.2953 
          Units: degrees_north 
@@ -537,20 +538,18 @@ data_info
      minimumDepthInMeters: 
          Range: 3.0, 54.0 
          Units: m 
-     modified: 
+     Observations: 
+         Range: 0, 11839 
      occurrenceID: 
      occurrenceStatus: 
      order: 
      organismQuantity: 
-         Range: 0.0, 0.919800885 
-         Units: percent 
+         Range: 0.0, 0.9475 
+         Units: 0.01percent 
      organismQuantityType: 
      ownerInstitutionCode: 
-     parentEventID: 
      phylum: 
      recordedBy: 
-     Samples: 
-         Range: 0, 11839 
      samplingEffort: 
      samplingProtocol: 
      scientificName: 
@@ -559,11 +558,13 @@ data_info
      siteCode: 
      siteID: 
          Range: 10, 81 
+         Units: unknown 
      siteName: 
      specificEpithet: 
      stateProvince: 
      stationNumber: 
-         Range: 101, 754 
+         Range: 101, 814 
+         Units: unknown 
      subRegionID: 
      taxonomicStatus: 
      taxonRank: 
@@ -698,7 +699,7 @@ df &lt;- tabledap(
 </table>
 </div></div></div>
 </div>
-<p>We can navigate to ERDDAP’s <a class="reference external" href="http://gcoos4.tamu.edu:8080/erddap/info/cremp_fk_v2_1996/index.html">info page</a> to find the variables description. Let’s check what is <code class="docutils literal notranslate"><span class="pre">organismQuantity</span></code>:</p>
+<p>We can navigate to ERDDAP’s <a class="reference external" href="http://gcoos4.tamu.edu:8080/erddap/info/fk_CREMP_yearly_revisited_DATA_v3_1996/index.html">info page</a> to find the variables description. Let’s check what is <code class="docutils literal notranslate"><span class="pre">organismQuantity</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="ow">is</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">derived</span> <span class="n">information</span> <span class="n">product</span><span class="p">,</span> <span class="n">such</span> <span class="k">as</span> <span class="n">the</span> <span class="n">numerical</span> <span class="n">value</span> <span class="k">for</span> <span class="n">biomass</span><span class="o">.</span> <span class="n">This</span> <span class="n">term</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">include</span> <span class="n">units</span><span class="o">.</span> <span class="n">Mean</span> <span class="n">number</span> <span class="n">of</span> <span class="n">observed</span> <span class="n">fish</span> <span class="n">per</span> <span class="n">species</span> <span class="k">for</span> <span class="mi">5</span> <span class="n">Minutes</span>
 </pre></div>
 </div>
@@ -709,6 +710,7 @@ let’s remove that first to plot the data positions only where something was fo
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter invalid values (-999).</span>
 
 <span class="n">cremp_1996</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;organismQuantity&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">cremp_1996</span><span class="p">[</span><span class="s2">&quot;genus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cremp_1996</span><span class="p">[</span><span class="s2">&quot;genus&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 <span class="n">cremp_1996</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -793,7 +795,7 @@ let’s remove that first to plot the data positions only where something was fo
 <p>What is the most common <code class="docutils literal notranslate"><span class="pre">genus</span></code> of Coral observed?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg</span> <span class="o">=</span> <span class="n">cremp_1996</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;genus&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg</span> <span class="o">=</span> <span class="n">cremp_1996</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;habitat&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;genus&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 <span class="n">avg</span>
 </pre></div>
@@ -837,21 +839,21 @@ let’s remove that first to plot the data positions only where something was fo
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768958</td>
-      <td>0.034680</td>
+      <td>0.034553</td>
     </tr>
     <tr>
       <th>Acropora</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.005494</td>
+      <td>0.006003</td>
     </tr>
     <tr>
       <th>Agaricia</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000003</td>
+      <td>0.000005</td>
     </tr>
     <tr>
       <th>Cladocora</th>
@@ -865,28 +867,28 @@ let’s remove that first to plot the data positions only where something was fo
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.004462</td>
+      <td>0.005079</td>
     </tr>
     <tr>
       <th>Dendrogyra</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000977</td>
+      <td>0.001327</td>
     </tr>
     <tr>
       <th>Diadema</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000007</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>Dichocoenia</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000509</td>
+      <td>0.000591</td>
     </tr>
     <tr>
       <th>Dictyota</th>
@@ -900,21 +902,21 @@ let’s remove that first to plot the data positions only where something was fo
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000999</td>
+      <td>0.001321</td>
     </tr>
     <tr>
       <th>Eusmilia</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000091</td>
+      <td>0.000042</td>
     </tr>
     <tr>
       <th>Favia</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000045</td>
+      <td>0.000031</td>
     </tr>
     <tr>
       <th>Gorgonia</th>
@@ -935,14 +937,14 @@ let’s remove that first to plot the data positions only where something was fo
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000004</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>Isophyllia</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000006</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>Lobophora</th>
@@ -963,63 +965,63 @@ let’s remove that first to plot the data positions only where something was fo
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000040</td>
+      <td>0.000018</td>
     </tr>
     <tr>
       <th>Manicina</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000007</td>
+      <td>0.000021</td>
     </tr>
     <tr>
       <th>Meandrina</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000363</td>
+      <td>0.000421</td>
     </tr>
     <tr>
       <th>Millepora</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.006159</td>
+      <td>0.006130</td>
     </tr>
     <tr>
       <th>Montastraea</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.013597</td>
+      <td>0.013394</td>
     </tr>
     <tr>
       <th>Mussa</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000061</td>
+      <td>0.000051</td>
     </tr>
     <tr>
       <th>Mycetophyllia</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000144</td>
+      <td>0.000133</td>
     </tr>
     <tr>
       <th>Oculina</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000046</td>
+      <td>0.000065</td>
     </tr>
     <tr>
       <th>Orbicella</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.033860</td>
+      <td>0.034583</td>
     </tr>
     <tr>
       <th>Palythoa</th>
@@ -1040,49 +1042,49 @@ let’s remove that first to plot the data positions only where something was fo
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.003372</td>
+      <td>0.003351</td>
     </tr>
     <tr>
       <th>Pseudodiploria</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.001024</td>
+      <td>0.001383</td>
     </tr>
     <tr>
       <th>Scolymia</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000009</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>Siderastrea</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.004603</td>
+      <td>0.004472</td>
     </tr>
     <tr>
       <th>Solenastrea</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000048</td>
+      <td>0.000051</td>
     </tr>
     <tr>
       <th>Stephanocoenia</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.000263</td>
+      <td>0.000271</td>
     </tr>
     <tr>
       <th>Undaria</th>
       <td>23.2375</td>
       <td>-81.046667</td>
       <td>24.768957</td>
-      <td>0.001044</td>
+      <td>0.001139</td>
     </tr>
     <tr>
       <th>Xestospongia</th>
@@ -1095,7 +1097,7 @@ let’s remove that first to plot the data positions only where something was fo
 </table>
 </div></div></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">rerddap</span></code>’s info request does not have enough metadata about the variables to explain the blank, and most abundant, <code class="docutils literal notranslate"><span class="pre">genus</span></code>. <a class="reference external" href="http://gcoos4.tamu.edu:8080/erddap/tabledap/cremp_fk_v2_1996.html">Checking the sever</a> did not help figure that out. We’ll remove that for now to deal with only those that are identified.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rerddap</span></code>’s info request does not have enough metadata about the variables to explain the blank, and most abundant, <code class="docutils literal notranslate"><span class="pre">genus</span></code>. <a class="reference external" href="http://gcoos4.tamu.edu:8080/erddap/tabledap/fk_CREMP_yearly_revisited_DATA_v3_1996.html">Checking the sever</a> did not help figure that out. We’ll remove that for now to deal with only those that are identified.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cremp_1996</span> <span class="o">=</span> <span class="n">cremp_1996</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cremp_1996</span><span class="p">[</span><span class="s2">&quot;genus&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
@@ -1118,24 +1120,31 @@ let’s remove that first to plot the data positions only where something was fo
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="n">avg</span> <span class="o">=</span> <span class="n">cremp_1996</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;genus&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># re-compute the &quot;biased&quot; average.</span>
+<span class="n">avg</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">cremp_1996</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;habitat&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;genus&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>  <span class="c1"># re-compute the &quot;biased&quot; average.</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">avg</span><span class="p">[</span><span class="s2">&quot;organismQuantity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f9c70be0813765cd7834c83ce75c270f3bb7651237c2731b8ac810886d46e324.png" src="../../../_images/f9c70be0813765cd7834c83ce75c270f3bb7651237c2731b8ac810886d46e324.png" />
+<img alt="../../../_images/0e49ed7e0fde7961e3e0e367f89a512650b8d0f38fedc7a88eec7f27b844693e.png" src="../../../_images/0e49ed7e0fde7961e3e0e367f89a512650b8d0f38fedc7a88eec7f27b844693e.png" />
 </div>
 </div>
 <p>and <code class="docutils literal notranslate"><span class="pre">habitat</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">cremp_1996</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;habitat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s2">&quot;organismQuantity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">cremp_1996</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;genus&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;habitat&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s2">&quot;organismQuantity&quot;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/10d675f92ced25e044e392975a4336212d429ffacdd9de64bf3fd7e776ce416f.png" src="../../../_images/10d675f92ced25e044e392975a4336212d429ffacdd9de64bf3fd7e776ce416f.png" />
+<img alt="../../../_images/b374b5a006fba3fb38af64cfe07a7aa0c28cc630a7745095fb19053371d9fc72.png" src="../../../_images/b374b5a006fba3fb38af64cfe07a7aa0c28cc630a7745095fb19053371d9fc72.png" />
 </div>
 </div>
 <p>It seems the most of the biomass was found around the <code class="docutils literal notranslate"><span class="pre">Dendrogyra</span></code> genus in Patch Reef habitats.
@@ -1203,7 +1212,11 @@ With a <code class="docutils literal notranslate"><span class="pre">pandas</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/24c6ae152749239df9175773823f6e3d757502e8e582aacab4ad3d75489b53fa.png" src="../../../_images/24c6ae152749239df9175773823f6e3d757502e8e582aacab4ad3d75489b53fa.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_9861/710676339.py:16: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
+  cmap=plt.cm.get_cmap(&quot;viridis_r&quot;, 6),
+</pre></div>
+</div>
+<img alt="../../../_images/f45a8ba99da5de089ab3e8f7c937e3d86ddbe0e48f1c3c457d700a8f939805f8.png" src="../../../_images/f45a8ba99da5de089ab3e8f7c937e3d86ddbe0e48f1c3c457d700a8f939805f8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1233,7 +1246,11 @@ With a <code class="docutils literal notranslate"><span class="pre">pandas</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/d0413dae4f5f6861418042e767541f4d7536f8d8b1cfdc19d48c9f43e635e132.png" src="../../../_images/d0413dae4f5f6861418042e767541f4d7536f8d8b1cfdc19d48c9f43e635e132.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_9861/1312933967.py:16: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
+  cmap=plt.cm.get_cmap(&quot;viridis_r&quot;, 6),
+</pre></div>
+</div>
+<img alt="../../../_images/a8ad1d4243ed4ec3e540d5cb9e12c88606c6dd92a48c2e23c9493e2daf5254d6.png" src="../../../_images/a8ad1d4243ed4ec3e540d5cb9e12c88606c6dd92a48c2e23c9493e2daf5254d6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1263,7 +1280,11 @@ With a <code class="docutils literal notranslate"><span class="pre">pandas</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/660cb25c38c69c74ed41b1bb18e9862fc9c34f1224d4666288ba18cd288096ae.png" src="../../../_images/660cb25c38c69c74ed41b1bb18e9862fc9c34f1224d4666288ba18cd288096ae.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_9861/1632937538.py:16: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
+  cmap=plt.cm.get_cmap(&quot;viridis_r&quot;, 6),
+</pre></div>
+</div>
+<img alt="../../../_images/b4a75ad12317d9399ae3b62621c3ed521b6b864b0f46a30a42e968a3af6a4207.png" src="../../../_images/b4a75ad12317d9399ae3b62621c3ed521b6b864b0f46a30a42e968a3af6a4207.png" />
 </div>
 </div>
 <p>This demonstration showed the power of mixing <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">R</span></code> to reduce developer time and allow the research to focus on the data and not the programming language.</p>
