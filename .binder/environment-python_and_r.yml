@@ -33,6 +33,7 @@ dependencies:
   - jupyter-book >=0.12.1
   - jupyterlab
   - matplotlib-base
+  - nbclassic
   - nbdime
   - nbval
   - nc-time-axis
