@@ -24,7 +24,7 @@ jobs:
         shell: bash -l {0}
         run: |
           set -e
-          jupyter-book build jupyterbook
+          jupyter-book build jupyterbook --builder linkcheck
 
       - name: GitHub Pages action
         if: github.ref == 'refs/heads/main'
