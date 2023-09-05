@@ -415,7 +415,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-macos">Linux/macOS</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-mamba-solver">Add mamba solver</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-ioos-conda-environment">Create the IOOS conda environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exiting-the-ioos-environment">Exiting the IOOS environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-ioos-environment">Updating the IOOS environment</a></li>
@@ -442,7 +441,7 @@ document.write(`
 <h1>Installing the IOOS conda environment<a class="headerlink" href="#installing-the-ioos-conda-environment" title="Permalink to this headline">#</a></h1>
 <p>For IOOS Python/R/Julia users we recommend the free
 <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a> distribution,
-a lightweight version of the <a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda Scientific Python Distribution</a> with the conda-forge channel pre-configured.
+a lightweight version of the <a class="reference external" href="https://www.anaconda.com/download">Anaconda Scientific Python Distribution</a> with the conda-forge channel pre-configured.
 While the full Anaconda distribution will also work,
 it is faster to install Miniforge and you can install only the packages you need.
 If for some reason you decide later that you want the full Anaconda distribution,
@@ -450,7 +449,7 @@ you can install it by typing <code class="docutils literal notranslate"><span cl
 <p>Note that if you have the Anaconda Distribution,
 or any other installation,
 in your machine you may want to follow
-<a class="reference external" href="https://docs.anaconda.com/anaconda/install/uninstall">these uninstall instructions</a>
+<a class="reference external" href="https://docs.anaconda.com/free/anaconda/install/uninstall/">these uninstall instructions</a>
 before proceeding.</p>
 <section id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">#</a></h2>
@@ -478,31 +477,6 @@ bash<span class="w"> </span>Miniforge-<span class="k">$(</span>uname<span class=
 <p>and use all the default options,
 except for the license agreement where you must actively change it to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p>
 </section>
-</section>
-<section id="add-mamba-solver">
-<h2>Add mamba solver<a class="headerlink" href="#add-mamba-solver" title="Permalink to this headline">#</a></h2>
-<p>The first thing we will do is to install the mamba solver and add it to our <code class="docutils literal notranslate"><span class="pre">.condarc</span></code>.
-This make the faster mamba solver default in our installations.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">name</span> <span class="n">base</span> <span class="n">conda</span><span class="o">-</span><span class="n">libmamba</span><span class="o">-</span><span class="n">solver</span> <span class="o">--</span><span class="n">yes</span>
-<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="nb">set</span> <span class="n">solver</span> <span class="n">libmamba</span>
-</pre></div>
-</div>
-<p>If that worked you should see:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>***
-
-NOTE: You are using the EXPERIMENTAL libmamba solver integration.
-
-If something is not working as expected, please:
-
-1. Go to https://github.com/conda/conda/issues/new/choose
-2. Choose the &quot;Libmamba Solver Feedback (Experimental Feature)&quot; option
-
-Thank you for your help!
-
-***
-</pre></div>
-</div>
-<p>For more info see: <a class="github reference external" href="https://github.com/conda/conda-libmamba-solver">conda/conda-libmamba-solver</a>.</p>
 </section>
 <section id="create-the-ioos-conda-environment">
 <h2>Create the IOOS conda environment<a class="headerlink" href="#create-the-ioos-conda-environment" title="Permalink to this headline">#</a></h2>
@@ -573,7 +547,7 @@ but the binary libraries they depend on.
 So it’s easier than <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> and, thanks to binary relocation,
 more powerful than python wheels.
 System-level installation of libraries and admin privileges are not required.
-Check out <a class="reference external" href="http://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html">Travis Oliphant’s blog piece</a> for more info.</p>
+Check out <a class="reference external" href="https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html">Travis Oliphant’s blog piece</a> for more info.</p>
 </section>
 <section id="how-to-get-help">
 <h2>How to get help<a class="headerlink" href="#how-to-get-help" title="Permalink to this headline">#</a></h2>
@@ -591,12 +565,11 @@ Check out <a class="reference external" href="http://technicaldiscovery.blogspot
 <ol class="arabic simple">
 <li><p>If you believe that only your environment is broken you can follow the <span class="xref myst">update environment</span> instructions from above;</p></li>
 <li><p>Sometimes conda updates can break backwards compatibility and updating is broken. In those cases remove the Miniforge3 directory and perform a fresh install of the new version.</p></li>
-<li><p>In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by <a class="reference external" href="https://github.com/ioos/ioos_code_lab/tree/main/.binder">downloading the lock file your system</a> and issuing the command:</p></li>
+<li><p>In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by <a class="reference external" href="https://github.com/ioos/ioos_code_lab/raw/main/.binder/conda-lock.yml">downloading the lock file</a> and issuing the command:</p></li>
 </ol>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>IOOS<span class="w"> </span>--file<span class="w"> </span>.binder/conda-linux-64.lock
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>IOOS<span class="w"> </span>--file<span class="w"> </span>.binder/conda-lock.yml
 </pre></div>
 </div>
-<p>Be sure to change <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> in the lock file name according to your system (<code class="docutils literal notranslate"><span class="pre">win-64</span></code> or <code class="docutils literal notranslate"><span class="pre">osx-64</span></code>).</p>
 </section>
 <section id="conda-lock">
 <h3>conda-lock<a class="headerlink" href="#conda-lock" title="Permalink to this headline">#</a></h3>
@@ -700,7 +673,6 @@ and ensuring that the same packages from the time you locked will be used.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-macos">Linux/macOS</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-mamba-solver">Add mamba solver</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-ioos-conda-environment">Create the IOOS conda environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exiting-the-ioos-environment">Exiting the IOOS environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-ioos-environment">Updating the IOOS environment</a></li>
