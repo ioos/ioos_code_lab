@@ -84,3 +84,16 @@ repository:
 sphinx:
   config:
     html_show_copyright: false
+    myst_heading_anchors: 3
+    nb_mime_priority_overrides: [
+      ["html", "application/vnd.jupyter.widget-view+json", 10],
+      ["html", "application/javascript", 20],
+      ["html", "text/html", 30],
+      ["html", "image/svg+xml", 40],
+      ["html", "image/png", 50],
+      ["html", "image/gif", 60],
+      ["html", "image/jpeg", 70],
+      ["html", "text/markdown", 80],
+      ["html", "text/latex", 90],
+      ["html", "text/plain", 100]
+    ]
