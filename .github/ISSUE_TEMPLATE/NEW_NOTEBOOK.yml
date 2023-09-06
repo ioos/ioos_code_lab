@@ -8,7 +8,7 @@ assignees:
 body:
   - type: markdown
     attributes:
-      value: If you want to suggest a notebook for the [IOOS CodeLab](https://ioos.github.io/ioos_code_lab/content/intro.html) please answer these questions:
+      value: If you want to suggest a notebook for the [IOOS CodeLab](https://ioos.github.io/ioos_code_lab/content/intro.html) please answer these questions
   - type: input
     id: language
     attributes:
