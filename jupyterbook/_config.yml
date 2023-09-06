@@ -35,6 +35,7 @@ parse:
     - substitution
 
   myst_url_schemes: [mailto, http, https] # URI schemes that will be recognized as external URLs in Markdown links
+  myst_dmath_double_inline: true  # Allow display math ($$) within an inline context
 
 #######################################################################################
 # HTML-specific settings
@@ -55,7 +56,7 @@ html:
     (240) 533-9444
   google_analytics_id: "G-546J258RCJ"
   home_page_in_navbar: false # Whether to include your home page in the left Navigation Bar
-  baseurl: "" # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
+  baseurl: "https://ioos.github.io/ioos_code_lab/" # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
   comments:
     hypothesis: false
     utterances: false
@@ -83,4 +84,18 @@ repository:
 # Advanced and power-user settings
 sphinx:
   config:
+    linkcheck_anchors_ignore: ["aboutPanel", "searchPanel", "!forum/ioos_tech"]
     html_show_copyright: false
+    myst_heading_anchors: 3
+    nb_mime_priority_overrides: [
+      ["html", "application/vnd.jupyter.widget-view+json", 10],
+      ["html", "application/javascript", 20],
+      ["html", "text/html", 30],
+      ["html", "image/svg+xml", 40],
+      ["html", "image/png", 50],
+      ["html", "image/gif", 60],
+      ["html", "image/jpeg", 70],
+      ["html", "text/markdown", 80],
+      ["html", "text/latex", 90],
+      ["html", "text/plain", 100]
+    ]
