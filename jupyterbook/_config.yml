@@ -83,6 +83,7 @@ repository:
 # Advanced and power-user settings
 sphinx:
   config:
+    linkcheck_anchors_ignore: ["aboutPanel", "searchPanel"]
     html_show_copyright: false
     myst_heading_anchors: 3
     nb_mime_priority_overrides: [
