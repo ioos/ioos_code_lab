@@ -148,7 +148,7 @@ For example, if you are seeing kernel errors like the one below.
 
 1. If you believe that only your environment is broken you can follow the [update environment](#updating-the-ioos-environment) instructions from above;
 1. Sometimes conda updates can break backwards compatibility and updating is broken. In those cases remove the Miniforge3 directory and perform a fresh install of the new version.
-1. In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by [downloading the lock file](https://github.com/ioos/ioos_code_lab/raw/main/.binder/conda-lock.yml) and issuing the command:
+1. In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by [downloading the lock file](https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/conda-lock.yml) and issuing the command:
 
 ```shell
 conda create --name IOOS --file .binder/conda-lock.yml
