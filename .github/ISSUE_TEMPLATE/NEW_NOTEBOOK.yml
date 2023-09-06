@@ -9,7 +9,7 @@ body:
   - type: markdown
     attributes:
       value: |
-      If you want to suggest a notebook for the [IOOS CodeLab](https://ioos.github.io/ioos_code_lab/content/intro.html#) please answer these questions:
+      If you want to suggest a notebook for the [IOOS CodeLab](https://ioos.github.io/ioos_code_lab/content/intro.html) please answer these questions:
   - type: input
     id: language
     attributes:
@@ -27,10 +27,10 @@ body:
     attributes:
       label: Module/Software/IOOS data service?
       description: Can you provide a minimum example of the expected code and results in a notebook?
-      placeholder: ""
+      placeholder: Yes, see this gist.
   - type: input
     id: description
     attributes:
       label: Provide a description.
       description: Please provide a detailed description of the suggested example below.
-      placeholder: ""
+      placeholder: The notebook should detail how to bring source data in, and create an interactive graphical timeseries of the data.
