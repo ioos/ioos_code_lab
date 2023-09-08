@@ -1,4 +1,4 @@
 "organismID","measurementValue","measurementType","measurementUnit","measurementMethod","eventID","occurrenceID"
-"105838_great_white_shark",NA,"mass of the animal as measured or estimated at deployment","kg",NA,"great_white shark_2009-09-23T00:00:00Z","2009-09-23T00:00:00Z_0_great_white_shark"
+"105838_great_white_shark",,"mass of the animal as measured or estimated at deployment","kg",,"great_white shark_2009-09-23T00:00:00Z","2009-09-23T00:00:00Z_0_great_white_shark"
 "105838_great_white_shark",213,"length of the animal as measured or estimated at deployment","cm","total length","great_white shark_2009-09-23T00:00:00Z","2009-09-23T00:00:00Z_0_great_white_shark"
-"105838_great_white_shark",NA,"length of the animal as measured or estimated at deployment","","Not provided","great_white shark_2009-09-23T00:00:00Z","2009-09-23T00:00:00Z_0_great_white_shark"
+"105838_great_white_shark",,"length of the animal as measured or estimated at deployment","","Not provided","great_white shark_2009-09-23T00:00:00Z","2009-09-23T00:00:00Z_0_great_white_shark"
