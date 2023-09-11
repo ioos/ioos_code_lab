@@ -29,7 +29,6 @@ dependencies:
   - ipyleaflet
   - joblib
   - jupyter
-  - jupyter_server <2.0.0
   - jupyter-book >=0.12.1
   - jupyterlab
   - matplotlib-base
@@ -90,3 +89,7 @@ dependencies:
   - r-sp
   - r-xtractomatic
   - r-xts
+platforms:
+  - linux-64
+  - osx-64
+  - win-64
