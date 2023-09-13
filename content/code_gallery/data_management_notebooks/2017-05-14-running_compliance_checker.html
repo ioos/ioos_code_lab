@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
@@ -75,7 +76,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Using BagIt to tag oceanographic data" href="2017-11-01-Creating-Archives-Using-Bagit.html" />
     <link rel="prev" title="Data Management" href="../data_management.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -477,16 +478,16 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="shore-station-compliance-checker-script">
-<h1>Shore Station Compliance Checker Script<a class="headerlink" href="#shore-station-compliance-checker-script" title="Permalink to this headline">#</a></h1>
+<h1>Shore Station Compliance Checker Script<a class="headerlink" href="#shore-station-compliance-checker-script" title="Permalink to this heading">#</a></h1>
 <p>Created: 2017-05-14</p>
 <p>The IOOS Compliance Checker is a Python-based tool that helps users check the meta data compliance of a netCDF file. This software can be run in a web interface here: <a class="reference external" href="https://compliance.ioos.us/index.html">https://compliance.ioos.us/index.html</a> The checker can also be run as a Python tool either on the command line or in a Python script.  This notebook demonstrates the python usage of the Compliance Checker.</p>
 <section id="purpose">
-<h2>Purpose:<a class="headerlink" href="#purpose" title="Permalink to this headline">#</a></h2>
+<h2>Purpose:<a class="headerlink" href="#purpose" title="Permalink to this heading">#</a></h2>
 <p>Run the compliance checker python tool on a Scipps Pier shore station dataset to check for the metadata compliance.</p>
 <p>The Scripps Pier automated shore station operated by Southern California Coastal Ocean Observing System (SCCOOS) at Scripps Institution of Oceanography (SIO) is mounted at a nominal depth of 5 meters MLLW. The instrument package includes a Seabird SBE 16plus SEACAT Conductivity, Temperature, and Pressure recorder, and a Seapoint Chlorophyll Fluorometer with a 0-50 ug/L gain setting.</p>
 </section>
 <section id="dependencies">
-<h2>Dependencies:<a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h2>
+<h2>Dependencies:<a class="headerlink" href="#dependencies" title="Permalink to this heading">#</a></h2>
 <p>This script must be run in the “IOOS” environment for the compliance checker to work properly.</p>
 <p>Written by: J.Bosch Feb. 10, 2017</p>
 <div class="cell docutils container">
@@ -525,7 +526,7 @@ document.write(`
 </div>
 </div>
 <section id="running-compliance-checker-on-the-scripps-pier-shore-station-data">
-<h3>Running Compliance Checker on the Scripps Pier shore station data<a class="headerlink" href="#running-compliance-checker-on-the-scripps-pier-shore-station-data" title="Permalink to this headline">#</a></h3>
+<h3>Running Compliance Checker on the Scripps Pier shore station data<a class="headerlink" href="#running-compliance-checker-on-the-scripps-pier-shore-station-data" title="Permalink to this heading">#</a></h3>
 <p>This code is written with all the arguments spelled out, following the usage instructions on the README section of compliance checker github page: <a class="github reference external" href="https://github.com/ioos/compliance-checker">ioos/compliance-checker</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

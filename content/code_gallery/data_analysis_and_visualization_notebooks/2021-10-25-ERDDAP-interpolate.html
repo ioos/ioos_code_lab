@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
@@ -75,7 +76,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Data Management" href="../data_management.html" />
     <link rel="prev" title="IOOS QARTOD software (ioos_qc)" href="2020-02-14-QARTOD_ioos_qc_Water-Level-Example.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -463,10 +464,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="interpolating-data-remotely-with-erddap">
-<h1>Interpolating data remotely with ERDDAP<a class="headerlink" href="#interpolating-data-remotely-with-erddap" title="Permalink to this headline">#</a></h1>
+<h1>Interpolating data remotely with ERDDAP<a class="headerlink" href="#interpolating-data-remotely-with-erddap" title="Permalink to this heading">#</a></h1>
 <p>Created: 2021-10-25</p>
+<p>Modified: 2023-09-13</p>
 <p>ERDDAP servers can do a lot on the server side.
-One functionality that can surprise even advanced users is the <a class="reference external" href="https://coastwatch.pfeg.noaa.gov/erddap/convert/interpolate.html">ability to interpolate data</a>.</p>
+One functionality that can surprise even advanced users is the <a class="reference external" href="https://erddap.ioos.us/erddap/convert/interpolate.html">ability to interpolate data</a>.</p>
 <p>The API is relatively simple.
 We need to provide a table of <code class="docutils literal notranslate"><span class="pre">&quot;time,longitude,latitude&quot;</span></code> we want to interpolate,
 a gridded dataset to interpolate from that is served in ERDDAP’s griddap,
@@ -475,7 +477,9 @@ and the interpolation method.</p>
 <p>First we need to get the saildrone data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">erddapy</span> <span class="kn">import</span> <span class="n">ERDDAP</span>
 
 <span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;https://data.pmel.noaa.gov/pmel/erddap&quot;</span>
@@ -488,11 +492,14 @@ and the interpolation method.</p>
 <span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="n">dataset_id</span>
 <span class="n">e</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">variables</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
-
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">])</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;sd1045_hurricane_2021.csv&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">fname</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -538,7 +545,7 @@ and the interpolation method.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/e12c9beea5fbe98344141eb56b6ef5b63e223316afc8347babbe28cf767f4292.png" src="../../../_images/e12c9beea5fbe98344141eb56b6ef5b63e223316afc8347babbe28cf767f4292.png" />
+<img alt="../../../_images/27ad865e1d028415af16ab5afcd16e2029b79950a3f0aa75408628923049bfdb.png" src="../../../_images/27ad865e1d028415af16ab5afcd16e2029b79950a3f0aa75408628923049bfdb.png" />
 </div>
 </div>
 <p>The inset in the plot shows the data during the recording of <a class="reference external" href="https://www.saildrone.com/news/saildrone-collects-live-video-inside-hurricane-sam">this video</a>. It was the first time a Saildrone was inside a hurricane!</p>
@@ -553,7 +560,7 @@ Before we send the interpolation request let’s re-sample it to daily data to r
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/eeeeb162d1c07d5acda5e9eef0df7f1ee0994d2e619646d303b504336bed2a09.png" src="../../../_images/eeeeb162d1c07d5acda5e9eef0df7f1ee0994d2e619646d303b504336bed2a09.png" />
+<img alt="../../../_images/df2b4dc42888c3deb7b902c60a69edede0fb6190473dda3e274a3012909d8c30.png" src="../../../_images/df2b4dc42888c3deb7b902c60a69edede0fb6190473dda3e274a3012909d8c30.png" />
 </div>
 </div>
 <p>We need to prepare the data to send to the server. As mentioned above the request will take a table with a header <code class="docutils literal notranslate"><span class="pre">&quot;time,latitude,longitude&quot;</span></code>, then its values. Note that we save a text time column and then rename the columns to create the request.</p>
@@ -573,7 +580,7 @@ Before we send the interpolation request let’s re-sample it to daily data to r
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote_plus</span>
 
-<span class="c1"># See https://coastwatch.pfeg.noaa.gov/erddap/convert/interpolate.html</span>
+<span class="c1"># See https://erddap.ioos.us/erddap/convert/interpolate.html</span>
 <span class="c1"># for more info on the options available</span>
 <span class="n">response</span> <span class="o">=</span> <span class="s2">&quot;csv&quot;</span>
 <span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;jplMURSST41&quot;</span>
@@ -582,7 +589,7 @@ Before we send the interpolation request let’s re-sample it to daily data to r
 <span class="n">nearby</span> <span class="o">=</span> <span class="mi">4</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;https://coastwatch.pfeg.noaa.gov/erddap/&quot;</span>
+    <span class="s2">&quot;http://oceanlab3.rsmas.miami.edu/erddap/&quot;</span>
     <span class="sa">f</span><span class="s2">&quot;convert/interpolate.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">?&quot;</span>
     <span class="sa">f</span><span class="s2">&quot;TimeLatLonTable=</span><span class="si">{</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">time_lat_lon</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="sa">f</span><span class="s2">&quot;&amp;requestCSV=</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">algorithm</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">nearby</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -625,7 +632,7 @@ However, we cannot expect such a perfect fit when comparing sensor from such dif
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c518a81e6e65080c7af5d1d9731e7a9a16be6bc7364e5eb2fa97ec4615eb18a2.png" src="../../../_images/c518a81e6e65080c7af5d1d9731e7a9a16be6bc7364e5eb2fa97ec4615eb18a2.png" />
+<img alt="../../../_images/c8ea6ec7dd800835cd18fb8531f1b89d8509dc9a70ebaf5a677f5fe7442a250a.png" src="../../../_images/c8ea6ec7dd800835cd18fb8531f1b89d8509dc9a70ebaf5a677f5fe7442a250a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -684,7 +691,7 @@ However, we cannot expect such a perfect fit when comparing sensor from such dif
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/ccb9e215e1cc5a76a7a46372b4d74588ea5485f74f3377fe2be472f07a6868e6.png" src="../../../_images/ccb9e215e1cc5a76a7a46372b4d74588ea5485f74f3377fe2be472f07a6868e6.png" />
+<img alt="../../../_images/fbfed4903b6da64849a14735d6865dc1dc95fa463546d551c3b44549d22dcb02.png" src="../../../_images/fbfed4903b6da64849a14735d6865dc1dc95fa463546d551c3b44549d22dcb02.png" />
 </div>
 </div>
 <p>We don’t have enough for a meaningful analysis here but it looks like the saildrone sensor has higher temperatures than the gridded dataset.</p>

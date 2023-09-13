@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
@@ -75,7 +76,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Aligning Data to Darwin Core" href="2020-12-08-DataToDwC.html" />
     <link rel="prev" title="Using BagIt to tag oceanographic data" href="2017-11-01-Creating-Archives-Using-Bagit.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -463,7 +464,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-a-cf-1-6-timeseries-using-pocean">
-<h1>Creating a CF-1.6 timeSeries using pocean<a class="headerlink" href="#creating-a-cf-1-6-timeseries-using-pocean" title="Permalink to this headline">#</a></h1>
+<h1>Creating a CF-1.6 timeSeries using pocean<a class="headerlink" href="#creating-a-cf-1-6-timeseries-using-pocean" title="Permalink to this heading">#</a></h1>
 <p>Created: 2018-02-27</p>
 <p>IOOS recommends to data providers that their netCDF files follow the CF-1.6 standard. In this notebook we will create a <a class="reference external" href="https://cfconventions.org/latest.html">CF-1.6 compliant</a> file that follows file that follows the <a class="reference external" href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch09.html">Discrete Sampling Geometries</a> (DSG) of a <code class="docutils literal notranslate"><span class="pre">timeSeries</span></code> from a pandas DataFrame.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">pocean</span></code> module can handle all the DSGs described in the CF-1.6 document: <code class="docutils literal notranslate"><span class="pre">point</span></code>, <code class="docutils literal notranslate"><span class="pre">timeSeries</span></code>, <code class="docutils literal notranslate"><span class="pre">trajectory</span></code>, <code class="docutils literal notranslate"><span class="pre">profile</span></code>, <code class="docutils literal notranslate"><span class="pre">timeSeriesProfile</span></code>, and <code class="docutils literal notranslate"><span class="pre">trajectoryProfile</span></code>. These DSGs array may be represented in the netCDF file as:</p>

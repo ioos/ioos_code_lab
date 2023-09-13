@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -75,7 +76,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Data Access" href="code_gallery/data_access.html" />
     <link rel="prev" title="IOOS CodeLab" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -439,7 +440,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="installing-the-ioos-conda-environment">
-<h1>Installing the IOOS conda environment<a class="headerlink" href="#installing-the-ioos-conda-environment" title="Permalink to this headline">#</a></h1>
+<h1>Installing the IOOS conda environment<a class="headerlink" href="#installing-the-ioos-conda-environment" title="Permalink to this heading">#</a></h1>
 <p>For IOOS Python/R/Julia users we recommend the free
 <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a> distribution,
 a lightweight version of the <a class="reference external" href="https://www.anaconda.com/download">Anaconda Scientific Python Distribution</a> with the conda-forge channel pre-configured.
@@ -453,10 +454,10 @@ in your machine you may want to follow
 <a class="reference external" href="https://docs.anaconda.com/free/anaconda/install/uninstall/">these uninstall instructions</a>
 before proceeding.</p>
 <section id="install">
-<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">#</a></h2>
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this heading">#</a></h2>
 <p>Download and install the appropriate Miniforge3 installer for your platform.</p>
 <section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
 <p>Download it from <a class="github reference external" href="https://github.com/conda-forge/miniforge">conda-forge/miniforge</a>.
 Run the installer
 Choose <em>Just Me</em> (not <em>All Users</em>),
@@ -468,7 +469,7 @@ uncheck the boxes to make Miniforge your default Python to avoid conflicts with 
 <p><img alt="miniforge_select_box" src="../_images/miniforge_select_box.png" /></p>
 </section>
 <section id="linux-macos">
-<h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Permalink to this headline">#</a></h3>
+<h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Permalink to this heading">#</a></h3>
 <p>Copy-and-paste this in the terminal:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span>-O<span class="w"> </span><span class="s2">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="k">$(</span>uname<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span><span class="s2">.sh&quot;</span>
 
@@ -480,7 +481,7 @@ except for the license agreement where you must actively change it to <code clas
 </section>
 </section>
 <section id="create-the-ioos-conda-environment">
-<h2>Create the IOOS conda environment<a class="headerlink" href="#create-the-ioos-conda-environment" title="Permalink to this headline">#</a></h2>
+<h2>Create the IOOS conda environment<a class="headerlink" href="#create-the-ioos-conda-environment" title="Permalink to this heading">#</a></h2>
 <p>Download the <a class="reference external" href="https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment.yml">environment.yml</a>,
 or the <a class="reference external" href="https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment-python_and_r.yml">environment-python_and_r.yml</a> for a bigger environment with the R packages,
 by right clicking with the mouse and choosing <code class="docutils literal notranslate"><span class="pre">save</span> <span class="pre">as...</span></code>,
@@ -515,7 +516,7 @@ for the old style notebooks,
 or <code class="docutils literal notranslate"><span class="pre">jupyter-lab</span></code> for the new IDE interface.</p>
 </section>
 <section id="exiting-the-ioos-environment">
-<h2>Exiting the IOOS environment<a class="headerlink" href="#exiting-the-ioos-environment" title="Permalink to this headline">#</a></h2>
+<h2>Exiting the IOOS environment<a class="headerlink" href="#exiting-the-ioos-environment" title="Permalink to this heading">#</a></h2>
 <p>If you want to leave the IOOS environment and return to the root environment,
 you can type</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>deactivate
@@ -523,7 +524,7 @@ you can type</p>
 </div>
 </section>
 <section id="updating-the-ioos-environment">
-<h2>Updating the IOOS environment<a class="headerlink" href="#updating-the-ioos-environment" title="Permalink to this headline">#</a></h2>
+<h2>Updating the IOOS environment<a class="headerlink" href="#updating-the-ioos-environment" title="Permalink to this heading">#</a></h2>
 <p>To update an existing environment you can do,</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>IOOS
 conda<span class="w"> </span>update<span class="w"> </span>--all<span class="w"> </span>--yes
@@ -541,7 +542,7 @@ Note that you don’t need to re-install Miniforge.
 Just download a fresh version of the environment file and re-create it.</p>
 </section>
 <section id="why-we-use-and-recommend-conda">
-<h2>Why we use and recommend conda<a class="headerlink" href="#why-we-use-and-recommend-conda" title="Permalink to this headline">#</a></h2>
+<h2>Why we use and recommend conda<a class="headerlink" href="#why-we-use-and-recommend-conda" title="Permalink to this heading">#</a></h2>
 <p>Conda users can just <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code>,
 which installs not only binary packages for their platform,
 but the binary libraries they depend on.
@@ -551,16 +552,16 @@ System-level installation of libraries and admin privileges are not required.
 Check out <a class="reference external" href="https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html">Travis Oliphant’s blog piece</a> for more info.</p>
 </section>
 <section id="how-to-get-help">
-<h2>How to get help<a class="headerlink" href="#how-to-get-help" title="Permalink to this headline">#</a></h2>
+<h2>How to get help<a class="headerlink" href="#how-to-get-help" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Raise an issue <a class="reference external" href="https://github.com/ioos/ioos_code_lab/issues">here</a></p></li>
 <li><p>Please get help on the <a class="reference external" href="https://groups.google.com/forum/?hl=en#!forum/ioos_tech">IOOS-tech Google Group</a></p></li>
 </ul>
 </section>
 <section id="appendix">
-<h2>Appendix:<a class="headerlink" href="#appendix" title="Permalink to this headline">#</a></h2>
+<h2>Appendix:<a class="headerlink" href="#appendix" title="Permalink to this heading">#</a></h2>
 <section id="what-to-do-when-everything-seems-to-be-broken">
-<h3>What to do when everything seems to be broken?<a class="headerlink" href="#what-to-do-when-everything-seems-to-be-broken" title="Permalink to this headline">#</a></h3>
+<h3>What to do when everything seems to be broken?<a class="headerlink" href="#what-to-do-when-everything-seems-to-be-broken" title="Permalink to this heading">#</a></h3>
 <p>For example, if you are seeing kernel errors like the one below.</p>
 <p><img alt="kernel_error" src="../_images/kernel_error.png" /></p>
 <ol class="arabic simple">
@@ -573,7 +574,7 @@ Check out <a class="reference external" href="https://technicaldiscovery.blogspo
 </div>
 </section>
 <section id="conda-lock">
-<h3>conda-lock<a class="headerlink" href="#conda-lock" title="Permalink to this headline">#</a></h3>
+<h3>conda-lock<a class="headerlink" href="#conda-lock" title="Permalink to this heading">#</a></h3>
 <p>Locking environments can be useful for reproducibility,
 Continuous Integration (CI),
 or when one requires faster installation.
@@ -591,7 +592,7 @@ and ensuring that the same packages from the time you locked will be used.</p>
 <p>In the example above we are locking for macOS, Linux and Windows.</p>
 </section>
 <section id="trouble-shooting-windows">
-<h3>Trouble-shooting Windows<a class="headerlink" href="#trouble-shooting-windows" title="Permalink to this headline">#</a></h3>
+<h3>Trouble-shooting Windows<a class="headerlink" href="#trouble-shooting-windows" title="Permalink to this heading">#</a></h3>
 <p>Windows can be complicated and here are a few tips to help you troubleshoot it:</p>
 <ol class="arabic simple">
 <li><p>If you did not install Miniforge on your C:\ drive you may have a “long path error.” Usually that happens when you see failures in the environment creation;</p></li>

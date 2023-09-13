@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
@@ -44,6 +44,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
@@ -75,7 +76,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Creating a CF-1.6 timeSeries using pocean" href="2018-02-27-pocean-timeSeries-demo.html" />
     <link rel="prev" title="Shore Station Compliance Checker Script" href="2017-05-14-running_compliance_checker.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -463,7 +464,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="using-bagit-to-tag-oceanographic-data">
-<h1>Using BagIt to tag oceanographic data<a class="headerlink" href="#using-bagit-to-tag-oceanographic-data" title="Permalink to this headline">#</a></h1>
+<h1>Using BagIt to tag oceanographic data<a class="headerlink" href="#using-bagit-to-tag-oceanographic-data" title="Permalink to this heading">#</a></h1>
 <p>Created: 2017-11-01</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/BagIt"><code class="docutils literal notranslate"><span class="pre">BagIt</span></code></a> is a packaging format that supports storage of arbitrary digital content. The “bag” consists of arbitrary content and “tags,” the metadata files. <code class="docutils literal notranslate"><span class="pre">BagIt</span></code> packages can be used to facilitate data sharing with federal archive centers - thus ensuring digital preservation of oceanographic datasets within IOOS and its regional associations. NOAA NCEI supports reading from a Web Accessible Folder (WAF) containing bagit archives. For an example please see: <a class="reference external" href="http://ncei.axiomdatascience.com/cencoos/">http://ncei.axiomdatascience.com/cencoos/</a></p>
 <p>On this notebook we will use the <a class="reference external" href="http://libraryofcongress.github.io/bagit-python">python interface</a> for <code class="docutils literal notranslate"><span class="pre">BagIt</span></code> to create a “bag” of a time-series profile data. First let us load our data from a comma separated values file (<code class="docutils literal notranslate"><span class="pre">CSV</span></code>).</p>
