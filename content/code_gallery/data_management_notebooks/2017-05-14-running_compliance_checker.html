@@ -498,7 +498,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.2.0+11.gd85b593
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.1.0
 </pre></div>
 </div>
 </div>
@@ -519,10 +519,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to the Scripps Pier Data.</span>
 
-
-<span class="c1"># See https://github.com/Unidata/netcdf-c/issues/1299</span>
-<span class="c1"># for the reason we need to append `#fillmismatch` to the URL.</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://data.ioos.us/thredds/dodsC/deployments/rutgers/ru29-20150623T1046/ru29-20150623T1046.nc3.nc#fillmismatch&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://gliders.ioos.us/thredds/fileServer/deployments/rutgers/ru29-20150623T1046/ru29-20150623T1046.nc3.nc&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -536,7 +533,7 @@ document.write(`
 
 <span class="n">return_value</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">ComplianceChecker</span><span class="o">.</span><span class="n">run_checker</span><span class="p">(</span>
     <span class="n">ds_loc</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
-    <span class="n">checker_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cf&quot;</span><span class="p">,</span> <span class="s2">&quot;acdd&quot;</span><span class="p">],</span>
+    <span class="n">checker_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cf:1.9&quot;</span><span class="p">,</span> <span class="s2">&quot;acdd&quot;</span><span class="p">],</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span>
     <span class="n">skip_checks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -557,11 +554,13 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--------------------------------------------------------------------------------
                          IOOS Compliance Checker Report                         
+                                 Version 5.1.0                                  
+                     Report generated 2023-09-13T13:58:44Z                      
                                     acdd:1.3                                    
 http://wiki.esipfed.org/index.php?title=Category:Attribute_Conventions_Dataset_Discovery
 --------------------------------------------------------------------------------
                                Corrective Actions                               
-ru29-20150623T1046.nc3.nc#fillmismatch has 11 potential issues
+ru29-20150623T1046.nc3.nc has 11 potential issues
 
 
                                Highly Recommended                               
@@ -570,29 +569,29 @@ Global Attributes
 * Conventions does not contain &#39;ACDD-1.3&#39;
 
 variable &quot;conductivity&quot; missing the following attributes:
-* coverage_content
+* coverage_content_type
 
 variable &quot;density&quot; missing the following attributes:
-* coverage_content
+* coverage_content_type
 
 variable &quot;platform_meta&quot; missing the following attributes:
-* coverage_content
+* coverage_content_type
 * standard_name
 
 variable &quot;pressure&quot; missing the following attributes:
-* coverage_content
+* coverage_content_type
 
 variable &quot;salinity&quot; missing the following attributes:
-* coverage_content
+* coverage_content_type
 
 variable &quot;temperature&quot; missing the following attributes:
-* coverage_content
+* coverage_content_type
 
 variable &quot;u&quot; missing the following attributes:
-* coverage_content
+* coverage_content_type
 
 variable &quot;v&quot; missing the following attributes:
-* coverage_content
+* coverage_content_type
 
 
                                   Recommended                                   
@@ -606,44 +605,6 @@ Global Attributes
 
 time_coverage_extents_match
 * Failed to retrieve and convert times for variables time.
-
-
---------------------------------------------------------------------------------
-                         IOOS Compliance Checker Report                         
-                                     cf:1.6                                     
-                            http://cfconventions.org                            
---------------------------------------------------------------------------------
-                               Corrective Actions                               
-ru29-20150623T1046.nc3.nc#fillmismatch has 5 potential issues
-
-
-                                     Errors                                     
---------------------------------------------------------------------------------
-§3.4 Ancillary Data
-* lat_qc is not a variable in this dataset
-* lon_qc is not a variable in this dataset
-
-§3.5 Flags
-* precise_lat_qc&#39;s flag_meanings and flag_values should have the same number of elements.
-* precise_lon_qc&#39;s flag_meanings and flag_values should have the same number of elements.
-
-§5.6 Horizontal Coorindate Reference Systems, Grid Mappings, Projections
-* longitude is not associated with a coordinate defining true latitude and sharing a subset of dimensions
-* longitude is not associated with a coordinate defining true longitude and sharing a subset of dimensions
-* latitude is not associated with a coordinate defining true latitude and sharing a subset of dimensions
-* latitude is not associated with a coordinate defining true longitude and sharing a subset of dimensions
-* time is not associated with a coordinate defining true latitude and sharing a subset of dimensions
-* time is not associated with a coordinate defining true longitude and sharing a subset of dimensions
-
-§9.1 Features and feature types
-* Different feature types discovered in this dataset: mapped-grid (u, v, time, longitude, latitude), trajectory-profile-incomplete (pressure, temperature, conductivity, salinity, density, platform_meta, depth)
-
-
-                                    Warnings                                    
---------------------------------------------------------------------------------
-§2.3 Naming Conventions
-* attribute trajectory:_Encoding should begin with a letter and be composed of letters, digits, and underscores
-* attribute wmo_id:_Encoding should begin with a letter and be composed of letters, digits, and underscores
 </pre></div>
 </div>
 </div>
