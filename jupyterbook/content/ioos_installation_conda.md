@@ -19,6 +19,7 @@ before proceeding.
 Download and install the appropriate Miniforge3 installer for your platform.
 
 ### Windows
+
 Download it from [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge).
 Run the installer
 Choose _Just Me_ (not _All Users_),
@@ -38,7 +39,7 @@ Copy-and-paste this in the terminal:
 ```shell
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
-bash Miniforge-$(uname)-$(uname -m).sh
+bash Miniforge3-$(uname)-$(uname -m).sh
 ```
 
 and use all the default options,
@@ -138,7 +139,7 @@ Check out [Travis Oliphant's blog piece](https://technicaldiscovery.blogspot.com
 - Raise an issue [here](https://github.com/ioos/ioos_code_lab/issues)
 - Please get help on the [IOOS-tech Google Group](https://groups.google.com/forum/?hl=en#!forum/ioos_tech)
 
-## Appendix:
+## Appendix
 
 ### What to do when everything seems to be broken?
 
