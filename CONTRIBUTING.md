@@ -5,15 +5,15 @@ This page documents the procedures for:
 1. [Requesting new notebooks](#requesting-new-notebooks) to be added to the [IOOS CodeLab](https://ioos.github.io/ioos_code_lab);
 1. [Building](#building-new-notebooks) new notebooks;
 1. [Reviewing](#reviewing) submitted notebooks;
-1. [Merging](#merging) approved notebooks for inclusion into the Code Gallery;
+1. [Merging](#merging) approved notebooks for inclusion into the CodeLab;
 1. [Announcing](#announcing) the new notebooks to the community; and
-1. [Logging any bugs](#logging-bugs) that are found in the Code Gallery.
-1. Managing the IOOS Data Demo Center [Project Board](#managing-ioos-data-demo-center-project-board).
-1. [Local management](#local-management-of-notebooks_demo) of the notebooks_demo repository.
+1. [Logging any bugs](#logging-bugs) that are found in the CodeLab.
+1. Managing the IOOS CodeLab [Project Board](#managing-ioos-data-demo-center-project-board).
+1. [Local management](#local-management-of-ioos_code_lab) of the ioos_code_lab repository.
 
 ## Requesting new notebooks
 
-- New notebooks should be requested by adding a [ticket](https://github.com/ioos/ioos_code_lab/issues/new) to this GitHub repository. The ticket should contain the following information:
+- New notebooks should be requested by adding a [ticket]([https://github.com/ioos/ioos_code_lab/issues/new](https://github.com/ioos/ioos_code_lab/issues/new?assignees=mathewbiddle%2Cocefpaf&labels=Notebook+idea&projects=&template=NEW_NOTEBOOK.yml&title=%5BNew+Notebook%5D%3A+)) to this GitHub repository. The ticket should contain the following information:
 
 ```
 - [ ] What is language(s) for used in the example?
@@ -35,15 +35,15 @@ When the ticket gets created, make the following additions to the ticket:
 
 If you would like to work on a notebook that has been proposed, follow these steps:
 
-1. [Create a fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) of the [notebooks_demos](https://github.com/ioos/ioos_code_lab) repository.
+1. [Create a fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) of the [ioos_code_lab](https://github.com/ioos/ioos_code_lab) repository.
 1. On your fork, [create a branch](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository) where you will start working on the new notebook.
    1. Give the branch a name that conveys what the new notebook is. For example, a notebook on converting data into Darwin Core could have a branch name of `data2dwc`. This makes it easier to know which branch is dedicated to which new notebook.
-1. On the new branch in your fork, start creating the new notebook.
+1. On the new `branch` in your `fork`, start creating the new notebook.
    1. Notebooks are kept in the [jupyterbook/content/code_gallery](https://github.com/ioos/ioos_code_lab/tree/main/jupyterbook/content/code_gallery) directory of this repository.
       1. There are three directories where notebooks can be placed:
-         1. `data_access_notebooks` -
-         1. `data_analysis_and_visualization_notebooks` -
-         1. `data_management_notebooks` -
+         1. `data_access_notebooks` - Notebooks exemplifying how to access data from various services using various tools.
+         1. `data_analysis_and_visualization_notebooks` - Notebooks exemplifying doing some analysis and/or visualizations using tools common in the IOOS community.
+         1. `data_management_notebooks` - Notebooks on how to use various tools to ensure compliance with existing standards and conventions.
    1. Typically, it's best to copy an existing (working) notebook to a new file. If you are creating a python notebook, copy one of the python notebooks. If you are creating an R notebook, copy one of the R notebooks, etc
    1. Name the notebook following the convention `[date]-[short name].ipynb`. Where, `[date]` is the date (YYYY-MM-DD) you started the new notebook and `[short name]` is an abbreviation for what the notebook will cover. Look at the existing notebook filenames to get a sense of the short names used.
 1. Edit the notebook following the [Jupyter Notebook documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html). The notebook should include the following information:
@@ -79,7 +79,7 @@ For Admins:
 
 1. If the notebook looks good, the reviewer will [merge the PR](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/merging-a-pull-request).
 1. This kicks off a series of [GitHub Actions](https://github.com/features/actions).
-   1. You can see the workflows at https://github.com/ioos/notebooks_demos/actions
+   1. You can see the workflows at https://github.com/ioos/ioos_code_lab/actions
 1. Once the workflows are complete, check the [IOOS CodeLab](https://ioos.github.io/ioos_code_lab/) for the new notebook.
 1. Review the notebook for any display issues when presented on the web. Check for the extra cell at the bottom of the notebook.
    1. If there are issues, submit a new PR to resolve the issues.
@@ -117,7 +117,7 @@ The [project board](https://github.com/orgs/ioos/projects/1) captures the curren
 | Announcement    | Tickets that have been merged and an announcement needs to be made. |
 | Done            | All completed tickets.                                              |
 
-## Local management of notebooks_demo
+## Local management of ioos_code_lab
 
 This section walks through one way to manage the notebooks_demo git repository on your local machine.
 
@@ -125,7 +125,7 @@ Clone your fork of the notebooks_demo repository to a known location on your mac
 
 `$ git clone https://github.com/MathewBiddle/ioos_code_lab.git`
 
-Set the upstream branch to the ioos/notebooks_demos repository:
+Set the upstream branch to the ioos/ioos_code_lab repository:
 
 `$ git remote add upstream https://github.com/ioos/ioos_code_lab.git`
 
