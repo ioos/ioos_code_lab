@@ -75,7 +75,7 @@ See [pull request reviews](https://docs.github.com/en/github/collaborating-with-
 
 ## Merging
 
-For Admins:
+For Administrators:
 
 1. If the notebook looks good, the reviewer will [merge the PR](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/merging-a-pull-request).
 1. This kicks off a series of [GitHub Actions](https://github.com/features/actions).
