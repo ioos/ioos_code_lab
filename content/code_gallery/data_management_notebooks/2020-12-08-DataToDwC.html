@@ -1354,14 +1354,14 @@ information. So, we create a lookup table of the unique scientific names found i
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;eventID&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;occurrenceID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;temperature&quot;</span>
-<span class="n">temperature</span><span class="p">[</span>
-    <span class="s2">&quot;measurementTypeID&quot;</span>
-<span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P25/current/WTEMP/&quot;</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementTypeID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P25/current/WTEMP/&quot;</span>
+<span class="p">)</span>
 <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span>
 <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementUnit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Celsius&quot;</span>
-<span class="n">temperature</span><span class="p">[</span>
-    <span class="s2">&quot;measurementUnitID&quot;</span>
-<span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P06/current/UPAA/&quot;</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementUnitID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P06/current/UPAA/&quot;</span>
+<span class="p">)</span>
 <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementAccuracy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementDeterminedDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
     <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%Y&quot;</span>
@@ -1385,9 +1385,9 @@ information. So, we create a lookup table of the unique scientific names found i
 
 <span class="n">percent_cover</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;eventID&quot;</span><span class="p">,</span> <span class="s2">&quot;occurrenceID&quot;</span><span class="p">,</span> <span class="s2">&quot;percent cover&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Percent Cover&quot;</span>
-<span class="n">percent_cover</span><span class="p">[</span>
-    <span class="s2">&quot;measurementTypeID&quot;</span>
-<span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P01/current/SDBIOL10/&quot;</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementTypeID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P01/current/SDBIOL10/&quot;</span>
+<span class="p">)</span>
 <span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;percent cover&quot;</span><span class="p">]</span>
 <span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementUnit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Percent/100m^2&quot;</span>
 <span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementUnitID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
