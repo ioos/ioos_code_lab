@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -19,15 +19,15 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -85,10 +85,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -129,11 +128,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -148,6 +150,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../../intro.html">
@@ -432,6 +435,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -441,6 +445,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -484,12 +489,12 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="parsing-conventions-and-standards-with-python">
 <h1>Parsing Conventions and standards with Python<a class="headerlink" href="#parsing-conventions-and-standards-with-python" title="Permalink to this heading">#</a></h1>
 <p>Created: 2019-11-16</p>
-<p>Updated: 2022-05-25</p>
+<p>Updated: 2023-02-19</p>
 <p>Metadata conventions, like the Climate and Forecast (CF) conventions,
 can be cumbersome to adhere to but it will be very handy when you or other users manipulate the data later in time.</p>
 <p>In this notebook we will explore three Python modules that parse <a class="reference external" href="https://cfconventions.org/cf-conventions/v1.6.0/cf-conventions.html"><code class="docutils literal notranslate"><span class="pre">CF-1.6</span></code></a>,
@@ -516,38 +521,50 @@ including <a class="reference external" href="https://scitools-iris.readthedocs.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- CF Roles:   grid_topology: [&#39;grid&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8.9
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SGRID:
+             CF role:   grid_topology: [&#39;grid&#39;]
+
+                Axes: * X: [&#39;xi_psi&#39;, &#39;xi_rho&#39;, &#39;xi_u&#39;, &#39;xi_v&#39;]
+                      * Y: [&#39;eta_psi&#39;, &#39;eta_rho&#39;, &#39;eta_u&#39;, &#39;eta_v&#39;]
+                      * Z: [&#39;s_rho&#39;, &#39;s_w&#39;]
 
 Coordinates:
-- CF Axes: * Z: [&#39;s_rho&#39;, &#39;s_w&#39;]
-           * T: [&#39;ocean_time&#39;]
-             X, Y: n/a
+             CF Axes: * Z: [&#39;s_rho&#39;, &#39;s_w&#39;]
+                      * T: [&#39;ocean_time&#39;]
+                        X, Y: n/a
 
-- CF Coordinates:   longitude: [&#39;lon_psi&#39;, &#39;lon_rho&#39;, &#39;lon_u&#39;, &#39;lon_v&#39;]
-                    latitude: [&#39;lat_psi&#39;, &#39;lat_rho&#39;, &#39;lat_u&#39;, &#39;lat_v&#39;]
-                  * vertical: [&#39;s_rho&#39;, &#39;s_w&#39;]
-                  * time: [&#39;ocean_time&#39;]
+      CF Coordinates:   longitude: [&#39;lon_psi&#39;, &#39;lon_rho&#39;, &#39;lon_u&#39;, &#39;lon_v&#39;]
+                        latitude: [&#39;lat_psi&#39;, &#39;lat_rho&#39;, &#39;lat_u&#39;, &#39;lat_v&#39;]
+                      * vertical: [&#39;s_rho&#39;, &#39;s_w&#39;]
+                      * time: [&#39;ocean_time&#39;]
 
-- Cell Measures:   area, volume: n/a
+       Cell Measures:   area, volume: n/a
 
-- Standard Names: * forecast_reference_time: [&#39;run&#39;]
-                    latitude: [&#39;lat_psi&#39;, &#39;lat_rho&#39;, &#39;lat_u&#39;, &#39;lat_v&#39;]
-                    longitude: [&#39;lon_psi&#39;, &#39;lon_rho&#39;, &#39;lon_u&#39;, &#39;lon_v&#39;]
-                  * ocean_s_coordinate_g1: [&#39;s_rho&#39;, &#39;s_w&#39;]
+      Standard Names: * forecast_reference_time: [&#39;run&#39;]
+                        latitude: [&#39;lat_psi&#39;, &#39;lat_rho&#39;, &#39;lat_u&#39;, &#39;lat_v&#39;]
+                        longitude: [&#39;lon_psi&#39;, &#39;lon_rho&#39;, &#39;lon_u&#39;, &#39;lon_v&#39;]
+                      * ocean_s_coordinate_g1: [&#39;s_rho&#39;, &#39;s_w&#39;]
 
-- Bounds:   n/a
+              Bounds:   n/a
+
+       Grid Mappings:   n/a
 
 Data Variables:
-- Cell Measures:   area, volume: n/a
+       Cell Measures:   area, volume: n/a
 
-- Standard Names:   sea_floor_depth_below_sea_surface: [&#39;h&#39;]
-                    sea_surface_elevation_anomaly: [&#39;zeta&#39;]
-                    sea_water_potential_temperature: [&#39;temp&#39;]
-                    sea_water_practical_salinity: [&#39;salt&#39;]
-                    sea_water_x_velocity: [&#39;u&#39;]
-                    sea_water_y_velocity: [&#39;v&#39;]
+      Standard Names:   sea_floor_depth_below_sea_surface: [&#39;h&#39;]
+                        sea_surface_elevation_anomaly: [&#39;zeta&#39;]
+                        sea_water_potential_temperature: [&#39;temp&#39;]
+                        sea_water_practical_salinity: [&#39;salt&#39;]
+                        sea_water_x_velocity: [&#39;u&#39;]
+                        sea_water_y_velocity: [&#39;v&#39;]
 
-- Bounds:   n/a
+              Bounds:   n/a
+
+       Grid Mappings:   n/a
 </pre></div>
 </div>
 </div>
@@ -571,10 +588,10 @@ Data Variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/micromamba/envs/IOOS/lib/python3.11/site-packages/cf_xarray/accessor.py:1638: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
-  warnings.warn(
-/home/filipe/micromamba/envs/IOOS/lib/python3.11/site-packages/cf_xarray/accessor.py:1638: UserWarning: Variables {&#39;&#39;} not found in object but are referred to in the CF attributes.
-  warnings.warn(
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_26057/1323880464.py:8: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
+  eta = ds.cf[&quot;zeta&quot;][run, ocean_time, x, y]
+/tmp/ipykernel_26057/1323880464.py:9: UserWarning: Variables {&#39;&#39;} not found in object but are referred to in the CF attributes.
+  depth = ds.cf[&quot;h&quot;][x, y]
 </pre></div>
 </div>
 </div>
@@ -599,8 +616,8 @@ Data Variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/micromamba/envs/IOOS/lib/python3.11/site-packages/cf_xarray/accessor.py:1638: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
-  warnings.warn(
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_26057/4185694592.py:1: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
+  temp = ds.cf[&quot;sea_water_potential_temperature&quot;]
 </pre></div>
 </div>
 <div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
@@ -967,13 +984,13 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;temp&#x27; (run: 1929, time: 157, s_rho: 36, eta_rho: 82,
-                          xi_rho: 130)&gt;
+                          xi_rho: 130)&gt; Size: 465GB
 [116222867280 values with dtype=float32]
 Coordinates:
-  * s_rho    (s_rho) float64 -0.9861 -0.9583 -0.9306 ... -0.04167 -0.01389
-  * run      (run) datetime64[ns] 2013-05-18 2013-05-19 ... 2018-09-14
-    lat_rho  (eta_rho, xi_rho) float64 33.74 33.79 33.84 ... 42.78 42.82 42.87
-    lon_rho  (eta_rho, xi_rho) float64 -75.84 -75.78 -75.71 ... -71.49 -71.43
+  * run      (run) datetime64[ns] 15kB 2013-05-18 2013-05-19 ... 2018-09-14
+  * s_rho    (s_rho) float64 288B -0.9861 -0.9583 -0.9306 ... -0.04167 -0.01389
+    lat_rho  (eta_rho, xi_rho) float64 85kB 33.74 33.79 33.84 ... 42.82 42.87
+    lon_rho  (eta_rho, xi_rho) float64 85kB -75.84 -75.78 ... -71.49 -71.43
 Dimensions without coordinates: time, eta_rho, xi_rho
 Attributes:
     units:          Celsius
@@ -981,21 +998,21 @@ Attributes:
     time:           ocean_time
     field:          temperature, scalar, series
     _ChunkSizes:    [  1  36  82 130]
-    standard_name:  sea_water_potential_temperature</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'temp'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>run</span>: 1929</li><li><span>time</span>: 157</li><li><span class='xr-has-index'>s_rho</span>: 36</li><li><span>eta_rho</span>: 82</li><li><span>xi_rho</span>: 130</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-f46888e6-6e6a-4b0d-bbd0-8928802ec23f' class='xr-array-in' type='checkbox' checked><label for='section-f46888e6-6e6a-4b0d-bbd0-8928802ec23f' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[116222867280 values with dtype=float32]</pre></div></div></li><li class='xr-section-item'><input id='section-0bca19c5-52a2-490c-b283-6d875b019e06' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0bca19c5-52a2-490c-b283-6d875b019e06' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>s_rho</span></div><div class='xr-var-dims'>(s_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.9861 -0.9583 ... -0.01389</div><input id='attrs-3fefe0ed-f401-450b-9770-6543f576ae53' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3fefe0ed-f401-450b-9770-6543f576ae53' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d66d0826-7c89-4e78-a6cd-91a7af6dcd31' class='xr-var-data-in' type='checkbox'><label for='data-d66d0826-7c89-4e78-a6cd-91a7af6dcd31' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd></dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g1</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd></dl></div><div class='xr-var-data'><pre>array([-0.986111, -0.958333, -0.930556, -0.902778, -0.875   , -0.847222,
+    standard_name:  sea_water_potential_temperature</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'temp'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>run</span>: 1929</li><li><span>time</span>: 157</li><li><span class='xr-has-index'>s_rho</span>: 36</li><li><span>eta_rho</span>: 82</li><li><span>xi_rho</span>: 130</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-4cfcea24-0e3b-4c66-8630-7fc3ae45f40e' class='xr-array-in' type='checkbox' checked><label for='section-4cfcea24-0e3b-4c66-8630-7fc3ae45f40e' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[116222867280 values with dtype=float32]</pre></div></div></li><li class='xr-section-item'><input id='section-f4475a10-02c9-49f1-86c2-34f40f0f63e7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f4475a10-02c9-49f1-86c2-34f40f0f63e7' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>run</span></div><div class='xr-var-dims'>(run)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2013-05-18 ... 2018-09-14</div><input id='attrs-6d3b2271-434b-416a-8e9a-6b1ae60843ff' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6d3b2271-434b-416a-8e9a-6b1ae60843ff' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5dfe3b9f-b541-4d98-a2cb-752343f616dc' class='xr-var-data-in' type='checkbox'><label for='data-5dfe3b9f-b541-4d98-a2cb-752343f616dc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Run time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2013-05-18T00:00:00.000000000&#x27;, &#x27;2013-05-19T00:00:00.000000000&#x27;,
+       &#x27;2013-05-20T00:00:00.000000000&#x27;, ..., &#x27;2018-09-12T00:00:00.000000000&#x27;,
+       &#x27;2018-09-13T00:00:00.000000000&#x27;, &#x27;2018-09-14T00:00:00.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>s_rho</span></div><div class='xr-var-dims'>(s_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.9861 -0.9583 ... -0.01389</div><input id='attrs-d91b0b8e-b5f4-4217-bd0e-65808a169951' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d91b0b8e-b5f4-4217-bd0e-65808a169951' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-09bf646e-c1be-47ce-b1e9-3579a41af539' class='xr-var-data-in' type='checkbox'><label for='data-09bf646e-c1be-47ce-b1e9-3579a41af539' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd></dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g1</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd></dl></div><div class='xr-var-data'><pre>array([-0.986111, -0.958333, -0.930556, -0.902778, -0.875   , -0.847222,
        -0.819444, -0.791667, -0.763889, -0.736111, -0.708333, -0.680556,
        -0.652778, -0.625   , -0.597222, -0.569444, -0.541667, -0.513889,
        -0.486111, -0.458333, -0.430556, -0.402778, -0.375   , -0.347222,
        -0.319444, -0.291667, -0.263889, -0.236111, -0.208333, -0.180556,
-       -0.152778, -0.125   , -0.097222, -0.069444, -0.041667, -0.013889])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>run</span></div><div class='xr-var-dims'>(run)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2013-05-18 ... 2018-09-14</div><input id='attrs-a767f81b-bac4-4efb-a880-9f77fa587de0' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a767f81b-bac4-4efb-a880-9f77fa587de0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-043f0457-0677-416e-b260-f50bcf249dae' class='xr-var-data-in' type='checkbox'><label for='data-043f0457-0677-416e-b260-f50bcf249dae' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Run time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2013-05-18T00:00:00.000000000&#x27;, &#x27;2013-05-19T00:00:00.000000000&#x27;,
-       &#x27;2013-05-20T00:00:00.000000000&#x27;, ..., &#x27;2018-09-12T00:00:00.000000000&#x27;,
-       &#x27;2018-09-13T00:00:00.000000000&#x27;, &#x27;2018-09-14T00:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>33.74 33.79 33.84 ... 42.82 42.87</div><input id='attrs-63013d8a-4e73-4b86-8a38-7e2eabbeea72' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-63013d8a-4e73-4b86-8a38-7e2eabbeea72' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-20dd32c2-0c9e-4073-a721-745aa69d1811' class='xr-var-data-in' type='checkbox'><label for='data-20dd32c2-0c9e-4073-a721-745aa69d1811' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd></dl></div><div class='xr-var-data'><pre>array([[33.744605, 33.794267, 33.843908, ..., 39.803658, 39.849137, 39.894587],
+       -0.152778, -0.125   , -0.097222, -0.069444, -0.041667, -0.013889])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>33.74 33.79 33.84 ... 42.82 42.87</div><input id='attrs-e023e94e-2c26-415a-9e02-d25a708abf4d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e023e94e-2c26-415a-9e02-d25a708abf4d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eb0cb29e-363a-429e-93ca-9855bcd9cb65' class='xr-var-data-in' type='checkbox'><label for='data-eb0cb29e-363a-429e-93ca-9855bcd9cb65' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd></dl></div><div class='xr-var-data'><pre>array([[33.744605, 33.794267, 33.843908, ..., 39.803658, 39.849137, 39.894587],
        [33.784963, 33.834601, 33.884218, ..., 39.840616, 39.886067, 39.93149 ],
        [33.825301, 33.874916, 33.924509, ..., 39.877575, 39.923   , 39.968397],
        ...,
        [36.874968, 36.922822, 36.970654, ..., 42.708485, 42.752428, 42.796348],
        [36.91383 , 36.961662, 37.009472, ..., 42.744764, 42.788691, 42.832595],
-       [36.952673, 37.000482, 37.04827 , ..., 42.781022, 42.824933, 42.868822]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-75.84 -75.78 ... -71.49 -71.43</div><input id='attrs-e7b7615e-d61c-4e59-ad37-e658527ebe6e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e7b7615e-d61c-4e59-ad37-e658527ebe6e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-63a4477e-8edc-4eb4-b5a7-f330497079d9' class='xr-var-data-in' type='checkbox'><label for='data-63a4477e-8edc-4eb4-b5a7-f330497079d9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd></dl></div><div class='xr-var-data'><pre>array([[-75.838286, -75.775218, -75.712149, ..., -67.832953, -67.770109,
+       [36.952673, 37.000482, 37.04827 , ..., 42.781022, 42.824933, 42.868822]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-75.84 -75.78 ... -71.49 -71.43</div><input id='attrs-66618d20-4601-4cb5-b884-1fb0408b9539' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-66618d20-4601-4cb5-b884-1fb0408b9539' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-788f0352-4f86-4e58-8b00-ebfc4cd8c8af' class='xr-var-data-in' type='checkbox'><label for='data-788f0352-4f86-4e58-8b00-ebfc4cd8c8af' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd></dl></div><div class='xr-var-data'><pre>array([[-75.838286, -75.775218, -75.712149, ..., -67.832953, -67.770109,
         -67.707269],
        [-75.884579, -75.821508, -75.758437, ..., -67.879134, -67.816286,
         -67.753442],
@@ -1007,32 +1024,26 @@ Attributes:
        [-79.542336, -79.47909 , -79.415844, ..., -71.510168, -71.446923,
         -71.383677],
        [-79.588635, -79.525386, -79.462137, ..., -71.556099, -71.492851,
-        -71.429602]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-44427e13-855d-4e6e-bbdd-d22daa3ebe96' class='xr-section-summary-in' type='checkbox'  ><label for='section-44427e13-855d-4e6e-bbdd-d22daa3ebe96' class='xr-section-summary' >Indexes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>s_rho</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-05fc9df6-3ed7-4e36-aade-9e0b716d6bed' class='xr-index-data-in' type='checkbox'/><label for='index-05fc9df6-3ed7-4e36-aade-9e0b716d6bed' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([   -0.986111111111111,   -0.9583333333333333,
-                -0.9305555555555555,   -0.9027777777777777,
-                             -0.875,   -0.8472222222222222,
-                -0.8194444444444444,   -0.7916666666666666,
-                -0.7638888888888888,    -0.736111111111111,
-                -0.7083333333333333,   -0.6805555555555555,
-                -0.6527777777777778,                -0.625,
-                -0.5972222222222222,   -0.5694444444444444,
-                -0.5416666666666666,   -0.5138888888888888,
-                -0.4861111111111111,   -0.4583333333333333,
-                -0.4305555555555555,  -0.40277777777777773,
-                             -0.375,   -0.3472222222222222,
-                -0.3194444444444444,  -0.29166666666666663,
-                -0.2638888888888889,   -0.2361111111111111,
-               -0.20833333333333331,  -0.18055555555555555,
-               -0.15277777777777776,                -0.125,
-               -0.09722222222222221,  -0.06944444444444445,
-              -0.041666666666666664, -0.013888888888888888],
-             dtype=&#x27;float64&#x27;, name=&#x27;s_rho&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>run</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-055af303-3163-4487-ae66-46f3dbca0e3d' class='xr-index-data-in' type='checkbox'/><label for='index-055af303-3163-4487-ae66-46f3dbca0e3d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2013-05-18&#x27;, &#x27;2013-05-19&#x27;, &#x27;2013-05-20&#x27;, &#x27;2013-05-21&#x27;,
+        -71.429602]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4dc413a3-3604-4fdd-9528-eb15fdee6422' class='xr-section-summary-in' type='checkbox'  ><label for='section-4dc413a3-3604-4fdd-9528-eb15fdee6422' class='xr-section-summary' >Indexes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>run</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-5eaff841-c311-4425-808a-2737185995e4' class='xr-index-data-in' type='checkbox'/><label for='index-5eaff841-c311-4425-808a-2737185995e4' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2013-05-18&#x27;, &#x27;2013-05-19&#x27;, &#x27;2013-05-20&#x27;, &#x27;2013-05-21&#x27;,
                &#x27;2013-05-22&#x27;, &#x27;2013-05-23&#x27;, &#x27;2013-05-24&#x27;, &#x27;2013-05-25&#x27;,
                &#x27;2013-05-26&#x27;, &#x27;2013-05-27&#x27;,
                ...
                &#x27;2018-09-05&#x27;, &#x27;2018-09-06&#x27;, &#x27;2018-09-07&#x27;, &#x27;2018-09-08&#x27;,
                &#x27;2018-09-09&#x27;, &#x27;2018-09-10&#x27;, &#x27;2018-09-11&#x27;, &#x27;2018-09-12&#x27;,
                &#x27;2018-09-13&#x27;, &#x27;2018-09-14&#x27;],
-              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;run&#x27;, length=1929, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a6d2faf1-1aa1-42ee-8726-a38fbcadc2df' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a6d2faf1-1aa1-42ee-8726-a38fbcadc2df' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>long_name :</span></dt><dd>potential temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  36  82 130]</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd></dl></div></li></ul></div></div></div></div>
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;run&#x27;, length=1929, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>s_rho</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-dc85a4a0-5fe4-43a4-bcb3-7971e5240495' class='xr-index-data-in' type='checkbox'/><label for='index-dc85a4a0-5fe4-43a4-bcb3-7971e5240495' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([   -0.986111111111111,   -0.9583333333333333,   -0.9305555555555555,
+         -0.9027777777777777,                -0.875,   -0.8472222222222222,
+         -0.8194444444444444,   -0.7916666666666666,   -0.7638888888888888,
+          -0.736111111111111,   -0.7083333333333333,   -0.6805555555555555,
+         -0.6527777777777778,                -0.625,   -0.5972222222222222,
+         -0.5694444444444444,   -0.5416666666666666,   -0.5138888888888888,
+         -0.4861111111111111,   -0.4583333333333333,   -0.4305555555555555,
+        -0.40277777777777773,                -0.375,   -0.3472222222222222,
+         -0.3194444444444444,  -0.29166666666666663,   -0.2638888888888889,
+         -0.2361111111111111,  -0.20833333333333331,  -0.18055555555555555,
+        -0.15277777777777776,                -0.125,  -0.09722222222222221,
+        -0.06944444444444445, -0.041666666666666664, -0.013888888888888888],
+      dtype=&#x27;float64&#x27;, name=&#x27;s_rho&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-53b41a15-29f5-4a32-880b-c9eedf481aa1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-53b41a15-29f5-4a32-880b-c9eedf481aa1' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>long_name :</span></dt><dd>potential temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  36  82 130]</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1052,7 +1063,7 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/1234925668e22093d7f9e8790ec18c7ee1314adfc44f60312d4211d4707977b4.png" src="../../../_images/1234925668e22093d7f9e8790ec18c7ee1314adfc44f60312d4211d4707977b4.png" />
+<img alt="../../../_images/3ddc2e356a7fe9cd678d0ebb91adcace34cb102e33ed5c4bf4b600f36a1dfe6b.png" src="../../../_images/3ddc2e356a7fe9cd678d0ebb91adcace34cb102e33ed5c4bf4b600f36a1dfe6b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1066,7 +1077,7 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/4b97ae4f09b93b6c72080a705697b68f86d66d5fd13e4c2e1dc253be281df260.png" src="../../../_images/4b97ae4f09b93b6c72080a705697b68f86d66d5fd13e4c2e1dc253be281df260.png" />
+<img alt="../../../_images/606787bcbcc07bf3280785c7943845130e28be66dbd67631f671325ac0adbe9f.png" src="../../../_images/606787bcbcc07bf3280785c7943845130e28be66dbd67631f671325ac0adbe9f.png" />
 </div>
 </div>
 </section>
@@ -1131,7 +1142,7 @@ if the data is <code class="docutils literal notranslate"><span class="pre">UGRI
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5d100526b7338936d6dd321fd5cb7030d85b7363ee8bd2b4b7458b29e08f26ba.png" src="../../../_images/5d100526b7338936d6dd321fd5cb7030d85b7363ee8bd2b4b7458b29e08f26ba.png" />
+<img alt="../../../_images/b98fe4a5ce70bd27cefbdde40d051ba95b6b379cb346c8c5cea5f51ad75bd31e.png" src="../../../_images/b98fe4a5ce70bd27cefbdde40d051ba95b6b379cb346c8c5cea5f51ad75bd31e.png" />
 </div>
 </div>
 <p>Check a longer <code class="docutils literal notranslate"><span class="pre">pyugrid</span></code> example <a class="reference external" href="https://ocefpaf.github.io/python4oceanographers/blog/2015/07/20/pyugrid/">here</a>.</p>
@@ -1147,6 +1158,9 @@ The specs are detailed in <a class="reference external" href="https://sgrid.gith
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pysgrid</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://geoport.whoi.edu/thredds/dodsC/coawst_4/use/fmrc/coawst_4_use_best.ncd&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;http://tds.marine.rutgers.edu/thredds/dodsC/roms/doppio/2017_da/avg/Averages_Best&quot;</span>
+<span class="p">)</span>
 <span class="n">sgrid</span> <span class="o">=</span> <span class="n">pysgrid</span><span class="o">.</span><span class="n">load_grid</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1349,12 +1363,11 @@ There is plenty of room to create convenience methods using the low level access
 <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
 
 <span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="s2">&quot;10m&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="o">-</span><span class="mf">73.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">62.5</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">46</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/e4dbb611000621a119839532f6cb8db87b008c275d51a24dbaf77d9b56ba4740.png" src="../../../_images/e4dbb611000621a119839532f6cb8db87b008c275d51a24dbaf77d9b56ba4740.png" />
+<img alt="../../../_images/aacc8d0067d22d8073a1f5302608290fad3be173009be970dea1fe1080fde7b8.png" src="../../../_images/aacc8d0067d22d8073a1f5302608290fad3be173009be970dea1fe1080fde7b8.png" />
 </div>
 </div>
 <p>For more examples on <code class="docutils literal notranslate"><span class="pre">pysgrid</span></code> check this <a class="reference external" href="https://ocefpaf.github.io/python4oceanographers/blog/2015/12/07/pysgrid/">post</a> out.</p>
@@ -1389,7 +1402,7 @@ There is plenty of room to create convenience methods using the low level access
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../data_analysis_and_visualization.html"
@@ -1417,6 +1430,7 @@ There is plenty of room to create convenience methods using the low level access
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1448,6 +1462,7 @@ By IOOS
   
   <div class="footer-item">
     
+
   </div>
   
   <div class="footer-item">
@@ -1470,8 +1485,8 @@ By IOOS
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
