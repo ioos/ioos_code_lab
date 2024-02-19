@@ -23,7 +23,7 @@ repos:
         exclude: "_templates/layout.html"
 
   - repo: https://github.com/psf/black
-    rev: 24.1.1
+    rev: 24.2.0
     hooks:
       - id: black
         language_version: python3
@@ -34,7 +34,7 @@ repos:
       - id: add-trailing-comma
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.2.0
+    rev: v0.2.2
     hooks:
       - id: ruff
 
@@ -47,10 +47,7 @@ repos:
       - id: nbqa-check-ast
       - id: nbqa-black
       - id: nbqa-ruff
-        args: [--fix, --extend-ignore=E402]
-        # Skipping b/c These notebooks mix R and Python and
-        # will return false positive for "F821 Undefined name.""
-        exclude: 2017-11-30-rerddap\.ipynb$|2018-02-20-obis.ipynb$
+        args: [--fix]
 
   - repo: https://github.com/bdice/nb-strip-paths
     rev: 'v0.1.0'
