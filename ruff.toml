@@ -1,12 +1,6 @@
 target-version = "py312"
 line-length = 120
-# Skipping b/c These notebooks mix R and Python and
-# will return false positive for "F821 Undefined name.""
-exclude = [
-    "2017-11-30-rerddap.ipynb",
-    "2018-02-20-obis.ipynb"
-]
-select = [
+lint.select = [
     "F", # flakes
     "I", # import sorting
     "U", # upgrade
@@ -15,3 +9,14 @@ select = [
 lint.ignore = [
     "E402",  # Module level import not at top of file
     ]
+
+# Skipping b/c These notebooks mix R and Python
+# NB: nbqa-ruff acts on converted .py so we cannot glob .ipynb :-/
+# https://github.com/nbQA-dev/nbQA/issues/823
+[lint.extend-per-file-ignores]
+"jupyterbook/content/code_gallery/data_access_notebooks/2017-11-30-rerddap*" = [
+    "F821",  # Undefined name
+]
+"jupyterbook/content/code_gallery/data_access_notebooks/2018-02-20-obis*" = [
+    "F821",  # Undefined name
+]
