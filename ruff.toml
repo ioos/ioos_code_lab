@@ -1,0 +1,17 @@
+target-version = "py312"
+line-length = 120
+# Skipping b/c These notebooks mix R and Python and
+# will return false positive for "F821 Undefined name.""
+exclude = [
+    "2017-11-30-rerddap.ipynb",
+    "2018-02-20-obis.ipynb"
+]
+select = [
+    "F", # flakes
+    "I", # import sorting
+    "U", # upgrade
+]
+
+lint.ignore = [
+    "E402",  # Module level import not at top of file
+    ]
