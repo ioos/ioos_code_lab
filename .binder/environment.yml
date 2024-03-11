@@ -43,6 +43,7 @@ dependencies:
   - phantomjs
   - pocean-core >=3.1
   - pre-commit
+  - pyarrow
   - pyobis
   - pyoos
   - pyresample
