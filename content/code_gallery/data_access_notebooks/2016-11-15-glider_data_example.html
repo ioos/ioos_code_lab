@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Plotting Glider data with Python tools &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
   
@@ -29,33 +28,31 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -63,15 +60,19 @@
                 gtag('js', new Date());
                 gtag('config', 'G-546J258RCJ');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/code_gallery/data_access_notebooks/2016-11-15-glider_data_example';</script>
     <link rel="canonical" href="https://ioos.github.io/ioos_code_lab/content/code_gallery/data_access_notebooks/2016-11-15-glider_data_example.html" />
-    <link rel="shortcut icon" href="../../../_static/IOOS_logo.png"/>
+    <link rel="icon" href="../../../_static/IOOS_logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Accessing glider data via the Glider DAC API with Python" href="2016-12-20-searching_glider_deployments.html" />
@@ -169,7 +170,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
@@ -480,7 +492,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="plotting-glider-data-with-python-tools">
-<h1>Plotting Glider data with Python tools<a class="headerlink" href="#plotting-glider-data-with-python-tools" title="Permalink to this heading">#</a></h1>
+<h1>Plotting Glider data with Python tools<a class="headerlink" href="#plotting-glider-data-with-python-tools" title="Link to this heading">#</a></h1>
 <p>Created: 2016-11-15</p>
 <p>Updated: 2022-05-25</p>
 <p>In this notebook we demonstrate how to obtain and plot glider data using cf-xarray . We will explore data from the Rutgers University RU29 <a class="reference external" href="https://challenger.marine.rutgers.edu/">Challenger</a> glider that was launched from Ubatuba, Brazil on June 23, 2015 to travel across the Atlantic Ocean. After 282 days at sea, the Challenger was picked up off the coast of South Africa, on March 31, 2016. For more information on this ground breaking excusion see: <a class="reference external" href="https://marine.rutgers.edu/announcements/the-challenger-glider-mission-south-atlantic-mission-complete">https://marine.rutgers.edu/announcements/the-challenger-glider-mission-south-atlantic-mission-complete</a></p>
@@ -504,6 +516,11 @@ document.write(`
 
 <span class="n">xr</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">keep_attrs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8.9
 </pre></div>
 </div>
 </div>
@@ -550,6 +567,7 @@ document.write(`
 }
 
 html[theme=dark],
+body[data-theme=dark],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
@@ -779,6 +797,11 @@ body.vscode-dark {
   grid-column: 4;
 }
 
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
 .xr-var-name,
 .xr-var-dims,
 .xr-var-dtype,
@@ -800,14 +823,16 @@ body.vscode-dark {
 }
 
 .xr-var-attrs,
-.xr-var-data {
+.xr-var-data,
+.xr-index-data {
   display: none;
   background-color: var(--xr-background-color) !important;
   padding-bottom: 5px !important;
 }
 
 .xr-var-attrs-in:checked ~ .xr-var-attrs,
-.xr-var-data-in:checked ~ .xr-var-data {
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
   display: block;
 }
 
@@ -817,13 +842,16 @@ body.vscode-dark {
 
 .xr-var-name span,
 .xr-var-data,
+.xr-index-name div,
+.xr-index-data,
 .xr-attrs {
   padding-left: 25px !important;
 }
 
 .xr-attrs,
 .xr-var-attrs,
-.xr-var-data {
+.xr-var-data,
+.xr-index-data {
   grid-column: 1 / -1;
 }
 
@@ -861,7 +889,8 @@ dl.xr-attrs {
 }
 
 .xr-icon-database,
-.xr-icon-file-text2 {
+.xr-icon-file-text2,
+.xr-no-icon {
   display: inline-block;
   vertical-align: middle;
   width: 1em;
@@ -870,42 +899,41 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;temperature&#x27; (profile: 542, obs: 483)&gt;
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;temperature&#x27; (profile: 542, obs: 483)&gt; Size: 1MB
 [261786 values with dtype=float32]
 Coordinates:
-    trajectory      &lt;U18 &#x27;ru29-20150623T1046&#x27;
-    temperature_qc  (profile, obs) float32 ...
-    time            (profile) datetime64[ns] 2015-06-23T10:57:59.290227712 .....
-    latitude        (profile) float64 -25.49 -25.51 -25.53 ... -34.07 -34.07
-    longitude       (profile) float64 -44.91 -44.92 -44.92 ... 13.49 13.48 13.48
-    depth           (profile, obs) float32 8.99 15.81 22.42 ... nan nan nan
+    trajectory      &lt;U18 72B &#x27;ru29-20150623T1046&#x27;
+    temperature_qc  (profile, obs) float32 1MB ...
+    time            (profile) datetime64[ns] 4kB 2015-06-23T10:57:59.29022771...
+    latitude        (profile) float64 4kB -25.49 -25.51 -25.53 ... -34.07 -34.07
+    longitude       (profile) float64 4kB -44.91 -44.92 -44.92 ... 13.48 13.48
+    depth           (profile, obs) float32 1MB 8.99 15.81 22.42 ... nan nan nan
 Dimensions without coordinates: profile, obs
-Attributes:
+Attributes: (12/14)
     _ChunkSizes:          1
     actual_range:         [ 3.744  24.5387]
     ancillary_variables:  temperature_qc
     colorBarMaximum:      32.0
     colorBarMinimum:      0.0
     instrument:           instrument_ctd
-    ioos_category:        Temperature
-    long_name:            Sea Water Temperature
+    ...                   ...
     observation_type:     measured
     platform:             platform
     standard_name:        sea_water_temperature
     units:                Celsius
     valid_max:            40.0
-    valid_min:            -5.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'temperature'</div><ul class='xr-dim-list'><li><span>profile</span>: 542</li><li><span>obs</span>: 483</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-51c33cf9-97dc-40f5-98d9-e473dcac0af1' class='xr-array-in' type='checkbox' checked><label for='section-51c33cf9-97dc-40f5-98d9-e473dcac0af1' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[261786 values with dtype=float32]</pre></div></div></li><li class='xr-section-item'><input id='section-9b8ecca9-b8f6-482f-800e-5e6060f1161d' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9b8ecca9-b8f6-482f-800e-5e6060f1161d' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>trajectory</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>&lt;U18</div><div class='xr-var-preview xr-preview'>&#x27;ru29-20150623T1046&#x27;</div><input id='attrs-7dbef074-eaaa-45aa-8ca5-c4b81106ab03' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7dbef074-eaaa-45aa-8ca5-c4b81106ab03' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d256582e-c9ca-471e-8b90-a69ce7f333db' class='xr-var-data-in' type='checkbox'><label for='data-d256582e-c9ca-471e-8b90-a69ce7f333db' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>18</dd><dt><span>cf_role :</span></dt><dd>trajectory_id</dd><dt><span>comment :</span></dt><dd>A trajectory is one deployment of a glider.</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>Trajectory Name</dd></dl></div><div class='xr-var-data'><pre>array(&#x27;ru29-20150623T1046&#x27;, dtype=&#x27;&lt;U18&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temperature_qc</span></div><div class='xr-var-dims'>(profile, obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-99ef7c6b-4c99-4b15-9266-120beec22df6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-99ef7c6b-4c99-4b15-9266-120beec22df6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9180b113-d2e0-4099-a252-fb60b3003dd8' class='xr-var-data-in' type='checkbox'><label for='data-9180b113-d2e0-4099-a252-fb60b3003dd8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>1</dd><dt><span>flag_meanings :</span></dt><dd>no_qc_performed good_data probably_good_data bad_data_that_are_potentially_correctable bad_data value_changed not_used not_used interpolated_value missing_value</dd><dt><span>flag_values :</span></dt><dd>[0 1 2 3 4 5 6 7 8 9]</dd><dt><span>ioos_category :</span></dt><dd>Quality</dd><dt><span>long_name :</span></dt><dd>temperature Variable Quality Flag</dd><dt><span>standard_name :</span></dt><dd>sea_water_temperature status_flag</dd><dt><span>valid_max :</span></dt><dd>9</dd><dt><span>valid_min :</span></dt><dd>0</dd></dl></div><div class='xr-var-data'><pre>[261786 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2015-06-23T10:57:59.290227712 .....</div><input id='attrs-057233df-0bc2-453b-80d3-608d0db5ac59' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-057233df-0bc2-453b-80d3-608d0db5ac59' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1f8945ff-389a-4e54-afc3-c4693ea41b74' class='xr-var-data-in' type='checkbox'><label for='data-1f8945ff-389a-4e54-afc3-c4693ea41b74' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[1.43505708e+09 1.45941633e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>comment :</span></dt><dd>Timestamp corresponding to the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Profile Time</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2015-06-23T10:57:59.290227712&#x27;, &#x27;2015-06-23T11:51:50.385717504&#x27;,
+    valid_min:            -5.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'temperature'</div><ul class='xr-dim-list'><li><span>profile</span>: 542</li><li><span>obs</span>: 483</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-8577a88f-617b-46fe-b45a-91f3660b83a1' class='xr-array-in' type='checkbox' checked><label for='section-8577a88f-617b-46fe-b45a-91f3660b83a1' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[261786 values with dtype=float32]</pre></div></div></li><li class='xr-section-item'><input id='section-12e44214-8b16-4bbf-bfbb-b005778fa038' class='xr-section-summary-in' type='checkbox'  checked><label for='section-12e44214-8b16-4bbf-bfbb-b005778fa038' class='xr-section-summary' >Coordinates: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>trajectory</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>&lt;U18</div><div class='xr-var-preview xr-preview'>&#x27;ru29-20150623T1046&#x27;</div><input id='attrs-f43e0b7b-dbb0-4b47-b93a-1ead9b166819' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f43e0b7b-dbb0-4b47-b93a-1ead9b166819' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f2e7d2de-bb15-4949-9b12-ac22ec6c9836' class='xr-var-data-in' type='checkbox'><label for='data-f2e7d2de-bb15-4949-9b12-ac22ec6c9836' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>18</dd><dt><span>cf_role :</span></dt><dd>trajectory_id</dd><dt><span>comment :</span></dt><dd>A trajectory is one deployment of a glider.</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>Trajectory Name</dd></dl></div><div class='xr-var-data'><pre>array(&#x27;ru29-20150623T1046&#x27;, dtype=&#x27;&lt;U18&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temperature_qc</span></div><div class='xr-var-dims'>(profile, obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-b978a2a5-caf0-4113-be15-55565e202d2e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b978a2a5-caf0-4113-be15-55565e202d2e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-16bb318b-b288-4f43-bed4-bc6302659646' class='xr-var-data-in' type='checkbox'><label for='data-16bb318b-b288-4f43-bed4-bc6302659646' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>1</dd><dt><span>flag_meanings :</span></dt><dd>no_qc_performed good_data probably_good_data bad_data_that_are_potentially_correctable bad_data value_changed not_used not_used interpolated_value missing_value</dd><dt><span>flag_values :</span></dt><dd>[0 1 2 3 4 5 6 7 8 9]</dd><dt><span>ioos_category :</span></dt><dd>Quality</dd><dt><span>long_name :</span></dt><dd>temperature Variable Quality Flag</dd><dt><span>standard_name :</span></dt><dd>sea_water_temperature status_flag</dd><dt><span>valid_max :</span></dt><dd>9</dd><dt><span>valid_min :</span></dt><dd>0</dd></dl></div><div class='xr-var-data'><pre>[261786 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2015-06-23T10:57:59.290227712 .....</div><input id='attrs-fc9a3fad-c625-44be-94a4-43d0d71e9f9e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fc9a3fad-c625-44be-94a4-43d0d71e9f9e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-80996f81-8986-439c-be44-1373718e3dd8' class='xr-var-data-in' type='checkbox'><label for='data-80996f81-8986-439c-be44-1373718e3dd8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[1.43505708e+09 1.45941633e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>comment :</span></dt><dd>Timestamp corresponding to the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Profile Time</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2015-06-23T10:57:59.290227712&#x27;, &#x27;2015-06-23T11:51:50.385717504&#x27;,
        &#x27;2015-06-23T13:52:41.140836608&#x27;, ..., &#x27;2016-03-31T07:18:12.181690624&#x27;,
        &#x27;2016-03-31T08:29:09.812891904&#x27;, &#x27;2016-03-31T09:25:31.420480512&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>latitude</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-25.49 -25.51 ... -34.07 -34.07</div><input id='attrs-7c783ce6-6f6c-4fc6-a4dc-d00bdfc9688d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7c783ce6-6f6c-4fc6-a4dc-d00bdfc9688d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f540fbeb-7ea2-4062-ae49-d54b36852a59' class='xr-var-data-in' type='checkbox'><label for='data-f540fbeb-7ea2-4062-ae49-d54b36852a59' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd><dt><span>actual_range :</span></dt><dd>[-37.3408904  -25.49266979]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>colorBarMaximum :</span></dt><dd>90.0</dd><dt><span>colorBarMinimum :</span></dt><dd>-90.0</dd><dt><span>comment :</span></dt><dd>Value is interpolated to provide an estimate of the latitude at the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Profile Latitude</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>valid_max :</span></dt><dd>90.0</dd><dt><span>valid_min :</span></dt><dd>-90.0</dd></dl></div><div class='xr-var-data'><pre>array([-25.49267 , -25.506013, -25.533423, ..., -34.066465, -34.066472,
-       -34.066226])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>longitude</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-44.91 -44.92 ... 13.48 13.48</div><input id='attrs-1f425fd8-02d0-4a92-b7f0-3f8256219bfa' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1f425fd8-02d0-4a92-b7f0-3f8256219bfa' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e64132ba-e84d-4ac5-840d-3516829dc672' class='xr-var-data-in' type='checkbox'><label for='data-e64132ba-e84d-4ac5-840d-3516829dc672' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd><dt><span>actual_range :</span></dt><dd>[-44.92195338  13.5917595 ]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>colorBarMaximum :</span></dt><dd>180.0</dd><dt><span>colorBarMinimum :</span></dt><dd>-180.0</dd><dt><span>comment :</span></dt><dd>Value is interpolated to provide an estimate of the longitude at the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Profile Longitude</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>valid_max :</span></dt><dd>180.0</dd><dt><span>valid_min :</span></dt><dd>-180.0</dd></dl></div><div class='xr-var-data'><pre>array([-44.910968, -44.919389, -44.921953, ...,  13.487144,  13.48187 ,
-        13.478096])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>depth</span></div><div class='xr-var-dims'>(profile, obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>8.99 15.81 22.42 ... nan nan nan</div><input id='attrs-5b0d6c12-4253-47e8-8b25-a2da473d4583' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5b0d6c12-4253-47e8-8b25-a2da473d4583' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a351e9e7-5dd4-4f3b-b07c-2f8053955b79' class='xr-var-data-in' type='checkbox'><label for='data-a351e9e7-5dd4-4f3b-b07c-2f8053955b79' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>1</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Height</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>down</dd><dt><span>actual_range :</span></dt><dd>[6.1000e-01 9.8317e+02]</dd><dt><span>ancillary_variables :</span></dt><dd>depth_qc</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>colorBarMaximum :</span></dt><dd>2000.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>colorBarPalette :</span></dt><dd>OceanDepth</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Depth</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>positive :</span></dt><dd>down</dd><dt><span>reference_datum :</span></dt><dd>sea-surface</dd><dt><span>standard_name :</span></dt><dd>depth</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>valid_max :</span></dt><dd>2000.0</dd><dt><span>valid_min :</span></dt><dd>0.0</dd></dl></div><div class='xr-var-data'><pre>array([[  8.99,  15.81,  22.42, ...,    nan,    nan,    nan],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>latitude</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-25.49 -25.51 ... -34.07 -34.07</div><input id='attrs-037a58c7-3542-418a-bacc-621a28b63409' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-037a58c7-3542-418a-bacc-621a28b63409' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-497238ba-ffdc-43a6-9bea-7229f2b5feca' class='xr-var-data-in' type='checkbox'><label for='data-497238ba-ffdc-43a6-9bea-7229f2b5feca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd><dt><span>actual_range :</span></dt><dd>[-37.3408904  -25.49266979]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>colorBarMaximum :</span></dt><dd>90.0</dd><dt><span>colorBarMinimum :</span></dt><dd>-90.0</dd><dt><span>comment :</span></dt><dd>Value is interpolated to provide an estimate of the latitude at the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Profile Latitude</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>valid_max :</span></dt><dd>90.0</dd><dt><span>valid_min :</span></dt><dd>-90.0</dd></dl></div><div class='xr-var-data'><pre>array([-25.49267 , -25.506013, -25.533423, ..., -34.066465, -34.066472,
+       -34.066226])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>longitude</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-44.91 -44.92 ... 13.48 13.48</div><input id='attrs-0af0d5ac-4c5f-4289-ab4e-7e0e7614bd12' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-0af0d5ac-4c5f-4289-ab4e-7e0e7614bd12' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a0ab2784-1654-47f2-a802-bb462d78c0ff' class='xr-var-data-in' type='checkbox'><label for='data-a0ab2784-1654-47f2-a802-bb462d78c0ff' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd><dt><span>actual_range :</span></dt><dd>[-44.92195338  13.5917595 ]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>colorBarMaximum :</span></dt><dd>180.0</dd><dt><span>colorBarMinimum :</span></dt><dd>-180.0</dd><dt><span>comment :</span></dt><dd>Value is interpolated to provide an estimate of the longitude at the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Profile Longitude</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>valid_max :</span></dt><dd>180.0</dd><dt><span>valid_min :</span></dt><dd>-180.0</dd></dl></div><div class='xr-var-data'><pre>array([-44.910968, -44.919389, -44.921953, ...,  13.487144,  13.48187 ,
+        13.478096])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>depth</span></div><div class='xr-var-dims'>(profile, obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>8.99 15.81 22.42 ... nan nan nan</div><input id='attrs-03967f16-1b04-4a6d-b0d7-03f5965be235' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-03967f16-1b04-4a6d-b0d7-03f5965be235' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-02c49554-fe74-4821-9125-7dc1ccc31db6' class='xr-var-data-in' type='checkbox'><label for='data-02c49554-fe74-4821-9125-7dc1ccc31db6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>1</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Height</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>down</dd><dt><span>actual_range :</span></dt><dd>[6.1000e-01 9.8317e+02]</dd><dt><span>ancillary_variables :</span></dt><dd>depth_qc</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>colorBarMaximum :</span></dt><dd>2000.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>colorBarPalette :</span></dt><dd>OceanDepth</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Depth</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>positive :</span></dt><dd>down</dd><dt><span>reference_datum :</span></dt><dd>sea-surface</dd><dt><span>standard_name :</span></dt><dd>depth</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>valid_max :</span></dt><dd>2000.0</dd><dt><span>valid_min :</span></dt><dd>0.0</dd></dl></div><div class='xr-var-data'><pre>array([[  8.99,  15.81,  22.42, ...,    nan,    nan,    nan],
        [  8.42,  14.53,  21.03, ...,    nan,    nan,    nan],
        [  2.65,   6.26,  12.39, ...,    nan,    nan,    nan],
        ...,
        [455.29,    nan, 454.01, ...,    nan,    nan,    nan],
        [  3.12,   6.13,  10.57, ...,    nan,    nan,    nan],
-       [455.39,    nan, 454.57, ...,    nan,    nan,    nan]], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-362a58c5-a4ca-4de5-ab2f-a50bee2cb4ff' class='xr-section-summary-in' type='checkbox'  ><label for='section-362a58c5-a4ca-4de5-ab2f-a50bee2cb4ff' class='xr-section-summary' >Attributes: <span>(14)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>1</dd><dt><span>actual_range :</span></dt><dd>[ 3.744  24.5387]</dd><dt><span>ancillary_variables :</span></dt><dd>temperature_qc</dd><dt><span>colorBarMaximum :</span></dt><dd>32.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Temperature</dd><dt><span>long_name :</span></dt><dd>Sea Water Temperature</dd><dt><span>observation_type :</span></dt><dd>measured</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>sea_water_temperature</dd><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>valid_max :</span></dt><dd>40.0</dd><dt><span>valid_min :</span></dt><dd>-5.0</dd></dl></div></li></ul></div></div></div></div>
+       [455.39,    nan, 454.57, ...,    nan,    nan,    nan]], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e37c1788-046a-4c44-8b4c-a2d4bbcc9eb7' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e37c1788-046a-4c44-8b4c-a2d4bbcc9eb7' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-f02f2245-aa44-4806-adc7-025b42b5ab76' class='xr-section-summary-in' type='checkbox'  ><label for='section-f02f2245-aa44-4806-adc7-025b42b5ab76' class='xr-section-summary' >Attributes: <span>(14)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>1</dd><dt><span>actual_range :</span></dt><dd>[ 3.744  24.5387]</dd><dt><span>ancillary_variables :</span></dt><dd>temperature_qc</dd><dt><span>colorBarMaximum :</span></dt><dd>32.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Temperature</dd><dt><span>long_name :</span></dt><dd>Sea Water Temperature</dd><dt><span>observation_type :</span></dt><dd>measured</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>sea_water_temperature</dd><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>valid_max :</span></dt><dd>40.0</dd><dt><span>valid_min :</span></dt><dd>-5.0</dd></dl></div></li></ul></div></div></div></div>
 </div>
 <p>We squeezed out the trajectory coordinate b/c we are interested in plotting only the profiles as a section.</p>
 <p>Glider data is not something trivial to visualize. The very first thing to do is to plot the glider track to check its path.</p>
@@ -948,7 +976,9 @@ Attributes:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
-&lt;head&gt;    
+&lt;html&gt;
+&lt;head&gt;
+    
     &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
     
         &lt;script&gt;
@@ -958,39 +988,42 @@ Attributes:
     
     &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
     &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
-    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
     &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
     &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
     
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_d8e51bfb6683897ad12038391cf354df {
+                #map_e302090e7efdb711117cc3da6f80cdfb {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
                     left: 0.0%;
                     top: 0.0%;
                 }
+                .leaflet-container { font-size: 1rem; }
             &lt;/style&gt;
         
 &lt;/head&gt;
-&lt;body&gt;    
+&lt;body&gt;
     
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_d8e51bfb6683897ad12038391cf354df&quot; &gt;&lt;/div&gt;
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_e302090e7efdb711117cc3da6f80cdfb&quot; &gt;&lt;/div&gt;
         
 &lt;/body&gt;
-&lt;script&gt;    
+&lt;script&gt;
     
-            var map_d8e51bfb6683897ad12038391cf354df = L.map(
-                &quot;map_d8e51bfb6683897ad12038391cf354df&quot;,
+    
+            var map_e302090e7efdb711117cc3da6f80cdfb = L.map(
+                &quot;map_e302090e7efdb711117cc3da6f80cdfb&quot;,
                 {
                     center: [-32.68654699601515, -9.153479067774677],
                     crs: L.CRS.EPSG3857,
@@ -1004,43 +1037,49 @@ Attributes:
 
         
     
-            var tile_layer_27d87e8e7158ef847601f9e5569543f7 = L.tileLayer(
+            var tile_layer_5c0a226bca8be467be21ef615f5e59eb = L.tileLayer(
                 &quot;http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/MapServer/tile/{z}/{y}/{x}&quot;,
                 {&quot;attribution&quot;: &quot;ESRI&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_d8e51bfb6683897ad12038391cf354df);
+            );
         
     
-            var circle_marker_b666337bc64b69f73336637dec960937 = L.circleMarker(
+            tile_layer_5c0a226bca8be467be21ef615f5e59eb.addTo(map_e302090e7efdb711117cc3da6f80cdfb);
+        
+    
+            var circle_marker_8c05f1c5cf9dd933cf0a142e2eaae1d6 = L.circleMarker(
                 [-25.492669785275247, -44.91096806852398],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;green&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 10, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_d8e51bfb6683897ad12038391cf354df);
+            ).addTo(map_e302090e7efdb711117cc3da6f80cdfb);
         
     
-            var circle_marker_cc63236c239faa2fb1e393932a714b64 = L.circleMarker(
+            var circle_marker_6c9a9a9efc2c40ecd56f1ab100329d81 = L.circleMarker(
                 [-34.06622565755587, 13.478095929451133],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#3388ff&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;red&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 10, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_d8e51bfb6683897ad12038391cf354df);
+            ).addTo(map_e302090e7efdb711117cc3da6f80cdfb);
         
     
-            var poly_line_9f81c3f612a32d0c4486744fc0ad5345 = L.polyline(
+            var poly_line_971ba73bf6d8d7919fde45041dc77b18 = L.polyline(
                 [[-25.492669785275247, -44.91096806852398], [-25.50601260921814, -44.9193893896653], [-25.533423466756766, -44.92195338434748], [-25.564012246182443, -44.90904687406153], [-25.607829062159343, -44.854078726843206], [-25.649866836338745, -44.79557935922748], [-25.68357777058221, -44.734681099770135], [-25.70023871328225, -44.597046483102275], [-25.705253045659276, -44.44073763099593], [-25.71566327371416, -44.2694558302287], [-25.7292395624592, -44.08983466641728], [-25.755772356936717, -43.909532160953695], [-25.77867726428543, -43.70516665855653], [-25.7730217852653, -43.68697506472591], [-25.81852297756228, -43.4828458790249], [-25.89684171990763, -43.287545437647886], [-26.005153565840683, -43.098903484344696], [-26.085496488230746, -42.912250971395736], [-26.17877163533346, -42.73380471833056], [-26.23847259694867, -42.58038898583916], [-26.28241822847369, -42.42150059962446], [-26.28394943504339, -42.28046836407499], [-26.259029029516558, -42.12337910926331], [-26.224768589694932, -41.971518822182375], [-26.178672499977356, -41.81190425942057], [-26.14200212419825, -41.658166529906936], [-26.130397870183824, -41.496184526052424], [-26.129766135858542, -41.34944202954894], [-26.08650118041916, -41.19994468941016], [-26.058000667118176, -41.04731618098933], [-26.031828233177084, -40.89135743861201], [-26.005510429554274, -40.717894404107184], [-25.987102096660728, -40.53704899115294], [-25.961011489624735, -40.36126838898011], [-25.93054064379766, -40.182530612915876], [-25.908805653798407, -39.99619503055903], [-25.89524540865816, -39.818845624980206], [-25.933538625464024, -39.65511382714813], [-25.9870901208139, -39.49455030479096], [-26.029384076684682, -39.33793507776647], [-26.07301788591231, -39.176936275191224], [-26.120831135755235, -39.02998959968397], [-26.164699997033555, -38.878979279252036], [-26.226299046895495, -38.724850982806636], [-26.283234969949902, -38.57277141836731], [-26.351803003093497, -38.404738850053], [-26.365273199700496, -38.36191668128523], [-26.424885748581804, -38.234414452664865], [-26.470128988687456, -38.07008254538478], [-26.522620674732277, -37.91790824042577], [-26.55872760298596, -37.774556779337274], [-26.598573131673614, -37.63238603370127], [-26.59633302787134, -37.48836553651641], [-26.594155728271147, -37.457446309279206], [-26.59484278064079, -37.39735881004217], [-26.583823048570483, -37.33734213712125], [-26.598330110230865, -37.207374340869], [-26.604788869017153, -37.08251482582798], [-26.62587991131732, -36.95799920172789], [-26.64625461850766, -36.84204053577355], [-26.6736367851428, -36.71685901332865], [-26.712369921497118, -36.5978066115434], [-26.74354071578739, -36.466267911164024], [-26.792981407628538, -36.329289785152426], [-26.839419843578845, -36.19619318045224], [-26.895302388701825, -36.06449898515646], [-26.955178428914735, -35.9316315083951], [-27.00558990002068, -35.793719215057195], [-27.05391717372721, -35.649703147398405], [-27.101146909637084, -35.50858895545294], [-27.153978809233553, -35.35953203426396], [-27.266856253595346, -35.23178041454342], [-27.36964967824511, -35.096850029539986], [-27.472397788970216, -34.958328461186525], [-27.57416989968188, -34.81179573720789], [-27.66772677642472, -34.664847127100096], [-27.770474502710236, -34.52098013727333], [-27.881754125330595, -34.37675579793402], [-27.98956716255608, -34.23814260142448], [-28.097438249377795, -34.11186872840265], [-28.209459318691405, -34.005357098132336], [-28.225245422131938, -33.87186493564277], [-28.23763272995698, -33.73940925663362], [-28.247004258595993, -33.59619393693014], [-28.246169681141534, -33.457768200291866], [-28.238004979919847, -33.32287005118056], [-28.247715294924912, -33.19425923515382], [-28.249278327617414, -33.0688400991552], [-28.257136038827838, -32.931261494456365], [-28.29203171025036, -32.79861460641228], [-28.389982129550788, -32.71218710204666], [-28.509895114751576, -32.62454958401002], [-28.61243074810975, -32.54744432407182], [-28.724105787242653, -32.47322338702624], [-28.836671740666002, -32.382278245433895], [-28.956561993540348, -32.24751376370347], [-29.061115175106824, -32.11394209535334], [-29.145490457294123, -31.9820624122866], [-29.225562669566667, -31.844070374010855], [-29.307718125661594, -31.698835859855627], [-29.377588436447013, -31.55759920770278], [-29.443040825186095, -31.425981465261604], [-29.513304508082282, -31.289439323458637], [-29.507782043758215, -31.135631745918765], [-29.50396196733571, -30.96675225547946], [-29.500821580959272, -30.794968758037356], [-29.50070446600496, -30.623239925850253], [-29.502911456165684, -30.43883695328369], [-29.527763497981, -30.276622175134168], [-29.548621178496326, -30.117251546289193], [-29.579742839539417, -29.956083919138845], [-29.606311843524722, -29.79815287380722], [-29.643808002108365, -29.633913487005845], [-29.68118112624769, -29.470021775235896], [-29.725685192874145, -29.306928679859222], [-29.76725170396548, -29.141055056437402], [-29.797008591159553, -28.967586137307855], [-29.829549725459316, -28.808868597192017], [-29.853093800135923, -28.65240577001829], [-29.88606961506367, -28.494705626380245], [-29.923572352577494, -28.164978923570338], [-29.949293594778325, -28.00405982470955], [-29.983971016218167, -27.838935530091735], [-30.02519281916964, -27.67444899886833], [-30.08320265270575, -27.50267916566586], [-30.123817794140624, -27.330663698272136], [-30.16733462213565, -27.157764315502675], [-30.224089131455155, -27.013619616985007], [-30.271906770837255, -26.882146673997536], [-30.325033748362625, -26.74912837381843], [-30.3750065494542, -26.63397081001233], [-30.42247630965821, -26.52103241068317], [-30.48573186770943, -26.41270718356277], [-30.55119575836728, -26.310155058574054], [-30.665018784649565, -26.2109826729285], [-30.785870853600656, -26.097284382894088], [-30.902346099920496, -25.973180499755433], [-31.033384764878626, -25.830005588311177], [-31.17338913839803, -25.679783156340207], [-31.30493860702882, -25.519861499460877], [-31.444046668554197, -25.337156797633426], [-31.51926594487463, -25.241128068358503], [-31.592504439810398, -25.130477421996012], [-31.715265812263002, -24.93557671239188], [-31.73359051522512, -24.284655825419023], [-31.733689263752748, -24.26327096044547], [-31.733609743143617, -24.060398862814147], [-31.71992055575677, -23.84773043629631], [-31.707084738547962, -23.627513114341454], [-31.68855754179341, -23.414020156737067], [-31.666004766932836, -23.195754659592097], [-31.65371209925707, -23.003432154782608], [-31.65586906886963, -22.824700983238785], [-31.688743260833924, -22.62185022914084], [-31.738004108806077, -22.425422376215316], [-31.779996950899417, -22.254360693770263], [-31.826350093433337, -22.09061066537082], [-31.86715774368857, -21.920638577414486], [-31.965422062570394, -21.423294747047816], [-32.0156814308716, -21.268962177113224], [-31.904524624660723, -21.75562994913398], [-31.934447923091952, -21.595940781046618], [-31.946802008545426, -21.513111443027377], [-32.09094679034722, -21.11997209394862], [-32.1806830453127, -20.97678662601562], [-32.27460369622762, -20.814676301661642], [-32.33834399235534, -20.67938397343953], [-32.39727421849259, -20.542312544337136], [-32.52111544946566, -20.445674532768397], [-32.63201975337436, -20.360007941758724], [-32.713889164447586, -20.252237992389173], [-32.80444338059429, -20.159950964827708], [-32.88741424163982, -20.07910016016965], [-32.96127898885966, -19.980941179803207], [-33.04655481606166, -19.88118684352179], [-33.12966514228612, -19.795691518515422], [-33.15784141068623, -19.673745393077205], [-33.198542062725274, -19.548202348534826], [-33.247118476460045, -19.455147598691067], [-33.28950632510858, -19.386932378203213], [-33.32680036487607, -19.309756442905854], [-33.25985592858754, -19.217752891006747], [-33.19699866056515, -19.122618019999376], [-33.162607414468724, -19.01029100920586], [-33.14167859552459, -18.89177705878324], [-33.10499766882109, -18.77653365764581], [-33.065845090225416, -18.64207724543501], [-33.04752835164576, -18.50208083068788], [-33.03075270953861, -18.34671795552572], [-33.05101245372572, -18.185299244386478], [-33.08316852344159, -18.016108765489193], [-33.11216311865235, -17.831905510000688], [-33.14250635288446, -17.664904770503323], [-33.16590462424645, -17.474111336442053], [-33.21676131456939, -17.28236250906133], [-33.26409414905736, -17.097213120765726], [-33.30426360240355, -16.918095999106942], [-33.35137221663536, -16.75558289418871], [-33.39774362441387, -16.591301711477236], [-33.44798456137612, -16.450591401368893], [-33.45624763483993, -16.282873175667824], [-33.45032020295433, -16.11218834561629], [-33.47252387741107, -15.94244510491576], [-33.5076320585261, -15.78075812694605], [-33.54249462071814, -15.60191560668937], [-33.59480562092044, -15.419287120627528], [-33.654127076575705, -15.2248666283873], [-33.68841639065363, -15.006250662454494], [-33.68297888751108, -14.784116134513189], [-33.66581307027204, -14.582359991424736], [-33.70403059692715, -14.416266958510402], [-33.70194182623971, -14.313169145052543], [-33.7181162745602, -14.212954462449915], [-33.759090477298265, -14.071390740556822], [-33.832453039061825, -13.955395563295486], [-33.89927710526159, -13.85215750522508], [-33.97144475184643, -13.758597438031932], [-34.08194935423891, -13.706506143487651], [-34.195949786595115, -13.660228195300098], [-34.30325129411937, -13.62251226530343], [-34.40284761716493, -13.56062452068451], [-34.4960656992487, -13.506210871179716], [-34.576957887232304, -13.442785201041916], [-34.67273840128125, -13.377497820260087], [-34.746816078557664, -13.264771015828515], [-35.08240763880381, -11.61927540437454], [-35.083068749019255, -11.555085086898794], [-35.07594127310987, -11.44039850320585], [-35.075128731919406, -11.322205778365962], [-35.09847838137274, -11.181251939883655], [-35.132060245290475, -11.016455899538723], [-35.169159153969666, -10.797801618656338], [-35.22169784115564, -10.563923026724533], [-35.281489176189645, -10.326180084554778], [-35.34395157617628, -10.116088435513712], [-35.35704533950782, -9.91278046815851], [-35.3607911238955, -9.699284117378248], [-35.36434386220334, -9.515230378482265], [-35.391926268455606, -9.357956291629769], [-35.44855448658446, -9.223130193734647], [-35.507077016021256, -9.075347901313515], [-35.52953764291542, -8.910322551901523], [-35.55171490918178, -8.76614093854227], [-35.56462641750755, -8.593012721033496], [-35.59355204396627, -8.423099829003], [-35.61228551997271, -8.24234569886676], [-35.644523146207376, -8.04635558906992], [-35.65726612379604, -7.861951693497029], [-35.656455580636035, -7.650989503442607], [-35.64531017569457, -7.449716932944359], [-35.607386121613494, -7.255114133841804], [-35.57748478187571, -7.0864849273204324], [-35.55526693394557, -6.948389960002511], [-35.5658346758162, -6.819851499938769], [-35.59737321438689, -6.678699317660433], [-35.63681406805858, -6.55165372710346], [-35.598546971987965, -6.40838264441005], [-35.58566272068507, -6.275459978172003], [-35.60292429972906, -6.1483017532061375], [-35.607565891971404, -6.027491055901741], [-35.61167878905647, -5.915491780701526], [-35.617027782454066, -5.811448427828912], [-35.613251606365935, -5.694906605022258], [-35.61873041028089, -5.575065221507762], [-35.6198062682857, -5.566736756677408], [-35.63221868976466, -5.4579149082249385], [-35.62887872979463, -5.450537816896244], [-35.58093636452519, -5.344283541226989], [-35.57741072820821, -5.336661176668878], [-35.53408233383461, -5.2412590323300625], [-35.53090350482111, -5.234823994214441], [-35.483661900331846, -5.14206900861086], [-35.48031769003569, -5.135023387068068], [-35.43398461453413, -5.039383781313438], [-35.430420653528174, -5.031731044792472], [-35.38363838222016, -4.9355176354586465], [-35.380286000093236, -4.928120880049968], [-35.33513257119424, -4.829786080005274], [-35.33314094714184, -4.8203238402030735], [-35.308276439382276, -4.703827892003481], [-35.30738179176381, -4.694752276357155], [-35.305247296611064, -4.437728289078421], [-35.29490972086625, -4.570246604189549], [-35.29572884757625, -4.5610849539922675], [-35.31760104165473, -4.301831653024667], [-35.3295005494816, -4.177263079168684], [-35.331315449049356, -4.051176543224966], [-35.33446585583275, -3.931826280925238], [-35.349370165330264, -3.8255879613506782], [-35.34197084295023, -3.7144460216944495], [-35.33782680775179, -3.612985192068864], [-35.33795473329328, -3.5695420768494097], [-35.338365712578884, -3.5198175865355856], [-35.332084763760115, -3.4309341970445772], [-35.336248642482985, -3.3192699267318955], [-35.30646037643828, -3.219699436847348], [-35.26532679750413, -3.1194711085324083], [-35.21992413063943, -3.011658538096395], [-35.171392265023854, -2.913245895710857], [-35.096355314152184, -2.808659445928747], [-35.04292426229005, -2.6928083239410783], [-35.00777872009905, -2.5906072058163203], [-34.97647543430147, -2.4802325887951495], [-34.95861301182432, -2.3592431151892908], [-34.94781358468905, -2.2405786555093945], [-34.94098471368584, -2.1174706110274557], [-34.939756018659125, -1.9746296286711589], [-34.9401943902621, -1.8305121967913323], [-34.95550269110862, -1.6694992635990908], [-34.986318785466814, -1.4817212068271166], [-35.009354250242886, -1.2864834169351753], [-35.02741915187608, -1.066008797886238], [-35.03410572568298, -0.9201088933798358], [-35.035104000237034, -0.8275505611363924], [-35.034762130716565, -0.5920634895688884], [-35.03077835866268, -0.37760706957341067], [-35.02661168645227, -0.1810821273942881], [-35.01487342957384, -0.004828613232271816], [-34.97979234992873, 0.15428020933692577], [-34.83115454252909, 0.22153697606875697], [-34.685609141739064, 0.2537958726729976], [-34.60824938057679, 0.3191977197412851], [-34.545003792302765, 0.39201247671844514], [-34.49453191048206, 0.46523522360427905], [-34.45168094810679, 0.5348343629106629], [-34.4214346673149, 0.6285622088350956], [-34.41184729014355, 0.7270801812543758], [-34.365929163742365, 0.8425968102081475], [-34.335547763041276, 0.9733301197247067], [-34.32503751316957, 1.0972266969120297], [-34.31734879314208, 1.2323294404883824], [-34.312788846278956, 1.3838440409815962], [-34.292986889231614, 1.5558685931289766], [-34.26781797067198, 1.7525725905657066], [-34.22740022294766, 1.957597145118268], [-34.205105593560134, 2.0776388422384335], [-34.18553464121168, 2.1720748500215836], [-34.164530075236286, 2.3548160789615302], [-34.18282609009977, 2.5302644027231684], [-34.21104209069933, 2.707494716969524], [-34.24542228063525, 2.8105217407696355], [-34.275930819696626, 2.9069408218410295], [-34.29074532478357, 3.0893331073276693], [-34.29380589848814, 3.285223439345834], [-34.29926240664425, 3.449574211625723], [-34.294750029672805, 3.6052675155392357], [-34.297134367393554, 3.788684316052242], [-34.28893628498639, 3.9833077371283303], [-34.231312228460965, 4.176975574265684], [-34.224313200059306, 4.222098533151555], [-34.20422227355832, 4.268259316049493], [-34.18966284322253, 4.301042053851714], [-34.187337452368226, 4.307423331309893], [-34.1882397538129, 4.355608188030521], [-34.159650152473695, 4.4634470783125435], [-34.148017605024805, 4.591747980914208], [-34.14986825568735, 4.684487463068947], [-34.16867145799806, 4.755115783772751], [-34.19927314299165, 4.827037700319536], [-34.23039955895326, 4.921417174246315], [-34.267498474161755, 5.009504589430986], [-34.30451357283708, 5.097177181524919], [-34.32680509225017, 5.162003556235693], [-34.35200517729027, 5.197959005283916], [-34.35944139731468, 5.234387266094434], [-34.39460322736932, 5.3371663783152306], [-34.44319691942987, 5.425077355212102], [-34.47093200235729, 5.53216025138286], [-34.48353231742185, 5.643321995850843], [-34.47409093824537, 5.778417246280361], [-34.467807878301464, 5.909581009328175], [-34.46067966463235, 6.0339407776603755], [-34.46909205805724, 6.195963003052336], [-34.45160522390626, 6.421561852052553], [-34.43926092029306, 6.629681755066002], [-34.44061232915485, 6.641381790695969], [-34.50186768298456, 6.84949857558697], [-34.56543452159186, 7.060604027378468], [-34.64057645911165, 7.237118442766442], [-34.74175104582942, 7.360548677135362], [-34.87665965908961, 7.44032514272158], [-35.076311635868336, 7.483151653254794], [-35.26520045584934, 7.5175403192706405], [-35.36231865161202, 7.468244021288681], [-35.46009993582536, 7.433328963923048], [-35.56487300624681, 7.416076606198], [-35.821532187245545, 7.540621492373938], [-36.04372067144951, 7.756277319637852], [-36.17353129400449, 8.054974908898293], [-36.213582152916096, 8.384370524546016], [-36.26549953378383, 8.60543416292952], [-36.25295630966225, 8.81881800227034], [-36.227300080138896, 8.977074190987423], [-36.1821834381774, 9.115547390249985], [-36.17327821913684, 9.218843896350567], [-36.19117642568958, 9.298351533437149], [-36.24970196937436, 9.377957417579], [-36.35375125796419, 9.462858658862759], [-36.524862451587595, 9.574689842767981], [-36.76989111576751, 9.681737686619332], [-36.97711484003476, 9.792829434846317], [-37.051139408425556, 9.850385324845421], [-37.247594182052765, 10.100862053936504], [-37.33607667231891, 10.354019839462392], [-37.340890399992446, 10.561792475523479], [-37.28429534908837, 10.683944099724082], [-37.16858317437969, 10.70694307540674], [-36.99869744722771, 10.658089125570312], [-36.76020900585665, 10.59031305604055], [-36.50719049576403, 10.566127448321286], [-36.32415689672675, 10.571072810900244], [-36.22187636078911, 10.594898869378023], [-36.16509787884785, 10.606852873424529], [-36.13687955425246, 10.598886369897949], [-36.1083158390808, 10.562614224781317], [-36.053123113222185, 10.489292092582025], [-35.989461697284845, 10.396751286400056], [-35.92320356384852, 10.30244756901507], [-35.858079188885974, 10.218535717620085], [-35.79698272097315, 10.141136246304729], [-35.736918269991136, 10.061330189780744], [-35.661135619613226, 9.96634988532906], [-35.5791765858266, 9.899980595119871], [-35.492637536740105, 9.874439772150279], [-35.38614002773187, 9.908093137580588], [-35.271703478882706, 9.939621638440881], [-35.16441102533866, 9.958873821786293], [-35.08275981653215, 9.963893234033657], [-35.01842002996009, 9.943232678327877], [-34.97995532005473, 9.969865534799938], [-34.9781250392162, 9.970970694177346], [-34.94551458006571, 10.04470492623583], [-34.89681162580024, 10.14927111680159], [-34.8480654656611, 10.288361725809565], [-34.82816723145127, 10.435813986846581], [-34.819478291027515, 10.572413967037491], [-34.799941604716366, 10.677053906630398], [-34.75213472148879, 10.749126082636225], [-34.7001982768847, 10.80278496383294], [-34.638807833303495, 10.840616062077348], [-34.5630484350292, 10.867833118286397], [-34.52268271389381, 10.912464616723243], [-34.4832972456423, 10.952402065529613], [-34.433127844661875, 10.994736037771188], [-34.374851493703, 11.059288427492563], [-34.29683583001991, 11.128074781540073], [-34.21602241403253, 11.20674703779696], [-34.1472132987914, 11.288906672439538], [-34.08313101733103, 11.37834921540672], [-34.03407374603425, 11.485386918291857], [-34.00468040762086, 11.587566908943886], [-34.00219518917356, 11.59439680663472], [-33.96762927810633, 11.684429462701694], [-33.965806583092885, 11.690396125349361], [-33.939743457902956, 11.774473311349915], [-33.93748065041423, 11.780401307966098], [-33.90701622745857, 11.858958788158334], [-33.90569622483767, 11.864335776616494], [-33.888701949465855, 11.936042997714884], [-33.887828960865164, 11.940411390194969], [-33.876589815938345, 11.99991331402429], [-33.87672047959785, 12.00455157561845], [-33.879383300586326, 12.06516228221956], [-33.879777873068704, 12.068852759465326], [-33.88535376869503, 12.120118288456808], [-33.87860255100133, 12.155484545636364], [-33.877172231608874, 12.187886006153217], [-33.84055831949004, 12.188990296100796], [-33.80047041492206, 12.17990880608092], [-33.76040771538058, 12.157373382789762], [-33.731934652539834, 12.164434381643497], [-33.70829442502954, 12.192341807690777], [-33.67880263601968, 12.220131663233806], [-33.64932396421482, 12.266090734361766], [-33.62426660005883, 12.317713562868425], [-33.59357264292847, 12.377747777015808], [-33.577965283442886, 12.451402293598525], [-33.58771963045576, 12.53625506856833], [-33.62793083254202, 12.619367859772925], [-33.683775047431695, 12.702283288894531], [-33.739947535761054, 12.772164050928788], [-33.79568264379811, 12.834043690148233], [-33.853196868692095, 12.886110998847064], [-33.89623500630905, 12.923287794583281], [-33.94052829039692, 12.957143093086133], [-33.97804728509405, 12.97146040190717], [-34.002503162528775, 12.994956448256595], [-34.02397056041356, 13.000586110228317], [-34.029534572311384, 13.002366710386758], [-34.05974441741089, 13.002859337712403], [-34.07823341945893, 13.005390357052628], [-34.10137850329181, 12.996094684473743], [-34.11164561127312, 12.990664155190455], [-34.11638641512059, 12.978483630892784], [-34.121046945132946, 12.981944121205222], [-34.11596506594823, 12.976382626022213], [-34.10368530704287, 12.97803440090751], [-34.044414154712015, 12.969962343929712], [-33.981934703239695, 12.996112535384917], [-33.90966550160957, 13.045508445301332], [-33.85196857241913, 13.12365473238377], [-33.8488424508008, 13.1298566560611], [-33.832505946007466, 13.237479706851335], [-33.84742078121731, 13.339171410262935], [-33.87263836577182, 13.416770225836924], [-33.904536424943515, 13.482454161548622], [-33.90713715345176, 13.4864530046148], [-33.92797402337114, 13.51519894570604], [-33.93008634363204, 13.51855795485553], [-33.94965697252626, 13.546283058314724], [-33.952611719966455, 13.549108427183167], [-33.97347451919506, 13.569057713760946], [-33.976294975032104, 13.572348098972197], [-33.97828512639248, 13.57457171410949], [-33.99212771700625, 13.590294434816306], [-33.99427178919154, 13.590729761149104], [-34.00997108681103, 13.591759500847711], [-34.011723687923464, 13.590837374336713], [-34.0199752203718, 13.586289417716715], [-34.022992486690654, 13.58524283501568], [-34.031861097295256, 13.583282645997988], [-34.0329882002087, 13.583334996705254], [-34.03623921889189, 13.583671462375413], [-34.03661448586066, 13.582710031010512], [-34.036978388530784, 13.577640280964685], [-34.03759698933484, 13.574059518612973], [-34.039238663752904, 13.558428091007999], [-34.04070691781402, 13.55347513410357], [-34.04346123505954, 13.54506190867053], [-34.04517423274852, 13.540955342527315], [-34.04802151336681, 13.53453506383651], [-34.04900690400772, 13.529638329956668], [-34.051594941576475, 13.5226721764218], [-34.05348740781157, 13.518176611733535], [-34.05712145383592, 13.511535333068267], [-34.05914703296345, 13.50643945165687], [-34.06193894609025, 13.500555847554308], [-34.063894643374326, 13.495603241122119], [-34.06542166433945, 13.490876309889703], [-34.066464749263176, 13.48714391870056], [-34.0664723976097, 13.481870256339331], [-34.06622565755587, 13.478095929451133]],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;orange&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: false, &quot;fillColor&quot;: &quot;orange&quot;, &quot;fillOpacity&quot;: 0.2, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;noClip&quot;: false, &quot;opacity&quot;: 0.6, &quot;smoothFactor&quot;: 1.0, &quot;stroke&quot;: true, &quot;weight&quot;: 8}
-            ).addTo(map_d8e51bfb6683897ad12038391cf354df);
+            ).addTo(map_e302090e7efdb711117cc3da6f80cdfb);
         
     
-        var popup_93e351c5c05c6e191b21c2ffc9b32397 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+        var popup_72106df8f1b14dc0b43c24332eefe111 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
 
         
-            var html_af9edb31ca1d930a87803b125cc0d323 = $(`&lt;div id=&quot;html_af9edb31ca1d930a87803b125cc0d323&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Slocum Glider ru29 Deployed on 2015-06-23&lt;/div&gt;`)[0];
-            popup_93e351c5c05c6e191b21c2ffc9b32397.setContent(html_af9edb31ca1d930a87803b125cc0d323);
+            
+                var html_062254b48efc6e3d62a2929eb5c90c74 = $(`&lt;div id=&quot;html_062254b48efc6e3d62a2929eb5c90c74&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Slocum Glider ru29 Deployed on 2015-06-23&lt;/div&gt;`)[0];
+                popup_72106df8f1b14dc0b43c24332eefe111.setContent(html_062254b48efc6e3d62a2929eb5c90c74);
+            
         
 
-        poly_line_9f81c3f612a32d0c4486744fc0ad5345.bindPopup(popup_93e351c5c05c6e191b21c2ffc9b32397)
+        poly_line_971ba73bf6d8d7919fde45041dc77b18.bindPopup(popup_72106df8f1b14dc0b43c24332eefe111)
         ;
 
         
     
-&lt;/script&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
 </div>
 <p>One might be interested in a the individual profiles of each dive. Lets extract the deepest dive and plot it.</p>
 <div class="cell docutils container">
@@ -1099,7 +1138,7 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/b843dd04d5f16faf78f53fa9b2dc8d97d9a2d7556d019d2ee08c6414070b15c6.png" src="../../../_images/b843dd04d5f16faf78f53fa9b2dc8d97d9a2d7556d019d2ee08c6414070b15c6.png" />
+<img alt="../../../_images/4d53b40e06b9b471857b141aa3b5e80782010f1b1011acd8f5670e89f8a98f6d.png" src="../../../_images/4d53b40e06b9b471857b141aa3b5e80782010f1b1011acd8f5670e89f8a98f6d.png" />
 </div>
 </div>
 <p>We can also visualize the whole track as a cross-section.</p>
@@ -1163,9 +1202,9 @@ Attributes:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data collected from 2015-06-23T10:57:59.290227712 to 2016-03-31T09:25:31.420480512
 </pre></div>
 </div>
-<img alt="../../../_images/d50ef825d17711132317a059df2d4d6640ca4094d915dfac3780cdc6e1c7c402.png" src="../../../_images/d50ef825d17711132317a059df2d4d6640ca4094d915dfac3780cdc6e1c7c402.png" />
-<img alt="../../../_images/3d3a6cadce05f7b97fb2c492bf955da269c6737c979ad898ff2c59dae027f194.png" src="../../../_images/3d3a6cadce05f7b97fb2c492bf955da269c6737c979ad898ff2c59dae027f194.png" />
-<img alt="../../../_images/eace5ed93e9517cb6ca3f827fa6bcb109853c26006136cbbec46dbe76886c46a.png" src="../../../_images/eace5ed93e9517cb6ca3f827fa6bcb109853c26006136cbbec46dbe76886c46a.png" />
+<img alt="../../../_images/9feee7d0310dd9d23de2da9dbeae3174fb63933eada218c4ca0e739ab3b8b253.png" src="../../../_images/9feee7d0310dd9d23de2da9dbeae3174fb63933eada218c4ca0e739ab3b8b253.png" />
+<img alt="../../../_images/be43412e502dce5f84f1265c8fe168f4b0a3e94cc293c2fe4c43de2140d11946.png" src="../../../_images/be43412e502dce5f84f1265c8fe168f4b0a3e94cc293c2fe4c43de2140d11946.png" />
+<img alt="../../../_images/7dbbb454d671d982c1bc69c2921e86b531d8493ce45c9dad8b275d6accdee890.png" src="../../../_images/7dbbb454d671d982c1bc69c2921e86b531d8493ce45c9dad8b275d6accdee890.png" />
 </div>
 </div>
 <p>Glider cross-section also very be useful but we need to be careful when interpreting those due to the many turns the glider took,

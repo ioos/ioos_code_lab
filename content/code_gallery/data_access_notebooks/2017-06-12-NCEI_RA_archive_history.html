@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
   
@@ -29,33 +28,31 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -63,15 +60,19 @@
                 gtag('js', new Date());
                 gtag('config', 'G-546J258RCJ');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/code_gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history';</script>
     <link rel="canonical" href="https://ioos.github.io/ioos_code_lab/content/code_gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html" />
-    <link rel="shortcut icon" href="../../../_static/IOOS_logo.png"/>
+    <link rel="icon" href="../../../_static/IOOS_logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Using the xtractomatic R package to track Pacific Blue Marlin" href="2017-08-01-xtractoR.html" />
@@ -169,7 +170,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
@@ -494,7 +506,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="using-ncei-geoportal-rest-api-to-collect-information-about-ioos-regional-association-archived-data">
-<h1>Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data<a class="headerlink" href="#using-ncei-geoportal-rest-api-to-collect-information-about-ioos-regional-association-archived-data" title="Permalink to this heading">#</a></h1>
+<h1>Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data<a class="headerlink" href="#using-ncei-geoportal-rest-api-to-collect-information-about-ioos-regional-association-archived-data" title="Link to this heading">#</a></h1>
 <p>Created: 2017-06-12</p>
 <p>IOOS regional associations archive their non-federal observational data with NOAA’s National Center for Environmental Information (NCEI). In this notebook we will use the <a class="reference external" href="https://github.com/Esri/geoportal-server/wiki/REST-API-Syntax">RESTful</a> services of the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal">NCEI geoportal</a> to collect metadata from the archive packages found in the NCEI archives. The metadata information are stored in <a class="reference external" href="https://wiki.earthdata.nasa.gov/display/NASAISO/ISO+19115-2">ISO 19115-2</a> xml files which the NCEI geoportal uses for discovery of Archival Information Packages (AIPs). This example uses the ISO metadata records to display publication information as well as plot the time coverage of each AIP at NCEI which meets the search criteria.</p>
 <p>First we update the namespaces dictionary from owslib to include the appropriate namespace reference for gmi and gml.</p>
@@ -511,7 +523,7 @@ document.write(`
 </div>
 </div>
 <section id="now-we-select-a-regional-association-and-platform">
-<h2>Now we select a Regional Association and platform<a class="headerlink" href="#now-we-select-a-regional-association-and-platform" title="Permalink to this heading">#</a></h2>
+<h2>Now we select a Regional Association and platform<a class="headerlink" href="#now-we-select-a-regional-association-and-platform" title="Link to this heading">#</a></h2>
 <p>This is where the user identifies the Regional Association and the platform type they are interested in. Change the RA acronym to the RA of interest. The user can also omit the Regional Association, by using <code class="docutils literal notranslate"><span class="pre">None</span></code>, to collect metadata information about all IOOS non-Federal observation data archived through the NCEI-IOOS pipeline.</p>
 <p>The options for platform include: <code class="docutils literal notranslate"><span class="pre">&quot;HF</span> <span class="pre">Radar&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Glider&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;FIXED</span> <span class="pre">PLATFORM&quot;</span></code>.</p>
 <div class="cell docutils container">
@@ -529,7 +541,7 @@ document.write(`
 </div>
 </section>
 <section id="next-we-generate-a-geoportal-query-and-georss-feed">
-<h2>Next we generate a geoportal query and georss feed<a class="headerlink" href="#next-we-generate-a-geoportal-query-and-georss-feed" title="Permalink to this heading">#</a></h2>
+<h2>Next we generate a geoportal query and georss feed<a class="headerlink" href="#next-we-generate-a-geoportal-query-and-georss-feed" title="Link to this heading">#</a></h2>
 <p>To find more information about how to compile a geoportal query, have a look at <a class="reference external" href="https://github.com/Esri/geoportal-server/wiki/REST-API-Syntax">REST API Syntax</a> and the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal/#aboutPanel">NCEI Search Tips</a> for the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal/#searchPanel">NCEI geoportal</a>. The example provided is specific to the NCEI-IOOS data pipeline project and only searches for non-federal timeseries data collected by each Regional Association.</p>
 <p>The query developed here can be updated to search for any Archival Information Packages at NCEI, therefore the user should develop the appropriate query using the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal/#searchPanel">NCEI Geoportal</a> and update this portion of the code to identify the REST API of interest.</p>
 <div class="cell docutils container">
@@ -608,7 +620,7 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
 </div>
 </section>
 <section id="time-to-query-the-portal-and-parse-out-the-csv-response">
-<h2>Time to query the portal and parse out the csv response<a class="headerlink" href="#time-to-query-the-portal-and-parse-out-the-csv-response" title="Permalink to this heading">#</a></h2>
+<h2>Time to query the portal and parse out the csv response<a class="headerlink" href="#time-to-query-the-portal-and-parse-out-the-csv-response" title="Link to this heading">#</a></h2>
 <p>Here we are opening the specified REST API and parsing it into a string. Then, since we identified it as a csv format above, we parse it using the Pandas package. We also split the Data_Date_Range column into two columns, <code class="docutils literal notranslate"><span class="pre">data_start_date</span></code> and <code class="docutils literal notranslate"><span class="pre">data_end_date</span></code> to have that useful information available.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -716,7 +728,7 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
 </div>
 </section>
 <section id="lets-collect-what-we-have-found">
-<h2>Let’s collect what we have found<a class="headerlink" href="#lets-collect-what-we-have-found" title="Permalink to this heading">#</a></h2>
+<h2>Let’s collect what we have found<a class="headerlink" href="#lets-collect-what-we-have-found" title="Link to this heading">#</a></h2>
 <p>Now that we have all the ISO metadata records we are interested in, it’s time to do something fun with them. In this example we want to generate a timeseries plot of the data coverage for the “Southern California Coastal Ocean Observing System” stations we have archived at NCEI.</p>
 <p>First we need to collect some information. We loop through each iso record to collect metadata information about each package. The example here shows how to collect the following items:</p>
 <ol class="arabic simple">
@@ -871,7 +883,7 @@ Current AIP Size = 93.228 MB
 </div>
 </section>
 <section id="create-a-timeseries-plot-of-data-coverage">
-<h2>Create a timeseries plot of data coverage<a class="headerlink" href="#create-a-timeseries-plot-of-data-coverage" title="Permalink to this heading">#</a></h2>
+<h2>Create a timeseries plot of data coverage<a class="headerlink" href="#create-a-timeseries-plot-of-data-coverage" title="Link to this heading">#</a></h2>
 <p>Now that we have a DataFrame with all the information we’re interested in, lets make a time coverage plot for all the AIP’s at NCEI.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

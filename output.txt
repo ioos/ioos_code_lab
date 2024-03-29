@@ -1,1 +1,0 @@
-content/code_gallery/data_access_notebooks/2018-03-01-erddapy.ipynb:160002: [redirected with Found] https://github.com/ioos/BioData-Training-Workshop/blob/master/notebooks/ERDDAP_timeseries_explorer-IOOS.ipynb to https://github.com/ioos/BioData-Training-Workshop/blob/main/notebooks/ERDDAP_timeseries_explorer-IOOS.ipynb

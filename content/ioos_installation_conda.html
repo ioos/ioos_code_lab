@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Installing the IOOS conda environment &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
   
@@ -29,33 +28,31 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -63,15 +60,19 @@
                 gtag('js', new Date());
                 gtag('config', 'G-546J258RCJ');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/ioos_installation_conda';</script>
     <link rel="canonical" href="https://ioos.github.io/ioos_code_lab/content/ioos_installation_conda.html" />
-    <link rel="shortcut icon" href="../_static/IOOS_logo.png"/>
+    <link rel="icon" href="../_static/IOOS_logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Data Access" href="code_gallery/data_access.html" />
@@ -169,7 +170,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current nav bd-sidenav">
@@ -456,7 +468,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="installing-the-ioos-conda-environment">
-<h1>Installing the IOOS conda environment<a class="headerlink" href="#installing-the-ioos-conda-environment" title="Permalink to this heading">#</a></h1>
+<h1>Installing the IOOS conda environment<a class="headerlink" href="#installing-the-ioos-conda-environment" title="Link to this heading">#</a></h1>
 <p>For IOOS Python/R/Julia users we recommend the free
 <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a> distribution,
 a lightweight version of the <a class="reference external" href="https://www.anaconda.com/download">Anaconda Scientific Python Distribution</a> with the conda-forge channel pre-configured.
@@ -470,10 +482,10 @@ in your machine you may want to follow
 <a class="reference external" href="https://docs.anaconda.com/free/anaconda/install/uninstall/">these uninstall instructions</a>
 before proceeding.</p>
 <section id="install">
-<h2>Install<a class="headerlink" href="#install" title="Permalink to this heading">#</a></h2>
+<h2>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h2>
 <p>Download and install the appropriate Miniforge3 installer for your platform.</p>
 <section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h3>
 <p>Download it from <a class="github reference external" href="https://github.com/conda-forge/miniforge">conda-forge/miniforge</a>.
 Run the installer
 Choose <em>Just Me</em> (not <em>All Users</em>),
@@ -485,7 +497,7 @@ uncheck the boxes to make Miniforge your default Python to avoid conflicts with 
 <p><img alt="miniforge_select_box" src="../_images/miniforge_select_box.png" /></p>
 </section>
 <section id="linux-macos">
-<h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Permalink to this heading">#</a></h3>
+<h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Link to this heading">#</a></h3>
 <p>Copy-and-paste this in the terminal:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span>-O<span class="w"> </span><span class="s2">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="k">$(</span>uname<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span><span class="s2">.sh&quot;</span>
 
@@ -497,7 +509,7 @@ except for the license agreement where you must actively change it to <code clas
 </section>
 </section>
 <section id="create-the-ioos-conda-environment">
-<h2>Create the IOOS conda environment<a class="headerlink" href="#create-the-ioos-conda-environment" title="Permalink to this heading">#</a></h2>
+<h2>Create the IOOS conda environment<a class="headerlink" href="#create-the-ioos-conda-environment" title="Link to this heading">#</a></h2>
 <p>Download the <a class="reference external" href="https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment.yml">environment.yml</a>,
 or the <a class="reference external" href="https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/environment-python_and_r.yml">environment-python_and_r.yml</a> for a bigger environment with the R packages,
 by right clicking with the mouse and choosing <code class="docutils literal notranslate"><span class="pre">save</span> <span class="pre">as...</span></code>,
@@ -532,7 +544,7 @@ for the old style notebooks,
 or <code class="docutils literal notranslate"><span class="pre">jupyter-lab</span></code> for the new IDE interface.</p>
 </section>
 <section id="exiting-the-ioos-environment">
-<h2>Exiting the IOOS environment<a class="headerlink" href="#exiting-the-ioos-environment" title="Permalink to this heading">#</a></h2>
+<h2>Exiting the IOOS environment<a class="headerlink" href="#exiting-the-ioos-environment" title="Link to this heading">#</a></h2>
 <p>If you want to leave the IOOS environment and return to the root environment,
 you can type</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>deactivate
@@ -540,7 +552,7 @@ you can type</p>
 </div>
 </section>
 <section id="updating-the-ioos-environment">
-<h2>Updating the IOOS environment<a class="headerlink" href="#updating-the-ioos-environment" title="Permalink to this heading">#</a></h2>
+<h2>Updating the IOOS environment<a class="headerlink" href="#updating-the-ioos-environment" title="Link to this heading">#</a></h2>
 <p>To update an existing environment you can do,</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>IOOS
 conda<span class="w"> </span>update<span class="w"> </span>--all<span class="w"> </span>--yes
@@ -558,7 +570,7 @@ Note that you don’t need to re-install Miniforge.
 Just download a fresh version of the environment file and re-create it.</p>
 </section>
 <section id="why-we-use-and-recommend-conda">
-<h2>Why we use and recommend conda<a class="headerlink" href="#why-we-use-and-recommend-conda" title="Permalink to this heading">#</a></h2>
+<h2>Why we use and recommend conda<a class="headerlink" href="#why-we-use-and-recommend-conda" title="Link to this heading">#</a></h2>
 <p>Conda users can just <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code>,
 which installs not only binary packages for their platform,
 but the binary libraries they depend on.
@@ -568,20 +580,20 @@ System-level installation of libraries and admin privileges are not required.
 Check out <a class="reference external" href="https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html">Travis Oliphant’s blog piece</a> for more info.</p>
 </section>
 <section id="how-to-get-help">
-<h2>How to get help<a class="headerlink" href="#how-to-get-help" title="Permalink to this heading">#</a></h2>
+<h2>How to get help<a class="headerlink" href="#how-to-get-help" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Raise an issue <a class="reference external" href="https://github.com/ioos/ioos_code_lab/issues">here</a></p></li>
 <li><p>Please get help on the <a class="reference external" href="https://groups.google.com/forum/?hl=en#!forum/ioos_tech">IOOS-tech Google Group</a></p></li>
 </ul>
 </section>
 <section id="appendix">
-<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading">#</a></h2>
+<h2>Appendix<a class="headerlink" href="#appendix" title="Link to this heading">#</a></h2>
 <section id="what-to-do-when-everything-seems-to-be-broken">
-<h3>What to do when everything seems to be broken?<a class="headerlink" href="#what-to-do-when-everything-seems-to-be-broken" title="Permalink to this heading">#</a></h3>
+<h3>What to do when everything seems to be broken?<a class="headerlink" href="#what-to-do-when-everything-seems-to-be-broken" title="Link to this heading">#</a></h3>
 <p>For example, if you are seeing kernel errors like the one below.</p>
 <p><img alt="kernel_error" src="../_images/kernel_error.png" /></p>
 <ol class="arabic simple">
-<li><p>If you believe that only your environment is broken you can follow the <a class="reference internal" href="#updating-the-ioos-environment"><span class="std std-doc">update environment</span></a> instructions from above;</p></li>
+<li><p>If you believe that only your environment is broken you can follow the <a class="reference internal" href="#updating-the-ioos-environment">update environment</a> instructions from above;</p></li>
 <li><p>Sometimes conda updates can break backwards compatibility and updating is broken. In those cases remove the Miniforge3 directory and perform a fresh install of the new version.</p></li>
 <li><p>In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by <a class="reference external" href="https://raw.githubusercontent.com/ioos/ioos_code_lab/main/.binder/conda-lock.yml">downloading the lock file</a> and issuing the command:</p></li>
 </ol>
@@ -590,7 +602,7 @@ Check out <a class="reference external" href="https://technicaldiscovery.blogspo
 </div>
 </section>
 <section id="conda-lock">
-<h3>conda-lock<a class="headerlink" href="#conda-lock" title="Permalink to this heading">#</a></h3>
+<h3>conda-lock<a class="headerlink" href="#conda-lock" title="Link to this heading">#</a></h3>
 <p>Locking environments can be useful for reproducibility,
 Continuous Integration (CI),
 or when one requires faster installation.
@@ -608,12 +620,12 @@ and ensuring that the same packages from the time you locked will be used.</p>
 <p>In the example above we are locking for macOS, Linux and Windows.</p>
 </section>
 <section id="trouble-shooting-windows">
-<h3>Trouble-shooting Windows<a class="headerlink" href="#trouble-shooting-windows" title="Permalink to this heading">#</a></h3>
+<h3>Trouble-shooting Windows<a class="headerlink" href="#trouble-shooting-windows" title="Link to this heading">#</a></h3>
 <p>Windows can be complicated and here are a few tips to help you troubleshoot it:</p>
 <ol class="arabic simple">
 <li><p>If you did not install Miniforge on your C:\ drive you may have a “long path error.” Usually that happens when you see failures in the environment creation;</p></li>
 <li><p>Installation is “successful” but nothing was installed. Please see <a class="github reference external" href="https://github.com/ContinuumIO/anaconda-issues/issues/6258">ContinuumIO/anaconda-issues#6258</a> for some reasons to why that us happening. Most common ones are aggressive anti-virus or bank apps blocking the installation;</p></li>
-<li><p>Installation was successful but calling <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbclassic</span></code> just hangs while “waiting for localhost:” that is probably a firewall setting blocking the notebook or you need to update your packages. See <a class="reference internal" href="#updating-the-ioos-environment"><span class="std std-doc">update environment</span></a>.</p></li>
+<li><p>Installation was successful but calling <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbclassic</span></code> just hangs while “waiting for localhost:” that is probably a firewall setting blocking the notebook or you need to update your packages. See <a class="reference internal" href="#updating-the-ioos-environment">update environment</a>.</p></li>
 </ol>
 </section>
 </section>
