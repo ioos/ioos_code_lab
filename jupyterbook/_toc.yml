@@ -2,10 +2,6 @@ format: jb-book
 root: content/intro.md
 title: The IOOS Data Demo Center
 parts:
-  - caption: Gallery
-    chapters:
-      - file: content/gallery.md
-        title: Notebooks gallery
 
   - caption: Getting Started
     chapters:
@@ -14,6 +10,8 @@ parts:
 
   - caption: Code Gallery
     chapters:
+      - file: content/code_gallery/gallery.md
+        title: Notebooks gallery
       - file: content/code_gallery/data_access.md
         sections:
           - glob: content/code_gallery/data_access_notebooks/*
