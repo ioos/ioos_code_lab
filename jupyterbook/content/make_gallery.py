@@ -1,7 +1,7 @@
-import nbformat
 import glob
 import os
 
+import nbformat
 from nbconvert.exporters import markdown
 
 SITE_DIR = "."
