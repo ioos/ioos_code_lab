@@ -28,8 +28,8 @@
 :shadow: md
 
 {bdg-primary}`Data Access`
-{bdg-secondary}`Glider`
-{bdg-info}`python`
+{bdg-secondary}`THREDDS`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2016-11-15-glider_data_example.png"/>
@@ -43,8 +43,8 @@
 :shadow: md
 
 {bdg-primary}`Data Access`
-{bdg-secondary}`Glider`
-{bdg-info}`python`
+{bdg-secondary}`GDAC API`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2016-12-20-searching_glider_deployments.png"/>
@@ -59,7 +59,7 @@
 
 {bdg-primary}`Data Access`
 {bdg-secondary}`Sensor Map`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2017-03-21-ERDDAP_IOOS_Sensor_Map.png"/>
@@ -73,8 +73,8 @@
 :shadow: md
 
 {bdg-primary}`Data Access`
-{bdg-secondary}`NCEI`
-{bdg-info}`python`
+{bdg-secondary}`NCEI REST API`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2017-06-12-NCEI_RA_archive_history.png"/>
@@ -103,8 +103,8 @@
 :shadow: md
 
 {bdg-primary}`Data Access`
-{bdg-secondary}`Hurricane`
-{bdg-info}`python`
+{bdg-secondary}`NHC/OPeNDAP`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2017-09-09-hurricane_irma.png"/>
@@ -119,7 +119,7 @@
 
 {bdg-primary}`Data Access`
 {bdg-secondary}`ERDDAP`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2017-11-30-rerddap.png"/>
@@ -134,7 +134,7 @@
 
 {bdg-primary}`Data Access`
 {bdg-secondary}`OBIS`
-{bdg-info}`python`
+{bdg-info}`Pyhton/R`
 ^^^
 
 <img src="../images/2018-02-20-obis.png"/>
@@ -149,7 +149,7 @@
 
 {bdg-primary}`Data Access`
 {bdg-secondary}`ERDDAP`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2018-03-01-erddapy.png"/>
@@ -163,8 +163,8 @@
 :shadow: md
 
 {bdg-primary}`Data Access`
-{bdg-secondary}`Modelling`
-{bdg-info}`python`
+{bdg-secondary}`THREDDS`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2019-03-08-grids-temperature.png"/>
@@ -178,8 +178,8 @@
 :shadow: md
 
 {bdg-primary}`Data Access`
-{bdg-secondary}`Hurricane`
-{bdg-info}`python`
+{bdg-secondary}`SOS`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/placeholder.png"/>
@@ -193,8 +193,8 @@
 :shadow: md
 
 {bdg-primary}`Data Access`
-{bdg-secondary}`GTS`
-{bdg-info}`python`
+{bdg-secondary}`NDBC`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2020-10-10-GTS.png"/>
@@ -209,7 +209,7 @@
 
 {bdg-primary}`Data Access`
 {bdg-secondary}`ERDDAP`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/placeholder.png"/>
@@ -224,7 +224,7 @@
 
 {bdg-primary}`Data Access`
 {bdg-secondary}`OBIS`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2022-11-23_pyobis_example.png"/>
@@ -238,8 +238,8 @@
 :shadow: md
 
 {bdg-primary}`Data Analysis And Visualization`
-{bdg-secondary}`CF-UGRID-SGRID`
-{bdg-info}`python`
+{bdg-secondary}`CF/UGRID/SGRID`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2016-11-16-CF-UGRID-SGRID-conventions.png"/>
@@ -253,7 +253,7 @@
 :shadow: md
 
 {bdg-primary}`Data Analysis And Visualization`
-{bdg-secondary}`r-oce`
+{bdg-secondary}`R-demo`
 {bdg-info}`R`
 ^^^
 
@@ -268,8 +268,8 @@
 :shadow: md
 
 {bdg-primary}`Data Analysis And Visualization`
-{bdg-secondary}`Matlab`
-{bdg-info}`octave`
+{bdg-secondary}`Matlab-demo`
+{bdg-info}`Octave/Matlab`
 ^^^
 
 <img src="../images/2017-03-30-octave_notebook_example.png"/>
@@ -283,8 +283,8 @@
 :shadow: md
 
 {bdg-primary}`Data Analysis And Visualization`
-{bdg-secondary}`Modelling`
-{bdg-info}`python`
+{bdg-secondary}`Mapping`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2018-12-04-grids.png"/>
@@ -299,7 +299,7 @@
 
 {bdg-primary}`Data Analysis And Visualization`
 {bdg-secondary}`QARTOD`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example.png"/>
@@ -314,7 +314,7 @@
 
 {bdg-primary}`Data Analysis And Visualization`
 {bdg-secondary}`ERDDAP`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2021-10-25-ERDDAP-interpolate.png"/>
@@ -328,8 +328,8 @@
 :shadow: md
 
 {bdg-primary}`Data Management`
-{bdg-secondary}`Compliance-Checker`
-{bdg-info}`python`
+{bdg-secondary}`Compliance-checker`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/placeholder.png"/>
@@ -344,7 +344,7 @@
 
 {bdg-primary}`Data Management`
 {bdg-secondary}`BagIt`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/placeholder.png"/>
@@ -359,7 +359,7 @@
 
 {bdg-primary}`Data Management`
 {bdg-secondary}`CF`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2018-02-27-pocean-timeSeries-demo.png"/>
@@ -373,8 +373,8 @@
 :shadow: md
 
 {bdg-primary}`Data Management`
-{bdg-secondary}`ERDDAP`
-{bdg-info}`Darwin Core`
+{bdg-secondary}`Darwin Core`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/placeholder.png"/>
@@ -389,7 +389,7 @@
 
 {bdg-primary}`Data Management`
 {bdg-secondary}`Zarr`
-{bdg-info}`python`
+{bdg-info}`Python`
 ^^^
 
 <img src="../images/2023-03-20-Reading_and_writing_zarr.png"/>
