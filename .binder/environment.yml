@@ -21,6 +21,7 @@ dependencies:
   - geolinks
   - geopandas
   - geoplot
+  - gliderpy
   - gridgeo
   - humanize
   - hvplot
