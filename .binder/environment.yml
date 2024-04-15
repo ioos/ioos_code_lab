@@ -25,6 +25,7 @@ dependencies:
   - gridgeo
   - humanize
   - hvplot
+  - ioos_metrics
   - ioos_qc
   - ipyleaflet
   - joblib
