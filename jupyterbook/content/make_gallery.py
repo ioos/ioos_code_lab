@@ -47,8 +47,8 @@ def make_gallery_entry(nb_path):
     :text-align: center
     :shadow: md
 
-    {{bdg-primary}}`{nb_path.split("/")[1].replace("_", " ").title().strip("Notebooks").strip()}`
-    {{bdg-secondary}}`ERDDAP`
+    {{bdg-primary}}`DATA SERVICE`
+    {{bdg-secondary}}`TOPICAL KEYWORD`
     {{bdg-info}}`{nb["metadata"]["language_info"]["name"]}`
     ^^^
 
