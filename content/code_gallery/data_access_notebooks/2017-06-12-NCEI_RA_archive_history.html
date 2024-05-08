@@ -781,7 +781,7 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
     <span class="p">)</span>
     <span class="c1"># First published date.</span>
     <span class="n">pubdate</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">date_path</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">First published date = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">util</span><span class="o">.</span><span class="n">testXMLValue</span><span class="p">(</span><span class="n">pubdate</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">First published date = </span><span class="si">{</span><span class="n">util</span><span class="o">.</span><span class="n">testXMLValue</span><span class="p">(</span><span class="n">pubdate</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># Data Temporal Coverage.</span>
     <span class="n">temporal_extent_path</span> <span class="o">=</span> <span class="p">(</span>
@@ -811,7 +811,7 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
                 <span class="n">plat_name</span> <span class="o">=</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
                     <span class="s2">&quot;.//gmd:keyword/gco:CharacterString&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
                 <span class="p">)</span><span class="o">.</span><span class="n">text</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Provider Platform Code = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">plat_name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provider Platform Code = </span><span class="si">{</span><span class="n">plat_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;provider_platform_name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plat_name</span>
                 <span class="k">break</span>
 
@@ -860,7 +860,7 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
     <span class="k">for</span> <span class="n">trans_size</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="s2">&quot;.//gmd:transferSize&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">trans_size</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//gco:Real&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
             <span class="n">sizes</span> <span class="o">=</span> <span class="n">trans_size</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//gco:Real&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Current AIP Size = </span><span class="si">%s</span><span class="s2"> MB&quot;</span> <span class="o">%</span> <span class="n">sizes</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current AIP Size = </span><span class="si">{</span><span class="n">sizes</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
 
             <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;package_size_mb&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">sizes</span>
             <span class="k">break</span>
