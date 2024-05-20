@@ -320,6 +320,21 @@
 <img src="../images/2021-10-25-ERDDAP-interpolate.png"/>
 :::
 
+:::{grid-item-card} Interpolate MURSST to great white shark telemetry track with R and ERDDAP
+:margin: 3 0 0 0
+:link: ./data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp.html
+:link-type: url
+:text-align: center
+:shadow: md
+
+{bdg-primary}`ERDDAP`
+{bdg-secondary}`MURSST Track Interpolation`
+{bdg-info}`R`
+^^^
+
+<img src="../images/2024-05-16-white_shark_water_temp.png"/>
+:::
+
 :::{grid-item-card} Shore Station Compliance Checker Script
 :margin: 3 0 0 0
 :link: ./data_management_notebooks/2017-05-14-running_compliance_checker.html
