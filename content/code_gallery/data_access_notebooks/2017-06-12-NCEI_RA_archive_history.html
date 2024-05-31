@@ -505,8 +505,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="using-ncei-geoportal-rest-api-to-collect-information-about-ioos-regional-association-archived-data">
 <h1>Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data<a class="headerlink" href="#using-ncei-geoportal-rest-api-to-collect-information-about-ioos-regional-association-archived-data" title="Link to this heading">#</a></h1>
-<p>Created: 2017-06-12
-Updated: 2024-05-10</p>
+<p>Created: 2017-06-12</p>
+<p>Updated: 2024-05-30</p>
 <p>IOOS regional associations archive their non-federal observational data with NOAA’s National Center for Environmental Information (NCEI). In this notebook we will use the <a class="reference external" href="https://github.com/Esri/geoportal-server/wiki/REST-API-Syntax">RESTful</a> services of the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal">NCEI geoportal</a> to collect metadata from the archive packages found in the NCEI archives. The metadata information are stored in <a class="reference external" href="https://wiki.earthdata.nasa.gov/display/NASAISO/ISO+19115-2">ISO 19115-2</a> xml files which the NCEI geoportal uses for discovery of Archival Information Packages (AIPs). This example uses the ISO metadata records to display publication information as well as plot the time coverage of each AIP at NCEI which meets the search criteria.</p>
 <p>First we update the namespaces dictionary from owslib to include the appropriate namespace reference for gmi and gml.</p>
 <div class="cell docutils container">
@@ -562,7 +562,7 @@ Updated: 2024-05-10</p>
     <span class="n">RAs</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;AOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Alaska Ocean Observing System&quot;</span><span class="p">,</span>
         <span class="s2">&quot;CARICOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Caribbean Coastal Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CeNCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Central and Northern California Coastal Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CeNCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Central and Northern California Ocean Observing System&quot;</span><span class="p">,</span>
         <span class="s2">&quot;GCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Gulf of Mexico Coastal Ocean Observing System&quot;</span><span class="p">,</span>
         <span class="s2">&quot;GLOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Lakes Observing System&quot;</span><span class="p">,</span>
         <span class="s2">&quot;MARACOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Mid-Atlantic Regional Association Coastal Ocean Observing System&quot;</span><span class="p">,</span>
