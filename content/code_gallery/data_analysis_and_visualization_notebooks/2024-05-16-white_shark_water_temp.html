@@ -511,7 +511,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="interpolate-mursst-to-great-white-shark-telemetry-track-with-r-and-erddap">
 <h1>Interpolate MURSST to great white shark telemetry track with R and ERDDAP<a class="headerlink" href="#interpolate-mursst-to-great-white-shark-telemetry-track-with-r-and-erddap" title="Link to this heading">#</a></h1>
 <p>Created: 2024-05-16</p>
-<p>Updated: 2024-05-16</p>
+<p>Updated: 2024-06-07</p>
 <p>This notebook walks through downloading a netCDF file from NCEI. The file follows a specific specification for ATN satellite trajectory observations as documented <a class="reference external" href="https://github.com/ioos/ioos-atn-data/blob/main/templates/atn_trajectory_template.cdl">here</a>. More information about the ATN netCDF specification can be found at <a class="reference external" href="https://ioos.github.io/ioos-atn-data/">https://ioos.github.io/ioos-atn-data/</a>.</p>
 <p>Since most of the examples in the IOOS Code Lab are in the python programming language, we wanted to show an example of working with a netCDF file in the R programming language to be inclusive of those users.</p>
 <p>For more information on the tidync package, see this R blog: <a class="reference external" href="https://ropensci.org/blog/2019/11/05/tidync/">https://ropensci.org/blog/2019/11/05/tidync/</a></p>
@@ -888,6 +888,12 @@ The following object is masked from &#39;package:purrr&#39;:
 </section>
 <section id="interpolating-mursst-to-white-shark-tracks-using-erddap">
 <h2>Interpolating MURSST to white shark tracks using ERDDAP<a class="headerlink" href="#interpolating-mursst-to-white-shark-tracks-using-erddap" title="Link to this heading">#</a></h2>
+<p><em>The MURSST product is a merged, multi-sensor L4 Foundation Sea Surface Temperature (SST) analysis product from Jet Propulsion Laboratory (JPL).
+This daily, global, Multi-scale, Ultra-high Resolution (MUR) Sea Surface Temperature (SST) 1-km data set, Version 4.1, is produced at JPL under the NASA MEaSUREs program.
+For details, see <a class="reference external" href="https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1">https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1</a>.
+This dataset is part of the Group for High-Resolution Sea Surface Temperature (GHRSST) project.
+The data for the most recent 7 days is usually revised everyday.
+The data for other days is sometimes revised.</em></p>
 <p>We need to prepare the data to send to the server. As mentioned above the request will take a table with a header <code class="docutils literal notranslate"><span class="pre">&quot;time,latitude,longitude&quot;</span></code>, then its values. Note that we rename the columns, then pick the subset to store as one long string to create the request.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
