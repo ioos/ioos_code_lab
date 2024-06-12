@@ -13,7 +13,7 @@ This page documents the procedures for:
 
 ## Requesting new notebooks
 
-- New notebooks should be requested by adding a [ticket]([https://github.com/ioos/ioos_code_lab/issues/new](https://github.com/ioos/ioos_code_lab/issues/new?assignees=mathewbiddle%2Cocefpaf&labels=Notebook+idea&projects=&template=NEW_NOTEBOOK.yml&title=%5BNew+Notebook%5D%3A+)) to this GitHub repository. The ticket should contain the following information:
+- New notebooks should be requested by adding an issue to this GitHub repository using this [template](https://github.com/ioos/ioos_code_lab/issues/new?assignees=mathewbiddle%2Cocefpaf&labels=Notebook+idea&projects=&template=NEW_NOTEBOOK.yml&title=%5BNew+Notebook%5D%3A+). The ticket should contain the following information (also provided in the issue template):
 
 ```
 - [ ] What is language(s) for used in the example?
