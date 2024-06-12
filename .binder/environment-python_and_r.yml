@@ -90,6 +90,7 @@ dependencies:
   - r-reshape2
   - r-robis>=2.3.9
   - r-sp
+  - r-tidyverse
   - r-xtractomatic
   - r-xts
 platforms:
