@@ -1,0 +1,1 @@
+content/ioos_installation_conda.md:11: [redirected with Found] https://docs.anaconda.com/free/anaconda/install/uninstall/ to https://docs.anaconda.com/anaconda/install/uninstall/
