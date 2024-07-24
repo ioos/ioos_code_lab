@@ -533,7 +533,10 @@ original data and aligning it to Darwin Core. It has been adapted from the R mar
 <p>Now we need to read in the raw data file using <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">pandas.read_csv()</a>. Here we display the first ten rows of data to give the user an idea of what observations are contained in the <a class="reference external" href="https://github.com/ioos/notebooks_demos/blob/master/notebooks/data/dwc/raw/MadeUpDataForBiologicalDataTraining.csv">raw file</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/ioos/notebooks_demos/raw/master/notebooks/data/dwc/raw/&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;https://github.com/ioos/notebooks_demos/&quot;</span>
+    <span class="s2">&quot;raw/main/ioos_code_lab/jupyterbook/content/code_gallery/data/&quot;</span>
+<span class="p">)</span>
 <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;MadeUpDataForBiologicalDataTraining.csv&quot;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">file</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
