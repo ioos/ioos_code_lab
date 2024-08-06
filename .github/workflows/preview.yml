@@ -1,0 +1,68 @@
+name: Preview Sphinx site
+
+on:
+  pull_request:
+    # branches: [ main ]
+
+jobs:
+  build_and_preview:
+    # if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:  # Job-level permissions configuration starts here
+      contents: write  # 'write' access to repository contents
+      pull-requests: write  # 'write' access to pull requests
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+
+    - name: Setup Micromamba
+      uses: mamba-org/setup-micromamba@f8b8a1e23a26f60a44c853292711bacfd3eac822 #v1
+      with:
+        environment-name: IOOS
+        init-shell: bash
+        create-args: >-
+          --file .binder/conda-lock.yml
+
+    - name: Build documentation
+      shell: bash -l {0}
+      run: >
+        set -e
+        && jupyter-book build jupyterbook
+
+    - name: Commit documentation changes to preview branch
+      run: |
+        if git clone https://github.com/ioos/ioos_code_lab.git --branch ${{ github.head_ref }}-preview --single-branch gh-pages ; then
+          cd gh-pages
+          echo "COMMENT_ON_PR=false" >> $GITHUB_ENV
+        else
+          git clone https://github.com/ioos/ioos_code_lab.git --branch gh-pages --single-branch gh-pages
+          cd gh-pages
+          git checkout -b ${{ github.head_ref }}-preview
+          echo "COMMENT_ON_PR=true" >> $GITHUB_ENV
+        fi
+        cp -r ../jupyterbook/_build/html .
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Update documentation" -a || true
+
+    - name: Push documentation changes to preview branch
+      uses: ad-m/github-push-action@77c5b412c50b723d2a4fbc6d71fb5723bcd439aa  # latest-main
+      with:
+        branch: ${{ github.head_ref }}-preview
+        directory: gh-pages
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Leave comment on pull request
+      if: env.COMMENT_ON_PR == 'true'
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea  # v7
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: 'Thank you for your contributions!\n\nA preview of your changes can be viewed at:\n- https://raw.githack.com/ioos/ioos_code_lab/${{ github.head_ref }}-preview/index.html'
+            })
