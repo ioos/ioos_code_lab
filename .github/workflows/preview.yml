@@ -48,7 +48,7 @@ jobs:
         git commit -m "Update documentation" -a || true
 
     - name: Push documentation changes to preview branch
-      uses: ad-m/github-push-action@77c5b412c50b723d2a4fbc6d71fb5723bcd439aa  # latest-main
+      uses: ad-m/github-push-action@d91a481090679876dfc4178fef17f286781251df  # latest-main
       with:
         branch: ${{ github.head_ref }}-preview
         directory: gh-pages
