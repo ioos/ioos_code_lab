@@ -615,7 +615,7 @@ Before we send the interpolation request let’s re-sample it to daily data to r
 <span class="n">nearby</span> <span class="o">=</span> <span class="mi">4</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;http://oceanlab3.rsmas.miami.edu/erddap/&quot;</span>
+    <span class="s2">&quot;https://oceanlab3.rsmas.miami.edu/erddap/&quot;</span>
     <span class="sa">f</span><span class="s2">&quot;convert/interpolate.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">?&quot;</span>
     <span class="sa">f</span><span class="s2">&quot;TimeLatLonTable=</span><span class="si">{</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">time_lat_lon</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="sa">f</span><span class="s2">&quot;&amp;requestCSV=</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">algorithm</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">nearby</span><span class="si">}</span><span class="s2">&quot;</span>
