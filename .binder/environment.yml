@@ -25,8 +25,8 @@ dependencies:
   - gridgeo
   - humanize
   - hvplot
-  - ioos-metrics
   - ioos_qc
+  - ioos-metrics
   - ipyleaflet
   - joblib
   - jupyter
@@ -41,6 +41,7 @@ dependencies:
   - oceans
   - oct2py
   - odvc
+  - openpyxl
   - palettable
   - phantomjs
   - pocean-core >=3.1
@@ -66,6 +67,5 @@ dependencies:
   - utide
   - windrose
   - xarray
-  - xlrd
   - xmltodict
   - zarr
