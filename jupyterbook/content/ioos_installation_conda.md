@@ -1,12 +1,14 @@
 # Installing the IOOS conda environment
 
-For IOOS Python/R/Julia users we recommend the free
+For IOOS Python, R, and/or Julia users we recommend the free
 [Miniforge](https://github.com/conda-forge/miniforge) distribution,
 a lightweight version of the [Anaconda Scientific Python Distribution](https://www.anaconda.com/download) with the conda-forge channel pre-configured.
 While the full Anaconda distribution will also work,
 it is faster to install Miniforge and you can install only the packages you need.
 If for some reason you decide later that you want the full Anaconda distribution,
 you can install it by typing `conda install -c defaults anaconda`.
+However, we discourage the use of a "big distribution" in liue of separated environments for each task/context when needed.
+This will increase reproducibility and make debugging a package problem much easier.
 
 Note that if you have the Anaconda Distribution,
 or any other installation,
