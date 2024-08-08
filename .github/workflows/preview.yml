@@ -6,7 +6,7 @@ on:
 
 jobs:
   build_and_preview:
-    # if: github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:  # Job-level permissions configuration starts here
       contents: write  # 'write' access to repository contents
@@ -32,15 +32,10 @@ jobs:
 
     - name: Commit documentation changes to preview branch
       run: |
-        if git clone https://github.com/ioos/ioos_code_lab.git --branch ${{ github.head_ref }}-preview --single-branch gh-pages ; then
-          cd gh-pages
-          echo "COMMENT_ON_PR=false" >> $GITHUB_ENV
-        else
-          git clone https://github.com/ioos/ioos_code_lab.git --branch gh-pages --single-branch gh-pages
-          cd gh-pages
-          git checkout -b ${{ github.head_ref }}-preview
-          echo "COMMENT_ON_PR=true" >> $GITHUB_ENV
-        fi
+        git clone https://github.com/ioos/ioos_code_lab.git --branch gh-pages --single-branch gh-pages
+        cd gh-pages
+        git checkout -b ${{ github.head_ref }}-preview
+        echo "COMMENT_ON_PR=true" >> $GITHUB_ENV
         cp -r ../jupyterbook/_build/html .
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
