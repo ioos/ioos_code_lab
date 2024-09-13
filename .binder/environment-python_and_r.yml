@@ -73,10 +73,12 @@ dependencies:
   # R packages.
   - rpy2
   - r-base=4
+  - r-dplyr
   - r-dt
   - r-finch
   - r-ggfortify
   - r-ggplot2
+  - r-gh
   - r-gsw
   - r-httr
   - r-irkernel
