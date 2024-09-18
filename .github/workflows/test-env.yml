@@ -22,7 +22,8 @@ jobs:
           create-args: >-
             --file .binder/conda-lock.yml
 
-      - name: Test environment
+      - name: Test environment and links
         shell: bash -l {0}
-        run: |
+        run: >
           python -c 'import osgeo.gdal; print(dir(osgeo.gdal))'
+          && jupyter-book build jupyterbook --builder linkcheck
