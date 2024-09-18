@@ -1,4 +1,4 @@
-name: Test Environment
+name: Test Environment and link rot
 
 on:
   pull_request:
