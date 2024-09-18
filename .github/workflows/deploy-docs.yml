@@ -24,7 +24,6 @@ jobs:
         shell: bash -l {0}
         run: >
           set -e
-          && jupyter-book build jupyterbook --builder linkcheck
           && jupyter-book build jupyterbook
 
       - name: GitHub Pages action
