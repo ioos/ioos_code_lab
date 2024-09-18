@@ -10,6 +10,7 @@ dependencies:
   - cc-plugin-ncei
   - cf_xarray
   - cftime
+  - ckanapi
   - compliance-checker
   - descartes
   - easyargs
