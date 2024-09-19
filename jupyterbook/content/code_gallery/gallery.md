@@ -230,6 +230,21 @@
 <img src="../images/2022-11-23_pyobis_example.png"/>
 :::
 
+:::{grid-item-card} Programmatically query the IOOS Data Catalog for a specific observation type
+:margin: 3 0 0 0
+:link: ./data_access_notebooks/2024-09-17-CKAN_API_Query.html
+:link-type: url
+:text-align: center
+:shadow: md
+
+{bdg-primary}`CKAN`
+{bdg-secondary}`Catalog`
+{bdg-info}`python`
+^^^
+
+<img src="../images/2024-09-17-CKAN_API_Query.png"/>
+:::
+
 :::{grid-item-card} Parsing Conventions and standards with Python
 :margin: 3 0 0 0
 :link: ./data_analysis_and_visualization_notebooks/2016-11-16-CF-UGRID-SGRID-conventions.html
