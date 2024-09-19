@@ -1,4 +1,4 @@
-name: Test Environment
+name: Test Environment and link rot
 
 on:
   pull_request:
@@ -8,8 +8,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
       fail-fast: false
+    defaults:
+      run:
+        shell: bash -l {0}
 
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
@@ -23,6 +26,10 @@ jobs:
             --file .binder/conda-lock.yml
 
       - name: Test environment
-        shell: bash -l {0}
-        run: |
+        run: >
           python -c 'import osgeo.gdal; print(dir(osgeo.gdal))'
+
+      - name: Test links
+        if: startsWith(matrix.os, 'ubuntu')
+        run: >
+          jupyter-book build jupyterbook --builder linkcheck
