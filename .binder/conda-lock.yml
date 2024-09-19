@@ -5514,7 +5514,7 @@ package:
   category: main
   optional: false
 - name: erddapy
-  version: 2.2.2
+  version: 2.2.3
   manager: conda
   platform: linux-64
   dependencies:
@@ -5522,14 +5522,14 @@ package:
     pandas: <3,>=0.25.2
     python: '>=3.10'
     pytz: ''
-  url: https://conda.anaconda.org/conda-forge/noarch/erddapy-2.2.2-pyhd8ed1ab_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/erddapy-2.2.3-pyhd8ed1ab_0.conda
   hash:
-    md5: 374bc39290bd75124b32fd2884387fd3
-    sha256: 9d7cb33bd0fca1d06f9b0dfef91da84cddc40d886a02435f241e975843737845
+    md5: 07d5c713a8d62836b91e6053b3fc1bf4
+    sha256: 47a585be11c73b0b92c45ee34bfb03e9eb43997b5012ab8a55f677f796f65287
   category: main
   optional: false
 - name: erddapy
-  version: 2.2.2
+  version: 2.2.3
   manager: conda
   platform: osx-64
   dependencies:
@@ -5537,10 +5537,10 @@ package:
     httpx: ''
     python: '>=3.10'
     pandas: <3,>=0.25.2
-  url: https://conda.anaconda.org/conda-forge/noarch/erddapy-2.2.2-pyhd8ed1ab_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/erddapy-2.2.3-pyhd8ed1ab_0.conda
   hash:
-    md5: 374bc39290bd75124b32fd2884387fd3
-    sha256: 9d7cb33bd0fca1d06f9b0dfef91da84cddc40d886a02435f241e975843737845
+    md5: 07d5c713a8d62836b91e6053b3fc1bf4
+    sha256: 47a585be11c73b0b92c45ee34bfb03e9eb43997b5012ab8a55f677f796f65287
   category: main
   optional: false
 - name: erddapy
@@ -5559,7 +5559,7 @@ package:
   category: main
   optional: false
 - name: erddapy
-  version: 2.2.2
+  version: 2.2.3
   manager: conda
   platform: win-64
   dependencies:
@@ -5567,10 +5567,10 @@ package:
     httpx: ''
     python: '>=3.10'
     pandas: <3,>=0.25.2
-  url: https://conda.anaconda.org/conda-forge/noarch/erddapy-2.2.2-pyhd8ed1ab_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/erddapy-2.2.3-pyhd8ed1ab_0.conda
   hash:
-    md5: 374bc39290bd75124b32fd2884387fd3
-    sha256: 9d7cb33bd0fca1d06f9b0dfef91da84cddc40d886a02435f241e975843737845
+    md5: 07d5c713a8d62836b91e6053b3fc1bf4
+    sha256: 47a585be11c73b0b92c45ee34bfb03e9eb43997b5012ab8a55f677f796f65287
   category: main
   optional: false
 - name: esmf
@@ -14474,11 +14474,11 @@ package:
     libgdal-core: '>=3.9'
     libkml: '>=1.3.0,<1.4.0a0'
     libstdcxx: '>=13'
-    tiledb: '>=2.25.0,<2.26.0a0'
-  url: https://conda.anaconda.org/conda-forge/linux-64/libgdal-tiledb-3.9.2-ha8d0372_1.conda
+    tiledb: '>=2.26.1,<2.27.0a0'
+  url: https://conda.anaconda.org/conda-forge/linux-64/libgdal-tiledb-3.9.2-h4a3bace_3.conda
   hash:
-    md5: 99186faa63e7e920f3a6e5a553ec543a
-    sha256: 3ae27949cc6230aee012035735231f727f762179f71c8fd99ee97ce5e79c7707
+    md5: adb2fe736f505d6a53d172d7b9639bd6
+    sha256: dbec3293bc450063a64e4190b58aabe5ba344837d885550a8528378a5a5d5128
   category: main
   optional: false
 - name: libgdal-tiledb
@@ -14490,11 +14490,11 @@ package:
     libcxx: '>=17'
     libgdal-core: '>=3.9'
     libkml: '>=1.3.0,<1.4.0a0'
-    tiledb: '>=2.25.0,<2.26.0a0'
-  url: https://conda.anaconda.org/conda-forge/osx-64/libgdal-tiledb-3.9.2-h6b136fe_1.conda
+    tiledb: '>=2.26.1,<2.27.0a0'
+  url: https://conda.anaconda.org/conda-forge/osx-64/libgdal-tiledb-3.9.2-h6b11327_3.conda
   hash:
-    md5: 4c2aff7ee0f02bdcf5b2c1d113f2ad48
-    sha256: 5a7fd0f9973f4af1be68b4d89e559d9d3f5fea5c1c6b08ca8dbf5e3685940b18
+    md5: 11048f3ba6cd8f6c4e9c031cd8368fce
+    sha256: 17cfdbccf4fedc3575085d7214e2f2833c088760ff8c5b2b802f65092ca057c1
   category: main
   optional: false
 - name: libgdal-xls
@@ -38621,7 +38621,7 @@ package:
   category: main
   optional: false
 - name: tiledb
-  version: 2.25.0
+  version: 2.26.1
   manager: conda
   platform: linux-64
   dependencies:
@@ -38646,14 +38646,14 @@ package:
     openssl: '>=3.3.2,<4.0a0'
     spdlog: '>=1.14.1,<1.15.0a0'
     zstd: '>=1.5.6,<1.6.0a0'
-  url: https://conda.anaconda.org/conda-forge/linux-64/tiledb-2.25.0-h4c922dd_14.conda
+  url: https://conda.anaconda.org/conda-forge/linux-64/tiledb-2.26.1-h4c922dd_1.conda
   hash:
-    md5: ff097191dd0c51f586da15745cb6e769
-    sha256: b1dfdc059c5a4d2c98b723d984398def408f51b898f52ffe32556bc2d28626c4
+    md5: be7dcba29f39f6bd55015871d5301ee1
+    sha256: fe92c08c9d220ecef10e365386bc26363019f4ea3db04ba6cf2bb492741652e2
   category: main
   optional: false
 - name: tiledb
-  version: 2.25.0
+  version: 2.26.1
   manager: conda
   platform: osx-64
   dependencies:
@@ -38677,10 +38677,10 @@ package:
     openssl: '>=3.3.2,<4.0a0'
     spdlog: '>=1.14.1,<1.15.0a0'
     zstd: '>=1.5.6,<1.6.0a0'
-  url: https://conda.anaconda.org/conda-forge/osx-64/tiledb-2.25.0-h4f8f562_14.conda
+  url: https://conda.anaconda.org/conda-forge/osx-64/tiledb-2.26.1-h4f8f562_1.conda
   hash:
-    md5: cf2081c37d510d792bd78d655a5c6636
-    sha256: 68c1ede79873a98d5199bbbfe4c60f4129d89525cd361d0ffc721eea3d2a462c
+    md5: 1c537b27be755eec56001f8457174779
+    sha256: 577e58faafcb90f3d3bcd2f1b10980dfe76edf6ff0501ad8c6f267b25256cf10
   category: main
   optional: false
 - name: tiledb
