@@ -13,9 +13,9 @@
 version: 1
 metadata:
   content_hash:
-    linux-64: 57775e56aa899aa046d891ef7f4a23ceebc4167ae543b7299964e36edd692d15
-    osx-64: 1be360b2d42bad0ccf3d11b8710effc07ff59128507924a9e2e23e7811711bcf
-    win-64: 142431dc4dccdaba5a624f33d839fd28f7d4370dbf051aab28b21fef32ae34e3
+    linux-64: 63a703ed60ee66ccb2abae1a01c88560c0ca663bbeca63dcf6eecdc4a0805fd3
+    osx-64: b7e039380a82099da611dc257526f2b80f8770f0b0f17f13c35637527d3c6600
+    win-64: c366031bcd1e7abd6af01bae972b75defe14834f397058d4098d16fb480ae88a
     osx-arm64: 20a1d6aef7e23d71bdf238b2867a6121491246090bfa41c6e70e1ec0243a617f
   channels:
   - url: conda-forge
@@ -6936,6 +6936,45 @@ package:
   hash:
     md5: 7d7995a5d2531107f231b9443fcd9485
     sha256: b02670a0676af30c9204a7e97b9dda2e95495034a28e813a2470fda0ed24a61b
+  category: main
+  optional: false
+- name: geodatasets
+  version: 2024.8.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    pooch: ''
+    python: '>=3.7'
+  url: https://conda.anaconda.org/conda-forge/noarch/geodatasets-2024.8.0-pyhd8ed1ab_0.conda
+  hash:
+    md5: dea9162591d00b0685db89dee59c3d9d
+    sha256: 50ceaa5a5179038d4d07dd7b43146e8fe463d3420de7a9a85d1414dc95636e21
+  category: main
+  optional: false
+- name: geodatasets
+  version: 2024.8.0
+  manager: conda
+  platform: osx-64
+  dependencies:
+    pooch: ''
+    python: '>=3.7'
+  url: https://conda.anaconda.org/conda-forge/noarch/geodatasets-2024.8.0-pyhd8ed1ab_0.conda
+  hash:
+    md5: dea9162591d00b0685db89dee59c3d9d
+    sha256: 50ceaa5a5179038d4d07dd7b43146e8fe463d3420de7a9a85d1414dc95636e21
+  category: main
+  optional: false
+- name: geodatasets
+  version: 2024.8.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    pooch: ''
+    python: '>=3.7'
+  url: https://conda.anaconda.org/conda-forge/noarch/geodatasets-2024.8.0-pyhd8ed1ab_0.conda
+  hash:
+    md5: dea9162591d00b0685db89dee59c3d9d
+    sha256: 50ceaa5a5179038d4d07dd7b43146e8fe463d3420de7a9a85d1414dc95636e21
   category: main
   optional: false
 - name: geographiclib
@@ -22309,6 +22348,51 @@ package:
   hash:
     md5: d96c0341131583a39a64e8524c8892d3
     sha256: 27ce4b97d01c986f5f7bcce51644ee6ce4303fed3b1d632401005267e5614688
+  category: main
+  optional: false
+- name: pooch
+  version: 1.8.2
+  manager: conda
+  platform: linux-64
+  dependencies:
+    packaging: '>=20.0'
+    platformdirs: '>=2.5.0'
+    python: '>=3.7'
+    requests: '>=2.19.0'
+  url: https://conda.anaconda.org/conda-forge/noarch/pooch-1.8.2-pyhd8ed1ab_0.conda
+  hash:
+    md5: 8dab97d8a9616e07d779782995710aed
+    sha256: f2ee98740ac62ff46700c3cae8a18c78bdb3d6dd80832c6e691e789b844830d8
+  category: main
+  optional: false
+- name: pooch
+  version: 1.8.2
+  manager: conda
+  platform: osx-64
+  dependencies:
+    python: '>=3.7'
+    packaging: '>=20.0'
+    requests: '>=2.19.0'
+    platformdirs: '>=2.5.0'
+  url: https://conda.anaconda.org/conda-forge/noarch/pooch-1.8.2-pyhd8ed1ab_0.conda
+  hash:
+    md5: 8dab97d8a9616e07d779782995710aed
+    sha256: f2ee98740ac62ff46700c3cae8a18c78bdb3d6dd80832c6e691e789b844830d8
+  category: main
+  optional: false
+- name: pooch
+  version: 1.8.2
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.7'
+    packaging: '>=20.0'
+    requests: '>=2.19.0'
+    platformdirs: '>=2.5.0'
+  url: https://conda.anaconda.org/conda-forge/noarch/pooch-1.8.2-pyhd8ed1ab_0.conda
+  hash:
+    md5: 8dab97d8a9616e07d779782995710aed
+    sha256: f2ee98740ac62ff46700c3cae8a18c78bdb3d6dd80832c6e691e789b844830d8
   category: main
   optional: false
 - name: poppler
