@@ -8,8 +8,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
       fail-fast: false
+    defaults:
+      run:
+        shell: bash -l {0}
 
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
@@ -22,8 +25,11 @@ jobs:
           create-args: >-
             --file .binder/conda-lock.yml
 
-      - name: Test environment and links
-        shell: bash -l {0}
+      - name: Test environment
         run: >
           python -c 'import osgeo.gdal; print(dir(osgeo.gdal))'
-          && jupyter-book build jupyterbook --builder linkcheck
+
+      - name: Test links
+        if: startsWith(matrix.os, 'ubuntu')
+        run: >
+          jupyter-book build jupyterbook --builder linkcheck
