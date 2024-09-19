@@ -17,6 +17,7 @@ dependencies:
   - erddapy
   - flake8
   - folium
+  - geodatasets
   - geojson
   - geojsonio
   - geolinks
