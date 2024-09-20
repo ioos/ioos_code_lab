@@ -350,6 +350,21 @@
 <img src="../images/2024-05-16-white_shark_water_temp.png"/>
 :::
 
+:::{grid-item-card} Using AphiaIDs to download OBIS occurrences for Bio/Eco EOVs
+:margin: 3 0 0 0
+:link: ./data_analysis_and_visualization_notebooks/2024-09-13-OBIS_EOVs.html
+:link-type: url
+:text-align: center
+:shadow: md
+
+{bdg-primary}`OBIS`
+{bdg-secondary}`EOVs`
+{bdg-info}`R`
+^^^
+
+<img src="../images/placeholder.png"/>
+:::
+
 :::{grid-item-card} Shore Station Compliance Checker Script
 :margin: 3 0 0 0
 :link: ./data_management_notebooks/2017-05-14-running_compliance_checker.html
