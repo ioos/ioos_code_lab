@@ -75,11 +75,13 @@ dependencies:
   # R packages.
   - rpy2
   - r-base=4
+  - r-dplyr
   - r-dt
   - r-finch
   - r-ggfortify
   - r-ggplot2
   - r-gsw
+  - r-htmlwidgets
   - r-httr
   - r-irkernel
   - r-lubridate
@@ -88,6 +90,7 @@ dependencies:
   - r-obistools
   - r-oce
   - r-rcolorbrewer
+  - r-readr
   - r-rerddap
   - r-reshape2
   - r-robis>=2.3.9
