@@ -12,6 +12,7 @@ dependencies:
   - cftime
   - ckanapi
   - compliance-checker
+  - dask
   - descartes
   - easyargs
   - erddapy
@@ -27,6 +28,7 @@ dependencies:
   - gridgeo
   - humanize
   - hvplot
+  - intake
   - ioos_qc
   - ioos-metrics
   - ipyleaflet
