@@ -20,5 +20,6 @@ jobs:
 
       - name: Notebook tests
         shell: bash -l {0}
-        run: |
-          python -m pytest --nbval --nbval-lax jupyterbook/content/code_gallery/data_management_notebooks/
+        run: >
+          micromamba install nbval
+          && python -m pytest --nbval --nbval-lax jupyterbook/content/code_gallery/data_management_notebooks/
