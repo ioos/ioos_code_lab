@@ -3,8 +3,6 @@ channels:
   - conda-forge
 dependencies:
   - python=3.13
-  - bagit
-  - bokeh
   - cartopy
   - cf_xarray
   - cf-units
@@ -23,10 +21,8 @@ dependencies:
   - ipyleaflet
   - ipywidgets
   - jupyter
-  - jupyter-book >=0.12.1
-  - jupyterlab
   - lxml
-  - matplotlib
+  - matplotlib-core
   - nbclassic
   - netcdf4
   - numpy
