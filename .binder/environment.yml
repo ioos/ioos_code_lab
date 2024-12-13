@@ -2,74 +2,50 @@ name: IOOS
 channels:
   - conda-forge
 dependencies:
-  - python=3.12
-  - bagit
-  - bokeh
+  - python=3.13
   - cartopy
-  - cc-plugin-glider
-  - cc-plugin-ncei
   - cf_xarray
-  - cftime
+  - cf-units
   - ckanapi
   - compliance-checker
-  - dask
-  - descartes
-  - easyargs
   - erddapy
-  - flake8
   - folium
-  - geodatasets
-  - geojson
-  - geojsonio
-  - geolinks
+  - gdal
   - geopandas
   - geoplot
-  - gliderpy
   - gridgeo
   - humanize
-  - hvplot
-  - intake
   - ioos_qc
+  - ioos_tools
   - ioos-metrics
   - ipyleaflet
-  - joblib
+  - ipywidgets
   - jupyter
-  - jupyter-book >=0.12.1
-  - jupyterlab
+  - lxml
   - matplotlib-base
   - nbclassic
-  - nbdime
-  - nbval
-  - nc-time-axis
-  - nco
+  - netcdf4
+  - numpy
   - oceans
-  - oct2py
   - odvc
-  - openpyxl
+  - owslib
   - palettable
-  - phantomjs
-  - pocean-core >=3.1
-  - pre-commit
-  - pyarrow
+  - pandas
+  - pocean-core
   - pyobis
   - pyoos
-  - pyresample
   - pysgrid
-  - pytest
   - pyugrid
   - pyworms
-  - rasterio
-  - seaborn
-  - selenium
-  - sensorml2iso
-  - simplekml
-  - siphon
-  - sympy
-  - tabulate
-  - thredds_crawler
+  - requests
+  - retrying
+  - seawater
+  - shapely
   - tqdm
-  - utide
-  - windrose
   - xarray
-  - xmltodict
   - zarr
+platforms:
+  - linux-64
+  - osx-64
+  - osx-arm64
+  - win-64
