@@ -50,6 +50,7 @@ dependencies:
   - r-irkernel
   - r-dplyr
   - r-htmlwidgets
+  - r-maps
   - r-readr
   - r-robis  # hoding osx-arm64
 platforms:
