@@ -22,7 +22,7 @@ dependencies:
   - ipywidgets
   - jupyter
   - lxml
-  - matplotlib-core
+  - matplotlib-base
   - nbclassic
   - netcdf4
   - numpy
