@@ -46,6 +46,7 @@ dependencies:
   - zarr
   # R packages.
   - r-base=4
+  - r-irkernel
   - r-dplyr
   - r-htmlwidgets
   - r-readr
