@@ -13,9 +13,9 @@
 version: 1
 metadata:
   content_hash:
-    linux-64: e64d17cdb22c0722dfca58994794eaea205115589431c125a6f0bceba91b4e4d
-    osx-64: 50884f879d888e55c4d0e1b9bf68d39b2fe6aebfcc5fa8bcfc4608e362bfdcbf
-    win-64: fe380b8743a1d0041972e0d9786a6784296b6324a95eefc6d4db5d29078d1f4f
+    linux-64: 020cda7eebc14c2398b7897fac9596cf097fe92aa67afbcc4a9231fd9cce5950
+    osx-64: 74be8105bf446f2f2b82542ccb7cbacd021768ca5338bae390b54391696a11f8
+    win-64: c8d656cd37beb3f860c889d9fac6cbecf223498989952146eb3386cea2049624
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -1585,6 +1585,69 @@ package:
   hash:
     md5: 357d7be4146d5fec543bfaa96a8a40de
     sha256: 9303a7a0e03cf118eab3691013f6d6cbd1cbac66efbc70d89b20f5d0145257c0
+  category: main
+  optional: false
+- name: bokeh
+  version: 3.6.2
+  manager: conda
+  platform: linux-64
+  dependencies:
+    contourpy: '>=1.2'
+    jinja2: '>=2.9'
+    numpy: '>=1.16'
+    packaging: '>=16.8'
+    pandas: '>=1.2'
+    pillow: '>=7.1.0'
+    python: '>=3.10'
+    pyyaml: '>=3.10'
+    tornado: '>=6.2'
+    xyzservices: '>=2021.09.1'
+  url: https://conda.anaconda.org/conda-forge/noarch/bokeh-3.6.2-pyhd8ed1ab_1.conda
+  hash:
+    md5: 976ff24762f1f991b08f7a7a41875086
+    sha256: 66d2649b8b8f1ec58c83a9ff948aed4a3a86465ca6ccda686741797cae54b264
+  category: main
+  optional: false
+- name: bokeh
+  version: 3.6.2
+  manager: conda
+  platform: osx-64
+  dependencies:
+    python: '>=3.10'
+    numpy: '>=1.16'
+    pyyaml: '>=3.10'
+    pandas: '>=1.2'
+    pillow: '>=7.1.0'
+    jinja2: '>=2.9'
+    packaging: '>=16.8'
+    tornado: '>=6.2'
+    xyzservices: '>=2021.09.1'
+    contourpy: '>=1.2'
+  url: https://conda.anaconda.org/conda-forge/noarch/bokeh-3.6.2-pyhd8ed1ab_1.conda
+  hash:
+    md5: 976ff24762f1f991b08f7a7a41875086
+    sha256: 66d2649b8b8f1ec58c83a9ff948aed4a3a86465ca6ccda686741797cae54b264
+  category: main
+  optional: false
+- name: bokeh
+  version: 3.6.2
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.10'
+    numpy: '>=1.16'
+    pyyaml: '>=3.10'
+    pandas: '>=1.2'
+    pillow: '>=7.1.0'
+    jinja2: '>=2.9'
+    packaging: '>=16.8'
+    tornado: '>=6.2'
+    xyzservices: '>=2021.09.1'
+    contourpy: '>=1.2'
+  url: https://conda.anaconda.org/conda-forge/noarch/bokeh-3.6.2-pyhd8ed1ab_1.conda
+  hash:
+    md5: 976ff24762f1f991b08f7a7a41875086
+    sha256: 66d2649b8b8f1ec58c83a9ff948aed4a3a86465ca6ccda686741797cae54b264
   category: main
   optional: false
 - name: branca
