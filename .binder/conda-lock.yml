@@ -13,9 +13,9 @@
 version: 1
 metadata:
   content_hash:
-    linux-64: 020cda7eebc14c2398b7897fac9596cf097fe92aa67afbcc4a9231fd9cce5950
-    osx-64: 74be8105bf446f2f2b82542ccb7cbacd021768ca5338bae390b54391696a11f8
-    win-64: c8d656cd37beb3f860c889d9fac6cbecf223498989952146eb3386cea2049624
+    linux-64: 86d9e607c8f3ff4161c3c3710d2e5cde986581474bc4d2cd4df55f0dae2b70c1
+    osx-64: 1ea1ad5cf7861489dc419dcff2d532cfd977b92114f342a70b56bc2225337fa1
+    win-64: 5af5c704ef434dfdde03699df27c3fd7d8062d8121d7236044098d205f78a0a0
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -19425,6 +19425,47 @@ package:
   hash:
     md5: 91753ccc055efe4bdc59d4e1a984cc7d
     sha256: 2227bc56fa23c73f42a72a61557197a0a3df2daf267e7e5bf3d62a3a533770b6
+  category: main
+  optional: false
+- name: r-maps
+  version: 3.4.2.1
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libgcc: '>=13'
+    r-base: '>=4.3,<4.4.0a0'
+  url: https://conda.anaconda.org/conda-forge/linux-64/r-maps-3.4.2.1-r43h2b5f3a1_0.conda
+  hash:
+    md5: 6f0792a8c58c6597b3334775ccd0bce5
+    sha256: 422e2d766c151d528bf4f31edd6602446bb6f3a74d8d900770fc0794e8481e8f
+  category: main
+  optional: false
+- name: r-maps
+  version: 3.4.2.1
+  manager: conda
+  platform: osx-64
+  dependencies:
+    __osx: '>=10.13'
+    r-base: '>=4.3,<4.4.0a0'
+  url: https://conda.anaconda.org/conda-forge/osx-64/r-maps-3.4.2.1-r43h79f565e_0.conda
+  hash:
+    md5: 5f45d4dceb661ff1ae4d93c4c16a5723
+    sha256: cd060233f90da654ca51960a67fe5179e56254008f7babeac4af5733317609a6
+  category: main
+  optional: false
+- name: r-maps
+  version: 3.4.2
+  manager: conda
+  platform: win-64
+  dependencies:
+    m2w64-gcc-libs: ''
+    m2w64-gcc-libs-core: ''
+    r-base: '>=4.1,<4.2.0a0'
+  url: https://conda.anaconda.org/conda-forge/win-64/r-maps-3.4.2-r41h6d2157b_0.conda
+  hash:
+    md5: 6459e91318c56027d56df38aca6d570a
+    sha256: 34b06e0069091edfe7820934564646dceabefde8760e089c5d396290b6274ebf
   category: main
   optional: false
 - name: r-mapview
