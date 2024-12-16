@@ -90,6 +90,8 @@ sphinx:
       "./data_management_notebooks/.*",
       "./data_analysis_and_visualization_notebooks/.*",
       "https://www.ncei.noaa.gov/archive/accession/0282699",  # slow
+      "https://gcoos4.tamu.edu/erddap/info/fk_CREMP_yearly_revisited_DATA_v3_1996/index.html", # data is gone
+      "https://gcoos4.tamu.edu/erddap/tabledap/fk_CREMP_yearly_revisited_DATA_v3_1996.html", # data is gone
       ]
     linkcheck_anchors_ignore: ["aboutPanel", "searchPanel", "!forum/ioos_tech"]
     html_show_copyright: false
