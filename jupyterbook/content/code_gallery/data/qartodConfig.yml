@@ -1,0 +1,71 @@
+contexts:
+   - streams:
+       conductivity:
+         qartod:
+             gross_range_test:
+               suspect_span: [0, 6]
+               fail_span: [0, 9]
+             spike_test:
+               suspect_threshold:
+               fail_threshold:
+             rate_of_change_test:
+               threshold: 0.1
+             flat_line_test:
+               tolerance: 0
+               suspect_threshold: 60
+               fail_threshold: 120
+       temperature:
+         qartod:
+             gross_range_test:
+               suspect_span: [0, 35]
+               fail_span: [-2, 40]
+             spike_test:
+               suspect_threshold: 
+               fail_threshold: 
+             rate_of_change_test:
+               threshold: 0.1
+             flat_line_test:
+               tolerance: 0
+               suspect_threshold: 60
+               fail_threshold: 120
+       pressure:
+         qartod:
+             gross_range_test:
+               suspect_span: [0, 1000]
+               fail_span: [0, 6000]
+             spike_test:
+               suspect_threshold:
+               fail_threshold:
+             rate_of_change_test:
+               threshold: 0.1
+             flat_line_test:
+               tolerance: 0
+               suspect_threshold: 60
+               fail_threshold: 120
+       salinity:
+         qartod:
+             gross_range_test:
+               fail_span: [0, 42]
+               suspect_span: [10, 38]
+             spike_test:
+               suspect_threshold:
+               fail_threshold:
+             rate_of_change_test:
+               threshold: 0.1
+             flat_line_test:
+               tolerance: 0
+               suspect_threshold: 60
+               fail_threshold: 120
+       density:
+         qartod:
+             gross_range_test:
+               fail_span: [1000, 1100]
+             spike_test:
+               suspect_threshold:
+               fail_threshold:
+             rate_of_change_test:
+               threshold: 0.1
+             flat_line_test:
+               tolerance: 0
+               suspect_threshold: 60
+               fail_threshold: 120
