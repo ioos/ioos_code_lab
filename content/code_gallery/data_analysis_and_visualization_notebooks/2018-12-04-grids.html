@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,10 +27,10 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -39,10 +39,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -245,9 +245,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -554,8 +559,8 @@ and feed it to <code class="docutils literal notranslate"><span class="pre">Grid
 <p>This step can take a while because we are fetching a lot of data!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gridgeo</span> <span class="kn">import</span> <span class="n">GridGeo</span>
-<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gridgeo</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridGeo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
 
 <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
     <span class="k">try</span><span class="p">:</span>
@@ -635,18 +640,18 @@ However, we need those functions to extract grid statistics and to easily plot t
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">cartopy.feature</span> <span class="kn">import</span> <span class="n">COLORS</span><span class="p">,</span> <span class="n">NaturalEarthFeature</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="kn">import</span> <span class="n">COLORS</span><span class="p">,</span> <span class="n">NaturalEarthFeature</span>
 
 <span class="n">LAND</span> <span class="o">=</span> <span class="n">NaturalEarthFeature</span><span class="p">(</span>
     <span class="s2">&quot;physical&quot;</span><span class="p">,</span> <span class="s2">&quot;land&quot;</span><span class="p">,</span> <span class="s2">&quot;10m&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;face&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">COLORS</span><span class="p">[</span><span class="s2">&quot;land&quot;</span><span class="p">]</span>
 <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">plot_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkgray&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkgray&quot;</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
         <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
         <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()},</span>
@@ -675,15 +680,15 @@ However, we need those functions to extract grid statistics and to easily plot t
     <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
 
 
-<span class="k">def</span> <span class="nf">cftime</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">num2date</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cftime</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">num2date</span>
 
     <span class="n">times</span> <span class="o">=</span> <span class="n">time</span><span class="p">[:]</span>
     <span class="n">calendar</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="s2">&quot;calendar&quot;</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">num2date</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">time</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">calendar</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_vlevel</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_vlevel</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">vlevel</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">z_axis</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
@@ -691,7 +696,7 @@ However, we need those functions to extract grid statistics and to easily plot t
     <span class="k">return</span> <span class="n">vlevel</span>
 
 
-<span class="k">def</span> <span class="nf">_tstep</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_tstep</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">tstep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">cftime</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">t_axis</span><span class="p">()))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
         <span class="n">tstep</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tstep</span><span class="p">)</span>
@@ -700,7 +705,7 @@ However, we need those functions to extract grid statistics and to easily plot t
     <span class="k">return</span> <span class="n">tstep</span>
 
 
-<span class="k">def</span> <span class="nf">_res</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_res</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">x_axis</span><span class="p">()[:]</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">y_axis</span><span class="p">()[:]</span>
@@ -722,8 +727,8 @@ However, we need those functions to extract grid statistics and to easily plot t
     <span class="k">return</span> <span class="n">res</span>
 
 
-<span class="k">def</span> <span class="nf">get_stats</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">gridgeo.cfvariable</span> <span class="kn">import</span> <span class="n">CFVariable</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_stats</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gridgeo.cfvariable</span><span class="w"> </span><span class="kn">import</span> <span class="n">CFVariable</span>
 
     <span class="n">var</span> <span class="o">=</span> <span class="n">CFVariable</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;nc&quot;</span><span class="p">],</span> <span class="o">**</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;var&quot;</span><span class="p">])</span>
     <span class="n">vlevel</span> <span class="o">=</span> <span class="n">_vlevel</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
@@ -743,7 +748,7 @@ However, we need those functions to extract grid statistics and to easily plot t
     <span class="k">return</span> <span class="n">df</span>
 
 
-<span class="k">def</span> <span class="nf">to_html</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">to_html</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">classes</span> <span class="o">=</span> <span class="s2">&quot;table table-striped table-hover table-condensed table-responsive&quot;</span>
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
 </pre></div>
@@ -844,7 +849,7 @@ it is quite complicated to create a meaningful visualization even at lower zoom 
 <p>To avoid that issue while still allowing for a quick domain inspection we can plot only the grid outline using <code class="docutils literal notranslate"><span class="pre">shapely</span></code> <code class="docutils literal notranslate"><span class="pre">outline</span></code> and plotting it as a GeoJSON via the <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code>. Note that this step can be quite slow for some models due to the high resolution of the mesh.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">folium</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
 
@@ -1170,8 +1175,8 @@ By IOOS
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,10 +27,10 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -39,10 +39,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -245,9 +245,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -484,7 +489,7 @@
 <p>Here we will fetch data during the <a class="reference external" href="https://en.wikipedia.org/wiki/Hurricane_Matthew">hurricane Matthew</a> passage over the southeast states from 2016-10-05 to 2016-10-12. The first step is to instantiate the server object and then add the constraints for our query.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy</span> <span class="kn">import</span> <span class="n">ERDDAP</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ERDDAP</span>
 
 <span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span>
     <span class="n">server</span><span class="o">=</span><span class="s2">&quot;https://opendap.co-ops.nos.noaa.gov/erddap&quot;</span><span class="p">,</span>
@@ -505,7 +510,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">folium</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
 
 <span class="n">lon</span> <span class="o">=</span> <span class="p">(</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="n">lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
@@ -617,7 +622,7 @@
 <p>We can check all the <code class="docutils literal notranslate"><span class="pre">dataset_id</span></code> that are available within those constraints with the search URL.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">))</span>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">]</span>
@@ -921,7 +926,7 @@ https://opendap.co-ops.nos.noaa.gov/erddap/tabledap/IOOS_Hourly_Height_Verified_
 <p>Now that we have the data we can, for example, check the station with the highest sea elevation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_station_name</span><span class="p">(</span><span class="n">station_id</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_station_name</span><span class="p">(</span><span class="n">station_id</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">station_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
 
 
@@ -939,7 +944,7 @@ https://opendap.co-ops.nos.noaa.gov/erddap/tabledap/IOOS_Hourly_Height_Verified_
 <p>Let’s plot the stations from North Carolina so we can compare with Fort Pulaski, GA.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">station_ids</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;NC&quot;</span><span class="p">][</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span>
 
@@ -964,17 +969,17 @@ We’ll leave that as an exercise to the readers.</p>
 This can be done using the software package <code class="docutils literal notranslate"><span class="pre">bokeh</span></code> and the mapping library <code class="docutils literal notranslate"><span class="pre">folium</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.embed</span> <span class="kn">import</span> <span class="n">file_html</span>
-<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span>
-<span class="kn">from</span> <span class="nn">bokeh.resources</span> <span class="kn">import</span> <span class="n">CDN</span>
-<span class="kn">from</span> <span class="nn">folium</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bokeh.embed</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_html</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bokeh.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">figure</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bokeh.resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">CDN</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">folium</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFrame</span>
 
 <span class="c1"># Plot defaults.</span>
 <span class="n">tools</span> <span class="o">=</span> <span class="s2">&quot;pan,box_zoom,reset&quot;</span>
 <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">250</span>
 
 
-<span class="k">def</span> <span class="nf">make_plot</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_plot</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span>
         <span class="n">toolbar_location</span><span class="o">=</span><span class="s2">&quot;above&quot;</span><span class="p">,</span>
         <span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span>
@@ -993,7 +998,7 @@ This can be done using the software package <code class="docutils literal notran
     <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">line</span>
 
 
-<span class="k">def</span> <span class="nf">make_marker</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_marker</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
     <span class="n">html</span> <span class="o">=</span> <span class="n">file_html</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">CDN</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
     <span class="n">iframe</span> <span class="o">=</span> <span class="n">IFrame</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span> <span class="o">+</span> <span class="mi">45</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span> <span class="o">+</span> <span class="mi">80</span><span class="p">)</span>
 
@@ -1975,8 +1980,8 @@ By IOOS
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
