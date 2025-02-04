@@ -5,8 +5,8 @@ dependencies:
   - python=3.13
   - bokeh
   - cartopy
-  - cf_xarray
   - cf-units
+  - cf-xarray
   - ckanapi
   - compliance-checker
   - erddapy
@@ -16,9 +16,8 @@ dependencies:
   - geoplot
   - gridgeo
   - humanize
-  - ioos_qc
-  - ioos_tools
   - ioos-metrics
+  - ioos-qc
   - ipyleaflet
   - ipywidgets
   - jupyter
@@ -34,7 +33,6 @@ dependencies:
   - pandas
   - pocean-core
   - pyobis
-  - pyoos
   - pysgrid
   - pyugrid
   - pyworms
@@ -42,6 +40,7 @@ dependencies:
   - retrying
   - seawater
   - shapely
+  - stamina
   - tqdm
   - xarray
   - zarr
