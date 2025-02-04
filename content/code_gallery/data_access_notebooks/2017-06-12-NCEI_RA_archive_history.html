@@ -544,7 +544,7 @@
 <span class="c1"># Generate geoportal query and georss feed.</span>
 
 <span class="c1"># Base geoportal url.</span>
-<span class="n">baseurl</span> <span class="o">=</span> <span class="s2">&quot;https://www.ncei.noaa.gov/&quot;</span> <span class="s2">&quot;metadata/geoportal/opensearch&quot;</span> <span class="s2">&quot;?q=&quot;</span>
+<span class="n">baseurl</span> <span class="o">=</span> <span class="s2">&quot;https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=&quot;</span>
 
 <span class="c1"># Identify the Regional Association</span>
 <span class="k">if</span> <span class="n">ra</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -623,9 +623,12 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
     <span class="s2">&quot; to &quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;ms&quot;</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span>
+<span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;ms&quot;</span><span class="p">))</span>
+
+<span class="c1"># Some cleanups</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -652,16 +655,11 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
       <th></th>
       <th>Id</th>
       <th>Title</th>
-      <th>Description</th>
       <th>West</th>
       <th>South</th>
       <th>East</th>
       <th>North</th>
       <th>Link_Xml</th>
-      <th>Link_1</th>
-      <th>Link_2</th>
-      <th>Link_3</th>
-      <th>Link_4</th>
       <th>Data_Date_Range</th>
       <th>Date_Published</th>
       <th>data_start_date</th>
@@ -673,16 +671,11 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
       <th>0</th>
       <td>gov.noaa.nodc:0162194</td>
       <td>Oceanographic data collected from Hammond Tide...</td>
-      <td>NaN</td>
       <td>-123.95167</td>
       <td>46.20267</td>
       <td>-123.95167</td>
       <td>46.20267</td>
       <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
       <td>2005-06-24T00:00:00Z to 2013-02-08T23:59:59.999Z</td>
       <td>2017-03-21T00:00:00Z</td>
       <td>2005-06-24 00:00:00+00:00</td>
@@ -692,16 +685,11 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
       <th>1</th>
       <td>gov.noaa.nodc:0162195</td>
       <td>Oceanographic data collected from SATURN River...</td>
-      <td>NaN</td>
       <td>-123.87195</td>
       <td>46.23498</td>
       <td>-123.87195</td>
       <td>46.23498</td>
       <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
       <td>2009-06-06T00:00:00Z to 2010-10-22T23:59:59.999Z</td>
       <td>2017-03-21T00:00:00Z</td>
       <td>2009-06-06 00:00:00+00:00</td>
@@ -711,16 +699,11 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
       <th>2</th>
       <td>gov.noaa.nodc:0162176</td>
       <td>Oceanographic data collected from Jetty A by C...</td>
-      <td>NaN</td>
       <td>-124.03168</td>
       <td>46.26712</td>
       <td>-124.03168</td>
       <td>46.26712</td>
       <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
       <td>2003-07-20T00:00:00Z to 2016-02-04T23:59:59.999Z</td>
       <td>2017-03-20T00:00:00Z</td>
       <td>2003-07-20 00:00:00+00:00</td>
@@ -728,37 +711,27 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
     </tr>
     <tr>
       <th>3</th>
-      <td>gov.noaa.nodc:0162179</td>
-      <td>Oceanographic data collected from Offshore Buo...</td>
-      <td>NaN</td>
-      <td>-124.26418</td>
-      <td>46.03842</td>
-      <td>-124.26418</td>
-      <td>46.03842</td>
+      <td>gov.noaa.nodc:0162190</td>
+      <td>Oceanographic data collected from Tenasillahe ...</td>
+      <td>-123.46828</td>
+      <td>46.23763</td>
+      <td>-123.46828</td>
+      <td>46.23763</td>
       <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2005-01-13T00:00:00Z to 2015-10-16T23:59:59.999Z</td>
+      <td>2004-01-23T00:00:00Z to 2011-11-17T23:59:59.999Z</td>
       <td>2017-03-20T00:00:00Z</td>
-      <td>2005-01-13 00:00:00+00:00</td>
-      <td>2015-10-17 00:00:00+00:00</td>
+      <td>2004-01-23 00:00:00+00:00</td>
+      <td>2011-11-18 00:00:00+00:00</td>
     </tr>
     <tr>
       <th>4</th>
       <td>gov.noaa.nodc:0162191</td>
       <td>Oceanographic data collected from Woody Island...</td>
-      <td>NaN</td>
       <td>-123.53420</td>
       <td>46.25212</td>
       <td>-123.53420</td>
       <td>46.25212</td>
       <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
       <td>1997-02-07T00:00:00Z to 2021-09-01T23:59:59.999Z</td>
       <td>2017-03-20T00:00:00Z</td>
       <td>1997-02-07 00:00:00+00:00</td>
@@ -798,28 +771,24 @@ ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/ite
 NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162176
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162179/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162179
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162190/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162190
 
 
 ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162191/xml
 NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162191
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162190/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162190
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162179/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162179
 
 
 ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162174/xml
 NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162174
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161822/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161822
-
-
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162175/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162175
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161524/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161524
 
 
 ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162171/xml
@@ -830,16 +799,16 @@ ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/ite
 NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162172
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162180/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162180
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161716/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161716
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162181/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162181
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161822/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161822
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162177/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162177
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162187/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162187
 
 
 ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162188/xml
@@ -850,24 +819,28 @@ ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/ite
 NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162189
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162187/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162187
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162175/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162175
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161524/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161524
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162177/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162177
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161716/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161716
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162181/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162181
 
 
-ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162178/xml
-NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162178
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162180/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162180
 
 
 ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162430/xml
 NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162430
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162178/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162178
 
 
 ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162185/xml
@@ -930,10 +903,19 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process each iso record.</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.error</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlopen</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">stamina</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">owslib</span><span class="w"> </span><span class="kn">import</span> <span class="n">util</span>
+
+
+<span class="nd">@stamina</span><span class="o">.</span><span class="n">retry</span><span class="p">(</span><span class="n">on</span><span class="o">=</span><span class="n">urllib</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,</span> <span class="n">attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">openurl</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thin wrapper around urlopen adding stamina.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
 
 <span class="n">df</span><span class="p">[</span>
     <span class="p">[</span>
@@ -947,7 +929,7 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
 
 <span class="c1"># For each accession in response.</span>
 <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]:</span>
-    <span class="n">iso</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">iso</span> <span class="o">=</span> <span class="n">openurl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">iso_tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">iso</span><span class="p">)</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">iso_tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
 
@@ -1077,11 +1059,11 @@ v1.1 = 2017-03-20 23:18:18+00:00
 Current AIP Size = 67.96 MB
 
 First published date = 2017-03-20
-Data time coverage: 2005-01-13 to 2015-10-16
-Accession: 0162179
+Data time coverage: 2004-01-23 to 2011-11-17
+Accession: 0162190
 Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:19:12+00:00
-Current AIP Size = 18.748 MB
+v1.1 = 2017-03-20 23:30:14+00:00
+Current AIP Size = 22.624 MB
 
 First published date = 2017-03-20
 Data time coverage: 1997-02-07 to 2021-09-01
@@ -1108,11 +1090,11 @@ v17.17 = 2021-09-20 10:20:37+00:00
 Current AIP Size = 43.548 MB
 
 First published date = 2017-03-20
-Data time coverage: 2004-01-23 to 2011-11-17
-Accession: 0162190
+Data time coverage: 2005-01-13 to 2015-10-16
+Accession: 0162179
 Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:30:14+00:00
-Current AIP Size = 22.624 MB
+v1.1 = 2017-03-20 23:19:12+00:00
+Current AIP Size = 18.748 MB
 
 First published date = 2017-03-20
 Data time coverage: 2004-01-16 to 2021-07-30
@@ -1165,8 +1147,52 @@ v43.43 = 2021-05-17 10:18:38+00:00
 v44.44 = 2021-07-18 14:37:42+00:00
 v45.45 = 2021-08-18 10:19:49+00:00
 Current AIP Size = 32.432 MB
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stamina.retry_scheduled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-09
+Data time coverage: 2005-12-15 to 2006-04-18
+Accession: 0161524
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-09 20:44:09+00:00
+Current AIP Size = 1.116 MB
 
-First published date = 2017-03-15
+First published date = 2017-03-20
+Data time coverage: 2004-01-16 to 2004-12-15
+Accession: 0162171
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:14:07+00:00
+Current AIP Size = 2.688 MB
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stamina.retry_scheduled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-20
+Data time coverage: 2003-01-01 to 2013-08-16
+Accession: 0162172
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:16:20+00:00
+Current AIP Size = 94.676 MB
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stamina.retry_scheduled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-14
+Data time coverage: 1998-03-01 to 2010-09-22
+Accession: 0161716
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-14 11:25:31+00:00
+Current AIP Size = 156.028 MB
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stamina.retry_scheduled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-15
 Data time coverage: 2000-07-02 to 2019-05-30
 Accession: 0161822
 Submitter: Northwest Association of Networked Ocean Observing Systems
@@ -1175,46 +1201,13 @@ v2.2 = 2019-06-17 10:18:28+00:00
 Current AIP Size = 102.536 MB
 
 First published date = 2017-03-20
-Data time coverage: 1998-09-03 to 2015-03-26
-Accession: 0162175
+Data time coverage: 2004-02-03 to 2008-03-19
+Accession: 0162187
 Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:17:43+00:00
-Current AIP Size = 84.18 MB
-
-First published date = 2017-03-20
-Data time coverage: 2004-01-16 to 2004-12-15
-Accession: 0162171
-Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:14:07+00:00
-Current AIP Size = 2.688 MB
-
-First published date = 2017-03-20
-Data time coverage: 2003-01-01 to 2013-08-16
-Accession: 0162172
-Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:16:20+00:00
-Current AIP Size = 94.676 MB
-
-First published date = 2017-03-20
-Data time coverage: 1997-12-02 to 2007-09-17
-Accession: 0162180
-Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:19:46+00:00
-Current AIP Size = 214.384 MB
-
-First published date = 2017-03-20
-Data time coverage: 1997-07-12 to 2014-01-15
-Accession: 0162181
-Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:20:24+00:00
-Current AIP Size = 89.492 MB
-
-First published date = 2017-03-20
-Data time coverage: 2001-09-17 to 2006-10-12
-Accession: 0162177
-Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:18:25+00:00
-Current AIP Size = 21.648 MB
+v1.1 = 2017-03-20 23:29:39+00:00
+v1.2 = 2017-04-04 17:13:06+00:00
+v2.3 = 2017-05-12 21:52:07+00:00
+Current AIP Size = 11.212 MB
 
 First published date = 2017-03-20
 Data time coverage: 2004-01-16 to 2005-08-15
@@ -1233,34 +1226,32 @@ v1.1 = 2017-03-20 23:30:07+00:00
 Current AIP Size = 155.688 MB
 
 First published date = 2017-03-20
-Data time coverage: 2004-02-03 to 2008-03-19
-Accession: 0162187
+Data time coverage: 1998-09-03 to 2015-03-26
+Accession: 0162175
 Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:29:39+00:00
-v1.2 = 2017-04-04 17:13:06+00:00
-v2.3 = 2017-05-12 21:52:07+00:00
-Current AIP Size = 11.212 MB
-
-First published date = 2017-03-09
-Data time coverage: 2005-12-15 to 2006-04-18
-Accession: 0161524
-Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-09 20:44:09+00:00
-Current AIP Size = 1.116 MB
-
-First published date = 2017-03-14
-Data time coverage: 1998-03-01 to 2010-09-22
-Accession: 0161716
-Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-14 11:25:31+00:00
-Current AIP Size = 156.028 MB
+v1.1 = 2017-03-20 23:17:43+00:00
+Current AIP Size = 84.18 MB
 
 First published date = 2017-03-20
-Data time coverage: 2012-04-28 to 2012-05-17
-Accession: 0162178
+Data time coverage: 2001-09-17 to 2006-10-12
+Accession: 0162177
 Submitter: Northwest Association of Networked Ocean Observing Systems
-v1.1 = 2017-03-20 23:18:28+00:00
-Current AIP Size = 0.816 MB
+v1.1 = 2017-03-20 23:18:25+00:00
+Current AIP Size = 21.648 MB
+
+First published date = 2017-03-20
+Data time coverage: 1997-07-12 to 2014-01-15
+Accession: 0162181
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:20:24+00:00
+Current AIP Size = 89.492 MB
+
+First published date = 2017-03-20
+Data time coverage: 1997-12-02 to 2007-09-17
+Accession: 0162180
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:19:46+00:00
+Current AIP Size = 214.384 MB
 
 First published date = 2017-04-25
 Data time coverage: 2009-06-23 to 2020-12-23
@@ -1300,9 +1291,15 @@ v30.30 = 2020-11-19 09:18:34+00:00
 v31.31 = 2020-12-18 17:11:30+00:00
 v32.32 = 2021-02-18 12:21:49+00:00
 Current AIP Size = 31.932 MB
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-20
+
+First published date = 2017-03-20
+Data time coverage: 2012-04-28 to 2012-05-17
+Accession: 0162178
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:18:28+00:00
+Current AIP Size = 0.816 MB
+
+First published date = 2017-03-20
 Data time coverage: 2014-09-08 to 2023-11-01
 Accession: 0162185
 Submitter: Northwest Association of Networked Ocean Observing Systems
@@ -1447,8 +1444,9 @@ v4.5 = 2017-10-16 10:50:44+00:00
 v5.6 = 2021-02-19 19:16:23+00:00
 v6.7 = 2021-03-17 12:46:22+00:00
 Current AIP Size = 16699.616 MB
-
-First published date = 2017-05-16
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-05-16
 Data time coverage: 2000-05-24 to 2023-11-01
 Accession: 0162621
 Submitter: Northwest Association of Networked Ocean Observing Systems
@@ -1646,7 +1644,7 @@ Current AIP Size = 14532.184 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a4136b574cb78d09c5ba33c136413bb929ac7afa4868e7b507bb49a4e5730d80.png" src="../../../_images/a4136b574cb78d09c5ba33c136413bb929ac7afa4868e7b507bb49a4e5730d80.png" />
+<img alt="../../../_images/dcfab841f3c706cc77aa354a8d756117240ae596d474f172a18efec444984895.png" src="../../../_images/dcfab841f3c706cc77aa354a8d756117240ae596d474f172a18efec444984895.png" />
 </div>
 </div>
 <p>This procedure has been developed as an example of how to use NCEI’s geoportal REST API’s to collect information about packages that have been archived at NCEI. The intention is to provide some guidance and ways to collect this information without having to request it directly from NCEI. There are a significant amount of metadata elements which NCEI makes available through their ISO metadata records. Therefore, anyone interested in collecting other information from the records at NCEI should have a look at the ISO metadata records and determine which items are of interest to their community. Then, update the example code provided to collect that information.</p>
