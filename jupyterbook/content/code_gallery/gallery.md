@@ -230,6 +230,21 @@
 <img src="../images/2022-11-23_pyobis_example.png"/>
 :::
 
+:::{grid-item-card} Planning a surf trip using IOOS EDS Model Viewer
+:margin: 3 0 0 0
+:link: ./data_access_notebooks/2022-11-25-plan_surf_trip_EDS.html
+:link-type: url
+:text-align: center
+:shadow: md
+
+{bdg-primary}`Data Access`
+{bdg-secondary}`Model Viewer`
+{bdg-info}`python`
+^^^
+
+<img src="../images/2022-11-25-plan_surf_trip_EDS.png"/>
+:::
+
 :::{grid-item-card} Programmatically query the IOOS Data Catalog for a specific observation type
 :margin: 3 0 0 0
 :link: ./data_access_notebooks/2024-09-17-CKAN_API_Query.html
