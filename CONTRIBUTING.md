@@ -83,6 +83,9 @@ For Administrators:
 1. Once the workflows are complete, check the [IOOS CodeLab](https://ioos.github.io/ioos_code_lab/) for the new notebook.
 1. Review the notebook for any display issues when presented on the web. Check for the extra cell at the bottom of the notebook.
    1. If there are issues, submit a new PR to resolve the issues.
+1. In the notebook activate the cell tag:
+   ![Image](https://github.com/user-attachments/assets/75af635f-e26a-434a-bd70-5b63680aa7b0)
+   1. And then add a `remove-cell` tag. That will tell jupyterbook to ignore that cell when rendering.
 
 ## Announcing
 
