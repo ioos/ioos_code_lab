@@ -562,13 +562,14 @@ document.write(`
   --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
 }
 
-html[theme=dark],
-body[data-theme=dark],
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
   --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1F1F1F;
+  --xr-border-color: #1f1f1f;
   --xr-disabled-color: #515151;
   --xr-background-color: #111111;
   --xr-background-color-row-even: #111111;
@@ -613,7 +614,7 @@ body.vscode-dark {
 .xr-sections {
   padding-left: 0 !important;
   display: grid;
-  grid-template-columns: 150px auto auto 1fr 20px 20px;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
 }
 
 .xr-section-item {
@@ -621,7 +622,9 @@ body.vscode-dark {
 }
 
 .xr-section-item input {
-  display: none;
+  display: inline-block;
+  opacity: 0;
+  height: 0;
 }
 
 .xr-section-item input + label {
@@ -631,6 +634,10 @@ body.vscode-dark {
 .xr-section-item input:enabled + label {
   cursor: pointer;
   color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
 }
 
 .xr-section-item input:enabled + label:hover {
@@ -654,7 +661,7 @@ body.vscode-dark {
 
 .xr-section-summary-in + label:before {
   display: inline-block;
-  content: '►';
+  content: "►";
   font-size: 11px;
   width: 15px;
   text-align: center;
@@ -665,7 +672,7 @@ body.vscode-dark {
 }
 
 .xr-section-summary-in:checked + label:before {
-  content: '▼';
+  content: "▼";
 }
 
 .xr-section-summary-in:checked + label > span {
@@ -737,15 +744,15 @@ body.vscode-dark {
 }
 
 .xr-dim-list:before {
-  content: '(';
+  content: "(";
 }
 
 .xr-dim-list:after {
-  content: ')';
+  content: ")";
 }
 
 .xr-dim-list li:not(:last-child):after {
-  content: ',';
+  content: ",";
   padding-right: 5px;
 }
 
@@ -908,19 +915,19 @@ Data variables:
     temp      (time, eta_rho, xi_rho) float64 205kB ...
     salt      (time, eta_rho, xi_rho) float64 205kB ...
 Attributes: (12/46)
-    file:                            doppio_avg_6733_0001.nc
+    file:                            doppio_avg_7014_0006.nc
     format:                          netCDF-4/HDF5 file
     Conventions:                     CF-1.4, SGRID-0.3
     type:                            ROMS/TOMS nonlinear model averages file
     title:                           ROMS doppio Real-Time Operational PSAS F...
     var_info:                        ../Data/varinfo1040t_daily.dat
     ...                              ...
-    frc_file_07:                     ../Data/Winds_ncepnam_3hourly_MAB_and_Go...
+    fpos_file:                       floats.in
     cdm_data_type:                   GRID
     featureType:                     GRID
     location:                        Proto fmrc:doppio_2017_da_avg
     summary:                         doppio
-    DODS_EXTRA.Unlimited_Dimension:  ocean_time</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-fa7e193e-2f60-43c2-a62c-7cc8c203a767' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-fa7e193e-2f60-43c2-a62c-7cc8c203a767' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li><li><span>eta_rho</span>: 106</li><li><span>xi_rho</span>: 242</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-b11d7a70-e85c-4fdf-a509-3494b32a05b9' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b11d7a70-e85c-4fdf-a509-3494b32a05b9' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>s_rho</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.0125</div><input id='attrs-257d2b3a-64bc-4095-be3f-0c77110e2acc' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-257d2b3a-64bc-4095-be3f-0c77110e2acc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-60cd3a1b-0119-4658-bd08-9dd5ac32a10f' class='xr-var-data-in' type='checkbox'><label for='data-60cd3a1b-0119-4658-bd08-9dd5ac32a10f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd></dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g2</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd></dl></div><div class='xr-var-data'><pre>array(-0.0125)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-3154b2a0-cfa3-4ae6-91b6-38c34623d956' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3154b2a0-cfa3-4ae6-91b6-38c34623d956' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-940a37de-f090-4f6b-88b7-d4ca98f37ac2' class='xr-var-data-in' type='checkbox'><label for='data-940a37de-f090-4f6b-88b7-d4ca98f37ac2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[106 242]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-b74a1a43-52b2-4434-97eb-b787e54d5932' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b74a1a43-52b2-4434-97eb-b787e54d5932' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ba3d9c31-e9a5-438d-8eb3-4b9345581af6' class='xr-var-data-in' type='checkbox'><label for='data-ba3d9c31-e9a5-438d-8eb3-4b9345581af6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[106 242]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-06-06T12:00:00</div><input id='attrs-f489157e-7133-45cc-9507-17a0896c542e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f489157e-7133-45cc-9507-17a0896c542e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-545c863b-2139-489d-a4ec-a7e7c28f5357' class='xr-var-data-in' type='checkbox'><label for='data-545c863b-2139-489d-a4ec-a7e7c28f5357' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Forecast time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-06-06T12:00:00.000000000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time_run</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-b083d0fd-b405-4c3f-bc22-06f741f23a0c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b083d0fd-b405-4c3f-bc22-06f741f23a0c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bdb4733e-b45b-43d1-94f7-2afb154b4b4e' class='xr-var-data-in' type='checkbox'><label for='data-bdb4733e-b45b-43d1-94f7-2afb154b4b4e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>run times for coordinate = time</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=datetime64[ns]]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d6dd22e4-4f1d-4850-9fe0-5f8950d33892' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d6dd22e4-4f1d-4850-9fe0-5f8950d33892' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>temp</span></div><div class='xr-var-dims'>(time, eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d84ba591-d54e-44e3-ba25-2ef3ea1f952c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d84ba591-d54e-44e3-ba25-2ef3ea1f952c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-033f5b97-8f5b-4daf-bcb1-b0e30cf07135' class='xr-var-data-in' type='checkbox'><label for='data-033f5b97-8f5b-4daf-bcb1-b0e30cf07135' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>long_name :</span></dt><dd>time-averaged potential temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>grid :</span></dt><dd>grid</dd><dt><span>location :</span></dt><dd>face</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  20  53 121]</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>salt</span></div><div class='xr-var-dims'>(time, eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-2b6613f9-9538-4671-82a9-6c31768ff985' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2b6613f9-9538-4671-82a9-6c31768ff985' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bb35aab5-9c90-434f-a974-b7f4b2af8e50' class='xr-var-data-in' type='checkbox'><label for='data-bb35aab5-9c90-434f-a974-b7f4b2af8e50' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>time-averaged salinity</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>grid :</span></dt><dd>grid</dd><dt><span>location :</span></dt><dd>face</dd><dt><span>field :</span></dt><dd>salinity, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  20  53 121]</dd><dt><span>standard_name :</span></dt><dd>sea_water_practical_salinity</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9247dce6-3517-4701-850e-f7e70776afcf' class='xr-section-summary-in' type='checkbox'  ><label for='section-9247dce6-3517-4701-850e-f7e70776afcf' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-06fbd3ad-504c-40b6-ab16-6bc1a7d2d9ad' class='xr-index-data-in' type='checkbox'/><label for='index-06fbd3ad-504c-40b6-ab16-6bc1a7d2d9ad' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-06-06 12:00:00&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-dae116c0-a23d-4117-9e8c-1de73b0788ad' class='xr-section-summary-in' type='checkbox'  ><label for='section-dae116c0-a23d-4117-9e8c-1de73b0788ad' class='xr-section-summary' >Attributes: <span>(46)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>file :</span></dt><dd>doppio_avg_6733_0001.nc</dd><dt><span>format :</span></dt><dd>netCDF-4/HDF5 file</dd><dt><span>Conventions :</span></dt><dd>CF-1.4, SGRID-0.3</dd><dt><span>type :</span></dt><dd>ROMS/TOMS nonlinear model averages file</dd><dt><span>title :</span></dt><dd>ROMS doppio Real-Time Operational PSAS Forecast System Version 1 FMRC Averages</dd><dt><span>var_info :</span></dt><dd>../Data/varinfo1040t_daily.dat</dd><dt><span>rst_file :</span></dt><dd>doppio_rst_6733.nc</dd><dt><span>his_base :</span></dt><dd>doppio_his_6733</dd><dt><span>avg_base :</span></dt><dd>doppio_avg_6733</dd><dt><span>flt_file :</span></dt><dd>doppio_flt_6733.nc</dd><dt><span>grd_file :</span></dt><dd>/home/om/roms/doppio/7km/grid_doppio_JJA_v13.nc</dd><dt><span>ini_file :</span></dt><dd>doppio_ini_6733.nc</dd><dt><span>tide_file :</span></dt><dd>/home/om/roms/doppio/7km/doppio_tide_7km.nc</dd><dt><span>frc_file_01 :</span></dt><dd>../PSAS/doppio_flx_6733_outer2.nc</dd><dt><span>clm_file_01 :</span></dt><dd>../Data/doppio_clm.nc</dd><dt><span>nud_file :</span></dt><dd>/home/om/roms/doppio/7km/doppio_nudgcoef_7km_1500-2000_GS.nc</dd><dt><span>script_file :</span></dt><dd>nl_ocean_doppio.in</dd><dt><span>fpos_file :</span></dt><dd>floats.in</dd><dt><span>NLM_TADV :</span></dt><dd>
+    DODS_EXTRA.Unlimited_Dimension:  ocean_time</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-a6717dce-0306-4ed6-a41f-876b4dd3e89e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a6717dce-0306-4ed6-a41f-876b4dd3e89e' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li><li><span>eta_rho</span>: 106</li><li><span>xi_rho</span>: 242</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-4ff93d96-687e-4069-84ca-e326e89fa021' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4ff93d96-687e-4069-84ca-e326e89fa021' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>s_rho</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.0125</div><input id='attrs-7a23e79d-0c13-42be-885a-0c8381ae7e32' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7a23e79d-0c13-42be-885a-0c8381ae7e32' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bf6c3d52-def5-41da-92b9-c23e0ffd14e8' class='xr-var-data-in' type='checkbox'><label for='data-bf6c3d52-def5-41da-92b9-c23e0ffd14e8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd></dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g2</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd></dl></div><div class='xr-var-data'><pre>array(-0.0125)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-78e3c0e9-9e88-4506-832b-ec00445c842e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-78e3c0e9-9e88-4506-832b-ec00445c842e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3427cee3-9ad3-4e67-8929-d49606576d92' class='xr-var-data-in' type='checkbox'><label for='data-3427cee3-9ad3-4e67-8929-d49606576d92' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[106 242]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-8a08be18-69d9-4954-8335-328c04fc27b1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8a08be18-69d9-4954-8335-328c04fc27b1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eedcc973-c840-4a29-ad44-9f3848c84cc9' class='xr-var-data-in' type='checkbox'><label for='data-eedcc973-c840-4a29-ad44-9f3848c84cc9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[106 242]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-06-06T12:00:00</div><input id='attrs-f6971d98-447f-46a2-9908-db1e915e87ec' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f6971d98-447f-46a2-9908-db1e915e87ec' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1fd611dc-22a2-4773-8448-8d9b6ffdcaa1' class='xr-var-data-in' type='checkbox'><label for='data-1fd611dc-22a2-4773-8448-8d9b6ffdcaa1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Forecast time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-06-06T12:00:00.000000000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time_run</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d90ca520-158d-448b-aaa9-e5f9a1a820dd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d90ca520-158d-448b-aaa9-e5f9a1a820dd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9ae090be-4b5a-46dd-ac22-a6d4e2a62620' class='xr-var-data-in' type='checkbox'><label for='data-9ae090be-4b5a-46dd-ac22-a6d4e2a62620' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>run times for coordinate = time</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=datetime64[ns]]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d628f928-0045-4ba1-9703-41ad68156b87' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d628f928-0045-4ba1-9703-41ad68156b87' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>temp</span></div><div class='xr-var-dims'>(time, eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-1ca73d11-0a5e-4a4a-b107-3fae7c75abf5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1ca73d11-0a5e-4a4a-b107-3fae7c75abf5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-27acabfe-02b9-493d-adc0-ca4985649f7b' class='xr-var-data-in' type='checkbox'><label for='data-27acabfe-02b9-493d-adc0-ca4985649f7b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>long_name :</span></dt><dd>time-averaged potential temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>grid :</span></dt><dd>grid</dd><dt><span>location :</span></dt><dd>face</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  20  53 121]</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>salt</span></div><div class='xr-var-dims'>(time, eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-2bbf63ea-c7d4-48cf-8146-cb0d2e0b06c4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2bbf63ea-c7d4-48cf-8146-cb0d2e0b06c4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-22baee9d-1957-4c95-b360-fe19a12af5bd' class='xr-var-data-in' type='checkbox'><label for='data-22baee9d-1957-4c95-b360-fe19a12af5bd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>time-averaged salinity</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>grid :</span></dt><dd>grid</dd><dt><span>location :</span></dt><dd>face</dd><dt><span>field :</span></dt><dd>salinity, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  20  53 121]</dd><dt><span>standard_name :</span></dt><dd>sea_water_practical_salinity</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cfd79c7e-5406-41f8-9d14-29da81fb011f' class='xr-section-summary-in' type='checkbox'  ><label for='section-cfd79c7e-5406-41f8-9d14-29da81fb011f' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-77183fa1-dd84-486b-a31e-6c855e7125bb' class='xr-index-data-in' type='checkbox'/><label for='index-77183fa1-dd84-486b-a31e-6c855e7125bb' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-06-06 12:00:00&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-13a3b59c-01f7-43ba-882a-8ef3bba421a4' class='xr-section-summary-in' type='checkbox'  ><label for='section-13a3b59c-01f7-43ba-882a-8ef3bba421a4' class='xr-section-summary' >Attributes: <span>(46)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>file :</span></dt><dd>doppio_avg_7014_0006.nc</dd><dt><span>format :</span></dt><dd>netCDF-4/HDF5 file</dd><dt><span>Conventions :</span></dt><dd>CF-1.4, SGRID-0.3</dd><dt><span>type :</span></dt><dd>ROMS/TOMS nonlinear model averages file</dd><dt><span>title :</span></dt><dd>ROMS doppio Real-Time Operational PSAS Forecast System Version 1 FMRC Averages</dd><dt><span>var_info :</span></dt><dd>../Data/varinfo1040t_daily.dat</dd><dt><span>rst_file :</span></dt><dd>tmp_doppio_rst_7014.nc</dd><dt><span>avg_base :</span></dt><dd>doppio_avg_7014</dd><dt><span>grd_file :</span></dt><dd>/home/om/roms/doppio/7km/grid_doppio_JJA_v13.nc</dd><dt><span>ini_file :</span></dt><dd>doppio_rst_7014.nc</dd><dt><span>tide_file :</span></dt><dd>/home/om/roms/doppio/7km/doppio_tide_7km.nc</dd><dt><span>frc_file_01 :</span></dt><dd>../Data/lwrad_down_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_02 :</span></dt><dd>../Data/Pair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_03 :</span></dt><dd>../Data/Qair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_04 :</span></dt><dd>../Data/rain_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_05 :</span></dt><dd>../Data/swrad_daily_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_06 :</span></dt><dd>../Data/Tair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_07 :</span></dt><dd>../Data/Winds_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>clm_file_01 :</span></dt><dd>../Data/doppio_clm.nc</dd><dt><span>nud_file :</span></dt><dd>/home/om/roms/doppio/7km/doppio_nudgcoef_7km_1500-2000_GS.nc</dd><dt><span>script_file :</span></dt><dd>nl_ocean_doppio.in</dd><dt><span>NLM_TADV :</span></dt><dd>
 ADVECTION:   HORIZONTAL   VERTICAL     
 temp:        Akima4       Akima4       
 salt:        Akima4       Akima4</dd><dt><span>NLM_LBC :</span></dt><dd>
@@ -932,8 +939,8 @@ u:     RadNud RadNud RadNud Clo
 v:     RadNud RadNud RadNud Clo    
 temp:  Rad    Rad    Rad    Clo    
 salt:  Rad    Rad    Rad    Clo    
-tke:   Gra    Gra    Gra    Clo</dd><dt><span>svn_url :</span></dt><dd>https://www.myroms.org/svn/src/trunk</dd><dt><span>svn_rev :</span></dt><dd>1040</dd><dt><span>code_dir :</span></dt><dd>/home/julia/ROMS/doppio/svn1040t</dd><dt><span>header_dir :</span></dt><dd>/home/julia/ROMS/doppio/Compile/fwd</dd><dt><span>header_file :</span></dt><dd>doppio.h</dd><dt><span>os :</span></dt><dd>Linux</dd><dt><span>cpu :</span></dt><dd>x86_64</dd><dt><span>compiler_system :</span></dt><dd>ifort</dd><dt><span>compiler_command :</span></dt><dd>/opt/sw/apps/intel-18.0.1/openmpi/3.1.2/bin/mpif90</dd><dt><span>compiler_flags :</span></dt><dd>-fp-model precise -heap-arrays -ip -O3 -traceback -check uninit</dd><dt><span>tiling :</span></dt><dd>004x004</dd><dt><span>history :</span></dt><dd>ROMS/TOMS, Version 3.9, Tuesday - June 11, 2024 -  4:33:26 AM ;
-FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Functionals/ana_btflux.h</dd><dt><span>CPP_options :</span></dt><dd>DOPPIO, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX, ANA_BTFLUX, ASSUMED_SHAPE, ATM_PRESS, AVERAGES, !BOUNDARY_A !COLLECT_ALL..., CHARNOK, CRAIG_BANNER, CURVGRID, DEFLATE, DJ_GRADPS, DOUBLE_PRECISION, FLOATS, FORWARD_WRITE, GLS_MIXING, HDF5, KANTHA_CLAYSON, MASKING, MIX_GEO_TS, MIX_S_UV, MPI, NONLINEAR, NONLIN_EOS, NO_LBC_ATT, N2S2_HORAVG, OUT_DOUBLE, POWER_LAW, PROFILE, K_GSCHEME, REDUCE_ALLREDUCE, !RST_SINGLE, SALINITY, SOLAR_SOURCE, SOLVE3D, SSH_TIDES, TS_DIF2, UV_ADV, UV_COR, UV_U3HADVECTION, UV_C4VADVECTION, UV_QDRAG, UV_TIDES, UV_VIS2, VAR_RHO_2D, WIND_MINUS_CURRENT</dd><dt><span>_CoordSysBuilder :</span></dt><dd>ucar.nc2.dataset.conv.CF1Convention</dd><dt><span>frc_file_02 :</span></dt><dd>../Data/Pair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_03 :</span></dt><dd>../Data/Qair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_04 :</span></dt><dd>../Data/rain_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_05 :</span></dt><dd>../Data/swrad_daily_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_06 :</span></dt><dd>../Data/Tair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_07 :</span></dt><dd>../Data/Winds_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>cdm_data_type :</span></dt><dd>GRID</dd><dt><span>featureType :</span></dt><dd>GRID</dd><dt><span>location :</span></dt><dd>Proto fmrc:doppio_2017_da_avg</dd><dt><span>summary :</span></dt><dd>doppio</dd><dt><span>DODS_EXTRA.Unlimited_Dimension :</span></dt><dd>ocean_time</dd></dl></div></li></ul></div></div></div></div>
+tke:   Gra    Gra    Gra    Clo</dd><dt><span>svn_url :</span></dt><dd>https://www.myroms.org/svn/src/trunk</dd><dt><span>svn_rev :</span></dt><dd>1040</dd><dt><span>code_dir :</span></dt><dd>/home/julia/ROMS/doppio/svn1040t</dd><dt><span>header_dir :</span></dt><dd>/home/julia/ROMS/doppio/Compile/fwd</dd><dt><span>header_file :</span></dt><dd>doppio.h</dd><dt><span>os :</span></dt><dd>Linux</dd><dt><span>cpu :</span></dt><dd>x86_64</dd><dt><span>compiler_system :</span></dt><dd>ifort</dd><dt><span>compiler_command :</span></dt><dd>/opt/sw/apps/intel-2021_8/openmpi/4.1.5/bin/mpif90</dd><dt><span>compiler_flags :</span></dt><dd>-fp-model precise -heap-arrays -ip -O3 -traceback -check uninit</dd><dt><span>tiling :</span></dt><dd>004x004</dd><dt><span>history :</span></dt><dd>ROMS/TOMS, Version 3.9, Wednesday - March 19, 2025 -  4:32:36 AM ;
+FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Functionals/ana_btflux.h, ROMS/Functionals/ana_srflux.h</dd><dt><span>CPP_options :</span></dt><dd>DOPPIO, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX, ANA_BTFLUX, ASSUMED_SHAPE, ATM_PRESS, AVERAGES, !BOUNDARY_A BULK_FLUXES, !COLLECT_ALL..., CHARNOK, CRAIG_BANNER, CURVGRID, DEFLATE, DIURNAL_SRFLUX, DJ_GRADPS, DOUBLE_PRECISION, EMINUSP, FORWARD_WRITE, GLS_MIXING, HDF5, KANTHA_CLAYSON, LONGWAVE_OUT, MASKING, MIX_GEO_TS, MIX_S_UV, MPI, NONLINEAR, NONLIN_EOS, NO_LBC_ATT, N2S2_HORAVG, OUT_DOUBLE, POWER_LAW, PROFILE, K_GSCHEME, REDUCE_ALLREDUCE, !RST_SINGLE, SALINITY, SOLAR_SOURCE, SOLVE3D, SSH_TIDES, TS_DIF2, UV_ADV, UV_COR, UV_U3HADVECTION, UV_C4VADVECTION, UV_QDRAG, UV_TIDES, UV_VIS2, VAR_RHO_2D, WIND_MINUS_CURRENT</dd><dt><span>_CoordSysBuilder :</span></dt><dd>ucar.nc2.dataset.conv.CF1Convention</dd><dt><span>his_base :</span></dt><dd>doppio_his_7014</dd><dt><span>flt_file :</span></dt><dd>doppio_flt_7014.nc</dd><dt><span>fpos_file :</span></dt><dd>floats.in</dd><dt><span>cdm_data_type :</span></dt><dd>GRID</dd><dt><span>featureType :</span></dt><dd>GRID</dd><dt><span>location :</span></dt><dd>Proto fmrc:doppio_2017_da_avg</dd><dt><span>summary :</span></dt><dd>doppio</dd><dt><span>DODS_EXTRA.Unlimited_Dimension :</span></dt><dd>ocean_time</dd></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -953,9 +960,9 @@ FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Fu
 <p>Now let’s choose a compression level and save it as zarr.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">zarr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">zarr.codecs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BloscCodec</span>
 
-<span class="n">compressor</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">Blosc</span><span class="p">(</span><span class="n">clevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">compressor</span> <span class="o">=</span> <span class="n">BloscCodec</span><span class="p">(</span><span class="n">clevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="s2">&quot;bitshuffle&quot;</span><span class="p">)</span>
 
 
 <span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;doppio/doppio_compressed.zarr&quot;</span>
@@ -964,8 +971,8 @@ FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Fu
     <span class="n">fname</span><span class="p">,</span>
     <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
     <span class="n">safe_chunks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">consolidated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">encoding</span><span class="o">=</span><span class="p">{</span><span class="n">var</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;compressor&quot;</span><span class="p">:</span> <span class="n">compressor</span><span class="p">}</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">},</span>
+    <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="p">{</span><span class="n">var</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;compressors&quot;</span><span class="p">:</span> <span class="n">compressor</span><span class="p">}</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">},</span>
 <span class="p">);</span>
 </pre></div>
 </div>
@@ -981,29 +988,55 @@ FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Fu
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">doppio/doppio_compressed.zarr</span>
 ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">lat_rho</span>
-│   └── 0.0
+│   ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">c</span>
+│   │   └── <span class=" -Color -Color-Bold -Color-Bold-Blue">0</span>
+│   │       └── 0
+│   └── zarr.json
 ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">lon_rho</span>
-│   └── 0.0
+│   ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">c</span>
+│   │   └── <span class=" -Color -Color-Bold -Color-Bold-Blue">0</span>
+│   │       └── 0
+│   └── zarr.json
 ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">salt</span>
-│   └── 0.0.0
+│   ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">c</span>
+│   │   └── <span class=" -Color -Color-Bold -Color-Bold-Blue">0</span>
+│   │       └── <span class=" -Color -Color-Bold -Color-Bold-Blue">0</span>
+│   │           └── 0
+│   └── zarr.json
 ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">s_rho</span>
-│   └── 0
+│   ├── c
+│   └── zarr.json
 ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">temp</span>
-│   └── 0.0.0
+│   ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">c</span>
+│   │   └── <span class=" -Color -Color-Bold -Color-Bold-Blue">0</span>
+│   │       └── <span class=" -Color -Color-Bold -Color-Bold-Blue">0</span>
+│   │           └── 0
+│   └── zarr.json
 ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">time</span>
-│   └── 0
-└── <span class=" -Color -Color-Bold -Color-Bold-Blue">time_run</span>
-    └── 0
+│   └── zarr.json
+├── <span class=" -Color -Color-Bold -Color-Bold-Blue">time_run</span>
+│   └── zarr.json
+└── zarr.json
 
-7 directories, 7 files
-144K	doppio/doppio_compressed.zarr/salt
-156K	doppio/doppio_compressed.zarr/lat_rho
-148K	doppio/doppio_compressed.zarr/temp
-16K	doppio/doppio_compressed.zarr/time
-16K	doppio/doppio_compressed.zarr/s_rho
-16K	doppio/doppio_compressed.zarr/time_run
-156K	doppio/doppio_compressed.zarr/lon_rho
-676K	doppio/doppio_compressed.zarr
+18 directories, 13 files
+152K	doppio/doppio_compressed.zarr/temp/c/0/0
+156K	doppio/doppio_compressed.zarr/temp/c/0
+160K	doppio/doppio_compressed.zarr/temp/c
+168K	doppio/doppio_compressed.zarr/temp
+8.0K	doppio/doppio_compressed.zarr/time_run
+200K	doppio/doppio_compressed.zarr/lon_rho/c/0
+204K	doppio/doppio_compressed.zarr/lon_rho/c
+212K	doppio/doppio_compressed.zarr/lon_rho
+148K	doppio/doppio_compressed.zarr/salt/c/0/0
+152K	doppio/doppio_compressed.zarr/salt/c/0
+156K	doppio/doppio_compressed.zarr/salt/c
+164K	doppio/doppio_compressed.zarr/salt
+12K	doppio/doppio_compressed.zarr/s_rho
+8.0K	doppio/doppio_compressed.zarr/time
+188K	doppio/doppio_compressed.zarr/lat_rho/c/0
+192K	doppio/doppio_compressed.zarr/lat_rho/c
+200K	doppio/doppio_compressed.zarr/lat_rho
+780K	doppio/doppio_compressed.zarr
 </pre></div>
 </div>
 </div>
@@ -1016,7 +1049,7 @@ FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Fu
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;doppio/doppio_compressed.zarr/.zmetadata&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;doppio/doppio_compressed.zarr/zarr.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">zmetadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
 
@@ -1025,192 +1058,55 @@ FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Fu
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;metadata&#39;: {&#39;.zattrs&#39;: {&#39;CPP_options&#39;: &#39;DOPPIO, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX, ANA_BTFLUX, ASSUMED_SHAPE, ATM_PRESS, AVERAGES, !BOUNDARY_A !COLLECT_ALL..., CHARNOK, CRAIG_BANNER, CURVGRID, DEFLATE, DJ_GRADPS, DOUBLE_PRECISION, FLOATS, FORWARD_WRITE, GLS_MIXING, HDF5, KANTHA_CLAYSON, MASKING, MIX_GEO_TS, MIX_S_UV, MPI, NONLINEAR, NONLIN_EOS, NO_LBC_ATT, N2S2_HORAVG, OUT_DOUBLE, POWER_LAW, PROFILE, K_GSCHEME, REDUCE_ALLREDUCE, !RST_SINGLE, SALINITY, SOLAR_SOURCE, SOLVE3D, SSH_TIDES, TS_DIF2, UV_ADV, UV_COR, UV_U3HADVECTION, UV_C4VADVECTION, UV_QDRAG, UV_TIDES, UV_VIS2, VAR_RHO_2D, WIND_MINUS_CURRENT&#39;,
-   &#39;Conventions&#39;: &#39;CF-1.4, SGRID-0.3&#39;,
-   &#39;DODS_EXTRA.Unlimited_Dimension&#39;: &#39;ocean_time&#39;,
-   &#39;NLM_LBC&#39;: &#39;\nEDGE:  WEST   SOUTH  EAST   NORTH  \nzeta:  Cha    Cha    Cha    Clo    \nubar:  Fla    Fla    Fla    Clo    \nvbar:  Fla    Fla    Fla    Clo    \nu:     RadNud RadNud RadNud Clo    \nv:     RadNud RadNud RadNud Clo    \ntemp:  Rad    Rad    Rad    Clo    \nsalt:  Rad    Rad    Rad    Clo    \ntke:   Gra    Gra    Gra    Clo&#39;,
-   &#39;NLM_TADV&#39;: &#39;\nADVECTION:   HORIZONTAL   VERTICAL     \ntemp:        Akima4       Akima4       \nsalt:        Akima4       Akima4&#39;,
-   &#39;_CoordSysBuilder&#39;: &#39;ucar.nc2.dataset.conv.CF1Convention&#39;,
-   &#39;ana_file&#39;: &#39;ROMS/Functionals/ana_btflux.h&#39;,
-   &#39;avg_base&#39;: &#39;doppio_avg_6733&#39;,
-   &#39;cdm_data_type&#39;: &#39;GRID&#39;,
-   &#39;clm_file_01&#39;: &#39;../Data/doppio_clm.nc&#39;,
-   &#39;code_dir&#39;: &#39;/home/julia/ROMS/doppio/svn1040t&#39;,
-   &#39;compiler_command&#39;: &#39;/opt/sw/apps/intel-18.0.1/openmpi/3.1.2/bin/mpif90&#39;,
-   &#39;compiler_flags&#39;: &#39;-fp-model precise -heap-arrays -ip -O3 -traceback -check uninit&#39;,
-   &#39;compiler_system&#39;: &#39;ifort&#39;,
-   &#39;cpu&#39;: &#39;x86_64&#39;,
-   &#39;featureType&#39;: &#39;GRID&#39;,
-   &#39;file&#39;: &#39;doppio_avg_6733_0001.nc&#39;,
-   &#39;flt_file&#39;: &#39;doppio_flt_6733.nc&#39;,
-   &#39;format&#39;: &#39;netCDF-4/HDF5 file&#39;,
-   &#39;fpos_file&#39;: &#39;floats.in&#39;,
-   &#39;frc_file_01&#39;: &#39;../PSAS/doppio_flx_6733_outer2.nc&#39;,
-   &#39;frc_file_02&#39;: &#39;../Data/Pair_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
-   &#39;frc_file_03&#39;: &#39;../Data/Qair_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
-   &#39;frc_file_04&#39;: &#39;../Data/rain_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
-   &#39;frc_file_05&#39;: &#39;../Data/swrad_daily_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
-   &#39;frc_file_06&#39;: &#39;../Data/Tair_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
-   &#39;frc_file_07&#39;: &#39;../Data/Winds_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
-   &#39;grd_file&#39;: &#39;/home/om/roms/doppio/7km/grid_doppio_JJA_v13.nc&#39;,
-   &#39;header_dir&#39;: &#39;/home/julia/ROMS/doppio/Compile/fwd&#39;,
-   &#39;header_file&#39;: &#39;doppio.h&#39;,
-   &#39;his_base&#39;: &#39;doppio_his_6733&#39;,
-   &#39;history&#39;: &#39;ROMS/TOMS, Version 3.9, Tuesday - June 11, 2024 -  4:33:26 AM ;\nFMRC Best_Excluding_Day1 Dataset&#39;,
-   &#39;ini_file&#39;: &#39;doppio_ini_6733.nc&#39;,
-   &#39;location&#39;: &#39;Proto fmrc:doppio_2017_da_avg&#39;,
-   &#39;nud_file&#39;: &#39;/home/om/roms/doppio/7km/doppio_nudgcoef_7km_1500-2000_GS.nc&#39;,
-   &#39;os&#39;: &#39;Linux&#39;,
-   &#39;rst_file&#39;: &#39;doppio_rst_6733.nc&#39;,
-   &#39;script_file&#39;: &#39;nl_ocean_doppio.in&#39;,
-   &#39;summary&#39;: &#39;doppio&#39;,
-   &#39;svn_rev&#39;: &#39;1040&#39;,
-   &#39;svn_url&#39;: &#39;https://www.myroms.org/svn/src/trunk&#39;,
-   &#39;tide_file&#39;: &#39;/home/om/roms/doppio/7km/doppio_tide_7km.nc&#39;,
-   &#39;tiling&#39;: &#39;004x004&#39;,
-   &#39;title&#39;: &#39;ROMS doppio Real-Time Operational PSAS Forecast System Version 1 FMRC Averages&#39;,
-   &#39;type&#39;: &#39;ROMS/TOMS nonlinear model averages file&#39;,
-   &#39;var_info&#39;: &#39;../Data/varinfo1040t_daily.dat&#39;},
-  &#39;.zgroup&#39;: {&#39;zarr_format&#39;: 2},
-  &#39;lat_rho/.zarray&#39;: {&#39;chunks&#39;: [106, 242],
-   &#39;compressor&#39;: {&#39;blocksize&#39;: 0,
-    &#39;clevel&#39;: 2,
-    &#39;cname&#39;: &#39;lz4&#39;,
-    &#39;id&#39;: &#39;blosc&#39;,
-    &#39;shuffle&#39;: -1},
-   &#39;dtype&#39;: &#39;&lt;f8&#39;,
-   &#39;fill_value&#39;: &#39;NaN&#39;,
-   &#39;filters&#39;: None,
-   &#39;order&#39;: &#39;C&#39;,
-   &#39;shape&#39;: [106, 242],
-   &#39;zarr_format&#39;: 2},
-  &#39;lat_rho/.zattrs&#39;: {&#39;_ARRAY_DIMENSIONS&#39;: [&#39;eta_rho&#39;, &#39;xi_rho&#39;],
-   &#39;_ChunkSizes&#39;: [106, 242],
-   &#39;_CoordinateAxisType&#39;: &#39;Lat&#39;,
-   &#39;field&#39;: &#39;lat_rho, scalar&#39;,
-   &#39;long_name&#39;: &#39;latitude of RHO-points&#39;,
-   &#39;standard_name&#39;: &#39;latitude&#39;,
-   &#39;units&#39;: &#39;degrees_north&#39;},
-  &#39;lon_rho/.zarray&#39;: {&#39;chunks&#39;: [106, 242],
-   &#39;compressor&#39;: {&#39;blocksize&#39;: 0,
-    &#39;clevel&#39;: 2,
-    &#39;cname&#39;: &#39;lz4&#39;,
-    &#39;id&#39;: &#39;blosc&#39;,
-    &#39;shuffle&#39;: -1},
-   &#39;dtype&#39;: &#39;&lt;f8&#39;,
-   &#39;fill_value&#39;: &#39;NaN&#39;,
-   &#39;filters&#39;: None,
-   &#39;order&#39;: &#39;C&#39;,
-   &#39;shape&#39;: [106, 242],
-   &#39;zarr_format&#39;: 2},
-  &#39;lon_rho/.zattrs&#39;: {&#39;_ARRAY_DIMENSIONS&#39;: [&#39;eta_rho&#39;, &#39;xi_rho&#39;],
-   &#39;_ChunkSizes&#39;: [106, 242],
-   &#39;_CoordinateAxisType&#39;: &#39;Lon&#39;,
-   &#39;field&#39;: &#39;lon_rho, scalar&#39;,
-   &#39;long_name&#39;: &#39;longitude of RHO-points&#39;,
-   &#39;standard_name&#39;: &#39;longitude&#39;,
-   &#39;units&#39;: &#39;degrees_east&#39;},
-  &#39;s_rho/.zarray&#39;: {&#39;chunks&#39;: [],
-   &#39;compressor&#39;: None,
-   &#39;dtype&#39;: &#39;&lt;f8&#39;,
-   &#39;fill_value&#39;: &#39;NaN&#39;,
-   &#39;filters&#39;: None,
-   &#39;order&#39;: &#39;C&#39;,
-   &#39;shape&#39;: [],
-   &#39;zarr_format&#39;: 2},
-  &#39;s_rho/.zattrs&#39;: {&#39;_ARRAY_DIMENSIONS&#39;: [],
-   &#39;_CoordinateAxes&#39;: &#39;s_rho&#39;,
-   &#39;_CoordinateAxisType&#39;: &#39;GeoZ&#39;,
-   &#39;_CoordinateTransformType&#39;: &#39;Vertical&#39;,
-   &#39;_CoordinateZisPositive&#39;: &#39;up&#39;,
-   &#39;field&#39;: &#39;s_rho, scalar&#39;,
-   &#39;formula_terms&#39;: &#39;s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc&#39;,
-   &#39;long_name&#39;: &#39;S-coordinate at RHO-points&#39;,
-   &#39;positive&#39;: &#39;up&#39;,
-   &#39;standard_name&#39;: &#39;ocean_s_coordinate_g2&#39;,
-   &#39;units&#39;: &#39;&#39;,
-   &#39;valid_max&#39;: 0.0,
-   &#39;valid_min&#39;: -1.0},
-  &#39;salt/.zarray&#39;: {&#39;chunks&#39;: [1, 106, 242],
-   &#39;compressor&#39;: {&#39;blocksize&#39;: 0,
-    &#39;clevel&#39;: 2,
-    &#39;cname&#39;: &#39;lz4&#39;,
-    &#39;id&#39;: &#39;blosc&#39;,
-    &#39;shuffle&#39;: -1},
-   &#39;dtype&#39;: &#39;&lt;f8&#39;,
-   &#39;fill_value&#39;: &#39;NaN&#39;,
-   &#39;filters&#39;: None,
-   &#39;order&#39;: &#39;C&#39;,
-   &#39;shape&#39;: [1, 106, 242],
-   &#39;zarr_format&#39;: 2},
-  &#39;salt/.zattrs&#39;: {&#39;_ARRAY_DIMENSIONS&#39;: [&#39;time&#39;, &#39;eta_rho&#39;, &#39;xi_rho&#39;],
-   &#39;_ChunkSizes&#39;: [1, 20, 53, 121],
-   &#39;coordinates&#39;: &#39;time_run time s_rho lat_rho lon_rho &#39;,
-   &#39;field&#39;: &#39;salinity, scalar, series&#39;,
-   &#39;grid&#39;: &#39;grid&#39;,
-   &#39;location&#39;: &#39;face&#39;,
-   &#39;long_name&#39;: &#39;time-averaged salinity&#39;,
-   &#39;standard_name&#39;: &#39;sea_water_practical_salinity&#39;,
-   &#39;time&#39;: &#39;ocean_time&#39;},
-  &#39;temp/.zarray&#39;: {&#39;chunks&#39;: [1, 106, 242],
-   &#39;compressor&#39;: {&#39;blocksize&#39;: 0,
-    &#39;clevel&#39;: 2,
-    &#39;cname&#39;: &#39;lz4&#39;,
-    &#39;id&#39;: &#39;blosc&#39;,
-    &#39;shuffle&#39;: -1},
-   &#39;dtype&#39;: &#39;&lt;f8&#39;,
-   &#39;fill_value&#39;: &#39;NaN&#39;,
-   &#39;filters&#39;: None,
-   &#39;order&#39;: &#39;C&#39;,
-   &#39;shape&#39;: [1, 106, 242],
-   &#39;zarr_format&#39;: 2},
-  &#39;temp/.zattrs&#39;: {&#39;_ARRAY_DIMENSIONS&#39;: [&#39;time&#39;, &#39;eta_rho&#39;, &#39;xi_rho&#39;],
-   &#39;_ChunkSizes&#39;: [1, 20, 53, 121],
-   &#39;coordinates&#39;: &#39;time_run time s_rho lat_rho lon_rho &#39;,
-   &#39;field&#39;: &#39;temperature, scalar, series&#39;,
-   &#39;grid&#39;: &#39;grid&#39;,
-   &#39;location&#39;: &#39;face&#39;,
-   &#39;long_name&#39;: &#39;time-averaged potential temperature&#39;,
-   &#39;standard_name&#39;: &#39;sea_water_potential_temperature&#39;,
-   &#39;time&#39;: &#39;ocean_time&#39;,
-   &#39;units&#39;: &#39;Celsius&#39;},
-  &#39;time/.zarray&#39;: {&#39;chunks&#39;: [1],
-   &#39;compressor&#39;: {&#39;blocksize&#39;: 0,
-    &#39;clevel&#39;: 2,
-    &#39;cname&#39;: &#39;lz4&#39;,
-    &#39;id&#39;: &#39;blosc&#39;,
-    &#39;shuffle&#39;: -1},
-   &#39;dtype&#39;: &#39;&lt;i8&#39;,
-   &#39;fill_value&#39;: None,
-   &#39;filters&#39;: None,
-   &#39;order&#39;: &#39;C&#39;,
-   &#39;shape&#39;: [1],
-   &#39;zarr_format&#39;: 2},
-  &#39;time/.zattrs&#39;: {&#39;_ARRAY_DIMENSIONS&#39;: [&#39;time&#39;],
-   &#39;_CoordinateAxisType&#39;: &#39;Time&#39;,
-   &#39;calendar&#39;: &#39;proleptic_gregorian&#39;,
-   &#39;long_name&#39;: &#39;Forecast time for ForecastModelRunCollection&#39;,
-   &#39;standard_name&#39;: &#39;time&#39;,
-   &#39;units&#39;: &#39;days since 2022-06-06 12:00:00&#39;},
-  &#39;time_run/.zarray&#39;: {&#39;chunks&#39;: [1],
-   &#39;compressor&#39;: {&#39;blocksize&#39;: 0,
-    &#39;clevel&#39;: 2,
-    &#39;cname&#39;: &#39;lz4&#39;,
-    &#39;id&#39;: &#39;blosc&#39;,
-    &#39;shuffle&#39;: -1},
-   &#39;dtype&#39;: &#39;&lt;i8&#39;,
-   &#39;fill_value&#39;: None,
-   &#39;filters&#39;: None,
-   &#39;order&#39;: &#39;C&#39;,
-   &#39;shape&#39;: [1],
-   &#39;zarr_format&#39;: 2},
-  &#39;time_run/.zattrs&#39;: {&#39;_ARRAY_DIMENSIONS&#39;: [&#39;time&#39;],
-   &#39;_CoordinateAxisType&#39;: &#39;RunTime&#39;,
-   &#39;calendar&#39;: &#39;proleptic_gregorian&#39;,
-   &#39;long_name&#39;: &#39;run times for coordinate = time&#39;,
-   &#39;standard_name&#39;: &#39;forecast_reference_time&#39;,
-   &#39;units&#39;: &#39;days since 2022-06-05 12:00:00&#39;}},
- &#39;zarr_consolidated_format&#39;: 1}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;attributes&#39;: {&#39;file&#39;: &#39;doppio_avg_7014_0006.nc&#39;,
+  &#39;format&#39;: &#39;netCDF-4/HDF5 file&#39;,
+  &#39;Conventions&#39;: &#39;CF-1.4, SGRID-0.3&#39;,
+  &#39;type&#39;: &#39;ROMS/TOMS nonlinear model averages file&#39;,
+  &#39;title&#39;: &#39;ROMS doppio Real-Time Operational PSAS Forecast System Version 1 FMRC Averages&#39;,
+  &#39;var_info&#39;: &#39;../Data/varinfo1040t_daily.dat&#39;,
+  &#39;rst_file&#39;: &#39;tmp_doppio_rst_7014.nc&#39;,
+  &#39;avg_base&#39;: &#39;doppio_avg_7014&#39;,
+  &#39;grd_file&#39;: &#39;/home/om/roms/doppio/7km/grid_doppio_JJA_v13.nc&#39;,
+  &#39;ini_file&#39;: &#39;doppio_rst_7014.nc&#39;,
+  &#39;tide_file&#39;: &#39;/home/om/roms/doppio/7km/doppio_tide_7km.nc&#39;,
+  &#39;frc_file_01&#39;: &#39;../Data/lwrad_down_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
+  &#39;frc_file_02&#39;: &#39;../Data/Pair_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
+  &#39;frc_file_03&#39;: &#39;../Data/Qair_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
+  &#39;frc_file_04&#39;: &#39;../Data/rain_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
+  &#39;frc_file_05&#39;: &#39;../Data/swrad_daily_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
+  &#39;frc_file_06&#39;: &#39;../Data/Tair_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
+  &#39;frc_file_07&#39;: &#39;../Data/Winds_ncepnam_3hourly_MAB_and_GoM.nc&#39;,
+  &#39;clm_file_01&#39;: &#39;../Data/doppio_clm.nc&#39;,
+  &#39;nud_file&#39;: &#39;/home/om/roms/doppio/7km/doppio_nudgcoef_7km_1500-2000_GS.nc&#39;,
+  &#39;script_file&#39;: &#39;nl_ocean_doppio.in&#39;,
+  &#39;NLM_TADV&#39;: &#39;\nADVECTION:   HORIZONTAL   VERTICAL     \ntemp:        Akima4       Akima4       \nsalt:        Akima4       Akima4&#39;,
+  &#39;NLM_LBC&#39;: &#39;\nEDGE:  WEST   SOUTH  EAST   NORTH  \nzeta:  Cha    Cha    Cha    Clo    \nubar:  Fla    Fla    Fla    Clo    \nvbar:  Fla    Fla    Fla    Clo    \nu:     RadNud RadNud RadNud Clo    \nv:     RadNud RadNud RadNud Clo    \ntemp:  Rad    Rad    Rad    Clo    \nsalt:  Rad    Rad    Rad    Clo    \ntke:   Gra    Gra    Gra    Clo&#39;,
+  &#39;svn_url&#39;: &#39;https://www.myroms.org/svn/src/trunk&#39;,
+  &#39;svn_rev&#39;: &#39;1040&#39;,
+  &#39;code_dir&#39;: &#39;/home/julia/ROMS/doppio/svn1040t&#39;,
+  &#39;header_dir&#39;: &#39;/home/julia/ROMS/doppio/Compile/fwd&#39;,
+  &#39;header_file&#39;: &#39;doppio.h&#39;,
+  &#39;os&#39;: &#39;Linux&#39;,
+  &#39;cpu&#39;: &#39;x86_64&#39;,
+  &#39;compiler_system&#39;: &#39;ifort&#39;,
+  &#39;compiler_command&#39;: &#39;/opt/sw/apps/intel-2021_8/openmpi/4.1.5/bin/mpif90&#39;,
+  &#39;compiler_flags&#39;: &#39;-fp-model precise -heap-arrays -ip -O3 -traceback -check uninit&#39;,
+  &#39;tiling&#39;: &#39;004x004&#39;,
+  &#39;history&#39;: &#39;ROMS/TOMS, Version 3.9, Wednesday - March 19, 2025 -  4:32:36 AM ;\nFMRC Best_Excluding_Day1 Dataset&#39;,
+  &#39;ana_file&#39;: &#39;ROMS/Functionals/ana_btflux.h, ROMS/Functionals/ana_srflux.h&#39;,
+  &#39;CPP_options&#39;: &#39;DOPPIO, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX, ANA_BTFLUX, ASSUMED_SHAPE, ATM_PRESS, AVERAGES, !BOUNDARY_A BULK_FLUXES, !COLLECT_ALL..., CHARNOK, CRAIG_BANNER, CURVGRID, DEFLATE, DIURNAL_SRFLUX, DJ_GRADPS, DOUBLE_PRECISION, EMINUSP, FORWARD_WRITE, GLS_MIXING, HDF5, KANTHA_CLAYSON, LONGWAVE_OUT, MASKING, MIX_GEO_TS, MIX_S_UV, MPI, NONLINEAR, NONLIN_EOS, NO_LBC_ATT, N2S2_HORAVG, OUT_DOUBLE, POWER_LAW, PROFILE, K_GSCHEME, REDUCE_ALLREDUCE, !RST_SINGLE, SALINITY, SOLAR_SOURCE, SOLVE3D, SSH_TIDES, TS_DIF2, UV_ADV, UV_COR, UV_U3HADVECTION, UV_C4VADVECTION, UV_QDRAG, UV_TIDES, UV_VIS2, VAR_RHO_2D, WIND_MINUS_CURRENT&#39;,
+  &#39;_CoordSysBuilder&#39;: &#39;ucar.nc2.dataset.conv.CF1Convention&#39;,
+  &#39;his_base&#39;: &#39;doppio_his_7014&#39;,
+  &#39;flt_file&#39;: &#39;doppio_flt_7014.nc&#39;,
+  &#39;fpos_file&#39;: &#39;floats.in&#39;,
+  &#39;cdm_data_type&#39;: &#39;GRID&#39;,
+  &#39;featureType&#39;: &#39;GRID&#39;,
+  &#39;location&#39;: &#39;Proto fmrc:doppio_2017_da_avg&#39;,
+  &#39;summary&#39;: &#39;doppio&#39;,
+  &#39;DODS_EXTRA.Unlimited_Dimension&#39;: &#39;ocean_time&#39;},
+ &#39;zarr_format&#39;: 3,
+ &#39;consolidated_metadata&#39;: None,
+ &#39;node_type&#39;: &#39;group&#39;}
 </pre></div>
 </div>
 </div>
@@ -1218,7 +1114,7 @@ FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Fu
 <p>New let’s read back the data to check if we can roundtrip it back to the original dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subset</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subset</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">subset</span>
 </pre></div>
@@ -1255,13 +1151,14 @@ FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Fu
   --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
 }
 
-html[theme=dark],
-body[data-theme=dark],
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
   --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1F1F1F;
+  --xr-border-color: #1f1f1f;
   --xr-disabled-color: #515151;
   --xr-background-color: #111111;
   --xr-background-color-row-even: #111111;
@@ -1306,7 +1203,7 @@ body.vscode-dark {
 .xr-sections {
   padding-left: 0 !important;
   display: grid;
-  grid-template-columns: 150px auto auto 1fr 20px 20px;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
 }
 
 .xr-section-item {
@@ -1314,7 +1211,9 @@ body.vscode-dark {
 }
 
 .xr-section-item input {
-  display: none;
+  display: inline-block;
+  opacity: 0;
+  height: 0;
 }
 
 .xr-section-item input + label {
@@ -1324,6 +1223,10 @@ body.vscode-dark {
 .xr-section-item input:enabled + label {
   cursor: pointer;
   color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
 }
 
 .xr-section-item input:enabled + label:hover {
@@ -1347,7 +1250,7 @@ body.vscode-dark {
 
 .xr-section-summary-in + label:before {
   display: inline-block;
-  content: '►';
+  content: "►";
   font-size: 11px;
   width: 15px;
   text-align: center;
@@ -1358,7 +1261,7 @@ body.vscode-dark {
 }
 
 .xr-section-summary-in:checked + label:before {
-  content: '▼';
+  content: "▼";
 }
 
 .xr-section-summary-in:checked + label > span {
@@ -1430,15 +1333,15 @@ body.vscode-dark {
 }
 
 .xr-dim-list:before {
-  content: '(';
+  content: "(";
 }
 
 .xr-dim-list:after {
-  content: ')';
+  content: ")";
 }
 
 .xr-dim-list li:not(:last-child):after {
-  content: ',';
+  content: ",";
   padding-right: 5px;
 }
 
@@ -1589,31 +1492,34 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 821kB
-Dimensions:   (eta_rho: 106, xi_rho: 242, time: 1)
+Dimensions:   (time: 1, eta_rho: 106, xi_rho: 242)
 Coordinates:
-    lat_rho   (eta_rho, xi_rho) float64 205kB ...
-    lon_rho   (eta_rho, xi_rho) float64 205kB ...
-    s_rho     float64 8B ...
-  * time      (time) datetime64[ns] 8B 2022-06-06T12:00:00
     time_run  (time) datetime64[ns] 8B ...
+    s_rho     float64 8B ...
+    lon_rho   (eta_rho, xi_rho) float64 205kB ...
+  * time      (time) datetime64[ns] 8B 2022-06-06T12:00:00
+    lat_rho   (eta_rho, xi_rho) float64 205kB ...
 Dimensions without coordinates: eta_rho, xi_rho
 Data variables:
     salt      (time, eta_rho, xi_rho) float64 205kB ...
     temp      (time, eta_rho, xi_rho) float64 205kB ...
 Attributes: (12/46)
-    CPP_options:                     DOPPIO, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX...
+    file:                            doppio_avg_7014_0006.nc
+    format:                          netCDF-4/HDF5 file
     Conventions:                     CF-1.4, SGRID-0.3
-    DODS_EXTRA.Unlimited_Dimension:  ocean_time
-    NLM_LBC:                         \nEDGE:  WEST   SOUTH  EAST   NORTH  \nz...
-    NLM_TADV:                        \nADVECTION:   HORIZONTAL   VERTICAL    ...
-    _CoordSysBuilder:                ucar.nc2.dataset.conv.CF1Convention
-    ...                              ...
-    svn_url:                         https://www.myroms.org/svn/src/trunk
-    tide_file:                       /home/om/roms/doppio/7km/doppio_tide_7km.nc
-    tiling:                          004x004
-    title:                           ROMS doppio Real-Time Operational PSAS F...
     type:                            ROMS/TOMS nonlinear model averages file
-    var_info:                        ../Data/varinfo1040t_daily.dat</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-daac4002-0621-480f-af06-b994927d1ccd' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-daac4002-0621-480f-af06-b994927d1ccd' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>eta_rho</span>: 106</li><li><span>xi_rho</span>: 242</li><li><span class='xr-has-index'>time</span>: 1</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-9549719e-079e-4496-8ff7-9ea6b55869a0' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9549719e-079e-4496-8ff7-9ea6b55869a0' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-1080105e-57f3-42d7-9935-996729805314' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1080105e-57f3-42d7-9935-996729805314' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9ab056fe-3d4f-4ec1-8011-4dfc46394bf6' class='xr-var-data-in' type='checkbox'><label for='data-9ab056fe-3d4f-4ec1-8011-4dfc46394bf6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>[106, 242]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-45317763-5b53-4e1d-bec4-d3b36a6554f6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-45317763-5b53-4e1d-bec4-d3b36a6554f6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4051b3a6-b424-48b2-833d-fb80ec87bbac' class='xr-var-data-in' type='checkbox'><label for='data-4051b3a6-b424-48b2-833d-fb80ec87bbac' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>[106, 242]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>s_rho</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-866d7841-0117-4337-ae51-c826be20ed96' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-866d7841-0117-4337-ae51-c826be20ed96' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6b33983e-3918-4c30-932a-f29934dd0b4c' class='xr-var-data-in' type='checkbox'><label for='data-6b33983e-3918-4c30-932a-f29934dd0b4c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g2</dd><dt><span>units :</span></dt><dd></dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-06-06T12:00:00</div><input id='attrs-86e5bdbe-ed8d-404e-ad3a-588a8ed0d89f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-86e5bdbe-ed8d-404e-ad3a-588a8ed0d89f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a7694016-6469-47da-8378-85516ebc4efc' class='xr-var-data-in' type='checkbox'><label for='data-a7694016-6469-47da-8378-85516ebc4efc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Forecast time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-06-06T12:00:00.000000000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time_run</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-c1e8aa82-ca17-4417-9469-ca3063c01c3d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c1e8aa82-ca17-4417-9469-ca3063c01c3d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0a2e5222-7b14-474c-bf53-2c30c576ce04' class='xr-var-data-in' type='checkbox'><label for='data-0a2e5222-7b14-474c-bf53-2c30c576ce04' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd><dt><span>long_name :</span></dt><dd>run times for coordinate = time</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=datetime64[ns]]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d07a9762-59fe-44fc-8a55-b703e401c452' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d07a9762-59fe-44fc-8a55-b703e401c452' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>salt</span></div><div class='xr-var-dims'>(time, eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-56088f73-2485-4d67-8557-6fc770a773a2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-56088f73-2485-4d67-8557-6fc770a773a2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c47471d4-35e7-4546-9ff9-3dbe83f4f70e' class='xr-var-data-in' type='checkbox'><label for='data-c47471d4-35e7-4546-9ff9-3dbe83f4f70e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>[1, 20, 53, 121]</dd><dt><span>field :</span></dt><dd>salinity, scalar, series</dd><dt><span>grid :</span></dt><dd>grid</dd><dt><span>location :</span></dt><dd>face</dd><dt><span>long_name :</span></dt><dd>time-averaged salinity</dd><dt><span>standard_name :</span></dt><dd>sea_water_practical_salinity</dd><dt><span>time :</span></dt><dd>ocean_time</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temp</span></div><div class='xr-var-dims'>(time, eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-757764b6-b816-43e3-904d-4d96870b0582' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-757764b6-b816-43e3-904d-4d96870b0582' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d6a6439d-7ad2-4f22-8198-5e12c17e1821' class='xr-var-data-in' type='checkbox'><label for='data-d6a6439d-7ad2-4f22-8198-5e12c17e1821' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>[1, 20, 53, 121]</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>grid :</span></dt><dd>grid</dd><dt><span>location :</span></dt><dd>face</dd><dt><span>long_name :</span></dt><dd>time-averaged potential temperature</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>units :</span></dt><dd>Celsius</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e51aa351-c3b4-4aa2-b76c-f42d0009cf38' class='xr-section-summary-in' type='checkbox'  ><label for='section-e51aa351-c3b4-4aa2-b76c-f42d0009cf38' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-783e9f25-5cc3-4cf3-b674-0d348565bc16' class='xr-index-data-in' type='checkbox'/><label for='index-783e9f25-5cc3-4cf3-b674-0d348565bc16' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-06-06 12:00:00&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f39ae62e-9d18-45c9-8b19-d91c2769bedb' class='xr-section-summary-in' type='checkbox'  ><label for='section-f39ae62e-9d18-45c9-8b19-d91c2769bedb' class='xr-section-summary' >Attributes: <span>(46)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>CPP_options :</span></dt><dd>DOPPIO, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX, ANA_BTFLUX, ASSUMED_SHAPE, ATM_PRESS, AVERAGES, !BOUNDARY_A !COLLECT_ALL..., CHARNOK, CRAIG_BANNER, CURVGRID, DEFLATE, DJ_GRADPS, DOUBLE_PRECISION, FLOATS, FORWARD_WRITE, GLS_MIXING, HDF5, KANTHA_CLAYSON, MASKING, MIX_GEO_TS, MIX_S_UV, MPI, NONLINEAR, NONLIN_EOS, NO_LBC_ATT, N2S2_HORAVG, OUT_DOUBLE, POWER_LAW, PROFILE, K_GSCHEME, REDUCE_ALLREDUCE, !RST_SINGLE, SALINITY, SOLAR_SOURCE, SOLVE3D, SSH_TIDES, TS_DIF2, UV_ADV, UV_COR, UV_U3HADVECTION, UV_C4VADVECTION, UV_QDRAG, UV_TIDES, UV_VIS2, VAR_RHO_2D, WIND_MINUS_CURRENT</dd><dt><span>Conventions :</span></dt><dd>CF-1.4, SGRID-0.3</dd><dt><span>DODS_EXTRA.Unlimited_Dimension :</span></dt><dd>ocean_time</dd><dt><span>NLM_LBC :</span></dt><dd>
+    title:                           ROMS doppio Real-Time Operational PSAS F...
+    var_info:                        ../Data/varinfo1040t_daily.dat
+    ...                              ...
+    fpos_file:                       floats.in
+    cdm_data_type:                   GRID
+    featureType:                     GRID
+    location:                        Proto fmrc:doppio_2017_da_avg
+    summary:                         doppio
+    DODS_EXTRA.Unlimited_Dimension:  ocean_time</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-f3483c5a-98df-4979-bb15-82de00e65620' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f3483c5a-98df-4979-bb15-82de00e65620' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li><li><span>eta_rho</span>: 106</li><li><span>xi_rho</span>: 242</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-71e9dac5-e939-4c47-886f-f4c296e7b4f8' class='xr-section-summary-in' type='checkbox'  checked><label for='section-71e9dac5-e939-4c47-886f-f4c296e7b4f8' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>time_run</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-30c4d795-8bfb-4104-abfd-7f88a4d3fc79' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-30c4d795-8bfb-4104-abfd-7f88a4d3fc79' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-898ef758-e103-46f9-b651-ee37bb307160' class='xr-var-data-in' type='checkbox'><label for='data-898ef758-e103-46f9-b651-ee37bb307160' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>run times for coordinate = time</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=datetime64[ns]]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>s_rho</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-cc1f6bff-af72-46ce-83d0-9a54335f973e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-cc1f6bff-af72-46ce-83d0-9a54335f973e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5f5e792e-6d4e-4ef7-834e-7c6aa498877e' class='xr-var-data-in' type='checkbox'><label for='data-5f5e792e-6d4e-4ef7-834e-7c6aa498877e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd></dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g2</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-483aeeb3-a223-4c67-ae46-01abcfc3245a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-483aeeb3-a223-4c67-ae46-01abcfc3245a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e3729e74-e6da-4cef-8a65-37d5bf91cf41' class='xr-var-data-in' type='checkbox'><label for='data-e3729e74-e6da-4cef-8a65-37d5bf91cf41' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[106, 242]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-06-06T12:00:00</div><input id='attrs-1404c6b5-4aef-4055-8717-315a18c143e9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1404c6b5-4aef-4055-8717-315a18c143e9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-212f3f47-9a87-497f-b815-f8b12a2791e6' class='xr-var-data-in' type='checkbox'><label for='data-212f3f47-9a87-497f-b815-f8b12a2791e6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Forecast time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-06-06T12:00:00.000000000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-83d2ba4d-5405-4948-9b9c-09a28de945cc' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-83d2ba4d-5405-4948-9b9c-09a28de945cc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-17b35ae8-e3bc-492b-88fb-5bdd2a22297e' class='xr-var-data-in' type='checkbox'><label for='data-17b35ae8-e3bc-492b-88fb-5bdd2a22297e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[106, 242]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a2160e01-1cd2-4a20-8c4e-d2eb4086806e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a2160e01-1cd2-4a20-8c4e-d2eb4086806e' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>salt</span></div><div class='xr-var-dims'>(time, eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-cbd4c72c-e228-4969-ab0e-4491f189179f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-cbd4c72c-e228-4969-ab0e-4491f189179f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a5a18ba3-6e3f-4325-b1d9-f369f93e4a17' class='xr-var-data-in' type='checkbox'><label for='data-a5a18ba3-6e3f-4325-b1d9-f369f93e4a17' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>time-averaged salinity</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>grid :</span></dt><dd>grid</dd><dt><span>location :</span></dt><dd>face</dd><dt><span>field :</span></dt><dd>salinity, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[1, 20, 53, 121]</dd><dt><span>standard_name :</span></dt><dd>sea_water_practical_salinity</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temp</span></div><div class='xr-var-dims'>(time, eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-da202861-be4f-4dfa-91be-af7aa0e7d807' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-da202861-be4f-4dfa-91be-af7aa0e7d807' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-52d4be81-c670-4a54-96c3-721fbb62a0de' class='xr-var-data-in' type='checkbox'><label for='data-52d4be81-c670-4a54-96c3-721fbb62a0de' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>long_name :</span></dt><dd>time-averaged potential temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>grid :</span></dt><dd>grid</dd><dt><span>location :</span></dt><dd>face</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[1, 20, 53, 121]</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd></dl></div><div class='xr-var-data'><pre>[25652 values with dtype=float64]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-89c90e13-8d87-4f29-842d-026cea5c89a6' class='xr-section-summary-in' type='checkbox'  ><label for='section-89c90e13-8d87-4f29-842d-026cea5c89a6' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-54c5e9ef-e6c0-412e-aefe-8f0484c786ed' class='xr-index-data-in' type='checkbox'/><label for='index-54c5e9ef-e6c0-412e-aefe-8f0484c786ed' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-06-06 12:00:00&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-0a7bc655-8c85-4427-9e9b-13bfa97020c8' class='xr-section-summary-in' type='checkbox'  ><label for='section-0a7bc655-8c85-4427-9e9b-13bfa97020c8' class='xr-section-summary' >Attributes: <span>(46)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>file :</span></dt><dd>doppio_avg_7014_0006.nc</dd><dt><span>format :</span></dt><dd>netCDF-4/HDF5 file</dd><dt><span>Conventions :</span></dt><dd>CF-1.4, SGRID-0.3</dd><dt><span>type :</span></dt><dd>ROMS/TOMS nonlinear model averages file</dd><dt><span>title :</span></dt><dd>ROMS doppio Real-Time Operational PSAS Forecast System Version 1 FMRC Averages</dd><dt><span>var_info :</span></dt><dd>../Data/varinfo1040t_daily.dat</dd><dt><span>rst_file :</span></dt><dd>tmp_doppio_rst_7014.nc</dd><dt><span>avg_base :</span></dt><dd>doppio_avg_7014</dd><dt><span>grd_file :</span></dt><dd>/home/om/roms/doppio/7km/grid_doppio_JJA_v13.nc</dd><dt><span>ini_file :</span></dt><dd>doppio_rst_7014.nc</dd><dt><span>tide_file :</span></dt><dd>/home/om/roms/doppio/7km/doppio_tide_7km.nc</dd><dt><span>frc_file_01 :</span></dt><dd>../Data/lwrad_down_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_02 :</span></dt><dd>../Data/Pair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_03 :</span></dt><dd>../Data/Qair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_04 :</span></dt><dd>../Data/rain_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_05 :</span></dt><dd>../Data/swrad_daily_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_06 :</span></dt><dd>../Data/Tair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_07 :</span></dt><dd>../Data/Winds_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>clm_file_01 :</span></dt><dd>../Data/doppio_clm.nc</dd><dt><span>nud_file :</span></dt><dd>/home/om/roms/doppio/7km/doppio_nudgcoef_7km_1500-2000_GS.nc</dd><dt><span>script_file :</span></dt><dd>nl_ocean_doppio.in</dd><dt><span>NLM_TADV :</span></dt><dd>
+ADVECTION:   HORIZONTAL   VERTICAL     
+temp:        Akima4       Akima4       
+salt:        Akima4       Akima4</dd><dt><span>NLM_LBC :</span></dt><dd>
 EDGE:  WEST   SOUTH  EAST   NORTH  
 zeta:  Cha    Cha    Cha    Clo    
 ubar:  Fla    Fla    Fla    Clo    
@@ -1622,11 +1528,8 @@ u:     RadNud RadNud RadNud Clo
 v:     RadNud RadNud RadNud Clo    
 temp:  Rad    Rad    Rad    Clo    
 salt:  Rad    Rad    Rad    Clo    
-tke:   Gra    Gra    Gra    Clo</dd><dt><span>NLM_TADV :</span></dt><dd>
-ADVECTION:   HORIZONTAL   VERTICAL     
-temp:        Akima4       Akima4       
-salt:        Akima4       Akima4</dd><dt><span>_CoordSysBuilder :</span></dt><dd>ucar.nc2.dataset.conv.CF1Convention</dd><dt><span>ana_file :</span></dt><dd>ROMS/Functionals/ana_btflux.h</dd><dt><span>avg_base :</span></dt><dd>doppio_avg_6733</dd><dt><span>cdm_data_type :</span></dt><dd>GRID</dd><dt><span>clm_file_01 :</span></dt><dd>../Data/doppio_clm.nc</dd><dt><span>code_dir :</span></dt><dd>/home/julia/ROMS/doppio/svn1040t</dd><dt><span>compiler_command :</span></dt><dd>/opt/sw/apps/intel-18.0.1/openmpi/3.1.2/bin/mpif90</dd><dt><span>compiler_flags :</span></dt><dd>-fp-model precise -heap-arrays -ip -O3 -traceback -check uninit</dd><dt><span>compiler_system :</span></dt><dd>ifort</dd><dt><span>cpu :</span></dt><dd>x86_64</dd><dt><span>featureType :</span></dt><dd>GRID</dd><dt><span>file :</span></dt><dd>doppio_avg_6733_0001.nc</dd><dt><span>flt_file :</span></dt><dd>doppio_flt_6733.nc</dd><dt><span>format :</span></dt><dd>netCDF-4/HDF5 file</dd><dt><span>fpos_file :</span></dt><dd>floats.in</dd><dt><span>frc_file_01 :</span></dt><dd>../PSAS/doppio_flx_6733_outer2.nc</dd><dt><span>frc_file_02 :</span></dt><dd>../Data/Pair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_03 :</span></dt><dd>../Data/Qair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_04 :</span></dt><dd>../Data/rain_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_05 :</span></dt><dd>../Data/swrad_daily_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_06 :</span></dt><dd>../Data/Tair_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>frc_file_07 :</span></dt><dd>../Data/Winds_ncepnam_3hourly_MAB_and_GoM.nc</dd><dt><span>grd_file :</span></dt><dd>/home/om/roms/doppio/7km/grid_doppio_JJA_v13.nc</dd><dt><span>header_dir :</span></dt><dd>/home/julia/ROMS/doppio/Compile/fwd</dd><dt><span>header_file :</span></dt><dd>doppio.h</dd><dt><span>his_base :</span></dt><dd>doppio_his_6733</dd><dt><span>history :</span></dt><dd>ROMS/TOMS, Version 3.9, Tuesday - June 11, 2024 -  4:33:26 AM ;
-FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ini_file :</span></dt><dd>doppio_ini_6733.nc</dd><dt><span>location :</span></dt><dd>Proto fmrc:doppio_2017_da_avg</dd><dt><span>nud_file :</span></dt><dd>/home/om/roms/doppio/7km/doppio_nudgcoef_7km_1500-2000_GS.nc</dd><dt><span>os :</span></dt><dd>Linux</dd><dt><span>rst_file :</span></dt><dd>doppio_rst_6733.nc</dd><dt><span>script_file :</span></dt><dd>nl_ocean_doppio.in</dd><dt><span>summary :</span></dt><dd>doppio</dd><dt><span>svn_rev :</span></dt><dd>1040</dd><dt><span>svn_url :</span></dt><dd>https://www.myroms.org/svn/src/trunk</dd><dt><span>tide_file :</span></dt><dd>/home/om/roms/doppio/7km/doppio_tide_7km.nc</dd><dt><span>tiling :</span></dt><dd>004x004</dd><dt><span>title :</span></dt><dd>ROMS doppio Real-Time Operational PSAS Forecast System Version 1 FMRC Averages</dd><dt><span>type :</span></dt><dd>ROMS/TOMS nonlinear model averages file</dd><dt><span>var_info :</span></dt><dd>../Data/varinfo1040t_daily.dat</dd></dl></div></li></ul></div></div></div></div>
+tke:   Gra    Gra    Gra    Clo</dd><dt><span>svn_url :</span></dt><dd>https://www.myroms.org/svn/src/trunk</dd><dt><span>svn_rev :</span></dt><dd>1040</dd><dt><span>code_dir :</span></dt><dd>/home/julia/ROMS/doppio/svn1040t</dd><dt><span>header_dir :</span></dt><dd>/home/julia/ROMS/doppio/Compile/fwd</dd><dt><span>header_file :</span></dt><dd>doppio.h</dd><dt><span>os :</span></dt><dd>Linux</dd><dt><span>cpu :</span></dt><dd>x86_64</dd><dt><span>compiler_system :</span></dt><dd>ifort</dd><dt><span>compiler_command :</span></dt><dd>/opt/sw/apps/intel-2021_8/openmpi/4.1.5/bin/mpif90</dd><dt><span>compiler_flags :</span></dt><dd>-fp-model precise -heap-arrays -ip -O3 -traceback -check uninit</dd><dt><span>tiling :</span></dt><dd>004x004</dd><dt><span>history :</span></dt><dd>ROMS/TOMS, Version 3.9, Wednesday - March 19, 2025 -  4:32:36 AM ;
+FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ana_file :</span></dt><dd>ROMS/Functionals/ana_btflux.h, ROMS/Functionals/ana_srflux.h</dd><dt><span>CPP_options :</span></dt><dd>DOPPIO, ADD_FSOBC, ADD_M2OBC, ANA_BSFLUX, ANA_BTFLUX, ASSUMED_SHAPE, ATM_PRESS, AVERAGES, !BOUNDARY_A BULK_FLUXES, !COLLECT_ALL..., CHARNOK, CRAIG_BANNER, CURVGRID, DEFLATE, DIURNAL_SRFLUX, DJ_GRADPS, DOUBLE_PRECISION, EMINUSP, FORWARD_WRITE, GLS_MIXING, HDF5, KANTHA_CLAYSON, LONGWAVE_OUT, MASKING, MIX_GEO_TS, MIX_S_UV, MPI, NONLINEAR, NONLIN_EOS, NO_LBC_ATT, N2S2_HORAVG, OUT_DOUBLE, POWER_LAW, PROFILE, K_GSCHEME, REDUCE_ALLREDUCE, !RST_SINGLE, SALINITY, SOLAR_SOURCE, SOLVE3D, SSH_TIDES, TS_DIF2, UV_ADV, UV_COR, UV_U3HADVECTION, UV_C4VADVECTION, UV_QDRAG, UV_TIDES, UV_VIS2, VAR_RHO_2D, WIND_MINUS_CURRENT</dd><dt><span>_CoordSysBuilder :</span></dt><dd>ucar.nc2.dataset.conv.CF1Convention</dd><dt><span>his_base :</span></dt><dd>doppio_his_7014</dd><dt><span>flt_file :</span></dt><dd>doppio_flt_7014.nc</dd><dt><span>fpos_file :</span></dt><dd>floats.in</dd><dt><span>cdm_data_type :</span></dt><dd>GRID</dd><dt><span>featureType :</span></dt><dd>GRID</dd><dt><span>location :</span></dt><dd>Proto fmrc:doppio_2017_da_avg</dd><dt><span>summary :</span></dt><dd>doppio</dd><dt><span>DODS_EXTRA.Unlimited_Dimension :</span></dt><dd>ocean_time</dd></dl></div></li></ul></div></div></div></div>
 </div>
 <p>And a quick plot to check the data.</p>
 <div class="cell docutils container">
@@ -1636,7 +1539,7 @@ FMRC Best_Excluding_Day1 Dataset</dd><dt><span>ini_file :</span></dt><dd>doppio_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/3aee8981b36387d498d8f49bcb7ae2f5cbb61db6f9bc105bad0f20de0e522e51.png" src="../../../_images/3aee8981b36387d498d8f49bcb7ae2f5cbb61db6f9bc105bad0f20de0e522e51.png" />
+<img alt="../../../_images/18fd068213157fd56d0dd96b414aa4929bf4d66bd3f7c92f9324bdad0c46bbdb.png" src="../../../_images/18fd068213157fd56d0dd96b414aa4929bf4d66bd3f7c92f9324bdad0c46bbdb.png" />
 </div>
 </div>
 <p>What is the current workflow and what are the altearnatives? Most ocean data are stored as modern netCDF files that are, under the hood HDF5 files with more strict metadata stuture. HDF5 has some limitations like,</p>
