@@ -37,7 +37,7 @@ jobs:
       id: relock
       run: >
         cd .binder/
-        &&  conda-lock --conda=micromamba -f environment-python_and_r.yml
+        &&  conda lock --conda=micromamba -f environment-python_and_r.yml
 
     - name: Check for changes
       id: check_changes
