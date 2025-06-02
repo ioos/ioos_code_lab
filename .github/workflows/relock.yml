@@ -1,16 +1,12 @@
 name: relock
 
-# on:
-#   schedule:
-#     - cron: '0 0 1 * *'
-#   workflow_dispatch:
 on:
-  pull_request:
-  push:
-    branches: [main]
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
 
 jobs:
-  update-cftable:
+  relock:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -30,14 +26,12 @@ jobs:
         init-shell: bash
         create-args: >-
           python=3
-          conda
-          conda lock
+          conda conda-lock
 
     - name: re-lock
-      id: relock
       run: >
         cd .binder/
-        &&  conda lock --conda=micromamba -f environment-python_and_r.yml
+        && conda-lock --conda=micromamba -f environment-python_and_r.yml
 
     - name: Check for changes
       id: check_changes
