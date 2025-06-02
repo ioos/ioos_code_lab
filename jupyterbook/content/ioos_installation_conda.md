@@ -11,7 +11,7 @@ you can install it by typing `conda install -c defaults anaconda`.
 Note that if you have the Anaconda Distribution,
 or any other installation,
 in your machine you may want to follow
-[these uninstall instructions](https://docs.anaconda.com/anaconda/install/uninstall/)
+[these uninstall instructions](https://www.anaconda.com/docs/getting-started/anaconda/uninstall)
 before proceeding.
 
 ## Install
