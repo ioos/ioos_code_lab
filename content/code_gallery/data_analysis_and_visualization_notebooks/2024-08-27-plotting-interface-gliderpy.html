@@ -547,8 +547,16 @@ document.write(`
 
 <span class="n">glider_grab</span> <span class="o">=</span> <span class="n">GliderDataFetcher</span><span class="p">()</span>
 
-<span class="n">glider_grab</span><span class="o">.</span><span class="n">fetcher</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;whoi_406-20160902T1700&quot;</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">glider_grab</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;whoi_406-20160902T1700&quot;</span>
+<span class="n">glider_grab</span><span class="o">.</span><span class="n">dataset_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataset_id</span><span class="p">]</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="n">glider_grab</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="n">dataset_id</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -561,7 +569,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/35d9575f929f53a865d4967642b1ff7161eb25c246af380cfe8a9965eaaab557.png" src="../../../_images/35d9575f929f53a865d4967642b1ff7161eb25c246af380cfe8a9965eaaab557.png" />
+<img alt="../../../_images/abb5766e08f5c2e721bdfd00a7284c0329a042ebbea7da73bb2576a4a5c3cb80.png" src="../../../_images/abb5766e08f5c2e721bdfd00a7284c0329a042ebbea7da73bb2576a4a5c3cb80.png" />
 </div>
 </div>
 <p>This is essentially a cartopy figure and one can customize it <code class="docutils literal notranslate"><span class="pre">further</span></code> to add tick marks, change coastline, land features, etc. However, the idea is to have <code class="docutils literal notranslate"><span class="pre">gliderpy</span></code>’s defaults to be just a bare minimum for a quick visualization.</p>
@@ -578,7 +586,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/accf3aa3490cc28744a41b2d6fb272f42bf913f5824601128809f129d532566b.png" src="../../../_images/accf3aa3490cc28744a41b2d6fb272f42bf913f5824601128809f129d532566b.png" />
+<img alt="../../../_images/5ef0ec97550215c1672a943b3ee9a54885075f4b7181bc0f9bd12952e6be2999.png" src="../../../_images/5ef0ec97550215c1672a943b3ee9a54885075f4b7181bc0f9bd12952e6be2999.png" />
 </div>
 </div>
 <p>As we can see from the gaps in some of the progiles this dataset was aready QA/QC’ed.</p>
@@ -598,7 +606,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/15c30dff539e6db02cf2c2c9aba366b14e7ea07c16afc28eeb072e8aacdd8e81.png" src="../../../_images/15c30dff539e6db02cf2c2c9aba366b14e7ea07c16afc28eeb072e8aacdd8e81.png" />
+<img alt="../../../_images/bb8ee61cdd3c93e27747e5ac6df9246d3c8135c006205ece170a2efb3b0149ca.png" src="../../../_images/bb8ee61cdd3c93e27747e5ac6df9246d3c8135c006205ece170a2efb3b0149ca.png" />
 </div>
 </div>
 <p>We can check a whole transec with the <code class="docutils literal notranslate"><span class="pre">plot_transect</span></code> method.</p>
@@ -619,7 +627,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/e34241bc3e4fad23c8e57b8f885150c3c651fc8c4ced5e7b6c08f5b2c19388a5.png" src="../../../_images/e34241bc3e4fad23c8e57b8f885150c3c651fc8c4ced5e7b6c08f5b2c19388a5.png" />
+<img alt="../../../_images/9c9f4540e767c98b0566d0837cec30ff04ce5019e50a5468c4117a2345c78c27.png" src="../../../_images/9c9f4540e767c98b0566d0837cec30ff04ce5019e50a5468c4117a2345c78c27.png" />
 </div>
 </div>
 <p>We hope this new functionality is useful!</p>
