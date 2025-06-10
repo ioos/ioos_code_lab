@@ -1,0 +1,1163 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Interpolate MURSST to great white shark telemetry track with R and ERDDAP &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/code_gallery/data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp';</script>
+    <link rel="canonical" href="https://ioos.github.io/ioos_code_lab/content/code_gallery/data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp.html" />
+    <link rel="icon" href="../../../_static/IOOS_logo.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Adding a plotting interface gliderpy" href="2024-08-27-plotting-interface-gliderpy.html" />
+    <link rel="prev" title="Interpolating data remotely with ERDDAP" href="2021-10-25-ERDDAP-interpolate.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/IOOS_logo.png" class="logo__image only-light" alt="The U.S. Integrated Ocean Observing System (IOOS) - Home"/>
+    <script>document.write(`<img src="../../../_static/IOOS_logo.png" class="logo__image only-dark" alt="The U.S. Integrated Ocean Observing System (IOOS) - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ioos_installation_conda.html">Installing the IOOS Conda Environment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Code Gallery</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Notebooks gallery</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_access.html">Data Access</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-10-12-fetching_data.html">Fetching data from CO-OPS ERDDAP with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-11-15-glider_data_example.html">Plotting Glider data with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-12-20-searching_glider_deployments.html">Accessing glider data via the Glider DAC API with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.html">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html">Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-08-01-xtractoR.html">Using the <code class="docutils literal notranslate"><span class="pre">xtractomatic</span></code> R package to track Pacific Blue Marlin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-09-09-hurricane_irma.html">Exploring the NHC Advisories and Sea Surface Height during Hurricane Irma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-11-30-rerddap.html">Calling R libraries from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2018-02-20-obis.html">Using r-obistools and r-obis to explore the OBIS database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2018-03-01-erddapy.html">erddapy: a python client/URL builder for ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2019-03-08-grids-temperature.html">IOOS models: Temperature Horizontal Slices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2019-05-27-hurricane_gis_part02.html">Accessing data from SOS using NHC GIS files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2020-10-10-GTS.html">IOOS GTS Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2021-10-19-multiple-erddap-search.html">Searching multiple ERDDAP servers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2022-11-23_pyobis_example.html">Using pyobis to query for known datasets</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2022-11-25-plan_surf_trip_EDS.html">Planning a surf trip using IOOS EDS Model Viewer</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2016-11-16-CF-UGRID-SGRID-conventions.html">Parsing Conventions and standards with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-01-23-R-notebook.html">Quick demonstration of R-notebooks using the r-oce library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-03-30-octave_notebook_example.html">A Matlab notebook primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2018-12-04-grids.html">IOOS models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2020-02-14-QARTOD_ioos_qc_Water-Level-Example.html">IOOS QARTOD software (ioos_qc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2021-10-25-ERDDAP-interpolate.html">Interpolating data remotely with ERDDAP</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Interpolate MURSST to great white shark telemetry track with R and ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-08-27-plotting-interface-gliderpy.html">Adding a plotting interface gliderpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-09-13-OBIS_EOVs.html">Using AphiaIDs to download OBIS occurrences for Bio/Eco EOVs</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_management.html">Data Management</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-05-14-running_compliance_checker.html">Shore Station Compliance Checker Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-11-01-Creating-Archives-Using-Bagit.html">Using BagIt to tag oceanographic data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2018-02-27-pocean-timeSeries-demo.html">Creating a CF-1.6 timeSeries using pocean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2020-12-08-DataToDwC.html">Aligning Data to Darwin Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2023-03-20-Reading_and_writing_zarr.html">Reading and writting zarr files with xarray</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Video Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/glos.html">GLOS Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ioos.html">IOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/nanoos.html">NANOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ooi.html">OOI Demonstration Videos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/python_dem.html">Python Demonstration Videos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://help.aodn.org.au/aodn-data-tools/user-code-library/">Opening netCDF files - hints from AODN</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://unidata.github.io/notebook-gallery/">Unidata Jupyter Notebook Gallery</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://iobis.org/tutorial/">Extracting and Enriching OBIS data with R</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/USGS-R">USGS-R Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ioos/ioos_code_lab/main?urlpath=lab/tree/jupyterbook/content/code_gallery/data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ioos/ioos_code_lab/blob/main/jupyterbook/content/code_gallery/data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab/issues/new?title=Issue%20on%20page%20%2Fcontent/code_gallery/data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/code_gallery/data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Interpolate MURSST to great white shark telemetry track with R and ERDDAP</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-netcdf-file-from-the-ncei-archive">Download the netCDF file from the NCEI Archive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collect-all-the-metadata-from-the-netcdf-file">Collect all the metadata from the netCDF file.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-attributes-from-netcdf">Example extracting attributes from netCDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#store-the-data-as-a-tibble-in-a-variable">Store the data as a tibble in a variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-time">Dealing with time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-raw-data">Plotting the raw data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-map">Making a map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolating-mursst-to-white-shark-tracks-using-erddap">Interpolating MURSST to white shark tracks using ERDDAP</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="interpolate-mursst-to-great-white-shark-telemetry-track-with-r-and-erddap">
+<h1>Interpolate MURSST to great white shark telemetry track with R and ERDDAP<a class="headerlink" href="#interpolate-mursst-to-great-white-shark-telemetry-track-with-r-and-erddap" title="Link to this heading">#</a></h1>
+<p>Created: 2024-05-16</p>
+<p>Updated: 2024-07-02</p>
+<p>This notebook walks through downloading a netCDF file from NCEI. The file follows a specific specification for ATN satellite trajectory observations as documented <a class="reference external" href="https://ioos.github.io/ioos-atn-data/atn-sat-telem-specification-v1-0.html#example-dataset">here</a>. More information about the ATN netCDF specification can be found at <a class="reference external" href="https://ioos.github.io/ioos-atn-data/">https://ioos.github.io/ioos-atn-data/</a>.</p>
+<p>Since most of the examples in the IOOS Code Lab are in the python programming language, we wanted to show an example of working with a netCDF file in the R programming language to be inclusive of those users.</p>
+<p>For more information on the tidync package, see this R blog: <a class="reference external" href="https://ropensci.org/blog/2019/11/05/tidync/">https://ropensci.org/blog/2019/11/05/tidync/</a></p>
+<p>Data used in this notebook are available from NCEI at the following link <a class="reference external" href="https://www.ncei.noaa.gov/archive/accession/0282699">https://www.ncei.noaa.gov/archive/accession/0282699</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tidync</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">obistools</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ncdf4</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">lubridate</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">mapdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
+which was just loaded, will retire in October 2023.
+Please refer to R-spatial evolution reports for details, especially
+https://r-spatial.org/r/2023/05/15/evolution4.html.
+It may be desirable to make the sf package available;
+package maintainers should consider adding sf to Suggests:.
+The sp package is now running under evolution status 2
+     (status 2 uses the sf package in place of rgdal)
+
+-- <span class=" -Color -Color-Bold">Attaching packages</span> ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- tidyverse 1.3.2 --
+<span class=" -Color -Color-Green">v</span> <span class=" -Color -Color-Blue">ggplot2</span> 3.4.2     <span class=" -Color -Color-Green">v</span> <span class=" -Color -Color-Blue">purrr  </span> 1.0.1
+<span class=" -Color -Color-Green">v</span> <span class=" -Color -Color-Blue">tibble </span> 3.2.1     <span class=" -Color -Color-Green">v</span> <span class=" -Color -Color-Blue">dplyr  </span> 1.1.1
+<span class=" -Color -Color-Green">v</span> <span class=" -Color -Color-Blue">tidyr  </span> 1.3.0     <span class=" -Color -Color-Green">v</span> <span class=" -Color -Color-Blue">stringr</span> 1.5.0
+<span class=" -Color -Color-Green">v</span> <span class=" -Color -Color-Blue">readr  </span> 2.1.4     <span class=" -Color -Color-Green">v</span> <span class=" -Color -Color-Blue">forcats</span> 1.0.0
+-- <span class=" -Color -Color-Bold">Conflicts</span> -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+<span class=" -Color -Color-Red">x</span> <span class=" -Color -Color-Blue">dplyr</span>::<span class=" -Color -Color-Green">filter()</span> masks <span class=" -Color -Color-Blue">stats</span>::filter()
+<span class=" -Color -Color-Red">x</span> <span class=" -Color -Color-Blue">dplyr</span>::<span class=" -Color -Color-Green">lag()</span>    masks <span class=" -Color -Color-Blue">stats</span>::lag()
+
+Attaching package: &#39;lubridate&#39;
+
+
+The following objects are masked from &#39;package:base&#39;:
+
+    date, intersect, setdiff, union
+
+
+
+Attaching package: &#39;maps&#39;
+
+
+The following object is masked from &#39;package:purrr&#39;:
+
+    map
+</pre></div>
+</div>
+</div>
+</div>
+<section id="download-the-netcdf-file-from-the-ncei-archive">
+<h2>Download the netCDF file from the NCEI Archive<a class="headerlink" href="#download-the-netcdf-file-from-the-ncei-archive" title="Link to this heading">#</a></h2>
+<p>See <a class="reference external" href="https://www.ncei.noaa.gov/archive/accession/0282699">https://www.ncei.noaa.gov/archive/accession/0282699</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;https://www.ncei.noaa.gov/data/oceans/archive/arc0217/0282699/1.1/data/0-data/atn_45866_great-white-shark_trajectory_20090923-20091123.nc&#39;</span>
+
+<span class="n">fname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nf">download.file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">fname</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;wb&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="collect-all-the-metadata-from-the-netcdf-file">
+<h2>Collect all the metadata from the netCDF file.<a class="headerlink" href="#collect-all-the-metadata-from-the-netcdf-file" title="Link to this heading">#</a></h2>
+<p>This gathers not only the global attributes, but the variable level attributes as well. As you can see in the <strong>variable</strong> column the term <code class="docutils literal notranslate"><span class="pre">NC_GLOBAL</span></code> refers to global attributes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ncmeta</span><span class="o">::</span><span class="nf">nc_atts</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-extracting-attributes-from-netcdf">
+<h2>Example extracting attributes from netCDF<a class="headerlink" href="#example-extracting-attributes-from-netcdf" title="Link to this heading">#</a></h2>
+<p>To give you an idea of what observations are in this file, we can print out the human readable <code class="docutils literal notranslate"><span class="pre">summary</span></code> and <code class="docutils literal notranslate"><span class="pre">long_name</span></code> attributes from all the variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;summary&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 1 × 4</caption>
+<thead>
+	<tr><th scope=col>id</th><th scope=col>name</th><th scope=col>variable</th><th scope=col>value</th></tr>
+	<tr><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;named list&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>46</td><td>summary</td><td>NC_GLOBAL</td><td>Wildlife Computers SPOT5 tag (ptt id 45866) deployed on a great white shark (Carcharodon carcharias) by Chris G. Lowe in the North Pacific Ocean from 2009-09-23 to 2009-11-23</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;long_name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 36 × 4</caption>
+<thead>
+	<tr><th scope=col>id</th><th scope=col>name</th><th scope=col>variable</th><th scope=col>value</th></tr>
+	<tr><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;named list&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0</td><td>long_name</td><td>deploy_id           </td><td>id for this deployment. This is typically the tag ptt</td></tr>
+	<tr><td>5</td><td>long_name</td><td>time                </td><td>Time of the measurement, in seconds since 1990-01-01</td></tr>
+	<tr><td>2</td><td>long_name</td><td>z                   </td><td>depth of measurement</td></tr>
+	<tr><td>2</td><td>long_name</td><td>lat                 </td><td>Latitude portion of location in decimal degrees North</td></tr>
+	<tr><td>2</td><td>long_name</td><td>lon                 </td><td>Longitude portion of location in decimal degrees East</td></tr>
+	<tr><td>2</td><td>long_name</td><td>ptt                 </td><td>Platform Transmitter Terminal (PTT) id used for Argos transmissions</td></tr>
+	<tr><td>2</td><td>long_name</td><td>instrument          </td><td>Instrument family</td></tr>
+	<tr><td>2</td><td>long_name</td><td>type                </td><td>Type of location information - Argos, GPS satellite or user provided location</td></tr>
+	<tr><td>3</td><td>long_name</td><td>location_class      </td><td>Location Quality Code from ARGOS satellite system</td></tr>
+	<tr><td>2</td><td>long_name</td><td>error_radius        </td><td>Error radius</td></tr>
+	<tr><td>2</td><td>long_name</td><td>semi_major_axis     </td><td>Error - ellipse semi-major axis</td></tr>
+	<tr><td>2</td><td>long_name</td><td>semi_minor_axis     </td><td>Error - ellipse semi-minor axis</td></tr>
+	<tr><td>2</td><td>long_name</td><td>ellipse_orientation </td><td>Error - ellipse orientation in degrees clockwise from true north</td></tr>
+	<tr><td>2</td><td>long_name</td><td>offset              </td><td>Error - offset in meters to center of error ellipse or circle</td></tr>
+	<tr><td>2</td><td>long_name</td><td>offset_orientation  </td><td>Error - offset orientation angle to ellipse center</td></tr>
+	<tr><td>2</td><td>long_name</td><td>gpe_msd             </td><td></td></tr>
+	<tr><td>2</td><td>long_name</td><td>gpe_u               </td><td></td></tr>
+	<tr><td>3</td><td>long_name</td><td>count               </td><td>Count</td></tr>
+	<tr><td>3</td><td>long_name</td><td>qartod_time_flag    </td><td>Time QC test - gross range test</td></tr>
+	<tr><td>3</td><td>long_name</td><td>qartod_speed_flag   </td><td>Speed QC test - gross range test</td></tr>
+	<tr><td>3</td><td>long_name</td><td>qartod_location_flag</td><td>Location QC test - Location test</td></tr>
+	<tr><td>3</td><td>long_name</td><td>qartod_rollup_flag  </td><td>Aggregate QC value</td></tr>
+	<tr><td>3</td><td>long_name</td><td>crs                 </td><td>Coordinate Reference System - http://www.opengis.net/def/crs/EPSG/0/4326</td></tr>
+	<tr><td>1</td><td>long_name</td><td>trajectory          </td><td>trajectory identifier</td></tr>
+	<tr><td>2</td><td>long_name</td><td>animal_age          </td><td>age of the animal as measured or estimated at deployment</td></tr>
+	<tr><td>1</td><td>long_name</td><td>animal_life_stage   </td><td>Lifestage of the animal at time of deployment </td></tr>
+	<tr><td>1</td><td>long_name</td><td>animal_sex          </td><td>sex of the animal at time of tag deployment</td></tr>
+	<tr><td>2</td><td>long_name</td><td>animal_weight       </td><td>mass of the animal as measured or estimated at deployment</td></tr>
+	<tr><td>4</td><td>long_name</td><td>animal_length       </td><td>length of the animal as measured or estimated at deployment</td></tr>
+	<tr><td>4</td><td>long_name</td><td>animal_length_2     </td><td>length of the animal as measured or estimated at deployment</td></tr>
+	<tr><td>3</td><td>long_name</td><td>animal              </td><td>tagged animal id</td></tr>
+	<tr><td>3</td><td>long_name</td><td>instrument_tag      </td><td>telemetry tag applied to animal</td></tr>
+	<tr><td>3</td><td>long_name</td><td>instrument_location </td><td>Wildlife Computers SPOT5</td></tr>
+	<tr><td>1</td><td>long_name</td><td>taxon_name          </td><td>most precise taxonomic classification for the tagged animal</td></tr>
+	<tr><td>1</td><td>long_name</td><td>taxon_lsid          </td><td>Namespaced Taxon Identifier for the tagged animal</td></tr>
+	<tr><td>0</td><td>long_name</td><td>comment             </td><td>Comment</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="store-the-data-as-a-tibble-in-a-variable">
+<h2>Store the data as a tibble in a variable<a class="headerlink" href="#store-the-data-as-a-tibble-in-a-variable" title="Link to this heading">#</a></h2>
+<p>Collect the data dimensioned by <code class="docutils literal notranslate"><span class="pre">time</span></code> from the netCDF file as a tibble. Then, print the first few rows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">atn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tidync</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+<span class="n">atn_tbl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">atn</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">hyper_tibble</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="nf">head</span><span class="p">(</span><span class="n">atn_tbl</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 4 × 23</caption>
+<thead>
+	<tr><th scope=col>time</th><th scope=col>z</th><th scope=col>lat</th><th scope=col>lon</th><th scope=col>ptt</th><th scope=col>instrument</th><th scope=col>type</th><th scope=col>location_class</th><th scope=col>error_radius</th><th scope=col>semi_major_axis</th><th scope=col>...</th><th scope=col>offset_orientation</th><th scope=col>gpe_msd</th><th scope=col>gpe_u</th><th scope=col>count</th><th scope=col>qartod_time_flag</th><th scope=col>qartod_speed_flag</th><th scope=col>qartod_location_flag</th><th scope=col>qartod_rollup_flag</th><th scope=col>comment</th><th scope=col>obs</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>...</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>622512000</td><td>0</td><td>34.030</td><td>-118.560</td><td>45866</td><td>SPOT</td><td>User </td><td>nan</td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>2</td><td>1</td><td>1</td><td></td><td>1</td></tr>
+	<tr><td>622708920</td><td>0</td><td>23.590</td><td>-166.180</td><td>45866</td><td>SPOT</td><td>Argos</td><td>A  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>4</td><td>1</td><td>4</td><td></td><td>2</td></tr>
+	<tr><td>622724940</td><td>0</td><td>34.024</td><td>-118.556</td><td>45866</td><td>SPOT</td><td>Argos</td><td>1  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>4</td><td>1</td><td>4</td><td></td><td>3</td></tr>
+	<tr><td>622725060</td><td>0</td><td>34.035</td><td>-118.549</td><td>45866</td><td>SPOT</td><td>Argos</td><td>0  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>4</td><td>1</td><td>4</td><td></td><td>4</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="dealing-with-time">
+<h2>Dealing with time<a class="headerlink" href="#dealing-with-time" title="Link to this heading">#</a></h2>
+<p>Notice the data in the <strong>time</strong> column aren’t formatted as times. We need to read the metadata associated with the time variable to understand what the units are. Below, we print a tibble of all the attributes from the <strong>time</strong> variable.</p>
+<p>Notice the <em>units</em> attribute and it’s value of <code class="docutils literal notranslate"><span class="pre">seconds</span> <span class="pre">since</span> <span class="pre">1990-01-01</span> <span class="pre">00:00:00Z</span></code>. We need to use that information to convert the time variable to something useful that <code class="docutils literal notranslate"><span class="pre">ggplot</span></code> can handle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">time_attrs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">variable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">time_attrs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 13 × 4</caption>
+<thead>
+	<tr><th scope=col>id</th><th scope=col>name</th><th scope=col>variable</th><th scope=col>value</th></tr>
+	<tr><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;named list&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td> 0</td><td>units                </td><td>time</td><td>seconds since 1990-01-01 00:00:00Z</td></tr>
+	<tr><td> 1</td><td>standard_name        </td><td>time</td><td>time</td></tr>
+	<tr><td> 2</td><td>axis                 </td><td>time</td><td>T</td></tr>
+	<tr><td> 3</td><td>_CoordinateAxisType  </td><td>time</td><td>Time</td></tr>
+	<tr><td> 4</td><td>calendar             </td><td>time</td><td>standard</td></tr>
+	<tr><td> 5</td><td>long_name            </td><td>time</td><td>Time of the measurement, in seconds since 1990-01-01</td></tr>
+	<tr><td> 6</td><td>actual_min           </td><td>time</td><td>2009-09-23T00:00:00Z</td></tr>
+	<tr><td> 7</td><td>actual_max           </td><td>time</td><td>2009-11-23T05:12:00Z</td></tr>
+	<tr><td> 8</td><td>ancillary_variables  </td><td>time</td><td>qartod_time_flag qartod_rollup_flag qartod_speed_flag</td></tr>
+	<tr><td> 9</td><td>instrument           </td><td>time</td><td>instrument_location</td></tr>
+	<tr><td>10</td><td>platform             </td><td>time</td><td>animal</td></tr>
+	<tr><td>11</td><td>coverage_content_type</td><td>time</td><td>coordinate</td></tr>
+	<tr><td>12</td><td>_FillValue           </td><td>time</td><td>NaN</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>So, we grab the value from the <code class="docutils literal notranslate"><span class="pre">units</span></code> attribute, split the string to collect the date information, and apply that to a time conversion function <code class="docutils literal notranslate"><span class="pre">as.POSIXct</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tunit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">time_attrs</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;units&quot;</span><span class="p">)</span>
+<span class="n">lunit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">str_split</span><span class="p">(</span><span class="n">tunit</span><span class="o">$</span><span class="n">value</span><span class="p">,</span><span class="s">&#39; &#39;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="n">atn_tbl</span><span class="o">$</span><span class="n">time</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.POSIXct</span><span class="p">(</span><span class="n">atn_tbl</span><span class="o">$</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">origin</span><span class="o">=</span><span class="n">lunit</span><span class="p">[</span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s">&quot;GMT&quot;</span><span class="p">)</span>
+
+<span class="nf">head</span><span class="p">(</span><span class="n">atn_tbl</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 23</caption>
+<thead>
+	<tr><th scope=col>time</th><th scope=col>z</th><th scope=col>lat</th><th scope=col>lon</th><th scope=col>ptt</th><th scope=col>instrument</th><th scope=col>type</th><th scope=col>location_class</th><th scope=col>error_radius</th><th scope=col>semi_major_axis</th><th scope=col>...</th><th scope=col>offset_orientation</th><th scope=col>gpe_msd</th><th scope=col>gpe_u</th><th scope=col>count</th><th scope=col>qartod_time_flag</th><th scope=col>qartod_speed_flag</th><th scope=col>qartod_location_flag</th><th scope=col>qartod_rollup_flag</th><th scope=col>comment</th><th scope=col>obs</th></tr>
+	<tr><th scope=col>&lt;dttm&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>...</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>2009-09-23 00:00:00</td><td>0</td><td>34.03</td><td>-118.56</td><td>45866</td><td>SPOT</td><td>User </td><td>nan</td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>2</td><td>1</td><td>1</td><td></td><td>1</td></tr>
+	<tr><td>2009-09-25 06:42:00</td><td>0</td><td>23.59</td><td>-166.18</td><td>45866</td><td>SPOT</td><td>Argos</td><td>A  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>4</td><td>1</td><td>4</td><td></td><td>2</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="plotting-the-raw-data">
+<h2>Plotting the raw data<a class="headerlink" href="#plotting-the-raw-data" title="Link to this heading">#</a></h2>
+<p>Now lets make some plots just to take a look at what data we’re working with. Here we make a plot of time vs longitude.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">)</span>
+
+<span class="c1"># collect title from global attributes</span>
+<span class="n">title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">variable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;NC_GLOBAL&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;title&quot;</span><span class="p">)</span>
+
+<span class="c1"># Map limits.</span>
+<span class="n">ylim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">atn_tbl</span><span class="o">$</span><span class="n">lat</span><span class="p">)</span><span class="m">-0.25</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">atn_tbl</span><span class="o">$</span><span class="n">lat</span><span class="p">)</span><span class="m">+0.25</span><span class="w"> </span><span class="p">)</span>
+<span class="n">xlim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">atn_tbl</span><span class="o">$</span><span class="n">lon</span><span class="p">)</span><span class="m">-0.25</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">atn_tbl</span><span class="o">$</span><span class="n">lon</span><span class="p">)</span><span class="m">+0.25</span><span class="w"> </span><span class="p">)</span>
+
+<span class="c1"># Get outline data for map.</span>
+<span class="n">w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">map_data</span><span class="p">(</span><span class="w"> </span><span class="s">&#39;worldHires&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylim</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="p">)</span>
+
+<span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">atn_tbl</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">geom_point</span><span class="p">(</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">location_class</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">geom_line</span><span class="p">(</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;grey&#39;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">scale_shape_manual</span><span class="p">(</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">19</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_polygon</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">long</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">group</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;grey80&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_fixed</span><span class="p">(</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="w"> </span><span class="nf">strwrap</span><span class="p">(</span><span class="n">title</span><span class="o">$</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">150</span><span class="p">),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../../_images/dad75423a04ec1c4fb7e69c635af1e04015480256bf257518463743488664de0.png"><img alt="../../../_images/dad75423a04ec1c4fb7e69c635af1e04015480256bf257518463743488664de0.png" src="../../../_images/dad75423a04ec1c4fb7e69c635af1e04015480256bf257518463743488664de0.png" style="width: 1200px; height: 420px;" />
+</a>
+</div>
+</div>
+<p>What do these <code class="docutils literal notranslate"><span class="pre">location_class</span></code> codes mean?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">code_defs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">variable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;location_class&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">name</span><span class="o">==</span><span class="s">&quot;code_meanings&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="o">==</span><span class="s">&quot;code_values&quot;</span><span class="p">)</span>
+
+<span class="nf">str_split_fixed</span><span class="p">(</span><span class="n">code_defs</span><span class="o">$</span><span class="n">value</span><span class="p">,</span><span class="s">&quot;,&quot;</span><span class="p">,</span><span class="m">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 2 × 8 of type chr</caption>
+<tbody>
+	<tr><td>G                                                                         </td><td>3                                                                          </td><td>2                                                                        </td><td>1                                                                         </td><td>0                                                                              </td><td>A                                                                                                                      </td><td>B                                                                                                                           </td><td>Z                                                                               </td></tr>
+	<tr><td>estimated error less than 100m and 1+ messages received per satellite pass</td><td> estimated error less than 250m and 4+ messages received per satellite pass</td><td> estimated error between 250m and 500m and 4+ messages per satellite pass</td><td> estimated error between 500m and 1500m and 4+ messages per satellite pass</td><td> estimated error greater than 1500m and 4+ messages received per satellite pass</td><td> no least squares estimated error or unbounded kalman filter estimated error and 3 messages received per satellite pass</td><td> no least squares estimated error or unbounded kalman filter estimated error and 1 or 2 messages received per satellite pass</td><td> invalid location (available for Service Plus or Auxilliary Location Processing)</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Review location uncertainty information and map to how many meters the uncertainty is.</p>
+<p>From the table above, only <code class="docutils literal notranslate"><span class="pre">nan</span></code>, <code class="docutils literal notranslate"><span class="pre">G</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, and <code class="docutils literal notranslate"><span class="pre">0</span></code> are valid points with known undertainties.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">atn_tbl_qc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">atn_tbl</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">location_class</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;nan&#39;</span><span class="p">,</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;0&#39;</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="c1">#     mutate(  # This returns NA for any other values than those defined below</span>
+<span class="c1">#         coordinateUncertaintyInMeters = case_when(location_class == &#39;nan&#39; ~ 0,</span>
+<span class="c1">#                                                      location_class == &#39;G&#39; ~ 200,</span>
+<span class="c1">#                                                      location_class == &#39;3&#39; ~ 250,</span>
+<span class="c1">#                                                      location_class == &#39;2&#39; ~ 500,</span>
+<span class="c1">#                                                      location_class == &#39;1&#39; ~ 1500,</span>
+<span class="c1">#                                                      location_class == &#39;0&#39; ~ 10000) # https://github.com/ioos/bio_data_guide/issues/145#issuecomment-1805739244</span>
+<span class="c1">#           ) %&gt;% </span>
+<span class="w">    </span><span class="nf">arrange</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+
+<span class="nf">head</span><span class="p">(</span><span class="n">atn_tbl_qc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 23</caption>
+<thead>
+	<tr><th scope=col>time</th><th scope=col>z</th><th scope=col>lat</th><th scope=col>lon</th><th scope=col>ptt</th><th scope=col>instrument</th><th scope=col>type</th><th scope=col>location_class</th><th scope=col>error_radius</th><th scope=col>semi_major_axis</th><th scope=col>...</th><th scope=col>offset_orientation</th><th scope=col>gpe_msd</th><th scope=col>gpe_u</th><th scope=col>count</th><th scope=col>qartod_time_flag</th><th scope=col>qartod_speed_flag</th><th scope=col>qartod_location_flag</th><th scope=col>qartod_rollup_flag</th><th scope=col>comment</th><th scope=col>obs</th></tr>
+	<tr><th scope=col>&lt;dttm&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>...</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>2009-09-23 00:00:00</td><td>0</td><td>34.030</td><td>-118.560</td><td>45866</td><td>SPOT</td><td>User </td><td>nan</td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>2</td><td>1</td><td>1</td><td></td><td>1</td></tr>
+	<tr><td>2009-09-25 11:09:00</td><td>0</td><td>34.024</td><td>-118.556</td><td>45866</td><td>SPOT</td><td>Argos</td><td>1  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>4</td><td>1</td><td>4</td><td></td><td>3</td></tr>
+	<tr><td>2009-09-25 11:11:00</td><td>0</td><td>34.035</td><td>-118.549</td><td>45866</td><td>SPOT</td><td>Argos</td><td>0  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>4</td><td>1</td><td>4</td><td></td><td>4</td></tr>
+	<tr><td>2009-09-27 17:58:00</td><td>0</td><td>34.033</td><td>-118.547</td><td>45866</td><td>SPOT</td><td>Argos</td><td>1  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>1</td><td>1</td><td>1</td><td></td><td>5</td></tr>
+	<tr><td>2009-10-08 20:24:00</td><td>0</td><td>34.038</td><td>-118.581</td><td>45866</td><td>SPOT</td><td>Argos</td><td>2  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>1</td><td>1</td><td>1</td><td></td><td>7</td></tr>
+	<tr><td>2009-10-15 11:05:00</td><td>0</td><td>33.995</td><td>-118.678</td><td>45866</td><td>SPOT</td><td>Argos</td><td>0  </td><td>NA</td><td>NA</td><td>...</td><td>NA</td><td>NaN</td><td>NaN</td><td>NA</td><td>1</td><td>1</td><td>1</td><td>1</td><td></td><td>8</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="making-a-map">
+<h2>Making a map<a class="headerlink" href="#making-a-map" title="Link to this heading">#</a></h2>
+<p>Next, let’s make a map of the locations of this animal with the colors identifying the location classes described in the table above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+
+<span class="c1"># collect title from global attributes</span>
+<span class="n">title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">variable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;NC_GLOBAL&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;title&quot;</span><span class="p">)</span>
+
+<span class="c1"># Map limits.</span>
+<span class="n">ylim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">atn_tbl_qc</span><span class="o">$</span><span class="n">lat</span><span class="p">)</span><span class="m">-0.15</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">atn_tbl_qc</span><span class="o">$</span><span class="n">lat</span><span class="p">)</span><span class="m">+0.15</span><span class="w"> </span><span class="p">)</span>
+<span class="n">xlim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">atn_tbl_qc</span><span class="o">$</span><span class="n">lon</span><span class="p">)</span><span class="m">-0.15</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">atn_tbl_qc</span><span class="o">$</span><span class="n">lon</span><span class="p">)</span><span class="m">+0.15</span><span class="w"> </span><span class="p">)</span>
+
+<span class="c1"># Get outline data for map.</span>
+<span class="n">w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">map_data</span><span class="p">(</span><span class="w"> </span><span class="s">&#39;worldHires&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylim</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="p">)</span>
+
+<span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">atn_tbl_qc</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">geom_point</span><span class="p">(</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location_class</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">geom_line</span><span class="p">(</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;grey&#39;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">scale_shape_manual</span><span class="p">(</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">19</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_polygon</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">long</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">group</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;grey80&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_fixed</span><span class="p">(</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="w"> </span><span class="nf">strwrap</span><span class="p">(</span><span class="n">title</span><span class="o">$</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">150</span><span class="p">),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../../_images/484f6e47abdf91451ebde83f43598473fcb54d8acbef30e3764265a7d970e4fb.png"><img alt="../../../_images/484f6e47abdf91451ebde83f43598473fcb54d8acbef30e3764265a7d970e4fb.png" src="../../../_images/484f6e47abdf91451ebde83f43598473fcb54d8acbef30e3764265a7d970e4fb.png" style="width: 600px; height: 600px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="interpolating-mursst-to-white-shark-tracks-using-erddap">
+<h2>Interpolating MURSST to white shark tracks using ERDDAP<a class="headerlink" href="#interpolating-mursst-to-white-shark-tracks-using-erddap" title="Link to this heading">#</a></h2>
+<p><em>The MURSST product is a merged, multi-sensor L4 Foundation Sea Surface Temperature (SST) analysis product from Jet Propulsion Laboratory (JPL).
+This daily, global, Multi-scale, Ultra-high Resolution (MUR) Sea Surface Temperature (SST) 1-km data set, Version 4.1, is produced at JPL under the NASA MEaSUREs program.
+For details, see <a class="reference external" href="https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1">https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1</a>.
+This dataset is part of the Group for High-Resolution Sea Surface Temperature (GHRSST) project.
+The data for the most recent 7 days is usually revised everyday.
+The data for other days is sometimes revised.</em></p>
+<p>We need to prepare the data to send to the server. As mentioned above the request will take a table with a header <code class="docutils literal notranslate"><span class="pre">&quot;time,latitude,longitude&quot;</span></code>, then its values. Note that we rename the columns, then pick the subset to store as one long string to create the request.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">time_lat_lon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">atn_tbl_qc</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">    </span><span class="nf">rename</span><span class="p">(</span><span class="w">  </span>
+<span class="w">        </span><span class="n">latitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span>
+<span class="w">        </span><span class="n">longitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lon</span><span class="p">)</span>
+
+<span class="n">time_lat_lon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">format_csv</span><span class="p">(</span><span class="n">time_lat_lon</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="s">&#39;latitude&#39;</span><span class="p">,</span><span class="s">&#39;longitude&#39;</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The cell below builds the request and download get it back as a data.frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;csv&quot;</span>
+<span class="n">dataset_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;jplMURSST41&quot;</span>
+<span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;analysed_sst&quot;</span>
+<span class="n">algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Nearest&quot;</span>
+<span class="n">nearby</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">216</span>
+
+<span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;http://coastwatch.pfeg.noaa.gov/erddap/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;convert/interpolate.&quot;</span><span class="p">,</span><span class="n">response</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;?TimeLatLonTable=&quot;</span><span class="p">,</span><span class="nf">URLencode</span><span class="p">(</span><span class="n">time_lat_lon</span><span class="p">,</span><span class="w"> </span><span class="n">reserved</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;&amp;requestCSV=&quot;</span><span class="p">,</span><span class="n">dataset_id</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="n">variable</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="n">algorithm</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="n">nearby</span>
+<span class="p">)</span>
+
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s plot what the interpolated sea surface temperatures were for that animal at that location and time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+
+<span class="c1"># collect title from global attributes</span>
+<span class="n">title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">variable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;NC_GLOBAL&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">filter</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;title&quot;</span><span class="p">)</span>
+
+<span class="c1"># Map limits.</span>
+<span class="n">ylim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">latitude</span><span class="p">)</span><span class="m">-0.1</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">latitude</span><span class="p">)</span><span class="m">+0.1</span><span class="w"> </span><span class="p">)</span>
+<span class="n">xlim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">longitude</span><span class="p">)</span><span class="m">-0.1</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">df</span><span class="o">$</span><span class="n">longitude</span><span class="p">)</span><span class="m">+0.1</span><span class="w"> </span><span class="p">)</span>
+
+<span class="c1"># Get outline data for map.</span>
+<span class="n">w</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">map_data</span><span class="p">(</span><span class="w"> </span><span class="s">&#39;worldHires&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylim</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="p">)</span>
+
+<span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">latitude</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">geom_point</span><span class="p">(</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jplMURSST41_analysed_sst_Nearest_216</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">geom_line</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">scale_shape_manual</span><span class="p">(</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">22</span><span class="p">,</span><span class="w"> </span><span class="m">17</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">     </span><span class="nf">scale_color_gradient</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">high</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+
+<span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_polygon</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">long</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">group</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;grey80&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_fixed</span><span class="p">(</span><span class="m">1.3</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xlim</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylim</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="w"> </span><span class="nf">strwrap</span><span class="p">(</span><span class="n">title</span><span class="o">$</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../../_images/5c2d9f3d5c828242f386dbf9f59efb4a3d343fcb816a24c32e034629f6edb8cc.png"><img alt="../../../_images/5c2d9f3d5c828242f386dbf9f59efb4a3d343fcb816a24c32e034629f6edb8cc.png" src="../../../_images/5c2d9f3d5c828242f386dbf9f59efb4a3d343fcb816a24c32e034629f6edb8cc.png" style="width: 600px; height: 600px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sessionInfo</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R version 4.1.3 (2022-03-10)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19045)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] mapdata_2.3.1    maps_3.4.1       lubridate_1.9.2  forcats_1.0.0   
+ [5] stringr_1.5.0    dplyr_1.1.1      purrr_1.0.1      readr_2.1.4     
+ [9] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.2    tidyverse_1.3.2 
+[13] ncdf4_1.21       obistools_0.0.10 tidync_0.3.0    
+
+loaded via a namespace (and not attached):
+ [1] httr_1.4.6          bit64_4.0.5         vroom_1.6.1        
+ [4] jsonlite_1.8.4      modelr_0.1.11       sp_2.0-0           
+ [7] googlesheets4_1.1.0 cellranger_1.1.0    pillar_1.9.0       
+[10] backports_1.4.1     lattice_0.20-45     glue_1.6.2         
+[13] uuid_1.1-0          digest_0.6.31       rvest_1.0.3        
+[16] colorspace_2.1-0    htmltools_0.5.5     pkgconfig_2.0.3    
+[19] broom_1.0.4         haven_2.5.2         scales_1.2.1       
+[22] tzdb_0.3.0          timechange_0.2.0    googledrive_2.1.0  
+[25] farver_2.1.1        generics_0.1.3      withr_2.5.0        
+[28] repr_1.1.6          cli_3.6.0           readxl_1.4.2       
+[31] magrittr_2.0.3      crayon_1.5.2        evaluate_0.20      
+[34] data.tree_1.0.0     fs_1.6.1            fansi_1.0.4        
+[37] xml2_1.3.3          tools_4.1.3         hms_1.1.3          
+[40] geosphere_1.5-18    gargle_1.4.0        lifecycle_1.0.3    
+[43] reprex_2.0.2        munsell_0.5.0       compiler_4.1.3     
+[46] RNetCDF_2.6-2       rlang_1.1.0         grid_4.1.3         
+[49] pbdZMQ_0.3-9        IRkernel_1.3.2      rappdirs_0.3.3     
+[52] htmlwidgets_1.6.2   crosstalk_1.2.0     labeling_0.4.2     
+[55] base64enc_0.1-3     rmarkdown_2.20      gtable_0.3.3       
+[58] DBI_1.1.3           R6_2.5.1            ncmeta_0.3.5       
+[61] knitr_1.42          bit_4.0.5           fastmap_1.1.1      
+[64] rgeos_0.6-2         utf8_1.2.3          stringi_1.7.12     
+[67] parallel_4.1.3      IRdisplay_1.1       Rcpp_1.0.10        
+[70] vctrs_0.6.1         leaflet_2.1.2       dbplyr_2.3.2       
+[73] tidyselect_1.2.0    xfun_0.37          
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./content/code_gallery/data_analysis_and_visualization_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2021-10-25-ERDDAP-interpolate.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Interpolating data remotely with ERDDAP</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2024-08-27-plotting-interface-gliderpy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Adding a plotting interface gliderpy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-netcdf-file-from-the-ncei-archive">Download the netCDF file from the NCEI Archive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collect-all-the-metadata-from-the-netcdf-file">Collect all the metadata from the netCDF file.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-attributes-from-netcdf">Example extracting attributes from netCDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#store-the-data-as-a-tibble-in-a-variable">Store the data as a tibble in a variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-time">Dealing with time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-raw-data">Plotting the raw data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-map">Making a map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolating-mursst-to-white-shark-tracks-using-erddap">Interpolating MURSST to white shark tracks using ERDDAP</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By IOOS
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href=https://ioos.noaa.gov> ioos.noaa.gov </a> &nbsp <a href=https://www.facebook.com/usioosgov> Facebook </a> &nbsp <a href=https://www.twitter.com/usioosgov> Twitter </a> &nbsp <a href="mailto:data.ioos@noaa.gov">Contact Us</a> <br> U.S. Integrated Ocean Observing System Program <br> 1315 East-West Highway <br> SSMC3, 2nd Floor <br> Silver Spring, MD 20910 <br> (240) 533-9444
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

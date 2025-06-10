@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>A Matlab notebook primer &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/code_gallery/data_analysis_and_visualization_notebooks/2017-03-30-octave_notebook_example';</script>
+    <link rel="canonical" href="https://ioos.github.io/ioos_code_lab/content/code_gallery/data_analysis_and_visualization_notebooks/2017-03-30-octave_notebook_example.html" />
+    <link rel="icon" href="../../../_static/IOOS_logo.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="IOOS models" href="2018-12-04-grids.html" />
+    <link rel="prev" title="Quick demonstration of R-notebooks using the r-oce library" href="2017-01-23-R-notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/IOOS_logo.png" class="logo__image only-light" alt="The U.S. Integrated Ocean Observing System (IOOS) - Home"/>
+    <script>document.write(`<img src="../../../_static/IOOS_logo.png" class="logo__image only-dark" alt="The U.S. Integrated Ocean Observing System (IOOS) - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ioos_installation_conda.html">Installing the IOOS Conda Environment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Code Gallery</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Notebooks gallery</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_access.html">Data Access</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-10-12-fetching_data.html">Fetching data from CO-OPS ERDDAP with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-11-15-glider_data_example.html">Plotting Glider data with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-12-20-searching_glider_deployments.html">Accessing glider data via the Glider DAC API with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.html">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html">Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-08-01-xtractoR.html">Using the <code class="docutils literal notranslate"><span class="pre">xtractomatic</span></code> R package to track Pacific Blue Marlin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-09-09-hurricane_irma.html">Exploring the NHC Advisories and Sea Surface Height during Hurricane Irma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-11-30-rerddap.html">Calling R libraries from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2018-02-20-obis.html">Using r-obistools and r-obis to explore the OBIS database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2018-03-01-erddapy.html">erddapy: a python client/URL builder for ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2019-03-08-grids-temperature.html">IOOS models: Temperature Horizontal Slices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2019-05-27-hurricane_gis_part02.html">Accessing data from SOS using NHC GIS files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2020-10-10-GTS.html">IOOS GTS Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2021-10-19-multiple-erddap-search.html">Searching multiple ERDDAP servers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2022-11-23_pyobis_example.html">Using pyobis to query for known datasets</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2022-11-25-plan_surf_trip_EDS.html">Planning a surf trip using IOOS EDS Model Viewer</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2016-11-16-CF-UGRID-SGRID-conventions.html">Parsing Conventions and standards with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-01-23-R-notebook.html">Quick demonstration of R-notebooks using the r-oce library</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">A Matlab notebook primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2018-12-04-grids.html">IOOS models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2020-02-14-QARTOD_ioos_qc_Water-Level-Example.html">IOOS QARTOD software (ioos_qc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2021-10-25-ERDDAP-interpolate.html">Interpolating data remotely with ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-05-16-white_shark_water_temp.html">Interpolate MURSST to great white shark telemetry track with R and ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-08-27-plotting-interface-gliderpy.html">Adding a plotting interface gliderpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-09-13-OBIS_EOVs.html">Using AphiaIDs to download OBIS occurrences for Bio/Eco EOVs</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_management.html">Data Management</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-05-14-running_compliance_checker.html">Shore Station Compliance Checker Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-11-01-Creating-Archives-Using-Bagit.html">Using BagIt to tag oceanographic data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2018-02-27-pocean-timeSeries-demo.html">Creating a CF-1.6 timeSeries using pocean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2020-12-08-DataToDwC.html">Aligning Data to Darwin Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2023-03-20-Reading_and_writing_zarr.html">Reading and writting zarr files with xarray</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Video Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/glos.html">GLOS Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ioos.html">IOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/nanoos.html">NANOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ooi.html">OOI Demonstration Videos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/python_dem.html">Python Demonstration Videos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://help.aodn.org.au/aodn-data-tools/user-code-library/">Opening netCDF files - hints from AODN</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://unidata.github.io/notebook-gallery/">Unidata Jupyter Notebook Gallery</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://iobis.org/tutorial/">Extracting and Enriching OBIS data with R</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/USGS-R">USGS-R Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ioos/ioos_code_lab/main?urlpath=lab/tree/jupyterbook/content/code_gallery/data_analysis_and_visualization_notebooks/2017-03-30-octave_notebook_example.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ioos/ioos_code_lab/blob/main/jupyterbook/content/code_gallery/data_analysis_and_visualization_notebooks/2017-03-30-octave_notebook_example.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab/issues/new?title=Issue%20on%20page%20%2Fcontent/code_gallery/data_analysis_and_visualization_notebooks/2017-03-30-octave_notebook_example.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/code_gallery/data_analysis_and_visualization_notebooks/2017-03-30-octave_notebook_example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A Matlab notebook primer</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-matlab-notebook-primer">
+<h1>A Matlab notebook primer<a class="headerlink" href="#a-matlab-notebook-primer" title="Link to this heading">#</a></h1>
+<p>Created: 2017-03-30</p>
+<div class="alert alert-danger">
+  <strong>This notebook is not tested in our CIs and require some extra configuration from the users. You'll need to install octave and the t_tide toolbox.</strong>
+</div><p>A common misconception is that <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code> notebooks are for Python only.
+We already showed how to use the
+<a class="reference external" href="https://ioos.github.io/ioos_code_lab/content/code_gallery/data_analysis_and_visualization_notebooks/2017-01-23-R-notebook.html"><code class="docutils literal notranslate"><span class="pre">R</span></code> language</a>,
+and now we are going to create a Matlab/Octave toolboxes notebook.</p>
+<p>The IOOS conda
+<a class="reference external" href="https://ioos.github.io/ioos_code_lab/content/ioos_installation_conda.html">environment</a>
+installs <code class="docutils literal notranslate"><span class="pre">oct2py</span></code>, the dependency needed to run Matlab/Octave notebooks.
+However, unlike <code class="docutils literal notranslate"><span class="pre">R</span></code> that can be installed with conda,
+we cannot install Matlab or Octave with it.
+This notebook relies on system installation of <code class="docutils literal notranslate"><span class="pre">octave</span></code> but it is possible to run the same on Matlab with very little modification.</p>
+<p>Here are some basic Matlab-like array creation and <code class="docutils literal notranslate"><span class="pre">dot</span></code> multiplication.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">y</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="n">z</span> <span class="p">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x =
+
+   1   2   3
+
+y =
+
+   1
+   2
+   3
+
+z =  14
+</pre></div>
+</div>
+</div>
+</div>
+<p>And a simple plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">y</span> <span class="p">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/35f79349931c3df1c910e0023f02424fe7498971b96aac9cb86d590afeb7816c.png" src="../../../_images/35f79349931c3df1c910e0023f02424fe7498971b96aac9cb86d590afeb7816c.png" />
+</div>
+</div>
+<p>To demonstrate the Matlab/Octave notebook we will use a well known toolbox for tidal analysis <a class="reference external" href="https://www-old.eoas.ubc.ca/~rich/"><code class="docutils literal notranslate"><span class="pre">t_tide</span></code></a>.
+First we need to add it to the path.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="nb">addpath</span><span class="p">(</span><span class="nb">genpath</span><span class="p">(</span><span class="s">&#39;t_tide_v1.3beta&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are running this on <code class="docutils literal notranslate"><span class="pre">octave</span></code> you need to load the <code class="docutils literal notranslate"><span class="pre">signal</span></code> package.
+This step is not necessary on <code class="docutils literal notranslate"><span class="pre">Matlab</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">pkg</span> <span class="nb">load</span> <span class="n">signal</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">t_demo</span></code> is a built-in script that contains a short example of capabilities of tidal analysis toolbox.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">t_demo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ echo (&#39;on&#39;)
++ ## Load the example.
++ load (&#39;t_example&#39;)
+warning: load: file found in load path
++ ## Define inference parameters.
++ infername = [&#39;P1&#39;; &#39;K2&#39;];
++ inferfrom = [&#39;K1&#39;; &#39;S2&#39;];
++ infamp = [.33093; .27215];
++ infphase = [-7.07; -22.40];
++ ## The call (see t_demo code for details).
+
++ ## hourly data
+
++ ## start time is datestr(tuk_time(1))
+
++ ## Latitude of obs
+
++ ## Add a shallow-water constituent 
+
++ ## coloured boostrap CI
++ [tidestruc, pout] = t_tide (tuk_elev, &#39;interval&#39;, 1, &#39;start&#39;, tuk_time (1), &#39;latitude&#39;, 69 + 27 / 60, &#39;inference&#39;, infername, inferfrom, infamp, infphase, &#39;shallow&#39;, &#39;M10&#39;, &#39;error&#39;, &#39;linear&#39;, &#39;synthesis&#39;, 1);
+warning: /home/filipe/IOOS/notebooks_demos/notebooks/t_tide_v1.3beta/t_tide.m: possible Matlab-style short-circuit operator at line 443, column 18
+warning: /home/filipe/IOOS/notebooks_demos/notebooks/t_tide_v1.3beta/t_tide.m: possible Matlab-style short-circuit operator at line 637, column 19
+warning: load: file found in load path
+   number of standard constituents used: 35
+   Forced fit to M10
+   Inference of P1   using K1  
+   Inference of K2   using S2  
+   Points used: 1510 of 1584
+   percent of var residual after lsqfit/var original: 74.18 %
+warning: /home/filipe/IOOS/notebooks_demos/notebooks/t_tide_v1.3beta/t_vuf.m: possible Matlab-style short-circuit operator at line 68, column 22
+warning: load: file found in load path
+   Greenwich phase computed with nodal corrections applied to amplitude 
+ and phase relative to center time
+   Do inference corrections
+   Using linearized error estimates
+   Generating prediction with nodal corrections, SNR is 1.000000
+warning: /home/filipe/IOOS/notebooks_demos/notebooks/t_tide_v1.3beta/t_predic.m: possible Matlab-style short-circuit operator at line 66, column 34
+warning: /home/filipe/IOOS/notebooks_demos/notebooks/t_tide_v1.3beta/t_predic.m: possible Matlab-style short-circuit operator at line 173, column 18
+warning: isstr is obsolete and will be removed from a future version of Octave, please use ischar instead
+warning: load: file found in load path
+warning: load: file found in load path
+   percent of var residual after synthesis/var original: 78.42 %
+-----------------------------------
+date: 29-Mar-2017
+nobs = 1584,  ngood = 1510,  record length (days) = 66.00
+start time: 06-Jul-1975 01:00:00
+rayleigh criterion = 1.0
+Greenwich phase computed with nodal corrections applied to amplitude \n and phase relative to center time
+
+x0= 1.98, x trend= 0
+
+var(x)= 0.82196   var(xp)= 0.17966   var(xres)= 0.64461
+percent var predicted/var original= 21.9 %
+
+     tidal amplitude and phase with 95% CI estimates
+
+tide   freq       amp     amp_err    pha    pha_err     snr
+ MM   0.0015122    0.2121    0.521   263.34   140.72     0.17
+ MSF  0.0028219    0.1561    0.521   133.80   191.29     0.09
+ ALP1 0.0343966    0.0152    0.035   334.95   143.54     0.19
+ 2Q1  0.0357064    0.0246    0.035    82.69    89.79     0.48
+ Q1   0.0372185    0.0158    0.035    65.74   140.51      0.2
+*O1   0.0387307    0.0764    0.035    74.23    29.21      4.7
+ NO1  0.0402686    0.0290    0.035   238.14    53.29     0.67
+*P1   0.0415526    0.0465    0.035    71.88    43.41      1.7
+*K1   0.0417807    0.1405    0.035    64.81    15.24       16
+ J1   0.0432929    0.0253    0.035     7.32    86.65     0.51
+*OO1  0.0448308    0.0531    0.035   235.75    43.75      2.3
+ UPS1 0.0463430    0.0298    0.035    91.73    87.12     0.71
+ EPS2 0.0761773    0.0211    0.025   184.59    66.90      0.7
+*MU2  0.0776895    0.0419    0.025    83.23    33.79      2.8
+*N2   0.0789992    0.0838    0.025    44.52    16.86       11
+*M2   0.0805114    0.4904    0.025    77.70     2.89  3.8e+02
+ L2   0.0820236    0.0213    0.025    35.22    82.98     0.71
+*S2   0.0833333    0.2197    0.025   126.72     6.58       76
+*K2   0.0835615    0.0598    0.025   149.12    28.01      5.6
+ ETA2 0.0850736    0.0071    0.025   246.05   244.76     0.08
+*MO3  0.1192421    0.0148    0.010   234.97    40.62      2.3
+*M3   0.1207671    0.0123    0.010   261.57    44.22      1.6
+ MK3  0.1222921    0.0049    0.010   331.60   117.53     0.25
+ SK3  0.1251141    0.0023    0.010   237.69   252.59    0.057
+*MN4  0.1595106    0.0092    0.009   256.47    52.74      1.1
+*M4   0.1610228    0.0126    0.009   291.78    38.58        2
+ SN4  0.1623326    0.0083    0.009   270.85    59.58     0.89
+ MS4  0.1638447    0.0010    0.009   339.35   479.33    0.014
+ S4   0.1666667    0.0047    0.009   299.56   108.15     0.28
+ 2MK5 0.2028035    0.0013    0.005   310.10   214.09    0.073
+ 2SK5 0.2084474    0.0045    0.005   104.00    62.55     0.94
+ 2MN6 0.2400221    0.0035    0.007   271.24   101.52     0.28
+ M6   0.2415342    0.0017    0.007   158.88   207.26    0.067
+ 2MS6 0.2443561    0.0056    0.007   306.10    65.10     0.71
+ 2SM6 0.2471781    0.0023    0.007   298.92   165.13     0.12
+*3MK7 0.2833149    0.0086    0.004   212.25    29.47      3.7
+ M8   0.3220456    0.0030    0.003    42.43    56.78     0.86
+ M10  0.4025570    0.0009    0.003   198.23   195.47     0.07
++ ## Use SNR=1 for synthesis. 
++ echo (&#39;off&#39;)
+warning: get: allowing linewi to match line property linewidth
+error: get: ambiguous text property name vertical; possible matches:
+
+verticalalignment      verticalalignmentmode
+
+error: called from:
+error:   /usr/share/octave/3.8.2/m/plot/appearance/text.m at line 152, column 17
+error:   /home/filipe/IOOS/notebooks_demos/notebooks/t_tide_v1.3beta/t_demo.m at line 57, column 1
+</pre></div>
+</div>
+<img alt="../../../_images/eab6872a20581566fc318609d3599b63eca7aa6d348981c73de7ac2bf4d088bb.png" src="../../../_images/eab6872a20581566fc318609d3599b63eca7aa6d348981c73de7ac2bf4d088bb.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "octave"
+        },
+        kernelOptions: {
+            name: "octave",
+            path: "./content/code_gallery/data_analysis_and_visualization_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'octave'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2017-01-23-R-notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quick demonstration of R-notebooks using the r-oce library</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2018-12-04-grids.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">IOOS models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By IOOS
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href=https://ioos.noaa.gov> ioos.noaa.gov </a> &nbsp <a href=https://www.facebook.com/usioosgov> Facebook </a> &nbsp <a href=https://www.twitter.com/usioosgov> Twitter </a> &nbsp <a href="mailto:data.ioos@noaa.gov">Contact Us</a> <br> U.S. Integrated Ocean Observing System Program <br> 1315 East-West Highway <br> SSMC3, 2nd Floor <br> Silver Spring, MD 20910 <br> (240) 533-9444
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

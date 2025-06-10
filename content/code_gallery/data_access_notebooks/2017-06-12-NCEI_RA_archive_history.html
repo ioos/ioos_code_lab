@@ -1,0 +1,1793 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/code_gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history';</script>
+    <link rel="canonical" href="https://ioos.github.io/ioos_code_lab/content/code_gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html" />
+    <link rel="icon" href="../../../_static/IOOS_logo.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Using the xtractomatic R package to track Pacific Blue Marlin" href="2017-08-01-xtractoR.html" />
+    <link rel="prev" title="Read realtime data from IOOS Sensor Map via ERDDAP tabledap" href="2017-03-21-ERDDAP_IOOS_Sensor_Map.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/IOOS_logo.png" class="logo__image only-light" alt="The U.S. Integrated Ocean Observing System (IOOS) - Home"/>
+    <script>document.write(`<img src="../../../_static/IOOS_logo.png" class="logo__image only-dark" alt="The U.S. Integrated Ocean Observing System (IOOS) - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ioos_installation_conda.html">Installing the IOOS Conda Environment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Code Gallery</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Notebooks gallery</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_access.html">Data Access</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2016-10-12-fetching_data.html">Fetching data from CO-OPS ERDDAP with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-11-15-glider_data_example.html">Plotting Glider data with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-12-20-searching_glider_deployments.html">Accessing glider data via the Glider DAC API with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-03-21-ERDDAP_IOOS_Sensor_Map.html">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-08-01-xtractoR.html">Using the <code class="docutils literal notranslate"><span class="pre">xtractomatic</span></code> R package to track Pacific Blue Marlin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-09-09-hurricane_irma.html">Exploring the NHC Advisories and Sea Surface Height during Hurricane Irma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-11-30-rerddap.html">Calling R libraries from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2018-02-20-obis.html">Using r-obistools and r-obis to explore the OBIS database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2018-03-01-erddapy.html">erddapy: a python client/URL builder for ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2019-03-08-grids-temperature.html">IOOS models: Temperature Horizontal Slices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2019-05-27-hurricane_gis_part02.html">Accessing data from SOS using NHC GIS files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2020-10-10-GTS.html">IOOS GTS Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2021-10-19-multiple-erddap-search.html">Searching multiple ERDDAP servers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2022-11-23_pyobis_example.html">Using pyobis to query for known datasets</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="2022-11-25-plan_surf_trip_EDS.html">Planning a surf trip using IOOS EDS Model Viewer</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2016-11-16-CF-UGRID-SGRID-conventions.html">Parsing Conventions and standards with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2017-01-23-R-notebook.html">Quick demonstration of R-notebooks using the r-oce library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2017-03-30-octave_notebook_example.html">A Matlab notebook primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2018-12-04-grids.html">IOOS models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2020-02-14-QARTOD_ioos_qc_Water-Level-Example.html">IOOS QARTOD software (ioos_qc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2021-10-25-ERDDAP-interpolate.html">Interpolating data remotely with ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp.html">Interpolate MURSST to great white shark telemetry track with R and ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2024-08-27-plotting-interface-gliderpy.html">Adding a plotting interface gliderpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2024-09-13-OBIS_EOVs.html">Using AphiaIDs to download OBIS occurrences for Bio/Eco EOVs</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_management.html">Data Management</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-05-14-running_compliance_checker.html">Shore Station Compliance Checker Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-11-01-Creating-Archives-Using-Bagit.html">Using BagIt to tag oceanographic data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2018-02-27-pocean-timeSeries-demo.html">Creating a CF-1.6 timeSeries using pocean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2020-12-08-DataToDwC.html">Aligning Data to Darwin Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2023-03-20-Reading_and_writing_zarr.html">Reading and writting zarr files with xarray</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Video Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/glos.html">GLOS Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ioos.html">IOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/nanoos.html">NANOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ooi.html">OOI Demonstration Videos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/python_dem.html">Python Demonstration Videos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://help.aodn.org.au/aodn-data-tools/user-code-library/">Opening netCDF files - hints from AODN</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://unidata.github.io/notebook-gallery/">Unidata Jupyter Notebook Gallery</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://iobis.org/tutorial/">Extracting and Enriching OBIS data with R</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/USGS-R">USGS-R Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ioos/ioos_code_lab/main?urlpath=lab/tree/jupyterbook/content/code_gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ioos/ioos_code_lab/blob/main/jupyterbook/content/code_gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab/issues/new?title=Issue%20on%20page%20%2Fcontent/code_gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/code_gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-we-select-a-regional-association-and-platform">Now we select a Regional Association and platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-we-generate-a-geoportal-query-and-georss-feed">Next we generate a geoportal query and georss feed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-to-query-the-portal-and-parse-out-the-csv-response">Time to query the portal and parse out the csv response</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lets-collect-what-we-have-found">Let’s collect what we have found</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-timeseries-plot-of-data-coverage">Create a timeseries plot of data coverage</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="using-ncei-geoportal-rest-api-to-collect-information-about-ioos-regional-association-archived-data">
+<h1>Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data<a class="headerlink" href="#using-ncei-geoportal-rest-api-to-collect-information-about-ioos-regional-association-archived-data" title="Link to this heading">#</a></h1>
+<p>Created: 2017-06-12</p>
+<p>Updated: 2024-05-30</p>
+<p>IOOS regional associations archive their non-federal observational data with NOAA’s National Center for Environmental Information (NCEI). In this notebook we will use the <a class="reference external" href="https://github.com/Esri/geoportal-server/wiki/REST-API-Syntax">RESTful</a> services of the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal">NCEI geoportal</a> to collect metadata from the archive packages found in the NCEI archives. The metadata information are stored in <a class="reference external" href="https://wiki.earthdata.nasa.gov/display/NASAISO/ISO+19115-2">ISO 19115-2</a> xml files which the NCEI geoportal uses for discovery of Archival Information Packages (AIPs). This example uses the ISO metadata records to display publication information as well as plot the time coverage of each AIP at NCEI which meets the search criteria.</p>
+<p>First we update the namespaces dictionary from owslib to include the appropriate namespace reference for gmi and gml.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">owslib.iso</span><span class="w"> </span><span class="kn">import</span> <span class="n">namespaces</span>
+
+<span class="c1"># Append gmi namespace to namespaces dictionary.</span>
+<span class="n">namespaces</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;gmi&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.isotc211.org/2005/gmi&quot;</span><span class="p">})</span>
+<span class="n">namespaces</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;gml&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.opengis.net/gml/3.2&quot;</span><span class="p">})</span>
+<span class="k">del</span> <span class="n">namespaces</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="now-we-select-a-regional-association-and-platform">
+<h2>Now we select a Regional Association and platform<a class="headerlink" href="#now-we-select-a-regional-association-and-platform" title="Link to this heading">#</a></h2>
+<p>This is where the user identifies the Regional Association and the platform type they are interested in. Change the RA acronym to the RA of interest. The user can also omit the Regional Association, by using <code class="docutils literal notranslate"><span class="pre">None</span></code>, to collect metadata information about all IOOS non-Federal observation data archived through the NCEI-IOOS pipeline.</p>
+<p>The options for platform include: <code class="docutils literal notranslate"><span class="pre">&quot;HF</span> <span class="pre">Radar&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Glider&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;FIXED</span> <span class="pre">PLATFORM&quot;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select RA, this will be the acronym for the RA or None if you want to search across all RAs</span>
+<span class="n">ra</span> <span class="o">=</span> <span class="s2">&quot;NANOOS&quot;</span>
+
+<span class="c1"># Identify the platform.</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;&quot;FIXED PLATFORM&quot;&#39;</span>  <span class="c1"># Options include: None, &quot;HF Radar&quot;, &quot;Glider&quot;, &quot;FIXED PLATFORM&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="next-we-generate-a-geoportal-query-and-georss-feed">
+<h2>Next we generate a geoportal query and georss feed<a class="headerlink" href="#next-we-generate-a-geoportal-query-and-georss-feed" title="Link to this heading">#</a></h2>
+<p>To find more information about how to compile a geoportal query, have a look at <a class="reference external" href="https://github.com/Esri/geoportal-server/wiki/REST-API-Syntax">REST API Syntax</a> and the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal/#aboutPanel">NCEI Search Tips</a> for the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal/#searchPanel">NCEI geoportal</a>. The example provided is specific to the NCEI-IOOS data pipeline project and only searches for non-federal timeseries data collected by each Regional Association.</p>
+<p>The query developed here can be updated to search for any Archival Information Packages at NCEI, therefore the user should develop the appropriate query using the <a class="reference external" href="https://www.ncei.noaa.gov/metadata/geoportal/#searchPanel">NCEI Geoportal</a> and update this portion of the code to identify the REST API of interest.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">quote</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">quote</span>
+
+<span class="c1"># Generate geoportal query and georss feed.</span>
+
+<span class="c1"># Base geoportal url.</span>
+<span class="n">baseurl</span> <span class="o">=</span> <span class="s2">&quot;https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=&quot;</span>
+
+<span class="c1"># Identify the Regional Association</span>
+<span class="k">if</span> <span class="n">ra</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">reg_assoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">RAs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;AOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Alaska Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CARICOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Caribbean Coastal Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CeNCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Central and Northern California Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Gulf of Mexico Coastal Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GLOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Lakes Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;MARACOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Mid-Atlantic Regional Association Coastal Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NANOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Northwest Association of Networked Ocean Observing Systems&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NERACOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeastern Regional Association of Coastal Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;PacIOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Pacific Islands Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SCCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Southern California Coastal Ocean Observing System&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SECOORA&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast Coastal Ocean Observing Regional Association&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">reg_assoc</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;(dataThemeinstitutions_s:&quot;</span><span class="si">{</span><span class="n">RAs</span><span class="p">[</span><span class="n">ra</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot; dataThemeprojects_s:&quot;</span><span class="si">{</span><span class="n">RAs</span><span class="p">[</span><span class="n">ra</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">ra</span><span class="si">}</span><span class="s1">)&quot;)&#39;</span>
+    <span class="p">)</span>
+
+<span class="c1"># Identify the project.</span>
+<span class="n">project</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;&quot;Integrated Ocean Observing System Data Assembly Centers Data Stewardship Program&quot;&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Identify the amount of records and format of the response: 1 to 1010 records.</span>
+<span class="n">records</span> <span class="o">=</span> <span class="s2">&quot;&amp;start=1&amp;num=1010&quot;</span>
+
+<span class="c1"># Identify the format of the response: georss.</span>
+<span class="n">response_format</span> <span class="o">=</span> <span class="s2">&quot;&amp;f=csv&quot;</span>
+
+<span class="k">if</span> <span class="n">platform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">reg_assoc_plat</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">reg_assoc</span> <span class="o">+</span> <span class="s2">&quot; AND&quot;</span> <span class="o">+</span> <span class="n">platform</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">reg_assoc_plat</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">reg_assoc</span><span class="p">)</span>
+
+<span class="c1"># Combine the URL.</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">baseurl</span><span class="p">,</span>
+    <span class="n">reg_assoc_plat</span><span class="p">,</span>
+    <span class="s2">&quot;&amp;filter=dataThemeprojects_s:&quot;</span><span class="p">,</span>
+    <span class="n">quote</span><span class="p">(</span><span class="n">project</span><span class="p">)</span> <span class="o">+</span> <span class="n">records</span> <span class="o">+</span> <span class="n">response_format</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Identified response format:</span><span class="se">\n</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Search page response:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">response_format</span><span class="p">,</span> <span class="s2">&quot;&amp;f=searchPage&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Identified response format:
+https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutions_s%3A%22Northwest%20Association%20of%20Networked%20Ocean%20Observing%20Systems%22%20dataThemeprojects_s%3A%22Northwest%20Association%20of%20Networked%20Ocean%20Observing%20Systems%20%28NANOOS%29%22%29%20AND%22FIXED%20PLATFORM%22&amp;filter=dataThemeprojects_s:%22Integrated%20Ocean%20Observing%20System%20Data%20Assembly%20Centers%20Data%20Stewardship%20Program%22&amp;start=1&amp;num=1010&amp;f=csv
+
+Search page response:
+https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutions_s%3A%22Northwest%20Association%20of%20Networked%20Ocean%20Observing%20Systems%22%20dataThemeprojects_s%3A%22Northwest%20Association%20of%20Networked%20Ocean%20Observing%20Systems%20%28NANOOS%29%22%29%20AND%22FIXED%20PLATFORM%22&amp;filter=dataThemeprojects_s:%22Integrated%20Ocean%20Observing%20System%20Data%20Assembly%20Centers%20Data%20Stewardship%20Program%22&amp;start=1&amp;num=1010&amp;f=searchPage
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="time-to-query-the-portal-and-parse-out-the-csv-response">
+<h2>Time to query the portal and parse out the csv response<a class="headerlink" href="#time-to-query-the-portal-and-parse-out-the-csv-response" title="Link to this heading">#</a></h2>
+<p>Here we are opening the specified REST API and parsing it into a string. Then, since we identified it as a csv format above, we parse it using the Pandas package. We also split the Data_Date_Range column into two columns, <code class="docutils literal notranslate"><span class="pre">data_start_date</span></code> and <code class="docutils literal notranslate"><span class="pre">data_end_date</span></code> to have that useful information available.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">,</span> <span class="s2">&quot;data_end_date&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Data_Date_Range&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+    <span class="s2">&quot; to &quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span>
+<span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;ms&quot;</span><span class="p">))</span>
+
+<span class="c1"># Some cleanups</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>Title</th>
+      <th>West</th>
+      <th>South</th>
+      <th>East</th>
+      <th>North</th>
+      <th>Link_Xml</th>
+      <th>Data_Date_Range</th>
+      <th>Date_Published</th>
+      <th>data_start_date</th>
+      <th>data_end_date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>gov.noaa.nodc:0162194</td>
+      <td>Oceanographic data collected from Hammond Tide...</td>
+      <td>-123.95167</td>
+      <td>46.20267</td>
+      <td>-123.95167</td>
+      <td>46.20267</td>
+      <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
+      <td>2005-06-24T00:00:00Z to 2013-02-08T23:59:59.999Z</td>
+      <td>2017-03-21T00:00:00Z</td>
+      <td>2005-06-24 00:00:00+00:00</td>
+      <td>2013-02-09 00:00:00+00:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>gov.noaa.nodc:0162195</td>
+      <td>Oceanographic data collected from SATURN River...</td>
+      <td>-123.87195</td>
+      <td>46.23498</td>
+      <td>-123.87195</td>
+      <td>46.23498</td>
+      <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
+      <td>2009-06-06T00:00:00Z to 2010-10-22T23:59:59.999Z</td>
+      <td>2017-03-21T00:00:00Z</td>
+      <td>2009-06-06 00:00:00+00:00</td>
+      <td>2010-10-23 00:00:00+00:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>gov.noaa.nodc:0162176</td>
+      <td>Oceanographic data collected from Jetty A by C...</td>
+      <td>-124.03168</td>
+      <td>46.26712</td>
+      <td>-124.03168</td>
+      <td>46.26712</td>
+      <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
+      <td>2003-07-20T00:00:00Z to 2016-02-04T23:59:59.999Z</td>
+      <td>2017-03-20T00:00:00Z</td>
+      <td>2003-07-20 00:00:00+00:00</td>
+      <td>2016-02-05 00:00:00+00:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>gov.noaa.nodc:0162190</td>
+      <td>Oceanographic data collected from Tenasillahe ...</td>
+      <td>-123.46828</td>
+      <td>46.23763</td>
+      <td>-123.46828</td>
+      <td>46.23763</td>
+      <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
+      <td>2004-01-23T00:00:00Z to 2011-11-17T23:59:59.999Z</td>
+      <td>2017-03-20T00:00:00Z</td>
+      <td>2004-01-23 00:00:00+00:00</td>
+      <td>2011-11-18 00:00:00+00:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>gov.noaa.nodc:0162191</td>
+      <td>Oceanographic data collected from Woody Island...</td>
+      <td>-123.53420</td>
+      <td>46.25212</td>
+      <td>-123.53420</td>
+      <td>46.25212</td>
+      <td>http://www.ncei.noaa.gov/metadata/geoportal/re...</td>
+      <td>1997-02-07T00:00:00Z to 2021-09-01T23:59:59.999Z</td>
+      <td>2017-03-20T00:00:00Z</td>
+      <td>1997-02-07 00:00:00+00:00</td>
+      <td>2021-09-02 00:00:00+00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now, lets pull out all the ISO metadata record links and print them out so the user can browse to the metadata record and look for what items they might be interested in.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parse the csv response</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> record(s)&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ISO19115-2 record:&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">])</span>  <span class="c1"># URL to ISO19115-2 record.</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=&quot;</span>
+        <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Id&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 31 record(s)
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162194/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162194
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162195/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162195
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162176/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162176
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162190/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162190
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162191/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162191
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162179/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162179
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162174/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162174
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161524/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161524
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162171/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162171
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162172/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162172
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161716/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161716
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0161822/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0161822
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162187/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162187
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162188/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162188
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162189/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162189
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162175/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162175
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162177/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162177
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162181/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162181
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162180/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162180
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162430/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162430
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162178/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162178
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162185/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162185
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162184/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162184
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162622/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162622
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162173/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162173
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162186/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162186
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0167435/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0167435
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162182/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162182
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162621/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162621
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162183/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162183
+
+
+ISO19115-2 record: http://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.nodc%3A0162617/xml
+NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0162617
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lets-collect-what-we-have-found">
+<h2>Let’s collect what we have found<a class="headerlink" href="#lets-collect-what-we-have-found" title="Link to this heading">#</a></h2>
+<p>Now that we have all the ISO metadata records we are interested in, it’s time to do something fun with them. In this example we want to generate a timeseries plot of the data coverage for the “Southern California Coastal Ocean Observing System” stations we have archived at NCEI.</p>
+<p>First we need to collect some information. We loop through each iso record to collect metadata information about each package. The example here shows how to collect the following items:</p>
+<ol class="arabic simple">
+<li><p>NCEI Archival Information Package (AIP) Accession ID (7-digit Accession Number)</p></li>
+<li><p>The first date the archive package was published.</p></li>
+<li><p>The platform code identified from the provider.</p></li>
+<li><p>The version number and date it was published.</p></li>
+<li><p>The current AIP size, in MB.</p></li>
+</ol>
+<p>There are plenty of other metadata elements to collect from the ISO records, so we recommend browsing to one of the records and having a look at the items of interest to your community.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process each iso record.</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.error</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlopen</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">stamina</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">owslib</span><span class="w"> </span><span class="kn">import</span> <span class="n">util</span>
+
+
+<span class="nd">@stamina</span><span class="o">.</span><span class="n">retry</span><span class="p">(</span><span class="n">on</span><span class="o">=</span><span class="n">urllib</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,</span> <span class="n">attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">openurl</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thin wrapper around urlopen adding stamina.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+
+<span class="n">df</span><span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;provider_platform_name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NCEI_accession_number&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;package_size_mb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;submitter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;version_info&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="c1"># For each accession in response.</span>
+<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]:</span>
+    <span class="n">iso</span> <span class="o">=</span> <span class="n">openurl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">iso_tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">iso</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">iso_tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+
+    <span class="n">vers_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="c1"># Collect Publication date information.</span>
+    <span class="n">date_path</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;.//&quot;</span>
+        <span class="s2">&quot;gmd:identificationInfo/&quot;</span>
+        <span class="s2">&quot;gmd:MD_DataIdentification/&quot;</span>
+        <span class="s2">&quot;gmd:citation/&quot;</span>
+        <span class="s2">&quot;gmd:CI_Citation/&quot;</span>
+        <span class="s2">&quot;gmd:date/&quot;</span>
+        <span class="s2">&quot;gmd:CI_Date/&quot;</span>
+        <span class="s2">&quot;gmd:date/gco:Date&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># First published date.</span>
+    <span class="n">pubdate</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">date_path</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">First published date = </span><span class="si">{</span><span class="n">util</span><span class="o">.</span><span class="n">testXMLValue</span><span class="p">(</span><span class="n">pubdate</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Data Temporal Coverage.</span>
+    <span class="n">temporal_extent_path</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;.//&quot;</span>
+        <span class="s2">&quot;gmd:temporalElement/&quot;</span>
+        <span class="s2">&quot;gmd:EX_TemporalExtent/&quot;</span>
+        <span class="s2">&quot;gmd:extent/&quot;</span>
+        <span class="s2">&quot;gml:TimePeriod&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">beginPosition</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+        <span class="n">temporal_extent_path</span> <span class="o">+</span> <span class="s2">&quot;/gml:beginPosition&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">endPosition</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">temporal_extent_path</span> <span class="o">+</span> <span class="s2">&quot;/gml:endPosition&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data time coverage: </span><span class="si">{</span><span class="n">beginPosition</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">endPosition</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Collect keyword terms of interest.</span>
+    <span class="k">for</span> <span class="n">MD_keywords</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span>
+        <span class="s2">&quot;.//gmd:descriptiveKeywords/gmd:MD_Keywords&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
+    <span class="p">):</span>
+        <span class="k">for</span> <span class="n">thesaurus_name</span> <span class="ow">in</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span>
+            <span class="s2">&quot;.//gmd:thesaurusName/gmd:CI_Citation/gmd:title/gco:CharacterString&quot;</span><span class="p">,</span>
+            <span class="n">namespaces</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;Provider Platform Names&quot;</span><span class="p">:</span>
+                <span class="n">plat_name</span> <span class="o">=</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+                    <span class="s2">&quot;.//gmd:keyword/gco:CharacterString&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">text</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provider Platform Code = </span><span class="si">{</span><span class="n">plat_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;provider_platform_name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plat_name</span>
+                <span class="k">break</span>
+
+            <span class="k">elif</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;NCEI ACCESSION NUMBER&quot;</span><span class="p">:</span>
+                <span class="n">acce_no</span> <span class="o">=</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//gmd:keyword/gmx:Anchor&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accession:&quot;</span><span class="p">,</span> <span class="n">acce_no</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;NCEI_accession_number&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">acce_no</span>
+                <span class="k">break</span>
+
+            <span class="k">elif</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;NODC SUBMITTING INSTITUTION NAMES THESAURUS&quot;</span><span class="p">:</span>
+                <span class="n">submitter</span> <span class="o">=</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+                    <span class="s2">&quot;.//gmd:keyword/gmx:Anchor&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">text</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Submitter:&quot;</span><span class="p">,</span> <span class="n">submitter</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;submitter&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">submitter</span>
+
+    <span class="c1"># Pull out the version information.</span>
+    <span class="c1"># Iterate through each processing step which is an NCEI version.</span>
+    <span class="k">for</span> <span class="n">process_step</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="s2">&quot;.//gmd:processStep&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">):</span>
+        <span class="c1"># Only parse gco:DateTime and gmd:title/gco:CharacterString.</span>
+        <span class="n">vers_title</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;.//&quot;</span>
+            <span class="s2">&quot;gmi:LE_ProcessStep/&quot;</span>
+            <span class="s2">&quot;gmi:output/&quot;</span>
+            <span class="s2">&quot;gmi:LE_Source/&quot;</span>
+            <span class="s2">&quot;gmd:sourceCitation/&quot;</span>
+            <span class="s2">&quot;gmd:CI_Citation/&quot;</span>
+            <span class="s2">&quot;gmd:title/&quot;</span>
+            <span class="s2">&quot;gco:CharacterString&quot;</span>
+        <span class="p">)</span>
+        <span class="n">vers_date</span> <span class="o">=</span> <span class="s2">&quot;.//&quot;</span> <span class="s2">&quot;gmi:LE_ProcessStep/&quot;</span> <span class="s2">&quot;gmd:dateTime/&quot;</span> <span class="s2">&quot;gco:DateTime&quot;</span>
+        <span class="k">if</span> <span class="n">process_step</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">vers_date</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span> <span class="ow">and</span> <span class="n">process_step</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span>
+            <span class="n">vers_title</span><span class="p">,</span> <span class="n">namespaces</span>
+        <span class="p">):</span>
+            <span class="c1"># Extract dateTime for each version.</span>
+            <span class="n">datetime</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">process_step</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">vers_date</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+            <span class="c1"># Extract version number.</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">process_step</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">vers_title</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">datetime</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">vers_dict</span><span class="p">[</span><span class="n">version</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;version_info&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">vers_dict</span><span class="p">]</span>
+
+    <span class="c1"># Collect package size information.</span>
+    <span class="c1"># Iterate through transfer size nodes.</span>
+    <span class="k">for</span> <span class="n">trans_size</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="s2">&quot;.//gmd:transferSize&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">trans_size</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//gco:Real&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+            <span class="n">sizes</span> <span class="o">=</span> <span class="n">trans_size</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//gco:Real&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current AIP Size = </span><span class="si">{</span><span class="n">sizes</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;package_size_mb&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">sizes</span>
+            <span class="k">break</span>
+
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-21
+Data time coverage: 2005-06-24 to 2013-02-08
+Accession: 0162194
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-21 15:34:14+00:00
+Current AIP Size = 51.24 MB
+
+First published date = 2017-03-21
+Data time coverage: 2009-06-06 to 2010-10-22
+Accession: 0162195
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-21 15:35:07+00:00
+Current AIP Size = 0.956 MB
+
+First published date = 2017-03-20
+Data time coverage: 2003-07-20 to 2016-02-04
+Accession: 0162176
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:18:18+00:00
+Current AIP Size = 67.96 MB
+
+First published date = 2017-03-20
+Data time coverage: 2004-01-23 to 2011-11-17
+Accession: 0162190
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:30:14+00:00
+Current AIP Size = 22.624 MB
+
+First published date = 2017-03-20
+Data time coverage: 1997-02-07 to 2021-09-01
+Accession: 0162191
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = Woody Island (USCG Pillar Rock back range board)
+v1.1 = 2017-03-20 23:30:25+00:00
+v2.2 = 2017-10-17 10:30:16+00:00
+v3.3 = 2019-04-18 14:24:02+00:00
+v4.4 = 2020-04-18 11:32:05+00:00
+v5.5 = 2020-05-18 11:43:45+00:00
+v6.6 = 2020-06-18 11:50:15+00:00
+v7.7 = 2020-07-18 11:49:00+00:00
+v8.8 = 2020-08-18 11:55:02+00:00
+v9.9 = 2020-09-22 21:56:53+00:00
+v10.10 = 2020-12-18 17:13:11+00:00
+v11.11 = 2021-02-22 10:57:10+00:00
+v12.12 = 2021-03-20 10:20:36+00:00
+v13.13 = 2021-04-18 10:50:23+00:00
+v14.14 = 2021-05-19 10:20:35+00:00
+v15.15 = 2021-07-21 10:25:39+00:00
+v16.16 = 2021-08-21 10:21:45+00:00
+v17.17 = 2021-09-20 10:20:37+00:00
+Current AIP Size = 43.548 MB
+
+First published date = 2017-03-20
+Data time coverage: 2005-01-13 to 2015-10-16
+Accession: 0162179
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:19:12+00:00
+Current AIP Size = 18.748 MB
+
+First published date = 2017-03-20
+Data time coverage: 2004-01-16 to 2021-07-30
+Accession: 0162174
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = Elliott Point
+v1.1 = 2017-03-20 23:17:26+00:00
+v2.2 = 2017-08-16 10:16:10+00:00
+v3.3 = 2017-10-16 10:16:07+00:00
+v4.4 = 2017-11-16 10:16:08+00:00
+v5.5 = 2017-12-16 10:16:10+00:00
+v6.6 = 2018-01-16 10:16:09+00:00
+v7.7 = 2018-02-16 10:16:09+00:00
+v8.8 = 2018-04-16 20:18:11+00:00
+v9.9 = 2018-05-17 10:16:11+00:00
+v10.10 = 2018-06-17 10:16:13+00:00
+v11.11 = 2018-07-17 10:16:14+00:00
+v12.12 = 2018-08-17 10:21:11+00:00
+v13.13 = 2018-09-17 10:16:12+00:00
+v14.14 = 2018-10-17 10:16:13+00:00
+v15.15 = 2018-11-17 10:26:15+00:00
+v16.16 = 2018-12-17 13:52:40+00:00
+v17.17 = 2019-01-17 10:16:43+00:00
+v18.18 = 2019-02-17 11:29:14+00:00
+v19.19 = 2019-03-21 04:04:28+00:00
+v20.20 = 2019-04-17 10:42:42+00:00
+v21.21 = 2019-05-17 15:13:46+00:00
+v22.22 = 2019-06-17 10:19:10+00:00
+v23.23 = 2019-07-17 10:16:44+00:00
+v24.24 = 2019-08-17 10:16:53+00:00
+v25.25 = 2019-09-17 10:16:45+00:00
+v26.26 = 2019-10-17 17:24:04+00:00
+v27.27 = 2019-11-17 11:11:34+00:00
+v28.28 = 2019-12-17 14:55:46+00:00
+v29.29 = 2020-01-18 15:12:10+00:00
+v30.30 = 2020-03-16 11:52:43+00:00
+v31.31 = 2020-04-17 10:20:01+00:00
+v32.32 = 2020-05-17 15:18:00+00:00
+v33.33 = 2020-06-17 17:24:37+00:00
+v34.34 = 2020-07-17 10:21:54+00:00
+v35.35 = 2020-08-17 12:20:10+00:00
+v36.36 = 2020-09-22 12:23:20+00:00
+v37.37 = 2020-10-17 12:24:19+00:00
+v38.38 = 2020-11-17 18:14:59+00:00
+v39.39 = 2020-12-17 15:35:51+00:00
+v40.40 = 2021-02-17 23:21:45+00:00
+v41.41 = 2021-03-17 11:40:02+00:00
+v42.42 = 2021-04-17 10:18:40+00:00
+v43.43 = 2021-05-17 10:18:38+00:00
+v44.44 = 2021-07-18 14:37:42+00:00
+v45.45 = 2021-08-18 10:19:49+00:00
+Current AIP Size = 32.432 MB
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stamina.retry_scheduled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-09
+Data time coverage: 2005-12-15 to 2006-04-18
+Accession: 0161524
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-09 20:44:09+00:00
+Current AIP Size = 1.116 MB
+
+First published date = 2017-03-20
+Data time coverage: 2004-01-16 to 2004-12-15
+Accession: 0162171
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:14:07+00:00
+Current AIP Size = 2.688 MB
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stamina.retry_scheduled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-20
+Data time coverage: 2003-01-01 to 2013-08-16
+Accession: 0162172
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:16:20+00:00
+Current AIP Size = 94.676 MB
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stamina.retry_scheduled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-14
+Data time coverage: 1998-03-01 to 2010-09-22
+Accession: 0161716
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-14 11:25:31+00:00
+Current AIP Size = 156.028 MB
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stamina.retry_scheduled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-03-15
+Data time coverage: 2000-07-02 to 2019-05-30
+Accession: 0161822
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-15 16:31:48+00:00
+v2.2 = 2019-06-17 10:18:28+00:00
+Current AIP Size = 102.536 MB
+
+First published date = 2017-03-20
+Data time coverage: 2004-02-03 to 2008-03-19
+Accession: 0162187
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:29:39+00:00
+v1.2 = 2017-04-04 17:13:06+00:00
+v2.3 = 2017-05-12 21:52:07+00:00
+Current AIP Size = 11.212 MB
+
+First published date = 2017-03-20
+Data time coverage: 2004-01-16 to 2005-08-15
+Accession: 0162188
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:29:42+00:00
+v1.2 = 2017-04-04 17:13:09+00:00
+v2.3 = 2017-05-19 11:26:08+00:00
+Current AIP Size = 26.576 MB
+
+First published date = 2017-03-20
+Data time coverage: 1996-09-05 to 2014-10-01
+Accession: 0162189
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:30:07+00:00
+Current AIP Size = 155.688 MB
+
+First published date = 2017-03-20
+Data time coverage: 1998-09-03 to 2015-03-26
+Accession: 0162175
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:17:43+00:00
+Current AIP Size = 84.18 MB
+
+First published date = 2017-03-20
+Data time coverage: 2001-09-17 to 2006-10-12
+Accession: 0162177
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:18:25+00:00
+Current AIP Size = 21.648 MB
+
+First published date = 2017-03-20
+Data time coverage: 1997-07-12 to 2014-01-15
+Accession: 0162181
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:20:24+00:00
+Current AIP Size = 89.492 MB
+
+First published date = 2017-03-20
+Data time coverage: 1997-12-02 to 2007-09-17
+Accession: 0162180
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:19:46+00:00
+Current AIP Size = 214.384 MB
+
+First published date = 2017-04-25
+Data time coverage: 2009-06-23 to 2020-12-23
+Accession: 0162430
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = SATURN River Station 05
+v1.1 = 2017-04-25 00:22:09+00:00
+v2.2 = 2017-12-17 07:32:30+00:00
+v3.3 = 2018-01-17 07:29:09+00:00
+v4.4 = 2018-02-17 07:31:33+00:00
+v5.5 = 2018-04-17 10:30:25+00:00
+v6.6 = 2018-05-18 10:30:06+00:00
+v7.7 = 2018-06-18 10:34:43+00:00
+v8.8 = 2018-07-18 10:37:42+00:00
+v9.9 = 2018-08-18 10:36:14+00:00
+v10.10 = 2018-09-18 10:36:11+00:00
+v11.11 = 2018-10-18 10:36:13+00:00
+v12.12 = 2018-11-18 11:53:25+00:00
+v13.13 = 2018-12-18 15:17:41+00:00
+v14.14 = 2019-01-18 10:51:33+00:00
+v15.15 = 2019-02-18 10:51:40+00:00
+v16.16 = 2019-03-19 10:54:44+00:00
+v17.17 = 2019-04-18 14:18:23+00:00
+v18.18 = 2019-05-18 10:58:44+00:00
+v19.19 = 2019-06-18 12:34:18+00:00
+v20.20 = 2019-07-18 10:55:15+00:00
+v21.21 = 2019-08-18 11:06:37+00:00
+v22.22 = 2019-12-18 10:17:52+00:00
+v23.23 = 2020-03-18 10:47:09+00:00
+v24.24 = 2020-04-18 11:30:53+00:00
+v25.25 = 2020-05-18 11:40:46+00:00
+v26.26 = 2020-06-18 11:43:52+00:00
+v27.27 = 2020-07-18 11:45:56+00:00
+v28.28 = 2020-08-18 11:48:09+00:00
+v29.29 = 2020-09-22 21:53:25+00:00
+v30.30 = 2020-11-19 09:18:34+00:00
+v31.31 = 2020-12-18 17:11:30+00:00
+v32.32 = 2021-02-18 12:21:49+00:00
+Current AIP Size = 31.932 MB
+
+First published date = 2017-03-20
+Data time coverage: 2012-04-28 to 2012-05-17
+Accession: 0162178
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:18:28+00:00
+Current AIP Size = 0.816 MB
+
+First published date = 2017-03-20
+Data time coverage: 2014-09-08 to 2023-11-01
+Accession: 0162185
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = SATURN-09
+v1.1 = 2017-03-20 23:29:28+00:00
+v2.2 = 2017-08-04 11:53:37+00:00
+v3.3 = 2019-05-18 11:04:36+00:00
+v4.4 = 2019-06-18 12:40:02+00:00
+v5.5 = 2019-07-18 10:57:38+00:00
+v6.6 = 2019-08-18 11:08:03+00:00
+v7.7 = 2019-12-18 10:30:19+00:00
+v8.8 = 2020-03-16 13:05:36+00:00
+v9.9 = 2020-06-18 11:47:17+00:00
+v10.10 = 2020-08-18 11:51:53+00:00
+v11.11 = 2021-02-22 10:56:38+00:00
+v12.12 = 2021-03-20 10:19:12+00:00
+v13.13 = 2021-04-18 10:49:51+00:00
+v14.14 = 2021-05-19 10:19:12+00:00
+v15.15 = 2021-07-21 10:24:49+00:00
+v16.16 = 2021-08-21 10:19:55+00:00
+v17.17 = 2021-09-20 10:19:07+00:00
+v18.18 = 2023-01-19 10:31:31+00:00
+v19.19 = 2023-06-18 11:29:34+00:00
+v20.20 = 2023-08-17 12:32:13+00:00
+v21.21 = 2023-09-19 15:03:38+00:00
+v22.22 = 2023-10-20 11:58:08+00:00
+v23.23 = 2023-11-19 10:44:59+00:00
+Current AIP Size = 175.38 MB
+
+First published date = 2017-03-20
+Data time coverage: 2012-05-03 to 2023-10-05
+Accession: 0162184
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = SATURN-07
+v1.1 = 2017-03-20 23:29:20+00:00
+v2.2 = 2017-08-04 11:53:27+00:00
+v3.3 = 2018-05-18 10:30:30+00:00
+v4.4 = 2018-06-18 10:35:39+00:00
+v5.5 = 2018-07-18 10:38:31+00:00
+v6.6 = 2018-08-18 10:36:47+00:00
+v7.7 = 2018-09-18 10:37:22+00:00
+v8.8 = 2018-10-18 10:37:33+00:00
+v9.9 = 2018-11-18 11:56:58+00:00
+v10.10 = 2018-12-18 15:21:03+00:00
+v11.11 = 2019-01-18 10:55:14+00:00
+v12.12 = 2019-02-18 10:55:24+00:00
+v13.13 = 2019-03-19 10:58:29+00:00
+v14.14 = 2019-04-18 14:22:16+00:00
+v15.15 = 2019-05-18 11:02:57+00:00
+v16.16 = 2019-06-18 12:38:20+00:00
+v17.17 = 2019-12-18 10:28:20+00:00
+v18.18 = 2021-03-19 11:20:38+00:00
+v19.19 = 2021-05-18 10:47:00+00:00
+v20.20 = 2021-07-21 10:23:10+00:00
+v21.21 = 2021-08-20 10:55:37+00:00
+v22.22 = 2021-09-19 10:50:05+00:00
+v23.23 = 2023-01-18 11:26:53+00:00
+v24.24 = 2023-02-18 11:10:47+00:00
+v25.25 = 2023-03-18 10:55:35+00:00
+v26.26 = 2023-04-18 11:18:18+00:00
+v27.27 = 2023-05-19 12:11:14+00:00
+v28.28 = 2023-06-18 11:26:28+00:00
+v29.29 = 2023-07-18 14:41:09+00:00
+v30.30 = 2023-08-19 11:17:31+00:00
+v31.31 = 2023-09-18 16:55:42+00:00
+v32.32 = 2023-10-19 12:28:12+00:00
+v33.33 = 2023-11-18 11:13:08+00:00
+Current AIP Size = 764.656 MB
+
+First published date = 2017-05-16
+Data time coverage: 2012-09-04 to 2019-06-14
+Accession: 0162622
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-05-16 14:01:12+00:00
+v2.2 = 2017-08-04 11:52:07+00:00
+v3.3 = 2017-08-17 08:43:23+00:00
+v4.4 = 2017-10-17 10:29:13+00:00
+v5.5 = 2018-04-17 10:30:32+00:00
+v6.6 = 2018-05-18 10:31:09+00:00
+v7.7 = 2018-06-18 10:35:50+00:00
+v8.8 = 2018-07-18 10:38:39+00:00
+v9.9 = 2018-08-18 10:36:57+00:00
+v10.10 = 2018-09-18 10:37:30+00:00
+v11.11 = 2018-10-18 10:37:42+00:00
+v12.12 = 2018-11-18 11:57:32+00:00
+v13.13 = 2018-12-18 15:21:37+00:00
+v14.14 = 2019-01-18 10:55:44+00:00
+v15.15 = 2019-02-18 10:55:55+00:00
+v16.16 = 2019-03-19 10:59:03+00:00
+v17.17 = 2019-04-18 14:22:52+00:00
+v18.18 = 2019-05-18 11:03:37+00:00
+v19.19 = 2019-06-18 12:39:00+00:00
+v20.20 = 2019-07-18 10:56:35+00:00
+Current AIP Size = 21.42 MB
+
+First published date = 2017-03-20
+Data time coverage: 1998-01-22 to 2015-09-07
+Accession: 0162173
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:17:20+00:00
+Current AIP Size = 84.772 MB
+
+First published date = 2017-03-20
+Data time coverage: 2015-09-01 to 2016-12-16
+Accession: 0162186
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-03-20 23:29:37+00:00
+v1.2 = 2017-04-04 17:12:03+00:00
+v2.3 = 2017-05-22 14:50:28+00:00
+v3.4 = 2017-08-04 04:23:41+00:00
+Current AIP Size = 944.24 MB
+
+First published date = 2017-10-19
+Data time coverage: 2017-09-14 to 2019-09-26
+Accession: 0167435
+Submitter: Northwest Association of Networked Ocean Observing Systems
+v1.1 = 2017-10-19 07:16:06+00:00
+v2.2 = 2017-11-16 10:16:12+00:00
+v3.3 = 2018-01-16 10:16:14+00:00
+v4.4 = 2018-10-17 10:16:20+00:00
+v5.5 = 2018-11-17 10:26:49+00:00
+v6.6 = 2018-12-17 13:53:12+00:00
+v7.7 = 2019-02-17 11:29:46+00:00
+v8.8 = 2019-04-17 10:43:21+00:00
+v9.9 = 2019-07-17 10:17:39+00:00
+v10.10 = 2019-08-17 10:17:51+00:00
+v11.11 = 2019-09-17 10:17:45+00:00
+v12.12 = 2019-10-17 17:25:04+00:00
+v13.13 = 2020-03-17 13:10:05+00:00
+Current AIP Size = 26.636 MB
+
+First published date = 2017-03-20
+Data time coverage: 2008-04-13 to 2017-10-01
+Accession: 0162182
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = Saturn Estuary Station 01
+v1.1 = 2017-03-20 23:27:01+00:00
+v1.2 = 2017-04-04 17:11:56+00:00
+v2.3 = 2017-06-17 11:11:02+00:00
+v3.4 = 2017-08-04 02:04:45+00:00
+v4.5 = 2017-10-16 10:50:44+00:00
+v5.6 = 2021-02-19 19:16:23+00:00
+v6.7 = 2021-03-17 12:46:22+00:00
+Current AIP Size = 16699.616 MB
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First published date = 2017-05-16
+Data time coverage: 2000-05-24 to 2023-11-01
+Accession: 0162621
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = Mott Basin
+v1.1 = 2017-05-16 13:55:25+00:00
+v2.2 = 2017-08-04 04:11:13+00:00
+v3.3 = 2017-08-17 08:43:06+00:00
+v4.4 = 2017-10-17 10:28:57+00:00
+v5.5 = 2017-12-17 07:32:19+00:00
+v6.6 = 2018-01-17 07:29:00+00:00
+v7.7 = 2018-02-17 07:31:23+00:00
+v8.8 = 2018-04-17 10:30:13+00:00
+v9.9 = 2018-05-18 10:29:56+00:00
+v10.10 = 2018-06-18 10:34:21+00:00
+v11.11 = 2018-07-18 10:37:30+00:00
+v12.12 = 2018-08-18 10:35:14+00:00
+v13.13 = 2018-09-18 10:35:24+00:00
+v14.14 = 2018-10-18 10:35:46+00:00
+v15.15 = 2018-11-18 11:52:15+00:00
+v16.16 = 2018-12-18 15:16:34+00:00
+v17.17 = 2019-01-18 10:50:29+00:00
+v18.18 = 2019-02-18 10:50:32+00:00
+v19.19 = 2019-03-19 10:53:29+00:00
+v20.20 = 2019-04-18 14:17:03+00:00
+v21.21 = 2019-05-18 10:57:27+00:00
+v22.22 = 2019-06-18 12:32:51+00:00
+v23.23 = 2019-07-18 10:53:53+00:00
+v24.24 = 2019-08-18 11:05:14+00:00
+v25.25 = 2020-03-16 13:03:05+00:00
+v26.26 = 2020-04-18 11:28:11+00:00
+v27.27 = 2020-05-18 11:36:17+00:00
+v28.28 = 2020-06-18 11:39:38+00:00
+v29.29 = 2020-07-18 11:40:48+00:00
+v30.30 = 2020-08-18 11:43:15+00:00
+v31.31 = 2020-09-22 21:48:52+00:00
+v32.32 = 2020-11-19 09:14:59+00:00
+v33.33 = 2020-12-18 17:08:48+00:00
+v34.34 = 2021-02-21 17:20:38+00:00
+v35.35 = 2021-03-19 11:18:14+00:00
+v36.36 = 2021-04-18 10:48:22+00:00
+v37.37 = 2021-05-18 10:44:09+00:00
+v38.38 = 2021-07-20 10:45:29+00:00
+v39.39 = 2021-08-20 10:51:53+00:00
+v40.40 = 2021-09-19 10:46:56+00:00
+v41.41 = 2023-01-18 11:22:24+00:00
+v42.42 = 2023-02-18 11:07:45+00:00
+v43.43 = 2023-03-18 10:51:53+00:00
+v44.44 = 2023-04-18 11:15:08+00:00
+v45.45 = 2023-05-19 12:07:35+00:00
+v46.46 = 2023-06-18 11:17:37+00:00
+v47.47 = 2023-07-18 14:35:35+00:00
+v48.48 = 2023-08-19 11:13:47+00:00
+v49.49 = 2023-09-18 16:40:07+00:00
+v50.50 = 2023-10-19 11:59:46+00:00
+v51.51 = 2023-11-18 11:09:37+00:00
+Current AIP Size = 4288.232 MB
+
+First published date = 2017-03-20
+Data time coverage: 2004-05-17 to 2023-01-23
+Accession: 0162183
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = Offshore Buoy
+v1.1 = 2017-03-20 23:28:55+00:00
+v2.2 = 2017-08-04 02:06:32+00:00
+v3.3 = 2017-08-16 10:17:50+00:00
+v4.4 = 2017-10-17 07:17:54+00:00
+v5.5 = 2017-12-16 10:18:17+00:00
+v6.6 = 2018-02-16 10:17:59+00:00
+v7.7 = 2018-05-17 10:18:12+00:00
+v8.8 = 2018-07-17 10:20:21+00:00
+v9.9 = 2018-08-17 10:22:19+00:00
+v10.10 = 2018-09-17 10:22:12+00:00
+v11.11 = 2018-10-17 10:23:29+00:00
+v12.12 = 2018-11-17 10:36:25+00:00
+v13.13 = 2018-12-17 14:03:19+00:00
+v14.14 = 2019-01-17 10:30:39+00:00
+v15.15 = 2019-02-17 11:38:30+00:00
+v16.16 = 2019-06-17 10:33:01+00:00
+v17.17 = 2019-07-17 10:32:11+00:00
+v18.18 = 2019-08-17 10:36:34+00:00
+v19.19 = 2019-09-17 10:31:18+00:00
+v20.20 = 2019-10-17 17:38:34+00:00
+v21.21 = 2019-11-17 11:24:52+00:00
+v22.22 = 2019-12-17 15:05:00+00:00
+v23.23 = 2020-04-17 10:51:01+00:00
+v24.24 = 2021-08-19 22:49:42+00:00
+v25.25 = 2021-09-17 13:30:16+00:00
+v26.26 = 2023-01-17 10:58:32+00:00
+v27.27 = 2023-02-17 11:02:01+00:00
+v28.28 = 2023-03-17 10:30:07+00:00
+Current AIP Size = 1171.812 MB
+
+First published date = 2017-05-15
+Data time coverage: 2008-04-19 to 2023-11-05
+Accession: 0162617
+Submitter: Northwest Association of Networked Ocean Observing Systems
+Provider Platform Code = Saturn Estuary Station 03
+v1.1 = 2017-05-15 20:15:43+00:00
+v2.2 = 2017-08-04 04:01:17+00:00
+v3.3 = 2017-08-16 11:09:03+00:00
+v4.4 = 2017-10-17 08:12:09+00:00
+v5.5 = 2017-12-16 11:34:44+00:00
+v6.6 = 2018-01-16 11:11:12+00:00
+v7.7 = 2018-02-16 11:14:29+00:00
+v8.8 = 2018-04-16 21:21:20+00:00
+v9.9 = 2018-05-17 11:13:32+00:00
+v10.10 = 2018-06-17 11:23:58+00:00
+v11.11 = 2018-07-17 11:37:10+00:00
+v12.12 = 2018-08-17 11:34:34+00:00
+v13.13 = 2018-09-17 11:31:10+00:00
+v14.14 = 2018-10-17 11:37:21+00:00
+v15.15 = 2018-11-17 12:47:55+00:00
+v16.16 = 2018-12-17 15:26:58+00:00
+v17.17 = 2019-01-17 12:20:20+00:00
+v18.18 = 2019-02-17 13:06:22+00:00
+v19.19 = 2019-03-18 14:20:33+00:00
+v20.20 = 2019-04-17 12:35:52+00:00
+v21.21 = 2019-05-17 16:20:22+00:00
+v22.22 = 2019-06-17 12:27:40+00:00
+v23.23 = 2019-07-17 12:37:50+00:00
+v24.24 = 2019-08-17 12:49:31+00:00
+v25.25 = 2019-12-17 16:25:53+00:00
+v26.26 = 2020-01-22 14:36:07+00:00
+v27.27 = 2020-03-17 16:47:35+00:00
+v28.28 = 2020-04-17 13:53:41+00:00
+v29.29 = 2020-05-17 18:18:47+00:00
+v30.30 = 2020-06-18 01:15:53+00:00
+v31.31 = 2020-07-17 13:55:22+00:00
+v32.32 = 2020-08-17 15:11:35+00:00
+v33.33 = 2020-09-22 14:43:06+00:00
+v34.34 = 2020-10-19 13:19:48+00:00
+v35.35 = 2020-11-18 02:30:20+00:00
+v36.36 = 2020-12-17 17:22:07+00:00
+v37.37 = 2021-02-20 01:21:58+00:00
+v38.38 = 2021-03-18 11:48:02+00:00
+v39.39 = 2021-04-17 11:57:53+00:00
+v40.40 = 2021-05-17 11:53:36+00:00
+v41.41 = 2021-07-19 11:47:53+00:00
+v42.42 = 2021-08-19 23:48:00+00:00
+v43.43 = 2021-09-18 11:46:48+00:00
+v44.44 = 2023-01-17 12:59:17+00:00
+v45.45 = 2023-02-17 12:28:16+00:00
+v46.46 = 2023-03-17 12:23:43+00:00
+v47.47 = 2023-04-17 12:36:02+00:00
+v48.48 = 2023-05-18 12:48:59+00:00
+v49.49 = 2023-06-17 12:25:06+00:00
+v50.50 = 2023-07-17 17:55:23+00:00
+v51.51 = 2023-08-18 13:14:13+00:00
+v52.52 = 2023-09-17 14:18:17+00:00
+v53.53 = 2023-10-17 14:20:05+00:00
+v54.54 = 2023-11-17 12:32:49+00:00
+Current AIP Size = 14532.184 MB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-timeseries-plot-of-data-coverage">
+<h2>Create a timeseries plot of data coverage<a class="headerlink" href="#create-a-timeseries-plot-of-data-coverage" title="Link to this heading">#</a></h2>
+<p>Now that we have a DataFrame with all the information we’re interested in, lets make a time coverage plot for all the AIP’s at NCEI.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.dates</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mdates</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">ypos</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span>
+    <span class="n">ypos</span><span class="p">,</span>
+    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]),</span>
+    <span class="n">left</span><span class="o">=</span><span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]),</span>
+    <span class="n">height</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">xlim</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">)),</span>
+    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">)),</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">yticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;NCEI Accession Number&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;NCEI_accession_number&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;NCEI archive package time coverage&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis_date</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/dcfab841f3c706cc77aa354a8d756117240ae596d474f172a18efec444984895.png" src="../../../_images/dcfab841f3c706cc77aa354a8d756117240ae596d474f172a18efec444984895.png" />
+</div>
+</div>
+<p>This procedure has been developed as an example of how to use NCEI’s geoportal REST API’s to collect information about packages that have been archived at NCEI. The intention is to provide some guidance and ways to collect this information without having to request it directly from NCEI. There are a significant amount of metadata elements which NCEI makes available through their ISO metadata records. Therefore, anyone interested in collecting other information from the records at NCEI should have a look at the ISO metadata records and determine which items are of interest to their community. Then, update the example code provided to collect that information.</p>
+<p><strong>Author:</strong> Mathew Biddle</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/code_gallery/data_access_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2017-03-21-ERDDAP_IOOS_Sensor_Map.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2017-08-01-xtractoR.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using the <code class="docutils literal notranslate"><span class="pre">xtractomatic</span></code> R package to track Pacific Blue Marlin</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-we-select-a-regional-association-and-platform">Now we select a Regional Association and platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-we-generate-a-geoportal-query-and-georss-feed">Next we generate a geoportal query and georss feed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-to-query-the-portal-and-parse-out-the-csv-response">Time to query the portal and parse out the csv response</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lets-collect-what-we-have-found">Let’s collect what we have found</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-timeseries-plot-of-data-coverage">Create a timeseries plot of data coverage</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By IOOS
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href=https://ioos.noaa.gov> ioos.noaa.gov </a> &nbsp <a href=https://www.facebook.com/usioosgov> Facebook </a> &nbsp <a href=https://www.twitter.com/usioosgov> Twitter </a> &nbsp <a href="mailto:data.ioos@noaa.gov">Contact Us</a> <br> U.S. Integrated Ocean Observing System Program <br> 1315 East-West Highway <br> SSMC3, 2nd Floor <br> Silver Spring, MD 20910 <br> (240) 533-9444
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
