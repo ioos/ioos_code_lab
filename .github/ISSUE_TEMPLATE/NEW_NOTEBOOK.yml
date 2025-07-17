@@ -21,13 +21,13 @@ body:
       label: Module/Software/IOOS data service?
       description: Is it focused on a particular module/software or an IOOS data service?
       placeholder: ERDDAP
-  - type: input
+  - type: textarea
     id: example
     attributes:
       label: Module/Software/IOOS data service?
       description: Can you provide a minimum example of the expected code and results in a notebook?
       placeholder: Yes, see this gist.
-  - type: input
+  - type: textarea
     id: description
     attributes:
       label: Provide a description.
