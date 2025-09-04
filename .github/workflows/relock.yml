@@ -1,5 +1,8 @@
 name: relock
 
+# no permissions by default
+permissions: {}
+
 on:
   schedule:
     - cron: '0 0 1 * *'

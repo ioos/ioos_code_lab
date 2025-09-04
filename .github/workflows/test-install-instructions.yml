@@ -1,5 +1,8 @@
 name: Test Install instructions Section
 
+# no permissions by default
+permissions: {}
+
 on:
   pull_request:
 
