@@ -26,5 +26,5 @@ jobs:
       - name: Linkcheck
         run: >
           set -e
-          && pip install jupyter-book
+          && pip install jupyter-book<2
           && jupyter-book build jupyterbook --builder linkcheck
