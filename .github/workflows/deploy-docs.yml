@@ -32,7 +32,7 @@ jobs:
         run: >
           set -e
           && pip install jupyter-book
-          && jupyter-book build jupyter-book<2
+          && jupyter-book build "jupyter-book<2"
 
       - name: GitHub Pages action
         if: success() && github.event_name == 'release'
