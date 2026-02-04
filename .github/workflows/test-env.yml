@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         # macos-latest is osx-arm64 and the env is not building there yet b/c of robis.
-        os: [ macos-13, ubuntu-latest, windows-latest ]
+        os: [ macos-15-intel, ubuntu-latest, windows-latest ]
       fail-fast: false
     defaults:
       run:
