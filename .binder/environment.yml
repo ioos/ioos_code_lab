@@ -9,6 +9,7 @@ dependencies:
   - cf-xarray
   - ckanapi
   - compliance-checker
+  - dask
   - erddapy
   - folium
   - gdal
