@@ -80,6 +80,21 @@
 <img src="../images/2017-06-12-NCEI_RA_archive_history.png"/>
 :::
 
+:::{grid-item-card} Near real-time HF-Radar currents in the proximity of the Deepwater Horizon site
+:margin: 3 0 0 0
+:link: ./data_access_notebooks/2017-07-25-HFRadar_currents.html
+:link-type: url
+:text-align: center
+:shadow: md
+
+{bdg-primary}`Data Access`
+{bdg-secondary}`THREDDS`
+{bdg-info}`Python`
+^^^
+
+<img src="../images/2017-07-25-HFRadar_currents.png"/>
+:::
+
 :::{grid-item-card} Using the `xtractomatic` R package to track Pacific Blue Marlin
 :margin: 3 0 0 0
 :link: ./data_access_notebooks/2017-08-01-xtractoR.html
