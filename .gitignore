@@ -2,3 +2,7 @@
 *.swp
 .ipynb_checkpoints/
 index.html
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+pixi.lock
