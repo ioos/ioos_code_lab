@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Aligning Data to Darwin Core &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
+
+
+<script src="https://dgd6r9iiqa8y9.cloudfront.net/ioos-ui-components.min.js"></script>
   
   
   
@@ -32,7 +35,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -53,7 +56,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
@@ -87,6 +90,9 @@
   
   
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+
+<ioos-header variant="compact" theme="auto"></ioos-header>
 
   
   
@@ -764,11 +770,10 @@ is a unique identifier for each sampling event in the data.</p>
 <p>Finally, we write out the <a class="reference external" href="https://github.com/ioos/notebooks_demos/blob/master/notebooks/data/dwc/processed/MadeUpData_event.csv">event file</a>, specifying the ISO date format. We’ve printed ten random rows of the DataFrame to give an example of what the resultant file will look like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/ioos/notebooks_demos/raw/master/notebooks/data/dwc/processed/&quot;</span>
-<span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;MadeUpData_event.csv&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="n">event</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">file</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-
+<span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;MadeUpData_event.csv&quot;</span><span class="p">)</span>
+<span class="n">event</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">event</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -806,6 +811,19 @@ is a unique identifier for each sampling event in the data.</p>
   </thead>
   <tbody>
     <tr>
+      <th>0</th>
+      <td>St. John_250_1</td>
+      <td>18.29788</td>
+      <td>-64.79451</td>
+      <td>25</td>
+      <td>25</td>
+      <td>shallow reef flat</td>
+      <td>St. John</td>
+      <td>2004-07-16</td>
+      <td>HumanObservation</td>
+      <td>EPSG:4326 WGS84</td>
+    </tr>
+    <tr>
       <th>4</th>
       <td>St. John_250_2</td>
       <td>18.29788</td>
@@ -813,19 +831,6 @@ is a unique identifier for each sampling event in the data.</p>
       <td>35</td>
       <td>35</td>
       <td>complex back reef</td>
-      <td>St. John</td>
-      <td>2004-07-16</td>
-      <td>HumanObservation</td>
-      <td>EPSG:4326 WGS84</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>St. John_250_3</td>
-      <td>18.29788</td>
-      <td>-64.79451</td>
-      <td>85</td>
-      <td>85</td>
-      <td>deep reef</td>
       <td>St. John</td>
       <td>2004-07-16</td>
       <td>HumanObservation</td>
@@ -938,7 +943,7 @@ information. So, we create a lookup table of the unique scientific names found i
     <span class="n">resp</span> <span class="o">=</span> <span class="n">pyworms</span><span class="o">.</span><span class="n">aphiaRecordsByMatchNames</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
     <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;acceptedname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;valid_name&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;acceptedID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;valid_AphiaID&quot;</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;acceptedID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;valid_AphiaID&quot;</span><span class="p">])</span>
     <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;scientificNameID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;lsid&quot;</span><span class="p">]</span>
     <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;kingdom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;kingdom&quot;</span><span class="p">]</span>
     <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;phylum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;phylum&quot;</span><span class="p">]</span>
@@ -955,15 +960,15 @@ information. So, we create a lookup table of the unique scientific names found i
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**Searching for scientific name = Acropora cervicornis**
 {&#39;AphiaID&#39;: 206989,
  &#39;authority&#39;: &#39;(Lamarck, 1816)&#39;,
- &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S. (2021). World List of Scleractinia. &#39;
-             &#39;Acropora cervicornis (Lamarck, 1816). Accessed through: World &#39;
-             &#39;Register of Marine Species at: &#39;
-             &#39;http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=206989 on &#39;
-             &#39;2021-08-30&#39;,
- &#39;class&#39;: &#39;Anthozoa&#39;,
+ &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List &#39;
+             &#39;of Scleractinia. Acropora cervicornis (Lamarck, 1816). Accessed &#39;
+             &#39;through: World Register of Marine Species at: &#39;
+             &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=206989 &#39;
+             &#39;on 2026-05-04&#39;,
+ &#39;class&#39;: &#39;Hexacorallia&#39;,
  &#39;family&#39;: &#39;Acroporidae&#39;,
  &#39;genus&#39;: &#39;Acropora&#39;,
- &#39;isBrackish&#39;: 0,
+ &#39;isBrackish&#39;: None,
  &#39;isExtinct&#39;: None,
  &#39;isFreshwater&#39;: 0,
  &#39;isMarine&#39;: 1,
@@ -971,8 +976,9 @@ information. So, we create a lookup table of the unique scientific names found i
  &#39;kingdom&#39;: &#39;Animalia&#39;,
  &#39;lsid&#39;: &#39;urn:lsid:marinespecies.org:taxname:206989&#39;,
  &#39;match_type&#39;: &#39;exact&#39;,
- &#39;modified&#39;: &#39;2018-08-27T16:36:11.490Z&#39;,
+ &#39;modified&#39;: &#39;2022-05-29T06:08:19.927Z&#39;,
  &#39;order&#39;: &#39;Scleractinia&#39;,
+ &#39;originalNameUsageID&#39;: 738916,
  &#39;parentNameUsageID&#39;: 205469,
  &#39;phylum&#39;: &#39;Cnidaria&#39;,
  &#39;rank&#39;: &#39;Species&#39;,
@@ -980,7 +986,7 @@ information. So, we create a lookup table of the unique scientific names found i
  &#39;status&#39;: &#39;accepted&#39;,
  &#39;taxonRankID&#39;: 220,
  &#39;unacceptreason&#39;: None,
- &#39;url&#39;: &#39;http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=206989&#39;,
+ &#39;url&#39;: &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=206989&#39;,
  &#39;valid_AphiaID&#39;: 206989,
  &#39;valid_authority&#39;: &#39;(Lamarck, 1816)&#39;,
  &#39;valid_name&#39;: &#39;Acropora cervicornis&#39;}
@@ -988,15 +994,15 @@ information. So, we create a lookup table of the unique scientific names found i
 **Searching for scientific name = Madracis auretenra**
 {&#39;AphiaID&#39;: 430664,
  &#39;authority&#39;: &#39;Locke, Weil &amp; Coates, 2007&#39;,
- &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S. (2021). World List of Scleractinia. &#39;
-             &#39;Madracis auretenra Locke, Weil &amp; Coates, 2007. Accessed through: &#39;
-             &#39;World Register of Marine Species at: &#39;
-             &#39;http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=430664 on &#39;
-             &#39;2021-08-30&#39;,
- &#39;class&#39;: &#39;Anthozoa&#39;,
+ &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List &#39;
+             &#39;of Scleractinia. Madracis auretenra Locke, Weil &amp; Coates, 2007. &#39;
+             &#39;Accessed through: World Register of Marine Species at: &#39;
+             &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=430664 &#39;
+             &#39;on 2026-05-04&#39;,
+ &#39;class&#39;: &#39;Hexacorallia&#39;,
  &#39;family&#39;: &#39;Pocilloporidae&#39;,
  &#39;genus&#39;: &#39;Madracis&#39;,
- &#39;isBrackish&#39;: 0,
+ &#39;isBrackish&#39;: None,
  &#39;isExtinct&#39;: None,
  &#39;isFreshwater&#39;: 0,
  &#39;isMarine&#39;: 1,
@@ -1004,8 +1010,9 @@ information. So, we create a lookup table of the unique scientific names found i
  &#39;kingdom&#39;: &#39;Animalia&#39;,
  &#39;lsid&#39;: &#39;urn:lsid:marinespecies.org:taxname:430664&#39;,
  &#39;match_type&#39;: &#39;exact&#39;,
- &#39;modified&#39;: &#39;2020-04-10T07:30:40.497Z&#39;,
+ &#39;modified&#39;: &#39;2022-12-30T10:18:02.270Z&#39;,
  &#39;order&#39;: &#39;Scleractinia&#39;,
+ &#39;originalNameUsageID&#39;: 430664,
  &#39;parentNameUsageID&#39;: 135125,
  &#39;phylum&#39;: &#39;Cnidaria&#39;,
  &#39;rank&#39;: &#39;Species&#39;,
@@ -1013,7 +1020,7 @@ information. So, we create a lookup table of the unique scientific names found i
  &#39;status&#39;: &#39;accepted&#39;,
  &#39;taxonRankID&#39;: 220,
  &#39;unacceptreason&#39;: None,
- &#39;url&#39;: &#39;http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=430664&#39;,
+ &#39;url&#39;: &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=430664&#39;,
  &#39;valid_AphiaID&#39;: 430664,
  &#39;valid_authority&#39;: &#39;Locke, Weil &amp; Coates, 2007&#39;,
  &#39;valid_name&#39;: &#39;Madracis auretenra&#39;}
@@ -1021,15 +1028,15 @@ information. So, we create a lookup table of the unique scientific names found i
 **Searching for scientific name = Mussa angulosa**
 {&#39;AphiaID&#39;: 216135,
  &#39;authority&#39;: &#39;(Pallas, 1766)&#39;,
- &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S. (2021). World List of Scleractinia. &#39;
-             &#39;Mussa angulosa (Pallas, 1766). Accessed through: World Register &#39;
-             &#39;of Marine Species at: &#39;
-             &#39;http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=216135 on &#39;
-             &#39;2021-08-30&#39;,
- &#39;class&#39;: &#39;Anthozoa&#39;,
+ &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List &#39;
+             &#39;of Scleractinia. Mussa angulosa (Pallas, 1766). Accessed &#39;
+             &#39;through: World Register of Marine Species at: &#39;
+             &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=216135 &#39;
+             &#39;on 2026-05-04&#39;,
+ &#39;class&#39;: &#39;Hexacorallia&#39;,
  &#39;family&#39;: &#39;Faviidae&#39;,
  &#39;genus&#39;: &#39;Mussa&#39;,
- &#39;isBrackish&#39;: 0,
+ &#39;isBrackish&#39;: None,
  &#39;isExtinct&#39;: 0,
  &#39;isFreshwater&#39;: 0,
  &#39;isMarine&#39;: 1,
@@ -1037,8 +1044,9 @@ information. So, we create a lookup table of the unique scientific names found i
  &#39;kingdom&#39;: &#39;Animalia&#39;,
  &#39;lsid&#39;: &#39;urn:lsid:marinespecies.org:taxname:216135&#39;,
  &#39;match_type&#39;: &#39;exact&#39;,
- &#39;modified&#39;: &#39;2020-06-28T17:27:59.150Z&#39;,
+ &#39;modified&#39;: &#39;2022-05-26T06:45:21.380Z&#39;,
  &#39;order&#39;: &#39;Scleractinia&#39;,
+ &#39;originalNameUsageID&#39;: 718670,
  &#39;parentNameUsageID&#39;: 206306,
  &#39;phylum&#39;: &#39;Cnidaria&#39;,
  &#39;rank&#39;: &#39;Species&#39;,
@@ -1046,7 +1054,7 @@ information. So, we create a lookup table of the unique scientific names found i
  &#39;status&#39;: &#39;accepted&#39;,
  &#39;taxonRankID&#39;: 220,
  &#39;unacceptreason&#39;: None,
- &#39;url&#39;: &#39;http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=216135&#39;,
+ &#39;url&#39;: &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=216135&#39;,
  &#39;valid_AphiaID&#39;: 216135,
  &#39;valid_authority&#39;: &#39;(Pallas, 1766)&#39;,
  &#39;valid_name&#39;: &#39;Mussa angulosa&#39;}
@@ -1054,15 +1062,15 @@ information. So, we create a lookup table of the unique scientific names found i
 **Searching for scientific name = Siderastrea radians**
 {&#39;AphiaID&#39;: 207517,
  &#39;authority&#39;: &#39;(Pallas, 1766)&#39;,
- &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S. (2021). World List of Scleractinia. &#39;
-             &#39;Siderastrea radians (Pallas, 1766). Accessed through: World &#39;
-             &#39;Register of Marine Species at: &#39;
-             &#39;http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=207517 on &#39;
-             &#39;2021-08-30&#39;,
- &#39;class&#39;: &#39;Anthozoa&#39;,
- &#39;family&#39;: &#39;Siderastreidae&#39;,
+ &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List &#39;
+             &#39;of Scleractinia. Siderastrea radians (Pallas, 1766). Accessed &#39;
+             &#39;through: World Register of Marine Species at: &#39;
+             &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=207517 &#39;
+             &#39;on 2026-05-04&#39;,
+ &#39;class&#39;: &#39;Hexacorallia&#39;,
+ &#39;family&#39;: &#39;Rhizangiidae&#39;,
  &#39;genus&#39;: &#39;Siderastrea&#39;,
- &#39;isBrackish&#39;: 0,
+ &#39;isBrackish&#39;: None,
  &#39;isExtinct&#39;: None,
  &#39;isFreshwater&#39;: 0,
  &#39;isMarine&#39;: 1,
@@ -1070,8 +1078,9 @@ information. So, we create a lookup table of the unique scientific names found i
  &#39;kingdom&#39;: &#39;Animalia&#39;,
  &#39;lsid&#39;: &#39;urn:lsid:marinespecies.org:taxname:207517&#39;,
  &#39;match_type&#39;: &#39;exact&#39;,
- &#39;modified&#39;: &#39;2014-06-02T10:15:47.813Z&#39;,
+ &#39;modified&#39;: &#39;2022-05-26T06:45:21.380Z&#39;,
  &#39;order&#39;: &#39;Scleractinia&#39;,
+ &#39;originalNameUsageID&#39;: 742106,
  &#39;parentNameUsageID&#39;: 204291,
  &#39;phylum&#39;: &#39;Cnidaria&#39;,
  &#39;rank&#39;: &#39;Species&#39;,
@@ -1079,7 +1088,7 @@ information. So, we create a lookup table of the unique scientific names found i
  &#39;status&#39;: &#39;accepted&#39;,
  &#39;taxonRankID&#39;: 220,
  &#39;unacceptreason&#39;: None,
- &#39;url&#39;: &#39;http://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=207517&#39;,
+ &#39;url&#39;: &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=207517&#39;,
  &#39;valid_AphiaID&#39;: 207517,
  &#39;valid_authority&#39;: &#39;(Pallas, 1766)&#39;,
  &#39;valid_name&#39;: &#39;Siderastrea radians&#39;}
@@ -1172,9 +1181,27 @@ information. So, we create a lookup table of the unique scientific names found i
   </thead>
   <tbody>
     <tr>
+      <th>1</th>
+      <td>St. John_250_1</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Madracis auretenra</td>
+      <td>present</td>
+      <td>Madracis auretenra</td>
+      <td>430664</td>
+      <td>urn:lsid:marinespecies.org:taxname:430664</td>
+      <td>Animalia</td>
+      <td>Cnidaria</td>
+      <td>Hexacorallia</td>
+      <td>Scleractinia</td>
+      <td>Pocilloporidae</td>
+      <td>Madracis</td>
+      <td>Locke, Weil &amp; Coates, 2007</td>
+      <td>Species</td>
+    </tr>
+    <tr>
       <th>4</th>
       <td>St. John_250_2</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
       <td>Acropora cervicornis</td>
       <td>absent</td>
       <td>Acropora cervicornis</td>
@@ -1182,7 +1209,7 @@ information. So, we create a lookup table of the unique scientific names found i
       <td>urn:lsid:marinespecies.org:taxname:206989</td>
       <td>Animalia</td>
       <td>Cnidaria</td>
-      <td>Anthozoa</td>
+      <td>Hexacorallia</td>
       <td>Scleractinia</td>
       <td>Acroporidae</td>
       <td>Acropora</td>
@@ -1192,7 +1219,7 @@ information. So, we create a lookup table of the unique scientific names found i
     <tr>
       <th>5</th>
       <td>St. John_250_2</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
       <td>Madracis auretenra</td>
       <td>present</td>
       <td>Madracis auretenra</td>
@@ -1200,7 +1227,7 @@ information. So, we create a lookup table of the unique scientific names found i
       <td>urn:lsid:marinespecies.org:taxname:430664</td>
       <td>Animalia</td>
       <td>Cnidaria</td>
-      <td>Anthozoa</td>
+      <td>Hexacorallia</td>
       <td>Scleractinia</td>
       <td>Pocilloporidae</td>
       <td>Madracis</td>
@@ -1210,7 +1237,7 @@ information. So, we create a lookup table of the unique scientific names found i
     <tr>
       <th>7</th>
       <td>St. John_250_2</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
       <td>Siderastrea radians</td>
       <td>absent</td>
       <td>Siderastrea radians</td>
@@ -1218,9 +1245,9 @@ information. So, we create a lookup table of the unique scientific names found i
       <td>urn:lsid:marinespecies.org:taxname:207517</td>
       <td>Animalia</td>
       <td>Cnidaria</td>
-      <td>Anthozoa</td>
+      <td>Hexacorallia</td>
       <td>Scleractinia</td>
-      <td>Siderastreidae</td>
+      <td>Rhizangiidae</td>
       <td>Siderastrea</td>
       <td>(Pallas, 1766)</td>
       <td>Species</td>
@@ -1228,7 +1255,7 @@ information. So, we create a lookup table of the unique scientific names found i
     <tr>
       <th>10</th>
       <td>St. John_250_3</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
       <td>Mussa angulosa</td>
       <td>present</td>
       <td>Mussa angulosa</td>
@@ -1236,7 +1263,7 @@ information. So, we create a lookup table of the unique scientific names found i
       <td>urn:lsid:marinespecies.org:taxname:216135</td>
       <td>Animalia</td>
       <td>Cnidaria</td>
-      <td>Anthozoa</td>
+      <td>Hexacorallia</td>
       <td>Scleractinia</td>
       <td>Faviidae</td>
       <td>Mussa</td>
@@ -1244,45 +1271,63 @@ information. So, we create a lookup table of the unique scientific names found i
       <td>Species</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>St. John_356_1</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
-      <td>Acropora cervicornis</td>
-      <td>present</td>
-      <td>Acropora cervicornis</td>
-      <td>206989</td>
-      <td>urn:lsid:marinespecies.org:taxname:206989</td>
+      <th>11</th>
+      <td>St. John_250_3</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Siderastrea radians</td>
+      <td>absent</td>
+      <td>Siderastrea radians</td>
+      <td>207517</td>
+      <td>urn:lsid:marinespecies.org:taxname:207517</td>
       <td>Animalia</td>
       <td>Cnidaria</td>
-      <td>Anthozoa</td>
+      <td>Hexacorallia</td>
       <td>Scleractinia</td>
-      <td>Acroporidae</td>
-      <td>Acropora</td>
-      <td>(Lamarck, 1816)</td>
+      <td>Rhizangiidae</td>
+      <td>Siderastrea</td>
+      <td>(Pallas, 1766)</td>
       <td>Species</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>14</th>
       <td>St. John_356_1</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
-      <td>Madracis auretenra</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Mussa angulosa</td>
       <td>present</td>
-      <td>Madracis auretenra</td>
-      <td>430664</td>
-      <td>urn:lsid:marinespecies.org:taxname:430664</td>
+      <td>Mussa angulosa</td>
+      <td>216135</td>
+      <td>urn:lsid:marinespecies.org:taxname:216135</td>
       <td>Animalia</td>
       <td>Cnidaria</td>
-      <td>Anthozoa</td>
+      <td>Hexacorallia</td>
       <td>Scleractinia</td>
-      <td>Pocilloporidae</td>
-      <td>Madracis</td>
-      <td>Locke, Weil &amp; Coates, 2007</td>
+      <td>Faviidae</td>
+      <td>Mussa</td>
+      <td>(Pallas, 1766)</td>
+      <td>Species</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>St. John_356_1</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Siderastrea radians</td>
+      <td>present</td>
+      <td>Siderastrea radians</td>
+      <td>207517</td>
+      <td>urn:lsid:marinespecies.org:taxname:207517</td>
+      <td>Animalia</td>
+      <td>Cnidaria</td>
+      <td>Hexacorallia</td>
+      <td>Scleractinia</td>
+      <td>Rhizangiidae</td>
+      <td>Siderastrea</td>
+      <td>(Pallas, 1766)</td>
       <td>Species</td>
     </tr>
     <tr>
       <th>19</th>
       <td>St. John_356_2</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
       <td>Siderastrea radians</td>
       <td>present</td>
       <td>Siderastrea radians</td>
@@ -1290,35 +1335,17 @@ information. So, we create a lookup table of the unique scientific names found i
       <td>urn:lsid:marinespecies.org:taxname:207517</td>
       <td>Animalia</td>
       <td>Cnidaria</td>
-      <td>Anthozoa</td>
+      <td>Hexacorallia</td>
       <td>Scleractinia</td>
-      <td>Siderastreidae</td>
+      <td>Rhizangiidae</td>
       <td>Siderastrea</td>
       <td>(Pallas, 1766)</td>
       <td>Species</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>St. John_356_3</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
-      <td>Madracis auretenra</td>
-      <td>absent</td>
-      <td>Madracis auretenra</td>
-      <td>430664</td>
-      <td>urn:lsid:marinespecies.org:taxname:430664</td>
-      <td>Animalia</td>
-      <td>Cnidaria</td>
-      <td>Anthozoa</td>
-      <td>Scleractinia</td>
-      <td>Pocilloporidae</td>
-      <td>Madracis</td>
-      <td>Locke, Weil &amp; Coates, 2007</td>
-      <td>Species</td>
-    </tr>
-    <tr>
       <th>22</th>
       <td>St. John_356_3</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
       <td>Mussa angulosa</td>
       <td>absent</td>
       <td>Mussa angulosa</td>
@@ -1326,28 +1353,10 @@ information. So, we create a lookup table of the unique scientific names found i
       <td>urn:lsid:marinespecies.org:taxname:216135</td>
       <td>Animalia</td>
       <td>Cnidaria</td>
-      <td>Anthozoa</td>
+      <td>Hexacorallia</td>
       <td>Scleractinia</td>
       <td>Faviidae</td>
       <td>Mussa</td>
-      <td>(Pallas, 1766)</td>
-      <td>Species</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>St. John_356_3</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
-      <td>Siderastrea radians</td>
-      <td>present</td>
-      <td>Siderastrea radians</td>
-      <td>207517</td>
-      <td>urn:lsid:marinespecies.org:taxname:207517</td>
-      <td>Animalia</td>
-      <td>Cnidaria</td>
-      <td>Anthozoa</td>
-      <td>Scleractinia</td>
-      <td>Siderastreidae</td>
-      <td>Siderastrea</td>
       <td>(Pallas, 1766)</td>
       <td>Species</td>
     </tr>
@@ -1462,46 +1471,111 @@ information. So, we create a lookup table of the unique scientific names found i
   </thead>
   <tbody>
     <tr>
-      <th>6</th>
+      <th>7</th>
       <td>St. John_250_2</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Percent Cover</td>
+      <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
+      <td>0</td>
+      <td>Percent/100m^2</td>
       <td></td>
-      <td>temperature</td>
-      <td>http://vocab.nerc.ac.uk/collection/P25/current...</td>
-      <td>24.8</td>
-      <td>Celsius</td>
-      <td>http://vocab.nerc.ac.uk/collection/P06/current...</td>
-      <td>3</td>
+      <td>5</td>
       <td>2004-07-16</td>
       <td></td>
     </tr>
     <tr>
       <th>18</th>
       <td>St. John_356_2</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Percent Cover</td>
+      <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
+      <td>0</td>
+      <td>Percent/100m^2</td>
       <td></td>
-      <td>rugosity</td>
-      <td></td>
-      <td>0.158489</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>5</td>
       <td>2004-07-17</td>
       <td></td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>St. John_250_2</td>
+      <th>19</th>
+      <td>St. John_356_2</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Percent Cover</td>
+      <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
+      <td>16</td>
+      <td>Percent/100m^2</td>
       <td></td>
-      <td>temperature</td>
-      <td>http://vocab.nerc.ac.uk/collection/P25/current...</td>
-      <td>24.8</td>
-      <td>Celsius</td>
-      <td>http://vocab.nerc.ac.uk/collection/P06/current...</td>
-      <td>3</td>
+      <td>5</td>
+      <td>2004-07-17</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>St. John_356_2</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Percent Cover</td>
+      <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
+      <td>10</td>
+      <td>Percent/100m^2</td>
+      <td></td>
+      <td>5</td>
+      <td>2004-07-17</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>St. John_250_3</td>
+      <td></td>
+      <td>rugosity</td>
+      <td></td>
+      <td>0.413461</td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td>2004-07-16</td>
       <td></td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>19</th>
+      <td>St. John_356_2</td>
+      <td></td>
+      <td>temperature</td>
+      <td>http://vocab.nerc.ac.uk/collection/P25/current...</td>
+      <td>24.9</td>
+      <td>Celsius</td>
+      <td>http://vocab.nerc.ac.uk/collection/P06/current...</td>
+      <td>3</td>
+      <td>2004-07-17</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>St. John_356_1</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Percent Cover</td>
+      <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
+      <td>10</td>
+      <td>Percent/100m^2</td>
+      <td></td>
+      <td>5</td>
+      <td>2004-07-17</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>St. John_356_1</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
+      <td>Percent Cover</td>
+      <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
+      <td>2</td>
+      <td>Percent/100m^2</td>
+      <td></td>
+      <td>5</td>
+      <td>2004-07-17</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>9</th>
       <td>St. John_250_3</td>
       <td></td>
       <td>temperature</td>
@@ -1514,81 +1588,16 @@ information. So, we create a lookup table of the unique scientific names found i
       <td></td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>St. John_250_2</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
-      <td>Percent Cover</td>
-      <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
-      <td>0</td>
-      <td>Percent/100m^2</td>
-      <td></td>
-      <td>5</td>
-      <td>2004-07-16</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>St. John_250_2</td>
-      <td></td>
-      <td>rugosity</td>
-      <td></td>
-      <td>0.364583</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>2004-07-16</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>St. John_250_2</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
-      <td>Percent Cover</td>
-      <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
-      <td>0</td>
-      <td>Percent/100m^2</td>
-      <td></td>
-      <td>5</td>
-      <td>2004-07-16</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>20</th>
+      <th>21</th>
       <td>St. John_356_3</td>
-      <td></td>
-      <td>rugosity</td>
-      <td></td>
-      <td>0.489574</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>2004-07-17</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>St. John_250_1</td>
-      <td>f470068c-998a-4e9b-b026-02bf02118de7</td>
+      <td>4bc6e4fe-b529-43ff-b588-71e55f551f1f</td>
       <td>Percent Cover</td>
       <td>http://vocab.nerc.ac.uk/collection/P01/current...</td>
-      <td>15</td>
+      <td>0</td>
       <td>Percent/100m^2</td>
       <td></td>
       <td>5</td>
-      <td>2004-07-16</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>St. John_250_1</td>
-      <td></td>
-      <td>temperature</td>
-      <td>http://vocab.nerc.ac.uk/collection/P25/current...</td>
-      <td>25.2</td>
-      <td>Celsius</td>
-      <td>http://vocab.nerc.ac.uk/collection/P06/current...</td>
-      <td>3</td>
-      <td>2004-07-16</td>
+      <td>2004-07-17</td>
       <td></td>
     </tr>
   </tbody>

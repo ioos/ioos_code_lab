@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>IOOS GTS Statistics &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
+
+
+<script src="https://dgd6r9iiqa8y9.cloudfront.net/ioos-ui-components.min.js"></script>
   
   
   
@@ -32,7 +35,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -53,7 +56,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
@@ -90,6 +93,9 @@
   
   
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+
+<ioos-header variant="compact" theme="auto"></ioos-header>
 
   
   
@@ -502,7 +508,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="ioos-gts-statistics">
 <h1>IOOS GTS Statistics<a class="headerlink" href="#ioos-gts-statistics" title="Link to this heading">#</a></h1>
 <p>Created: 2020-10-10</p>
-<p>Updated: 2023-06-26</p>
+<p>Updated: 2026-05-04</p>
 <p>The Global Telecommunication System (GTS) is a coordinated effort for rapid distribution of observations.
 The GTS monthly reports show the number of messages released to GTS for each station.
 The reports contain the following fields:</p>
@@ -581,59 +587,37 @@ The reports contain the following fields:</p>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>met</th>
-      <th>wave</th>
       <th>time (UTC)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
-      <td>695.000000</td>
-      <td>695.000000</td>
       <td>695</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>5492.500719</td>
-      <td>1207.418705</td>
-      <td>2021-08-16 07:35:49.640287744</td>
+      <td>2021-08-16 07:35:49.640287</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
       <td>2021-07-01 00:00:00</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
       <td>2021-08-01 00:00:00</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>2576.000000</td>
-      <td>0.000000</td>
       <td>2021-09-01 00:00:00</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>8789.000000</td>
-      <td>1409.000000</td>
       <td>2021-09-16 00:00:00</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>17814.000000</td>
-      <td>17814.000000</td>
       <td>2021-10-01 00:00:00</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>5841.635417</td>
-      <td>2841.529514</td>
-      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -651,7 +635,7 @@ The reports contain the following fields:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;DatetimeArray&gt;
 [&#39;2021-07-01 00:00:00&#39;, &#39;2021-08-01 00:00:00&#39;, &#39;2021-09-01 00:00:00&#39;,
  &#39;2021-10-01 00:00:00&#39;]
-Length: 4, dtype: datetime64[ns]
+Length: 4, dtype: datetime64[us]
 </pre></div>
 </div>
 </div>
@@ -671,7 +655,7 @@ Length: 4, dtype: datetime64[ns]
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;# observations&#39;)
 </pre></div>
 </div>
-<img alt="../../../_images/19abb1cf9e81ee291e2424a91fa8e5ac931549f10a1d2829b4334e345fd9042f.png" src="../../../_images/19abb1cf9e81ee291e2424a91fa8e5ac931549f10a1d2829b4334e345fd9042f.png" />
+<img alt="../../../_images/7ecf56387ed781e8ce525dad9effd0930d5970b3a9232db1f99a470b578f87a1.png" src="../../../_images/7ecf56387ed781e8ce525dad9effd0930d5970b3a9232db1f99a470b578f87a1.png" />
 </div>
 </div>
 <p>Let us check the monthly sum of data released both for individual met and wave and the totals.</p>
@@ -684,7 +668,7 @@ Length: 4, dtype: datetime64[ns]
 <span class="c1"># Remove time-zone info for easier plotting, it is all UTC.</span>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
-<span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">))</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;ME&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -741,7 +725,7 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;# observations&#39;)
 </pre></div>
 </div>
-<img alt="../../../_images/db10203e33d15c3c4dace7c8ecfbcec1e3598a792b12247e6f0eca73f9330745.png" src="../../../_images/db10203e33d15c3c4dace7c8ecfbcec1e3598a792b12247e6f0eca73f9330745.png" />
+<img alt="../../../_images/720d9c721c5d7bc5ce77e4705a0a2db771c8a937520786bce175220cf1f35915.png" src="../../../_images/720d9c721c5d7bc5ce77e4705a0a2db771c8a937520786bce175220cf1f35915.png" />
 </div>
 </div>
 <p>Those plots are interesting to understand the RAs role in the GTS ingest and how much data is being released over time. It would be nice to see those per buoy on a map.</p>
@@ -801,7 +785,6 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
       <th>currents</th>
       <th>waterquality</th>
       <th>dart</th>
-      <th>seq</th>
     </tr>
     <tr>
       <th>id</th>
@@ -816,44 +799,27 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0y2w3</th>
-      <td>44.794</td>
-      <td>-87.313</td>
-      <td>179</td>
-      <td>Sturgeon Bay CG Station, WI</td>
-      <td>U.S.C.G. Marine Reporting Stations</td>
-      <td>IOOS Partners</td>
-      <td>fixed</td>
-      <td>n</td>
-      <td>n</td>
-      <td>n</td>
-      <td>n</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
       <th>13001</th>
-      <td>12.000</td>
-      <td>-23.000</td>
+      <td>12.0</td>
+      <td>-23.0</td>
       <td>0</td>
       <td>NE Extension</td>
       <td>Prediction and Research Moored Array in the At...</td>
       <td>International Partners</td>
       <td>buoy</td>
-      <td>y</td>
       <td>n</td>
       <td>n</td>
       <td>n</td>
-      <td>NaN</td>
+      <td>n</td>
     </tr>
     <tr>
       <th>13002</th>
-      <td>21.000</td>
-      <td>-23.000</td>
+      <td>21.0</td>
+      <td>-23.0</td>
       <td>0</td>
       <td>NE Extension</td>
       <td>Prediction and Research Moored Array in the At...</td>
@@ -863,12 +829,11 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
       <td>n</td>
       <td>n</td>
       <td>n</td>
-      <td>NaN</td>
     </tr>
     <tr>
       <th>13008</th>
-      <td>15.000</td>
-      <td>-38.000</td>
+      <td>15.0</td>
+      <td>-38.0</td>
       <td>0</td>
       <td>Reggae</td>
       <td>Prediction and Research Moored Array in the At...</td>
@@ -878,12 +843,11 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
       <td>n</td>
       <td>n</td>
       <td>n</td>
-      <td>NaN</td>
     </tr>
     <tr>
       <th>13009</th>
-      <td>8.000</td>
-      <td>-38.000</td>
+      <td>8.0</td>
+      <td>-38.0</td>
       <td>0</td>
       <td>Lambada</td>
       <td>Prediction and Research Moored Array in the At...</td>
@@ -893,151 +857,26 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
       <td>n</td>
       <td>n</td>
       <td>n</td>
-      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>14041</th>
+      <td>-8.0</td>
+      <td>55.0</td>
+      <td>0</td>
+      <td></td>
+      <td>Research Moored Array for African-Asian-Austra...</td>
+      <td>International Partners</td>
+      <td>buoy</td>
+      <td>n</td>
+      <td>n</td>
+      <td>n</td>
+      <td>n</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 <p>For simplificty we will plot the total of observations per buoys.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>locationID</th>
-      <th>region</th>
-      <th>sponsor</th>
-      <th>met</th>
-      <th>wave</th>
-      <th>time (UTC)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>46108</td>
-      <td>AOOS</td>
-      <td>ALASKA OCEAN OBSERVING SYSTEM</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2021-07-01</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>haxa2</td>
-      <td>AOOS</td>
-      <td>MARINE EXCHANGE OF ALASKA</td>
-      <td>8760.0</td>
-      <td>0.0</td>
-      <td>2021-07-01</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>jmla2</td>
-      <td>AOOS</td>
-      <td>MARINE EXCHANGE OF ALASKA</td>
-      <td>8600.0</td>
-      <td>0.0</td>
-      <td>2021-07-01</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>nkla2</td>
-      <td>AOOS</td>
-      <td>MARINE EXCHANGE OF ALASKA</td>
-      <td>8774.0</td>
-      <td>0.0</td>
-      <td>2021-07-01</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>gixa2</td>
-      <td>AOOS</td>
-      <td>MARINE EXCHANGE OF ALASKA</td>
-      <td>8534.0</td>
-      <td>0.0</td>
-      <td>2021-07-01</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>169</th>
-      <td>ssbn7</td>
-      <td>SECOORA</td>
-      <td>COASTAL OCEAN RESEARCH AND MONITORING PROGRAM</td>
-      <td>0.0</td>
-      <td>2940.0</td>
-      <td>2021-10-01</td>
-    </tr>
-    <tr>
-      <th>170</th>
-      <td>41159</td>
-      <td>SECOORA</td>
-      <td>COASTAL OCEAN RESEARCH AND MONITORING PROGRAM</td>
-      <td>0.0</td>
-      <td>2716.0</td>
-      <td>2021-10-01</td>
-    </tr>
-    <tr>
-      <th>171</th>
-      <td>sipf1</td>
-      <td>SECOORA</td>
-      <td>FLORIDA INSTITUTE OF TECHNOLOGY</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2021-10-01</td>
-    </tr>
-    <tr>
-      <th>172</th>
-      <td>42098</td>
-      <td>SECOORA</td>
-      <td>GREATER TAMPA BAY MARINE ADVISORY COUNCIL PORTS</td>
-      <td>0.0</td>
-      <td>2872.0</td>
-      <td>2021-10-01</td>
-    </tr>
-    <tr>
-      <th>173</th>
-      <td>44095</td>
-      <td>SECOORA</td>
-      <td>UNIVERSITY OF NORTH CAROLINA COASTAL STUDIES</td>
-      <td>0.0</td>
-      <td>2916.0</td>
-      <td>2021-10-01</td>
-    </tr>
-  </tbody>
-</table>
-<p>695 rows × 6 columns</p>
-</div></div></div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;locationID&quot;</span><span class="p">,</span> <span class="s2">&quot;met&quot;</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;locationID&quot;</span><span class="p">)</span>
@@ -1106,7 +945,7 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "094e65422fe54788b9879ae297563fd8", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "158551c0a9a440b4a66c5bf703df0cdf", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 </section>
 </section>

@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Creating a CF-1.6 timeSeries using pocean &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
+
+
+<script src="https://dgd6r9iiqa8y9.cloudfront.net/ioos-ui-components.min.js"></script>
   
   
   
@@ -32,7 +35,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -53,7 +56,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
@@ -87,6 +90,9 @@
   
   
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+
+<ioos-header variant="compact" theme="auto"></ioos-header>
 
   
   
@@ -489,6 +495,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="creating-a-cf-1-6-timeseries-using-pocean">
 <h1>Creating a CF-1.6 timeSeries using pocean<a class="headerlink" href="#creating-a-cf-1-6-timeseries-using-pocean" title="Link to this heading">#</a></h1>
 <p>Created: 2018-02-27</p>
+<p>Updated: 2026-05-04</p>
 <p>IOOS recommends to data providers that their netCDF files follow the CF-1.6 standard. In this notebook we will create a <a class="reference external" href="https://cfconventions.org/latest.html">CF-1.6 compliant</a> file that follows file that follows the <a class="reference external" href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch09.html">Discrete Sampling Geometries</a> (DSG) of a <code class="docutils literal notranslate"><span class="pre">timeSeries</span></code> from a pandas DataFrame.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">pocean</span></code> module can handle all the DSGs described in the CF-1.6 document: <code class="docutils literal notranslate"><span class="pre">point</span></code>, <code class="docutils literal notranslate"><span class="pre">timeSeries</span></code>, <code class="docutils literal notranslate"><span class="pre">trajectory</span></code>, <code class="docutils literal notranslate"><span class="pre">profile</span></code>, <code class="docutils literal notranslate"><span class="pre">timeSeriesProfile</span></code>, and <code class="docutils literal notranslate"><span class="pre">trajectoryProfile</span></code>. These DSGs array may be represented in the netCDF file as:</p>
 <ul class="simple">
@@ -557,7 +564,7 @@
   <tbody>
     <tr>
       <th>95</th>
-      <td>2022-05-10 15:18:50.687502</td>
+      <td>2026-07-31 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -567,7 +574,7 @@
     </tr>
     <tr>
       <th>96</th>
-      <td>2022-05-11 15:18:50.687502</td>
+      <td>2026-08-01 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -577,7 +584,7 @@
     </tr>
     <tr>
       <th>97</th>
-      <td>2022-05-12 15:18:50.687502</td>
+      <td>2026-08-02 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -587,7 +594,7 @@
     </tr>
     <tr>
       <th>98</th>
-      <td>2022-05-13 15:18:50.687502</td>
+      <td>2026-08-03 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -597,7 +604,7 @@
     </tr>
     <tr>
       <th>99</th>
-      <td>2022-05-14 15:18:50.687502</td>
+      <td>2026-08-04 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -612,10 +619,7 @@
 <p>Let’s take a look at our fake data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">oceans.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">stick_plot</span>
 
 <span class="n">q</span> <span class="o">=</span> <span class="n">stick_plot</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">])</span>
@@ -625,23 +629,12 @@
     <span class="n">q</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ref</span><span class="si">}</span><span class="s2"> m s$^</span><span class="si">{</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">labelpos</span><span class="o">=</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="s2">&quot;axes&quot;</span>
 <span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">70</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([19024., 19038., 19052., 19066., 19083., 19097., 19113., 19127.]),
- [Text(0, 0, &#39;&#39;),
-  Text(0, 0, &#39;&#39;),
-  Text(0, 0, &#39;&#39;),
-  Text(0, 0, &#39;&#39;),
-  Text(0, 0, &#39;&#39;),
-  Text(0, 0, &#39;&#39;),
-  Text(0, 0, &#39;&#39;),
-  Text(0, 0, &#39;&#39;)])
-</pre></div>
-</div>
-<img alt="../../../_images/3693c31daccfd03e68828196d0d9f036fc5849ce723ea9033a78dffe01f20017.png" src="../../../_images/3693c31daccfd03e68828196d0d9f036fc5849ce723ea9033a78dffe01f20017.png" />
+<img alt="../../../_images/63b489ed24914a14a0af949d3ff33fa0ff71a3cacaea3b789c136a661da48cf3.png" src="../../../_images/63b489ed24914a14a0af949d3ff33fa0ff71a3cacaea3b789c136a661da48cf3.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">pocean.dsg</span></code> is relatively simple to use. The user must provide a DataFrame, like the one above, and a dictionary of attributes that maps to the data and adhere to the DSG conventions desired.</p>
@@ -748,22 +741,22 @@ variables:
 		longitude:units = &quot;degrees_east&quot; ;
 		longitude:standard_name = &quot;longitude&quot; ;
 	int depth(station) ;
-		depth:_FillValue = -9999 ;
+		depth:_FillValue = 0 ;
 		depth:axis = &quot;Z&quot; ;
 	double u(station, time) ;
-		u:_FillValue = -9999.9 ;
+		u:_FillValue = 0. ;
 		u:units = &quot;m/s&quot; ;
 		u:standard_name = &quot;eastward_sea_water_velocity&quot; ;
 		u:coordinates = &quot;time depth longitude latitude&quot; ;
 	double v(station, time) ;
-		v:_FillValue = -9999.9 ;
+		v:_FillValue = 0. ;
 		v:units = &quot;m/s&quot; ;
 		v:standard_name = &quot;northward_sea_water_velocity&quot; ;
 		v:coordinates = &quot;time depth longitude latitude&quot; ;
 
 // global attributes:
 		:Conventions = &quot;CF-1.6&quot; ;
-		:date_created = &quot;2022-02-11T18:18:00Z&quot; ;
+		:date_created = &quot;2026-05-04T20:12:00Z&quot; ;
 		:featureType = &quot;timeseries&quot; ;
 		:cdm_data_type = &quot;Timeseries&quot; ;
 		:title = &quot;Fake mooring&quot; ;
@@ -830,7 +823,7 @@ variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;class &#39;netCDF4._netCDF4.Variable&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;class &#39;netCDF4.Variable&#39;&gt;
  float64 time(time)
      units: seconds since 1990-01-01 00:00:00Z
      standard_name: time
@@ -849,9 +842,9 @@ variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;class &#39;netCDF4._netCDF4.Variable&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;class &#39;netCDF4.Variable&#39;&gt;
  int32 depth(station)
-     _FillValue: -9999
+     _FillValue: 0
      axis: Z
  unlimited dimensions: 
  current shape = (1,)
@@ -891,7 +884,7 @@ variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;_FillValue&#39;: -9999.9,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;_FillValue&#39;: np.float64(0.0),
  &#39;units&#39;: &#39;m/s&#39;,
  &#39;standard_name&#39;: &#39;eastward_sea_water_velocity&#39;,
  &#39;coordinates&#39;: &#39;time depth longitude latitude&#39;}
@@ -907,6 +900,10 @@ variables:
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/micromamba/envs/IOOS/lib/python3.14/site-packages/numpy/ma/core.py:498: RuntimeWarning: invalid value encountered in cast
+  fill_value = np.asarray(fill_value, dtype=ndtype)
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -937,7 +934,7 @@ variables:
   <tbody>
     <tr>
       <th>0</th>
-      <td>2022-02-04 15:18:50.687502</td>
+      <td>2026-04-27 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -947,7 +944,7 @@ variables:
     </tr>
     <tr>
       <th>1</th>
-      <td>2022-02-05 15:18:50.687502</td>
+      <td>2026-04-28 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -957,7 +954,7 @@ variables:
     </tr>
     <tr>
       <th>2</th>
-      <td>2022-02-06 15:18:50.687502</td>
+      <td>2026-04-29 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -967,7 +964,7 @@ variables:
     </tr>
     <tr>
       <th>3</th>
-      <td>2022-02-07 15:18:50.687502</td>
+      <td>2026-04-30 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
@@ -977,7 +974,7 @@ variables:
     </tr>
     <tr>
       <th>4</th>
-      <td>2022-02-08 15:18:50.687502</td>
+      <td>2026-05-01 17:12:13.521024</td>
       <td>-48.6256</td>
       <td>-27.5717</td>
       <td>10</td>
