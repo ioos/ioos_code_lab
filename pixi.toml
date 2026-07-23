@@ -8,6 +8,7 @@ version = "0.1.0"
 [tasks]
 build_html = { cmd = ["jupyter-book", "build", "jupyterbook"] }
 jb = { cmd = "python jupyterbook/add_header.py", depends-on=["build_html"] }
+linkcheck = { cmd = "jupyter-book build jupyterbook --builder linkcheck" }
 
 [dependencies]
 jupyter-book = ">=1.0.4,<2"
