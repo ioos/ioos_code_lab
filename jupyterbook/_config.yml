@@ -1,5 +1,5 @@
 # Book settings
-title: The U.S. Integrated Ocean Observing System (IOOS) # The title of the book. Will be placed in the left navbar.
+title: The U.S. Integrated Ocean Observing System (IOOS)
 author: IOOS # The author of the book
 logo: images/IOOS_logo.png # A path to the book logo
 
@@ -44,7 +44,8 @@ html:
   use_edit_page_button: false # Whether to add an "edit this page" button to pages. If `true`, repository information in repository: must be filled in
   use_repository_button: true # Whether to add a link to your repository button
   use_issues_button: true # Whether to add an "open an issue" button
-  extra_navbar: <a href="https://ioos.us">IOOS</a> # Will be displayed underneath the left navbar.
+  # Hitting https://github.com/jupyter-book/jupyter-book/issues/1966
+  extra_navbar: <a href="https://ioos.us">IOOS</a>
   extra_footer: <a href=https://ioos.noaa.gov> ioos.noaa.gov </a> &nbsp
     <a href=https://www.facebook.com/usioosgov> Facebook </a> &nbsp
     <a href=https://www.twitter.com/usioosgov> Twitter </a> &nbsp

@@ -11,20 +11,16 @@ on:
 jobs:
   build-docs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
-          fetch-depth: 0
           persist-credentials: false
 
-      - name: Set up Python
-        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
-        with:
-          python-version: "3.x"
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f  # v0.10.0
 
-      - name: Linkcheck
-        run: >
-          set -e
-          && pip install "jupyter-book<2"
-          && jupyter-book build jupyterbook --builder linkcheck
+      - name: Build documentation
+        run: pixi run linkcheck
