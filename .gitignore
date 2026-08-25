@@ -6,3 +6,6 @@ index.html
 .pixi/*
 !.pixi/config.toml
 pixi.lock
+.vscode/
+jupyterbook/content/code_gallery/data_access_notebooks/.dodsrc
+jupyterbook/content/code_gallery/data_access_notebooks/chlor_a.nc
