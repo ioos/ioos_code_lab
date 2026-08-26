@@ -275,6 +275,21 @@
 <img src="../images/2024-09-17-CKAN_API_Query.png"/>
 :::
 
+:::{grid-item-card} Investigating PACE and OBIS as a data source for phytoplankton observations
+:margin: 3 0 0 0
+:link: ./data_access_notebooks/2026-08-25-PACE-OBIS.html
+:link-type: url
+:text-align: center
+:shadow: md
+
+{bdg-primary}`PACE`
+{bdg-secondary}`OBIS`
+{bdg-info}`python`
+^^^
+
+<img src="../images/2026-08-25-PACE-OBIS.png"/>
+:::
+
 :::{grid-item-card} Parsing Conventions and standards with Python
 :margin: 3 0 0 0
 :link: ./data_analysis_and_visualization_notebooks/2016-11-16-CF-UGRID-SGRID-conventions.html
