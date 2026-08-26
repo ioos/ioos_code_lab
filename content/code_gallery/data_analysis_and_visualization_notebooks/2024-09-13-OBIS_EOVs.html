@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -516,7 +517,7 @@
 <p><strong>Note</strong>: the <code class="docutils literal notranslate"><span class="pre">acceptedTaxonIds</span></code> in these files are based on what was up-to-date in the WoRMS database as of the date this script was written.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mangroves</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;https://raw.githubusercontent.com/ioos/marine_life_data_network/main/eov_taxonomy/mangroves.csv&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mangroves</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"https://raw.githubusercontent.com/ioos/marine_life_data_network/main/eov_taxonomy/mangroves.csv"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -524,9 +525,9 @@
 <p>Now we will do a bit of cleanup to get a list of aphiaIDs for mangroves so we can run our <a class="reference external" href="https://iobis.github.io/robis/articles/getting-started.html"><code class="docutils literal notranslate"><span class="pre">robis</span></code></a> query using these as taxon identifiers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mangroves</span><span class="o">$</span><span class="n">ID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;urn:lsid:marinespecies.org:taxname.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mangroves</span><span class="o">$</span><span class="n">acceptedTaxonId</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mangroves</span><span class="o">$</span><span class="n">ID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">"urn:lsid:marinespecies.org:taxname."</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">,</span><span class="w"> </span><span class="n">mangroves</span><span class="o">$</span><span class="n">acceptedTaxonId</span><span class="p">)</span>
 <span class="n">mangroves</span><span class="o">$</span><span class="n">ID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">mangroves</span><span class="o">$</span><span class="n">ID</span><span class="p">)</span>
-<span class="n">mangroveIdentifiers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">mangroves</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">)</span>
+<span class="n">mangroveIdentifiers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">mangroves</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">", "</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

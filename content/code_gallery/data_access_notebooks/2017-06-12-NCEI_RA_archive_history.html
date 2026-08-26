@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -517,8 +518,8 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">owslib.iso</span><span class="w"> </span><span class="kn">import</span> <span class="n">namespaces</span>
 
 <span class="c1"># Append gmi namespace to namespaces dictionary.</span>
-<span class="n">namespaces</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;gmi&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.isotc211.org/2005/gmi&quot;</span><span class="p">})</span>
-<span class="n">namespaces</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;gml&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.opengis.net/gml/3.2&quot;</span><span class="p">})</span>
+<span class="n">namespaces</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"gmi"</span><span class="p">:</span> <span class="s2">"http://www.isotc211.org/2005/gmi"</span><span class="p">})</span>
+<span class="n">namespaces</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"gml"</span><span class="p">:</span> <span class="s2">"http://www.opengis.net/gml/3.2"</span><span class="p">})</span>
 <span class="k">del</span> <span class="n">namespaces</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -531,11 +532,11 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select RA, this will be the acronym for the RA or None if you want to search across all RAs</span>
-<span class="n">ra</span> <span class="o">=</span> <span class="s2">&quot;NANOOS&quot;</span>
+<span class="n">ra</span> <span class="o">=</span> <span class="s2">"NANOOS"</span>
 
 <span class="c1"># Identify the platform.</span>
 <span class="n">platform</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s1">&#39;&quot;FIXED PLATFORM&quot;&#39;</span>  <span class="c1"># Options include: None, &quot;HF Radar&quot;, &quot;Glider&quot;, &quot;FIXED PLATFORM&quot;</span>
+    <span class="s1">'"FIXED PLATFORM"'</span>  <span class="c1"># Options include: None, "HF Radar", "Glider", "FIXED PLATFORM"</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -556,56 +557,56 @@
 <span class="c1"># Generate geoportal query and georss feed.</span>
 
 <span class="c1"># Base geoportal url.</span>
-<span class="n">baseurl</span> <span class="o">=</span> <span class="s2">&quot;https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=&quot;</span>
+<span class="n">baseurl</span> <span class="o">=</span> <span class="s2">"https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q="</span>
 
 <span class="c1"># Identify the Regional Association</span>
 <span class="k">if</span> <span class="n">ra</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">reg_assoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">reg_assoc</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">RAs</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;AOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Alaska Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CARICOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Caribbean Coastal Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CeNCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Central and Northern California Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;GCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Gulf of Mexico Coastal Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;GLOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Lakes Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;MARACOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Mid-Atlantic Regional Association Coastal Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;NANOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Northwest Association of Networked Ocean Observing Systems&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;NERACOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Northeastern Regional Association of Coastal Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;PacIOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Pacific Islands Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SCCOOS&quot;</span><span class="p">:</span> <span class="s2">&quot;Southern California Coastal Ocean Observing System&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SECOORA&quot;</span><span class="p">:</span> <span class="s2">&quot;Southeast Coastal Ocean Observing Regional Association&quot;</span><span class="p">,</span>
+        <span class="s2">"AOOS"</span><span class="p">:</span> <span class="s2">"Alaska Ocean Observing System"</span><span class="p">,</span>
+        <span class="s2">"CARICOOS"</span><span class="p">:</span> <span class="s2">"Caribbean Coastal Ocean Observing System"</span><span class="p">,</span>
+        <span class="s2">"CeNCOOS"</span><span class="p">:</span> <span class="s2">"Central and Northern California Ocean Observing System"</span><span class="p">,</span>
+        <span class="s2">"GCOOS"</span><span class="p">:</span> <span class="s2">"Gulf of Mexico Coastal Ocean Observing System"</span><span class="p">,</span>
+        <span class="s2">"GLOS"</span><span class="p">:</span> <span class="s2">"Great Lakes Observing System"</span><span class="p">,</span>
+        <span class="s2">"MARACOOS"</span><span class="p">:</span> <span class="s2">"Mid-Atlantic Regional Association Coastal Ocean Observing System"</span><span class="p">,</span>
+        <span class="s2">"NANOOS"</span><span class="p">:</span> <span class="s2">"Northwest Association of Networked Ocean Observing Systems"</span><span class="p">,</span>
+        <span class="s2">"NERACOOS"</span><span class="p">:</span> <span class="s2">"Northeastern Regional Association of Coastal Ocean Observing System"</span><span class="p">,</span>
+        <span class="s2">"PacIOOS"</span><span class="p">:</span> <span class="s2">"Pacific Islands Ocean Observing System"</span><span class="p">,</span>
+        <span class="s2">"SCCOOS"</span><span class="p">:</span> <span class="s2">"Southern California Coastal Ocean Observing System"</span><span class="p">,</span>
+        <span class="s2">"SECOORA"</span><span class="p">:</span> <span class="s2">"Southeast Coastal Ocean Observing Regional Association"</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="n">reg_assoc</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s1">&#39;(dataThemeinstitutions_s:&quot;</span><span class="si">{</span><span class="n">RAs</span><span class="p">[</span><span class="n">ra</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot; dataThemeprojects_s:&quot;</span><span class="si">{</span><span class="n">RAs</span><span class="p">[</span><span class="n">ra</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">ra</span><span class="si">}</span><span class="s1">)&quot;)&#39;</span>
+        <span class="sa">f</span><span class="s1">'(dataThemeinstitutions_s:"</span><span class="si">{</span><span class="n">RAs</span><span class="p">[</span><span class="n">ra</span><span class="p">]</span><span class="si">}</span><span class="s1">" dataThemeprojects_s:"</span><span class="si">{</span><span class="n">RAs</span><span class="p">[</span><span class="n">ra</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">ra</span><span class="si">}</span><span class="s1">)")'</span>
     <span class="p">)</span>
 
 <span class="c1"># Identify the project.</span>
 <span class="n">project</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s1">&#39;&quot;Integrated Ocean Observing System Data Assembly Centers Data Stewardship Program&quot;&#39;</span>
+    <span class="s1">'"Integrated Ocean Observing System Data Assembly Centers Data Stewardship Program"'</span>
 <span class="p">)</span>
 
 <span class="c1"># Identify the amount of records and format of the response: 1 to 1010 records.</span>
-<span class="n">records</span> <span class="o">=</span> <span class="s2">&quot;&amp;start=1&amp;num=1010&quot;</span>
+<span class="n">records</span> <span class="o">=</span> <span class="s2">"&amp;start=1&amp;num=1010"</span>
 
 <span class="c1"># Identify the format of the response: georss.</span>
-<span class="n">response_format</span> <span class="o">=</span> <span class="s2">&quot;&amp;f=csv&quot;</span>
+<span class="n">response_format</span> <span class="o">=</span> <span class="s2">"&amp;f=csv"</span>
 
 <span class="k">if</span> <span class="n">platform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">reg_assoc_plat</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">reg_assoc</span> <span class="o">+</span> <span class="s2">&quot; AND&quot;</span> <span class="o">+</span> <span class="n">platform</span><span class="p">)</span>
+    <span class="n">reg_assoc_plat</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">reg_assoc</span> <span class="o">+</span> <span class="s2">" AND"</span> <span class="o">+</span> <span class="n">platform</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">reg_assoc_plat</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">reg_assoc</span><span class="p">)</span>
 
 <span class="c1"># Combine the URL.</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}{}{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">baseurl</span><span class="p">,</span>
     <span class="n">reg_assoc_plat</span><span class="p">,</span>
-    <span class="s2">&quot;&amp;filter=dataThemeprojects_s:&quot;</span><span class="p">,</span>
+    <span class="s2">"&amp;filter=dataThemeprojects_s:"</span><span class="p">,</span>
     <span class="n">quote</span><span class="p">(</span><span class="n">project</span><span class="p">)</span> <span class="o">+</span> <span class="n">records</span> <span class="o">+</span> <span class="n">response_format</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Identified response format:</span><span class="se">\n</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Identified response format:</span><span class="se">\n</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
-    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Search page response:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">response_format</span><span class="p">,</span> <span class="s2">&quot;&amp;f=searchPage&quot;</span><span class="p">))</span>
+    <span class="s2">"</span><span class="se">\n</span><span class="s2">Search page response:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">response_format</span><span class="p">,</span> <span class="s2">"&amp;f=searchPage"</span><span class="p">))</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -631,16 +632,16 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-<span class="n">df</span><span class="p">[[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">,</span> <span class="s2">&quot;data_end_date&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Data_Date_Range&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
-    <span class="s2">&quot; to &quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">df</span><span class="p">[[</span><span class="s2">"data_start_date"</span><span class="p">,</span> <span class="s2">"data_end_date"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Data_Date_Range"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+    <span class="s2">" to "</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
-    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span>
-<span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;ms&quot;</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"data_start_date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"data_start_date"</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"data_end_date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"data_end_date"</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span>
+<span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"ms"</span><span class="p">))</span>
 
 <span class="c1"># Some cleanups</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"all"</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -758,14 +759,14 @@ https://www.ncei.noaa.gov/metadata/geoportal/opensearch?q=%28dataThemeinstitutio
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parse the csv response</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> record(s)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> record(s)"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ISO19115-2 record:&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">])</span>  <span class="c1"># URL to ISO19115-2 record.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ISO19115-2 record:"</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">"Link_Xml"</span><span class="p">])</span>  <span class="c1"># URL to ISO19115-2 record.</span>
     <span class="nb">print</span><span class="p">(</span>
-        <span class="s2">&quot;NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=&quot;</span>
-        <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Id&quot;</span><span class="p">]</span>
+        <span class="s2">"NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id="</span>
+        <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s2">"Id"</span><span class="p">]</span>
     <span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -923,22 +924,22 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
 
 <span class="nd">@stamina</span><span class="o">.</span><span class="n">retry</span><span class="p">(</span><span class="n">on</span><span class="o">=</span><span class="n">urllib</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,</span> <span class="n">attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">openurl</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thin wrapper around urlopen adding stamina.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Thin wrapper around urlopen adding stamina."""</span>
     <span class="k">return</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
 
 <span class="n">df</span><span class="p">[</span>
     <span class="p">[</span>
-        <span class="s2">&quot;provider_platform_name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;NCEI_accession_number&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_size_mb&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;submitter&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version_info&quot;</span><span class="p">,</span>
+        <span class="s2">"provider_platform_name"</span><span class="p">,</span>
+        <span class="s2">"NCEI_accession_number"</span><span class="p">,</span>
+        <span class="s2">"package_size_mb"</span><span class="p">,</span>
+        <span class="s2">"submitter"</span><span class="p">,</span>
+        <span class="s2">"version_info"</span><span class="p">,</span>
     <span class="p">]</span>
-<span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
 
 <span class="c1"># For each accession in response.</span>
-<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Link_Xml"</span><span class="p">]:</span>
     <span class="n">iso</span> <span class="o">=</span> <span class="n">openurl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">iso_tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">iso</span><span class="p">)</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">iso_tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
@@ -947,79 +948,79 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
 
     <span class="c1"># Collect Publication date information.</span>
     <span class="n">date_path</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;.//&quot;</span>
-        <span class="s2">&quot;gmd:identificationInfo/&quot;</span>
-        <span class="s2">&quot;gmd:MD_DataIdentification/&quot;</span>
-        <span class="s2">&quot;gmd:citation/&quot;</span>
-        <span class="s2">&quot;gmd:CI_Citation/&quot;</span>
-        <span class="s2">&quot;gmd:date/&quot;</span>
-        <span class="s2">&quot;gmd:CI_Date/&quot;</span>
-        <span class="s2">&quot;gmd:date/gco:Date&quot;</span>
+        <span class="s2">".//"</span>
+        <span class="s2">"gmd:identificationInfo/"</span>
+        <span class="s2">"gmd:MD_DataIdentification/"</span>
+        <span class="s2">"gmd:citation/"</span>
+        <span class="s2">"gmd:CI_Citation/"</span>
+        <span class="s2">"gmd:date/"</span>
+        <span class="s2">"gmd:CI_Date/"</span>
+        <span class="s2">"gmd:date/gco:Date"</span>
     <span class="p">)</span>
     <span class="c1"># First published date.</span>
     <span class="n">pubdate</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">date_path</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">First published date = </span><span class="si">{</span><span class="n">util</span><span class="o">.</span><span class="n">testXMLValue</span><span class="p">(</span><span class="n">pubdate</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First published date = </span><span class="si">{</span><span class="n">util</span><span class="o">.</span><span class="n">testXMLValue</span><span class="p">(</span><span class="n">pubdate</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="c1"># Data Temporal Coverage.</span>
     <span class="n">temporal_extent_path</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;.//&quot;</span>
-        <span class="s2">&quot;gmd:temporalElement/&quot;</span>
-        <span class="s2">&quot;gmd:EX_TemporalExtent/&quot;</span>
-        <span class="s2">&quot;gmd:extent/&quot;</span>
-        <span class="s2">&quot;gml:TimePeriod&quot;</span>
+        <span class="s2">".//"</span>
+        <span class="s2">"gmd:temporalElement/"</span>
+        <span class="s2">"gmd:EX_TemporalExtent/"</span>
+        <span class="s2">"gmd:extent/"</span>
+        <span class="s2">"gml:TimePeriod"</span>
     <span class="p">)</span>
 
     <span class="n">beginPosition</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
-        <span class="n">temporal_extent_path</span> <span class="o">+</span> <span class="s2">&quot;/gml:beginPosition&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
+        <span class="n">temporal_extent_path</span> <span class="o">+</span> <span class="s2">"/gml:beginPosition"</span><span class="p">,</span> <span class="n">namespaces</span>
     <span class="p">)</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">endPosition</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">temporal_extent_path</span> <span class="o">+</span> <span class="s2">&quot;/gml:endPosition&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">endPosition</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">temporal_extent_path</span> <span class="o">+</span> <span class="s2">"/gml:endPosition"</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data time coverage: </span><span class="si">{</span><span class="n">beginPosition</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">endPosition</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Data time coverage: </span><span class="si">{</span><span class="n">beginPosition</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">endPosition</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="c1"># Collect keyword terms of interest.</span>
     <span class="k">for</span> <span class="n">MD_keywords</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span>
-        <span class="s2">&quot;.//gmd:descriptiveKeywords/gmd:MD_Keywords&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
+        <span class="s2">".//gmd:descriptiveKeywords/gmd:MD_Keywords"</span><span class="p">,</span> <span class="n">namespaces</span>
     <span class="p">):</span>
         <span class="k">for</span> <span class="n">thesaurus_name</span> <span class="ow">in</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span>
-            <span class="s2">&quot;.//gmd:thesaurusName/gmd:CI_Citation/gmd:title/gco:CharacterString&quot;</span><span class="p">,</span>
+            <span class="s2">".//gmd:thesaurusName/gmd:CI_Citation/gmd:title/gco:CharacterString"</span><span class="p">,</span>
             <span class="n">namespaces</span><span class="p">,</span>
         <span class="p">):</span>
-            <span class="k">if</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;Provider Platform Names&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">"Provider Platform Names"</span><span class="p">:</span>
                 <span class="n">plat_name</span> <span class="o">=</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
-                    <span class="s2">&quot;.//gmd:keyword/gco:CharacterString&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
+                    <span class="s2">".//gmd:keyword/gco:CharacterString"</span><span class="p">,</span> <span class="n">namespaces</span>
                 <span class="p">)</span><span class="o">.</span><span class="n">text</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provider Platform Code = </span><span class="si">{</span><span class="n">plat_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;provider_platform_name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plat_name</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Provider Platform Code = </span><span class="si">{</span><span class="n">plat_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Link_Xml"</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">"provider_platform_name"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plat_name</span>
                 <span class="k">break</span>
 
-            <span class="k">elif</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;NCEI ACCESSION NUMBER&quot;</span><span class="p">:</span>
-                <span class="n">acce_no</span> <span class="o">=</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//gmd:keyword/gmx:Anchor&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accession:&quot;</span><span class="p">,</span> <span class="n">acce_no</span><span class="p">)</span>
-                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;NCEI_accession_number&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">acce_no</span>
+            <span class="k">elif</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">"NCEI ACCESSION NUMBER"</span><span class="p">:</span>
+                <span class="n">acce_no</span> <span class="o">=</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">".//gmd:keyword/gmx:Anchor"</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Accession:"</span><span class="p">,</span> <span class="n">acce_no</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Link_Xml"</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">"NCEI_accession_number"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">acce_no</span>
                 <span class="k">break</span>
 
-            <span class="k">elif</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;NODC SUBMITTING INSTITUTION NAMES THESAURUS&quot;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">thesaurus_name</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">"NODC SUBMITTING INSTITUTION NAMES THESAURUS"</span><span class="p">:</span>
                 <span class="n">submitter</span> <span class="o">=</span> <span class="n">MD_keywords</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
-                    <span class="s2">&quot;.//gmd:keyword/gmx:Anchor&quot;</span><span class="p">,</span> <span class="n">namespaces</span>
+                    <span class="s2">".//gmd:keyword/gmx:Anchor"</span><span class="p">,</span> <span class="n">namespaces</span>
                 <span class="p">)</span><span class="o">.</span><span class="n">text</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Submitter:&quot;</span><span class="p">,</span> <span class="n">submitter</span><span class="p">)</span>
-                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;submitter&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">submitter</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Submitter:"</span><span class="p">,</span> <span class="n">submitter</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Link_Xml"</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">"submitter"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">submitter</span>
 
     <span class="c1"># Pull out the version information.</span>
     <span class="c1"># Iterate through each processing step which is an NCEI version.</span>
-    <span class="k">for</span> <span class="n">process_step</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="s2">&quot;.//gmd:processStep&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">process_step</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="s2">".//gmd:processStep"</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">):</span>
         <span class="c1"># Only parse gco:DateTime and gmd:title/gco:CharacterString.</span>
         <span class="n">vers_title</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;.//&quot;</span>
-            <span class="s2">&quot;gmi:LE_ProcessStep/&quot;</span>
-            <span class="s2">&quot;gmi:output/&quot;</span>
-            <span class="s2">&quot;gmi:LE_Source/&quot;</span>
-            <span class="s2">&quot;gmd:sourceCitation/&quot;</span>
-            <span class="s2">&quot;gmd:CI_Citation/&quot;</span>
-            <span class="s2">&quot;gmd:title/&quot;</span>
-            <span class="s2">&quot;gco:CharacterString&quot;</span>
+            <span class="s2">".//"</span>
+            <span class="s2">"gmi:LE_ProcessStep/"</span>
+            <span class="s2">"gmi:output/"</span>
+            <span class="s2">"gmi:LE_Source/"</span>
+            <span class="s2">"gmd:sourceCitation/"</span>
+            <span class="s2">"gmd:CI_Citation/"</span>
+            <span class="s2">"gmd:title/"</span>
+            <span class="s2">"gco:CharacterString"</span>
         <span class="p">)</span>
-        <span class="n">vers_date</span> <span class="o">=</span> <span class="s2">&quot;.//&quot;</span> <span class="s2">&quot;gmi:LE_ProcessStep/&quot;</span> <span class="s2">&quot;gmd:dateTime/&quot;</span> <span class="s2">&quot;gco:DateTime&quot;</span>
+        <span class="n">vers_date</span> <span class="o">=</span> <span class="s2">".//"</span> <span class="s2">"gmi:LE_ProcessStep/"</span> <span class="s2">"gmd:dateTime/"</span> <span class="s2">"gco:DateTime"</span>
         <span class="k">if</span> <span class="n">process_step</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">vers_date</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span> <span class="ow">and</span> <span class="n">process_step</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span>
             <span class="n">vers_title</span><span class="p">,</span> <span class="n">namespaces</span>
         <span class="p">):</span>
@@ -1027,19 +1028,19 @@ NCEI dataset metadata page: https://www.ncei.noaa.gov/access/metadata/landing-pa
             <span class="n">datetime</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">process_step</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">vers_date</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 
             <span class="c1"># Extract version number.</span>
-            <span class="n">version</span> <span class="o">=</span> <span class="n">process_step</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">vers_title</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">datetime</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">process_step</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">vers_title</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">datetime</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
             <span class="n">vers_dict</span><span class="p">[</span><span class="n">version</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;version_info&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">version</span><span class="p">]</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Link_Xml"</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">"version_info"</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">version</span><span class="p">]</span>
 
     <span class="c1"># Collect package size information.</span>
     <span class="c1"># Iterate through transfer size nodes.</span>
-    <span class="k">for</span> <span class="n">trans_size</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="s2">&quot;.//gmd:transferSize&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">trans_size</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//gco:Real&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
-            <span class="n">sizes</span> <span class="o">=</span> <span class="n">trans_size</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//gco:Real&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current AIP Size = </span><span class="si">{</span><span class="n">sizes</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">trans_size</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iterfind</span><span class="p">(</span><span class="s2">".//gmd:transferSize"</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">trans_size</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">".//gco:Real"</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+            <span class="n">sizes</span> <span class="o">=</span> <span class="n">trans_size</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">".//gco:Real"</span><span class="p">,</span> <span class="n">namespaces</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Current AIP Size = </span><span class="si">{</span><span class="n">sizes</span><span class="si">}</span><span class="s2"> MB"</span><span class="p">)</span>
 
-            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Link_Xml&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;package_size_mb&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">sizes</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Link_Xml"</span><span class="p">]</span> <span class="o">==</span> <span class="n">url</span><span class="p">,</span> <span class="p">[</span><span class="s2">"package_size_mb"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">sizes</span>
             <span class="k">break</span>
 
         <span class="k">break</span>
@@ -1613,28 +1614,28 @@ Current AIP Size = 1171.812 MB
 <span class="c1"># Plot the data</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span>
     <span class="n">ypos</span><span class="p">,</span>
-    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]),</span>
-    <span class="n">left</span><span class="o">=</span><span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]),</span>
+    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"data_end_date"</span><span class="p">])</span> <span class="o">-</span> <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"data_start_date"</span><span class="p">]),</span>
+    <span class="n">left</span><span class="o">=</span><span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"data_start_date"</span><span class="p">]),</span>
     <span class="n">height</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+    <span class="n">align</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">xlim</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_start_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">)),</span>
-    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;data_end_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">)),</span>
+    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"data_start_date"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">)),</span>
+    <span class="n">mdates</span><span class="o">.</span><span class="n">date2num</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"data_end_date"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">)),</span>
 <span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">yticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;NCEI Accession Number&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;NCEI_accession_number&quot;</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;NCEI archive package time coverage&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">"out"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"NCEI Accession Number"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"NCEI_accession_number"</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"NCEI archive package time coverage"</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">xaxis_date</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

@@ -81,7 +81,7 @@
     <link rel="icon" href="../../../_static/IOOS_logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Data Analysis And Visualization" href="../data_analysis_and_visualization.html" />
+    <link rel="next" title="Investigating PACE and OBIS as a data source for phytoplankton observations" href="2026-08-25-PACE-OBIS.html" />
     <link rel="prev" title="Planning a surf trip using IOOS EDS Model Viewer" href="2022-11-25-plan_surf_trip_EDS.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -530,8 +531,8 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ckanapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">RemoteCKAN</span>
 
 <span class="n">ioos_catalog</span> <span class="o">=</span> <span class="n">RemoteCKAN</span><span class="p">(</span>
-    <span class="n">address</span><span class="o">=</span><span class="s2">&quot;https://data.ioos.us&quot;</span><span class="p">,</span>
-    <span class="n">user_agent</span><span class="o">=</span><span class="s2">&quot;ckanapiioos/1.0 (+https://ioos.us/)&quot;</span><span class="p">,</span>
+    <span class="n">address</span><span class="o">=</span><span class="s2">"https://data.ioos.us"</span><span class="p">,</span>
+    <span class="n">user_agent</span><span class="o">=</span><span class="s2">"ckanapiioos/1.0 (+https://ioos.us/)"</span><span class="p">,</span>
 <span class="p">)</span>
 
 
@@ -557,7 +558,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;aoos&#39;, &#39;caricoos&#39;, &#39;cdip&#39;, &#39;cencoos&#39;, &#39;comt&#39;, &#39;gcoos&#39;, &#39;glider-dac&#39;, &#39;glos&#39;, &#39;hf-radar-dac&#39;, &#39;ioos&#39;, &#39;maracoos&#39;, &#39;nanoos&#39;, &#39;neracoos&#39;, &#39;noaa-co-ops&#39;, &#39;noaa-ndbc&#39;, &#39;oceansites&#39;, &#39;pacioos&#39;, &#39;sccoos&#39;, &#39;secoora&#39;, &#39;unidata&#39;, &#39;usgs&#39;, &#39;us-navy&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['aoos', 'caricoos', 'cdip', 'cencoos', 'comt', 'gcoos', 'glider-dac', 'glos', 'hf-radar-dac', 'ioos', 'maracoos', 'nanoos', 'neracoos', 'noaa-co-ops', 'noaa-ndbc', 'oceansites', 'pacioos', 'sccoos', 'secoora', 'unidata', 'usgs', 'us-navy']
 </pre></div>
 </div>
 </div>
@@ -569,7 +570,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span> <span class="o">=</span> <span class="n">ioos_catalog</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">package_search</span><span class="p">()</span>
-<span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
+<span class="n">datasets</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -587,18 +588,18 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://cfconventions.org/Data/cf-standard-names/current/src/cf-standard-name-table.xml&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://cfconventions.org/Data/cf-standard-names/current/src/cf-standard-name-table.xml"</span>
 
-<span class="n">tbl_version</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_xml</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">xpath</span><span class="o">=</span><span class="s2">&quot;./*&quot;</span><span class="p">)[</span><span class="s2">&quot;version_number&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_xml</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">xpath</span><span class="o">=</span><span class="s2">&quot;entry&quot;</span><span class="p">)</span>
+<span class="n">tbl_version</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_xml</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">xpath</span><span class="o">=</span><span class="s2">"./*"</span><span class="p">)[</span><span class="s2">"version_number"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_xml</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">xpath</span><span class="o">=</span><span class="s2">"entry"</span><span class="p">)</span>
 
 <span class="n">std_names</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
-    <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;oxygen&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;sea_water&quot;</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"oxygen"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"sea_water"</span><span class="p">))</span>
 <span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CF Standard Name Table: </span><span class="si">{</span><span class="n">tbl_version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"CF Standard Name Table: </span><span class="si">{</span><span class="n">tbl_version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">std_names</span><span class="p">[[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">]]</span>
+<span class="n">std_names</span><span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"description"</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -706,18 +707,18 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">requests.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChunkedEncodingError</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib3.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">IncompleteRead</span>
 
-<span class="n">ua</span> <span class="o">=</span> <span class="s2">&quot;ckanapiioos/1.0 (+https://ioos.us/)&quot;</span>
+<span class="n">ua</span> <span class="o">=</span> <span class="s2">"ckanapiioos/1.0 (+https://ioos.us/)"</span>
 
-<span class="n">ioos_catalog</span> <span class="o">=</span> <span class="n">RemoteCKAN</span><span class="p">(</span><span class="s2">&quot;https://data.ioos.us&quot;</span><span class="p">,</span> <span class="n">user_agent</span><span class="o">=</span><span class="n">ua</span><span class="p">)</span>
+<span class="n">ioos_catalog</span> <span class="o">=</span> <span class="n">RemoteCKAN</span><span class="p">(</span><span class="s2">"https://data.ioos.us"</span><span class="p">,</span> <span class="n">user_agent</span><span class="o">=</span><span class="n">ua</span><span class="p">)</span>
 <span class="n">ioos_catalog</span>
 
 <span class="n">df_out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
 
-<span class="k">for</span> <span class="n">std_name</span> <span class="ow">in</span> <span class="n">std_names</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">std_name</span> <span class="ow">in</span> <span class="n">std_names</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]:</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="n">std_name</span><span class="p">)</span>
 
-    <span class="n">fq</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;+cf_standard_names:</span><span class="si">{</span><span class="n">std_name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">fq</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"+cf_standard_names:</span><span class="si">{</span><span class="n">std_name</span><span class="si">}</span><span class="s2">"</span>
 
     <span class="n">result_count</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -731,17 +732,17 @@
         <span class="k">except</span> <span class="p">(</span><span class="n">CKANAPIError</span><span class="p">,</span> <span class="n">IncompleteRead</span><span class="p">,</span> <span class="n">ChunkedEncodingError</span><span class="p">):</span>
             <span class="k">continue</span>
 
-        <span class="n">num_results</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
+        <span class="n">num_results</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;num_results: </span><span class="si">{</span><span class="n">num_results</span><span class="si">}</span><span class="s2">, result_count: </span><span class="si">{</span><span class="n">result_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"num_results: </span><span class="si">{</span><span class="n">num_results</span><span class="si">}</span><span class="s2">, result_count: </span><span class="si">{</span><span class="n">result_count</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"results"</span><span class="p">]:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]],</span>
-                    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;resources&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;url&quot;</span><span class="p">]],</span>
-                    <span class="s2">&quot;org&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;organization&quot;</span><span class="p">][</span><span class="s2">&quot;title&quot;</span><span class="p">]],</span>
-                    <span class="s2">&quot;std_name&quot;</span><span class="p">:</span> <span class="n">std_name</span><span class="p">,</span>
+                    <span class="s2">"title"</span><span class="p">:</span> <span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]],</span>
+                    <span class="s2">"url"</span><span class="p">:</span> <span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">"resources"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"url"</span><span class="p">]],</span>
+                    <span class="s2">"org"</span><span class="p">:</span> <span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">"organization"</span><span class="p">][</span><span class="s2">"title"</span><span class="p">]],</span>
+                    <span class="s2">"std_name"</span><span class="p">:</span> <span class="n">std_name</span><span class="p">,</span>
                 <span class="p">}</span>
             <span class="p">)</span>
 
@@ -751,13 +752,13 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">result_count</span> <span class="o">&gt;=</span> <span class="n">num_results</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;num_results: </span><span class="si">{</span><span class="n">num_results</span><span class="si">}</span><span class="s2">, result_count: </span><span class="si">{</span><span class="n">result_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"num_results: </span><span class="si">{</span><span class="n">num_results</span><span class="si">}</span><span class="s2">, result_count: </span><span class="si">{</span><span class="n">result_count</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
             <span class="k">break</span>
 
     <span class="n">df_out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_out</span><span class="p">,</span> <span class="n">df_std_name</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;num_results: </span><span class="si">{</span><span class="n">num_results</span><span class="si">}</span><span class="s2">, result_count: </span><span class="si">{</span><span class="n">result_count</span><span class="si">}</span><span class="s2">, total_result_count: </span><span class="si">{</span><span class="n">df_out</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">"num_results: </span><span class="si">{</span><span class="n">num_results</span><span class="si">}</span><span class="s2">, result_count: </span><span class="si">{</span><span class="n">result_count</span><span class="si">}</span><span class="s2">, total_result_count: </span><span class="si">{</span><span class="n">df_out</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span>
 
 <span class="n">df_out</span><span class="o">.</span><span class="n">shape</span>
@@ -849,7 +850,7 @@ num_results: 0, result_count: 0, total_result_count: 12761
 <p>The DataFrame of the matching datasets is quite large. I wonder what the distribution of those datasets across organizations looks like? Let’s use <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html">pandas.groupby()</a> to generate some statistics about how many datasets are provided, matching our criteria, by which organization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;org&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"org"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -954,8 +955,8 @@ num_results: 0, result_count: 0, total_result_count: 12761
 <p>Glider DAC data are already making it to NCEI, so we can drop those entries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_no_glider</span> <span class="o">=</span> <span class="n">df_out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">df_out</span><span class="p">[</span><span class="s2">&quot;org&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;Glider DAC&quot;</span><span class="p">)]</span>
-<span class="n">df_out_no_glider</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;org&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_no_glider</span> <span class="o">=</span> <span class="n">df_out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">df_out</span><span class="p">[</span><span class="s2">"org"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"Glider DAC"</span><span class="p">)]</span>
+<span class="n">df_out_no_glider</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"org"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1055,7 +1056,7 @@ num_results: 0, result_count: 0, total_result_count: 12761
 <p>As we only need to know about the unique datasets, let’s count how many unique dataset urls we have.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_no_glider</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;url&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_no_glider</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"url"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1167,7 +1168,7 @@ num_results: 0, result_count: 0, total_result_count: 12761
 <p>As you can see above, there are a lot of duplicate dataset urls which we can simplify down. We identify duplicates by looking at the URL, which should be unique for each dataset, and drop the duplicates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_nodups_no_glider</span> <span class="o">=</span> <span class="n">df_out_no_glider</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s2">&quot;last&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_nodups_no_glider</span> <span class="o">=</span> <span class="n">df_out_no_glider</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"url"</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s2">"last"</span><span class="p">)</span>
 
 <span class="n">df_out_nodups_no_glider</span>
 </pre></div>
@@ -1288,7 +1289,7 @@ num_results: 0, result_count: 0, total_result_count: 12761
 <p><em>Hint: We know ERDDAP systems typically have <code class="docutils literal notranslate"><span class="pre">erddap</span></code> in their urls.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_nodups_no_glider</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">df_out_nodups_no_glider</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;erddap&quot;</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_nodups_no_glider</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">df_out_nodups_no_glider</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"erddap"</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -1342,7 +1343,7 @@ num_results: 0, result_count: 0, total_result_count: 12761
 <p>This is the distribution of unique datasets found in the IOOS Data Catalog which have a CF Standard Name that contains the work <code class="docutils literal notranslate"><span class="pre">oxygen</span></code> and <code class="docutils literal notranslate"><span class="pre">sea_water</span></code>. We’ve dropped out the Glider DAC datasets as, theoretically, those are in NCEI already.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_nodups_no_glider</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;org&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_out_nodups_no_glider</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"org"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1451,19 +1452,19 @@ num_results: 0, result_count: 0, total_result_count: 12761
 
 <span class="nd">@stamina</span><span class="o">.</span><span class="n">retry</span><span class="p">(</span><span class="n">on</span><span class="o">=</span><span class="n">HTTPError</span><span class="p">,</span> <span class="n">attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">request_df</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thin layer to handle retries.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Thin layer to handle retries."""</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">error_handling_layer</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Even with stamina we may hit servers that will fail.&quot;&quot;&quot;</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">"""Even with stamina we may hit servers that will fail."""</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span>
     <span class="c1"># Requesting only the position.</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.csvp?latitude,longitude&amp;distinct()&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'url'</span><span class="p">]</span><span class="si">}</span><span class="s2">.csvp?latitude,longitude&amp;distinct()"</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">request_df</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Failed to fetch </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Failed to fetch </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">."</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">title</span><span class="p">,</span> <span class="n">df</span>
@@ -1475,7 +1476,7 @@ num_results: 0, result_count: 0, total_result_count: 12761
 <span class="n">downloads</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">r</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
-        <span class="n">joblib</span><span class="o">.</span><span class="n">Parallel</span><span class="p">(</span><span class="n">return_as</span><span class="o">=</span><span class="s2">&quot;generator&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">num_cores</span><span class="p">,</span> <span class="n">max_nbytes</span><span class="o">=</span><span class="mi">5000</span><span class="p">)(</span>
+        <span class="n">joblib</span><span class="o">.</span><span class="n">Parallel</span><span class="p">(</span><span class="n">return_as</span><span class="o">=</span><span class="s2">"generator"</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">num_cores</span><span class="p">,</span> <span class="n">max_nbytes</span><span class="o">=</span><span class="mi">5000</span><span class="p">)(</span>
             <span class="n">joblib</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">error_handling_layer</span><span class="p">)(</span><span class="n">row</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_out_nodups_no_glider</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()</span>
         <span class="p">),</span>
@@ -1678,7 +1679,7 @@ stamina.retry_scheduled
 <p>Transpose it when we print, so we can see all the columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_out_final</span><span class="p">[</span><span class="s1">&#39;&quot;Deepwater CTD - pe972218.ctd.nc - 29.25N, -87.89W - 1997-03-21&quot;&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_out_final</span><span class="p">[</span><span class="s1">'"Deepwater CTD - pe972218.ctd.nc - 29.25N, -87.89W - 1997-03-21"'</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span>
     <span class="mi">5</span>
 <span class="p">)</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
@@ -1733,20 +1734,20 @@ stamina.retry_scheduled
 <span class="k">def</span><span class="w"> </span><span class="nf">make_map</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
     <span class="n">shpfilename</span> <span class="o">=</span> <span class="n">shpreader</span><span class="o">.</span><span class="n">natural_earth</span><span class="p">(</span>
-        <span class="n">resolution</span><span class="o">=</span><span class="s2">&quot;110m&quot;</span><span class="p">,</span>
-        <span class="n">category</span><span class="o">=</span><span class="s2">&quot;cultural&quot;</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;admin_0_countries&quot;</span><span class="p">,</span>
+        <span class="n">resolution</span><span class="o">=</span><span class="s2">"110m"</span><span class="p">,</span>
+        <span class="n">category</span><span class="o">=</span><span class="s2">"cultural"</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"admin_0_countries"</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">countries</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">shpfilename</span><span class="p">)</span>
 
-    <span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="p">[</span><span class="s2">&quot;NAME&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;United States of America&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span>
+    <span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="p">[</span><span class="s2">"NAME"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"United States of America"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">"lightgrey"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span>
     <span class="p">)</span>
 
     <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude (degrees_east)&quot;</span><span class="p">,</span>
-        <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude (degrees_north)&quot;</span><span class="p">,</span>
-        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">"longitude (degrees_east)"</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">"latitude (degrees_north)"</span><span class="p">,</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">"scatter"</span><span class="p">,</span>
         <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
     <span class="p">)</span>
 
@@ -1762,15 +1763,15 @@ stamina.retry_scheduled
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_coords_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dict_out_final</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Clean value outside of valid lon, lat.</span>
-<span class="n">df_coords_clean</span> <span class="o">=</span> <span class="n">df_coords_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">&quot;latitude (degrees_north)&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">90</span><span class="p">]</span>
+<span class="n">df_coords_clean</span> <span class="o">=</span> <span class="n">df_coords_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">"latitude (degrees_north)"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">90</span><span class="p">]</span>
 <span class="n">df_coords_clean</span> <span class="o">=</span> <span class="n">df_coords_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
-    <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">&quot;latitude (degrees_north)&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">90</span>
+    <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">"latitude (degrees_north)"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">90</span>
 <span class="p">]</span>
 <span class="n">df_coords_clean</span> <span class="o">=</span> <span class="n">df_coords_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
-    <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">&quot;longitude (degrees_east)&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">180</span>
+    <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">"longitude (degrees_east)"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">180</span>
 <span class="p">]</span>
 <span class="n">df_coords_clean</span> <span class="o">=</span> <span class="n">df_coords_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
-    <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">&quot;longitude (degrees_east)&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">180</span>
+    <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">"longitude (degrees_east)"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">180</span>
 <span class="p">]</span>
 <span class="n">df_coords_clean</span>
 
@@ -1779,7 +1780,7 @@ stamina.retry_scheduled
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;longitude (degrees_east)&#39;, ylabel=&#39;latitude (degrees_north)&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel='longitude (degrees_east)', ylabel='latitude (degrees_north)'&gt;
 </pre></div>
 </div>
 <img alt="../../../_images/2252520f5e02acf0d236356f4b49821636d7346e94ffca36762ae919f97e8b64.png" src="../../../_images/2252520f5e02acf0d236356f4b49821636d7346e94ffca36762ae919f97e8b64.png" />
@@ -1793,8 +1794,8 @@ stamina.retry_scheduled
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">locations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
     <span class="nb">zip</span><span class="p">(</span>
-        <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">&quot;latitude (degrees_north)&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">],</span>
-        <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">&quot;longitude (degrees_east)&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">],</span>
+        <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">"latitude (degrees_north)"</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">],</span>
+        <span class="n">df_coords_clean</span><span class="p">[</span><span class="s2">"longitude (degrees_east)"</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">],</span>
     <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
@@ -1810,14 +1811,14 @@ stamina.retry_scheduled
 
 <span class="n">marker_cluster</span> <span class="o">=</span> <span class="n">MarkerCluster</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 
-<span class="n">icon_create_function</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="n">icon_create_function</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
 <span class="s2">function(cluster) {</span>
 <span class="s2">    return L.divIcon({</span>
-<span class="s2">    html: &#39;&lt;b&gt;&#39; + cluster.getChildCount() + &#39;&lt;/b&gt;&#39;,</span>
-<span class="s2">    className: &#39;marker-cluster marker-cluster-large&#39;,</span>
+<span class="s2">    html: '&lt;b&gt;' + cluster.getChildCount() + '&lt;/b&gt;',</span>
+<span class="s2">    className: 'marker-cluster marker-cluster-large',</span>
 <span class="s2">    iconSize: new L.Point(20, 20)</span>
 <span class="s2">    });</span>
-<span class="s2">}&quot;&quot;&quot;</span>
+<span class="s2">}"""</span>
 
 
 <span class="n">marker_cluster</span> <span class="o">=</span> <span class="n">MarkerCluster</span><span class="p">(</span>
@@ -9129,11 +9130,11 @@ Failed to fetch https://gcoos5.geos.tamu.edu/erddap/tabledap/WS1202_WS1202_deck-
       </div>
     </a>
     <a class="right-next"
-       href="../data_analysis_and_visualization.html"
+       href="2026-08-25-PACE-OBIS.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Analysis And Visualization</p>
+        <p class="prev-next-title">Investigating PACE and OBIS as a data source for phytoplankton observations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -506,7 +507,7 @@
 
 <span class="n">glider_grab</span> <span class="o">=</span> <span class="n">GliderDataFetcher</span><span class="p">()</span>
 
-<span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;whoi_406-20160902T1700&quot;</span>
+<span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">"whoi_406-20160902T1700"</span>
 <span class="n">glider_grab</span><span class="o">.</span><span class="n">dataset_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataset_id</span><span class="p">]</span>
 <span class="n">dfs</span> <span class="o">=</span> <span class="n">glider_grab</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 </pre></div>
@@ -538,7 +539,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">plot_cast</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">profile_number</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">plot_cast</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">profile_number</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
@@ -552,10 +553,10 @@
 <p>Note that all the methods accept an <code class="docutils literal notranslate"><span class="pre">ax</span></code> argument. With that we can create tweak our figures. Here is another example, let’s plot two variables from the same cast.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax0</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot_cast</span><span class="p">(</span><span class="n">profile_number</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax0</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot_cast</span><span class="p">(</span><span class="n">profile_number</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
 
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">ax0</span><span class="o">.</span><span class="n">twiny</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">plot_cast</span><span class="p">(</span><span class="n">profile_number</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s2">&quot;salinity&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot_cast</span><span class="p">(</span><span class="n">profile_number</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
 
 <span class="n">ax0</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -578,8 +579,8 @@
     <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">df</span><span class="o">.</span><span class="n">plot_transect</span><span class="p">(</span><span class="n">var</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">plot_transect</span><span class="p">(</span><span class="n">var</span><span class="o">=</span><span class="s2">&quot;salinity&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;cividis&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot_transect</span><span class="p">(</span><span class="n">var</span><span class="o">=</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"viridis"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot_transect</span><span class="p">(</span><span class="n">var</span><span class="o">=</span><span class="s2">"salinity"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"cividis"</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>

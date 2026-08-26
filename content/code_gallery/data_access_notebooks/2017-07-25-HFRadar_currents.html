@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -505,7 +506,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFrame</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://hfradar.ioos.us/hfrnet/&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://hfradar.ioos.us/hfrnet/"</span>
 
 <span class="n">IFrame</span><span class="p">(</span>
     <span class="n">src</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
@@ -543,23 +544,23 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 
-<span class="n">year</span><span class="p">,</span> <span class="n">month</span> <span class="o">=</span> <span class="s2">&quot;2017&quot;</span><span class="p">,</span> <span class="s2">&quot;07&quot;</span>
-<span class="n">days</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;24&quot;</span><span class="p">,</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span> <span class="s2">&quot;26&quot;</span><span class="p">]</span>
-<span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">04</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2400</span><span class="p">,</span> <span class="mi">100</span><span class="p">))]</span>
+<span class="n">year</span><span class="p">,</span> <span class="n">month</span> <span class="o">=</span> <span class="s2">"2017"</span><span class="p">,</span> <span class="s2">"07"</span>
+<span class="n">days</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"24"</span><span class="p">,</span> <span class="s2">"25"</span><span class="p">,</span> <span class="s2">"26"</span><span class="p">]</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">04</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2400</span><span class="p">,</span> <span class="mi">100</span><span class="p">))]</span>
 
 <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;https://www.ncei.noaa.gov/thredds-ocean/dodsC/ioos/hfradar/rtv/&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">year</span><span class="si">}{</span><span class="n">month</span><span class="si">}</span><span class="s2">/USEGC/</span><span class="si">{</span><span class="n">year</span><span class="si">}{</span><span class="n">month</span><span class="si">}{</span><span class="n">day</span><span class="si">}{</span><span class="n">time</span><span class="si">}</span><span class="s2">_hfr_usegc_6km_rtv_uwls_NDBC.nc&quot;</span>
+            <span class="s2">"https://www.ncei.noaa.gov/thredds-ocean/dodsC/ioos/hfradar/rtv/"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">year</span><span class="si">}{</span><span class="n">month</span><span class="si">}</span><span class="s2">/USEGC/</span><span class="si">{</span><span class="n">year</span><span class="si">}{</span><span class="n">month</span><span class="si">}{</span><span class="n">day</span><span class="si">}{</span><span class="n">time</span><span class="si">}</span><span class="s2">_hfr_usegc_6km_rtv_uwls_NDBC.nc"</span>
         <span class="p">)</span>
         <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
 
 <span class="c1"># We need to use `preprocess` b/c not all coords, like `nSites`,</span>
 <span class="c1"># align properly.</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ds</span><span class="p">:</span> <span class="n">ds</span><span class="p">[[</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">]])</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ds</span><span class="p">:</span> <span class="n">ds</span><span class="p">[[</span><span class="s2">"u"</span><span class="p">,</span> <span class="s2">"v"</span><span class="p">]])</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
@@ -1428,8 +1429,8 @@ current maps.</dd><dt><span>geospatial_lat_min :</span></dt><dd>21.73596</dd><dt
     <span class="n">lat</span><span class="o">=</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lat</span> <span class="o">&lt;</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dy</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lat</span> <span class="o">&gt;</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">dy</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="n">avg</span> <span class="o">=</span> <span class="n">dsr</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">])</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">avg</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
+<span class="n">avg</span> <span class="o">=</span> <span class="n">dsr</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">,</span> <span class="s2">"lat"</span><span class="p">])</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">avg</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1439,8 +1440,8 @@ current maps.</dd><dt><span>geospatial_lat_min :</span></dt><dd>21.73596</dd><dt
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy.ma</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ma</span>
 
-<span class="n">v</span> <span class="o">=</span> <span class="n">avg</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">avg</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">avg</span><span class="p">[</span><span class="s2">"v"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">avg</span><span class="p">[</span><span class="s2">"u"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
 
 <span class="n">u</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -1463,9 +1464,9 @@ current maps.</dd><dt><span>geospatial_lat_min :</span></dt><dd>21.73596</dd><dt
     <span class="mf">0.1</span><span class="p">,</span>
     <span class="mf">0.85</span><span class="p">,</span>
     <span class="n">ref</span><span class="p">,</span>
-    <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">),</span>
-    <span class="n">labelpos</span><span class="o">=</span><span class="s2">&quot;N&quot;</span><span class="p">,</span>
-    <span class="n">coordinates</span><span class="o">=</span><span class="s2">&quot;axes&quot;</span><span class="p">,</span>
+    <span class="s2">"</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"u"</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="p">),</span>
+    <span class="n">labelpos</span><span class="o">=</span><span class="s2">"N"</span><span class="p">,</span>
+    <span class="n">coordinates</span><span class="o">=</span><span class="s2">"axes"</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
@@ -1482,10 +1483,10 @@ current maps.</dd><dt><span>geospatial_lat_min :</span></dt><dd>21.73596</dd><dt
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span>
 
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
-    <span class="s2">&quot;https://dods.ndbc.noaa.gov/thredds/dodsC/hfradar_usegc_6km_25hravg&quot;</span>
+    <span class="s2">"https://dods.ndbc.noaa.gov/thredds/dodsC/hfradar_usegc_6km_25hravg"</span>
 <span class="p">)</span>
 <span class="n">yesterday</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dsy</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">yesterday</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="n">dsy</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">yesterday</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"nearest"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1493,12 +1494,12 @@ current maps.</dd><dt><span>geospatial_lat_min :</span></dt><dd>21.73596</dd><dt
 <p>Now that we singled out the date and and time we want the data, we trigger the download by accessing the data with <code class="docutils literal notranslate"><span class="pre">xarray</span></code>’s <code class="docutils literal notranslate"><span class="pre">.data</span></code> property.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">dsy</span><span class="p">[</span><span class="s2">&quot;u_mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">dsy</span><span class="p">[</span><span class="s2">&quot;v_mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">dsy</span><span class="p">[</span><span class="s2">"u_mean"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">dsy</span><span class="p">[</span><span class="s2">"v_mean"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
 
-<span class="n">lon</span> <span class="o">=</span> <span class="n">dsy</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">dsy</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">dsy</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">dsy</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">dsy</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">dsy</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
 </pre></div>
 </div>
 </div>
@@ -1523,7 +1524,7 @@ current maps.</dd><dt><span>geospatial_lat_min :</span></dt><dd>21.73596</dd><dt
 <span class="kn">from</span><span class="w"> </span><span class="nn">cartopy.mpl.gridliner</span><span class="w"> </span><span class="kn">import</span> <span class="n">LATITUDE_FORMATTER</span><span class="p">,</span> <span class="n">LONGITUDE_FORMATTER</span>
 
 <span class="n">LAND</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
-    <span class="s2">&quot;physical&quot;</span><span class="p">,</span> <span class="s2">&quot;land&quot;</span><span class="p">,</span> <span class="s2">&quot;10m&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;face&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span>
+    <span class="s2">"physical"</span><span class="p">,</span> <span class="s2">"land"</span><span class="p">,</span> <span class="s2">"10m"</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"face"</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">"lightgray"</span>
 <span class="p">)</span>
 
 <span class="n">sub</span> <span class="o">=</span> <span class="mi">2</span>
@@ -1545,13 +1546,13 @@ current maps.</dd><dt><span>geospatial_lat_min :</span></dt><dd>21.73596</dd><dt
 <span class="p">)</span>
 
 <span class="c1"># Deepwater Horizon site.</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="mf">88.365997</span><span class="p">,</span> <span class="mf">28.736628</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;crimson&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="mf">88.365997</span><span class="p">,</span> <span class="mf">28.736628</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"crimson"</span><span class="p">)</span>
 <span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">draw_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">gl</span><span class="o">.</span><span class="n">xlabels_top</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">ylabels_right</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">gl</span><span class="o">.</span><span class="n">xformatter</span> <span class="o">=</span> <span class="n">LONGITUDE_FORMATTER</span>
 <span class="n">gl</span><span class="o">.</span><span class="n">yformatter</span> <span class="o">=</span> <span class="n">LATITUDE_FORMATTER</span>
 
-<span class="n">feature</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">LAND</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">feature</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">LAND</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

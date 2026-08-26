@@ -1,0 +1,1463 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Investigating PACE and OBIS as a data source for phytoplankton observations &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
+
+
+<script src="https://dgd6r9iiqa8y9.cloudfront.net/ioos-ui-components.min.js"></script>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/code_gallery/data_access_notebooks/2026-08-25-PACE-OBIS';</script>
+    <link rel="canonical" href="https://ioos.github.io/ioos_code_lab/content/code_gallery/data_access_notebooks/2026-08-25-PACE-OBIS.html" />
+    <link rel="icon" href="../../../_static/IOOS_logo.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Data Analysis And Visualization" href="../data_analysis_and_visualization.html" />
+    <link rel="prev" title="Programmatically query the IOOS Data Catalog for a specific observation type" href="2024-09-17-CKAN_API_Query.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+
+<ioos-header variant="compact" theme="auto"></ioos-header>
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/IOOS_logo.png" class="logo__image only-light" alt="The U.S. Integrated Ocean Observing System (IOOS) - Home"/>
+    <img src="../../../_static/IOOS_logo.png" class="logo__image only-dark pst-js-only" alt="The U.S. Integrated Ocean Observing System (IOOS) - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ioos_installation_conda.html">Installing the IOOS Conda Environment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Code Gallery</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gallery.html">Notebooks gallery</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_access.html">Data Access</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2016-10-12-fetching_data.html">Fetching data from CO-OPS ERDDAP with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-11-15-glider_data_example.html">Plotting Glider data with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-12-20-searching_glider_deployments.html">Accessing glider data via the Glider DAC API with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-03-21-ERDDAP_IOOS_Sensor_Map.html">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-06-12-NCEI_RA_archive_history.html">Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-07-25-HFRadar_currents.html">Near real-time HF-Radar currents in the proximity of the Deepwater Horizon site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-08-01-xtractoR.html">Using the <code class="docutils literal notranslate"><span class="pre">xtractomatic</span></code> R package to track Pacific Blue Marlin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-09-09-hurricane_irma.html">Exploring the NHC Advisories and Sea Surface Height during Hurricane Irma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-11-30-rerddap.html">Calling R libraries from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2018-02-20-obis.html">Using r-obistools and r-obis to explore the OBIS database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2018-03-01-erddapy.html">erddapy: a python client/URL builder for ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2019-03-08-grids-temperature.html">IOOS models: Temperature Horizontal Slices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2019-05-27-hurricane_gis_part02.html">Accessing data from SOS using NHC GIS files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2020-10-10-GTS.html">IOOS GTS Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2021-10-19-multiple-erddap-search.html">Searching multiple ERDDAP servers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2022-11-23_pyobis_example.html">Using pyobis to query for known datasets</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="2022-11-25-plan_surf_trip_EDS.html">Planning a surf trip using IOOS EDS Model Viewer</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2016-11-16-CF-UGRID-SGRID-conventions.html">Parsing Conventions and standards with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2017-01-23-R-notebook.html">Quick demonstration of R-notebooks using the r-oce library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2017-03-30-octave_notebook_example.html">A Matlab notebook primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2018-12-04-grids.html">IOOS models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2020-02-14-QARTOD_ioos_qc_Water-Level-Example.html">IOOS QARTOD software (ioos_qc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2021-10-25-ERDDAP-interpolate.html">Interpolating data remotely with ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2024-05-16-white_shark_water_temp.html">Interpolate MURSST to great white shark telemetry track with R and ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2024-08-27-plotting-interface-gliderpy.html">Adding a plotting interface gliderpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_analysis_and_visualization_notebooks/2024-09-13-OBIS_EOVs.html">Using AphiaIDs to download OBIS occurrences for Bio/Eco EOVs</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_management.html">Data Management</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-05-14-running_compliance_checker.html">Shore Station Compliance Checker Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-11-01-Creating-Archives-Using-Bagit.html">Using BagIt to tag oceanographic data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2018-02-27-pocean-timeSeries-demo.html">Creating a CF-1.6 timeSeries using pocean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2020-12-08-DataToDwC.html">Aligning Data to Darwin Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2023-03-20-Reading_and_writing_zarr.html">Reading and writting zarr files with xarray</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Video Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/glos.html">GLOS Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ioos.html">IOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/nanoos.html">NANOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ooi.html">OOI Demonstration Videos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/python_dem.html">Python Demonstration Videos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://help.aodn.org.au/aodn-data-tools/user-code-library/">Opening netCDF files - hints from AODN</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://unidata.github.io/notebook-gallery/">Unidata Jupyter Notebook Gallery</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://iobis.org/tutorial/">Extracting and Enriching OBIS data with R</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/USGS-R">USGS-R Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ioos/ioos_code_lab/main?urlpath=lab/tree/jupyterbook/content/code_gallery/data_access_notebooks/2026-08-25-PACE-OBIS.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ioos/ioos_code_lab/blob/main/jupyterbook/content/code_gallery/data_access_notebooks/2026-08-25-PACE-OBIS.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab/issues/new?title=Issue%20on%20page%20%2Fcontent/code_gallery/data_access_notebooks/2026-08-25-PACE-OBIS.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/code_gallery/data_access_notebooks/2026-08-25-PACE-OBIS.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Investigating PACE and OBIS as a data source for phytoplankton observations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">COLAB</span> <span class="o">=</span> <span class="s2">"google.colab"</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_install</span><span class="p">(</span><span class="n">package</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">COLAB</span><span class="p">:</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Install </span><span class="si">{</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="si">}</span><span class="s2">? [y/n]:"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ans</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"y"</span><span class="p">,</span> <span class="s2">"yes"</span><span class="p">]:</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"pip"</span><span class="p">,</span> <span class="s2">"install"</span><span class="p">,</span> <span class="s2">"--quiet"</span><span class="p">,</span> <span class="n">package</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="si">}</span><span class="s2"> installed!"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_colab_install_missing_deps</span><span class="p">(</span><span class="n">deps</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+
+    <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">deps</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dep</span> <span class="o">==</span> <span class="s2">"iris"</span><span class="p">:</span>
+                <span class="n">dep</span> <span class="o">=</span> <span class="s2">"scitools-iris"</span>
+            <span class="n">_install</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span>
+
+
+<span class="n">deps</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"pyobis"</span><span class="p">,</span> <span class="s2">"joblib"</span><span class="p">]</span>
+<span class="n">_colab_install_missing_deps</span><span class="p">(</span><span class="n">deps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="investigating-pace-and-obis-as-a-data-source-for-phytoplankton-observations">
+<h1>Investigating PACE and OBIS as a data source for phytoplankton observations<a class="headerlink" href="#investigating-pace-and-obis-as-a-data-source-for-phytoplankton-observations" title="Link to this heading">#</a></h1>
+<p>Created: 2026-08-25</p>
+<p>The Plankton, Aerosol, Cloud, ocean Ecosystem (PACE) and the Ocean Biodiversity Information System (OBIS) both provide information about phytoplankton distribution on a global scale. PACE Chlorophyll is the near-surface concentration of the green pigment, chlorophyll a, at the ocean surface. Found in tiny photosynthetic organisms – phytoplankton – chlorophyll is a measure of ocean ecosystem health (<a class="reference external" href="https://pace.oceansciences.org/recentmapdata.htm">link</a>). On the other hand, OBIS is the world’s largest global open-access infrastructure for marine biodiversity data, providing occurrence records at species levels.</p>
+<p>The former will have a much higher global coverage while the former will certainly be more accurate in its data. While researches can ue one to calibrate the other or mix-and-match these data to create a better final product, we wonder how easy it is to fetch them and display on a common grid.</p>
+<p>We will use the <code class="docutils literal notranslate"><span class="pre">pyobis</span></code> and <code class="docutils literal notranslate"><span class="pre">earthaccess</span></code> libraries. Earthaccess requires a login to get download access the data. Please navigate to <a class="reference external" href="https://earthaccess.readthedocs.io/en/latest/user/">https://earthaccess.readthedocs.io/en/latest/user/</a> and follow the instructions there on how to create one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">earthaccess</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">persist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can not define our search bounding box, time span, and filter for the 1 degree dataset only, the 4 km results will also be fetched. Because it can be a lot of data, we will avoid the 4km high resolution for now with a simple filter to the results and get only the files that end with <code class="docutils literal notranslate"><span class="pre">1deg.nc</span></code> string.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="o">.</span><span class="n">search_data</span><span class="p">(</span>
+    <span class="n">short_name</span><span class="o">=</span><span class="s2">"PACE_OCI_L3M_CHL"</span><span class="p">,</span>
+    <span class="n">temporal</span><span class="o">=</span><span class="p">(</span><span class="s2">"2025-01-01"</span><span class="p">,</span> <span class="s2">"2025-12-31"</span><span class="p">),</span>
+    <span class="n">bounding_box</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">75.0</span><span class="p">,</span> <span class="mf">47.0</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">fileset</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">one_degree</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fileset</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">full_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"1deg.nc"</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next loop downloads and save the data. We will re-download the data if we do not have it already. The local cache will save us some time and ensure we always have the data even if the server is down.</p>
+<p>Local caching is always a good practice to preserver the data and avoid putting a lot of strain on servers with multiple identical requests.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">"chlor_a.nc"</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fake_time</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"product_name"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">assign_coords</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">one_degree</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="n">fake_time</span><span class="p">)</span>
+    <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span><span class="o">.</span><span class="n">display_max</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span><span class="o">.</span><span class="n">display_min</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">chlor_a</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">"time"</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+
+<span class="c1"># DataArray for the chlor_a variable only.</span>
+<span class="n">chlor_a</span> <span class="o">=</span> <span class="n">chlor_a</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can query OBIS for appropriate phytoplankton taxonomic groupings. Here we list some generic phytoplankton groupings which would be equivalent to the chlorophyll satellite proxy data. Luckily OBIS allows users to use the WoRMS taxonomic backbone as a way to search for more exapansize taxonomic ranks, like family.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>term</p></th>
+<th class="head"><p>WoRMS</p></th>
+<th class="head"><p>OBIS Map</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Diatoms (Bacillariophyceae)</p></td>
+<td><p><a class="reference external" href="https://www.marinespecies.org/aphia.php?p=taxdetails&amp;amp;id=148899">https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=148899</a></p></td>
+<td><p><a class="reference external" href="https://mapper.obis.org/?taxonid=148899">https://mapper.obis.org/?taxonid=148899</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Dinoflagellates (Dinophyceae)</p></td>
+<td><p><a class="reference external" href="https://www.marinespecies.org/aphia.php?p=taxdetails&amp;amp;id=19542">https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=19542</a></p></td>
+<td><p><a class="reference external" href="https://mapper.obis.org/?taxonid=19542">https://mapper.obis.org/?taxonid=19542</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Cyanobacteria (Blue-green algae)</p></td>
+<td><p><a class="reference external" href="https://www.marinespecies.org/aphia.php?p=taxdetails&amp;amp;id=146537">https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=146537</a></p></td>
+<td><p><a class="reference external" href="https://mapper.obis.org/?taxonid=146537">https://mapper.obis.org/?taxonid=146537</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Coccolithophyceae</p></td>
+<td><p><a class="reference external" href="https://www.marinespecies.org/aphia.php?p=taxdetails&amp;amp;id=592906">https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=592906</a></p></td>
+<td><p><a class="reference external" href="https://mapper.obis.org/?taxonid=592906">https://mapper.obis.org/?taxonid=592906</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Below we do an initial test to ensure our search criterias are working with pyobis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyobis</span><span class="w"> </span><span class="kn">import</span> <span class="n">occurrences</span>
+
+<span class="c1"># IDs from the table above.</span>
+<span class="n">aphia_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"148899"</span><span class="p">,</span> <span class="s2">"19542"</span><span class="p">,</span> <span class="s2">"146537"</span><span class="p">,</span> <span class="s2">"592906"</span><span class="p">]</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">occurrences</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">taxonid</span><span class="o">=</span><span class="n">aphia_ids</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-08-26 11:10:04 - pyobis.cache.cache - INFO - Cache initialized at C:\Users\Mathew.Biddle\AppData\Local\pyobis
+2026-08-26 11:10:04 - pyobis.obisutils - INFO - 100 to be fetched. Estimated time =0.064834473133087160 seconds
+2026-08-26 11:10:04 - pyobis.obisutils - INFO - Fetching: [████████████████████████████████████████████████████████████████████████████████████████████████████] 100/100
+2026-08-26 11:10:04 - pyobis.cache.cache - INFO - Cache initialized at C:\Users\Mathew.Biddle\AppData\Local\pyobis
+2026-08-26 11:10:04 - pyobis.obisutils - INFO - Fetched 100 records.
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>basisOfRecord</th>
+      <th>bibliographicCitation</th>
+      <th>brackish</th>
+      <th>catalogNumber</th>
+      <th>class</th>
+      <th>classid</th>
+      <th>collectionCode</th>
+      <th>coordinateUncertaintyInMeters</th>
+      <th>country</th>
+      <th>date_end</th>
+      <th>...</th>
+      <th>fieldNotes</th>
+      <th>preparations</th>
+      <th>verbatimLocality</th>
+      <th>associatedOccurrences</th>
+      <th>eventType</th>
+      <th>identificationVerificationStatus</th>
+      <th>identificationQualifier</th>
+      <th>individualCount</th>
+      <th>forma</th>
+      <th>formaid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>MaterialSample</td>
+      <td>Brown, M. V. et al. Continental scale monitori...</td>
+      <td>True</td>
+      <td>102.100.100/35552-EF9455B8FFF22EFC18B3DCB74655...</td>
+      <td>Coccolithophyceae</td>
+      <td>592906.0</td>
+      <td>BioPlatforms Marine microbes NRS ROT</td>
+      <td>50.0</td>
+      <td>Australia</td>
+      <td>1.498349e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>HumanObservation</td>
+      <td>Continuous Plankton Recorder (CPR) data from t...</td>
+      <td>True</td>
+      <td>23AC-43-172</td>
+      <td>Bacillariophyceae</td>
+      <td>148899.0</td>
+      <td>CPR</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MaterialSample</td>
+      <td>Focardi, Amaranta,Ostrowski, Martin,Goossen, K...</td>
+      <td>True</td>
+      <td>102.100.100/35991-3012DC434CD10C331A5B06F1EAFB...</td>
+      <td>Dinophyceae</td>
+      <td>19542.0</td>
+      <td>BioPlatforms Marine microbes in2016_v04</td>
+      <td>50.0</td>
+      <td>Australia</td>
+      <td>1.473984e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MATERIAL_SAMPLE</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Dinophyceae</td>
+      <td>19542.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.676419e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>MATERIAL_SAMPLE</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Dinophyceae</td>
+      <td>19542.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.447891e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>Occurrence</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>d2ec2d5e06a7683d488c60683531_ARVAM_60683531_AR...</td>
+      <td>Dinophyceae</td>
+      <td>19542.0</td>
+      <td>QUADRIGE - Coastal monitoring database and pro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.521072e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>MATERIAL_SAMPLE</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Dinophyceae</td>
+      <td>19542.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.558138e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>MATERIAL_SAMPLE</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Cyanophyceae</td>
+      <td>146542.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.475712e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>MaterialSample</td>
+      <td>Brown, M. V. et al. Continental scale monitori...</td>
+      <td>True</td>
+      <td>102.100.100/34175-9BDF23CB027253367726EAD57B18...</td>
+      <td>Coccolithophyceae</td>
+      <td>592906.0</td>
+      <td>BioPlatforms Marine microbes NRS ROT</td>
+      <td>50.0</td>
+      <td>Australia</td>
+      <td>1.458691e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>MATERIAL_SAMPLE</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>Coccolithophyceae</td>
+      <td>592906.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.486080e+12</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 122 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">date_year</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"%Y"</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count                            91
+mean     2014-05-21 06:35:36.263736
+min             1972-01-01 00:00:00
+25%             2013-01-01 00:00:00
+50%             2016-01-01 00:00:00
+75%             2019-01-01 00:00:00
+max             2024-01-01 00:00:00
+Name: date_year, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next step is to query for gridded occurrence data for the <code class="docutils literal notranslate"><span class="pre">aphia_ids</span></code> we selected above. We search for gridded occurrences because this reduces the amount of data sent across the web. We could collect specific point observations, but that would take a lot of bandwidth and processing power to ingest and convert to appropriate georeferenced data. The <code class="docutils literal notranslate"><span class="pre">.grid()</span></code> response also provides total occurrence counts per cell, which is what we want to collect anyways.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">occurrences</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">taxonid</span><span class="o">=</span><span class="n">aphia_ids</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-08-26 11:12:20 - pyobis.cache.cache - INFO - Cache initialized at C:\Users\Mathew.Biddle\AppData\Local\pyobis
+2026-08-26 11:12:20 - pyobis.cache.cache - INFO - Cache initialized at C:\Users\Mathew.Biddle\AppData\Local\pyobis
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to match with PACE data later, we need to organize the data into geo-aware constructs. We will use geopandas.GeoDataFrames as the unified construct to align our data into.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">gdf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POLYGON ((150.46875 -35.15625, 151.875 -35.156...</td>
+      <td>1517546</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POLYGON ((153.28125 -28.125, 154.6875 -28.125,...</td>
+      <td>1090666</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POLYGON ((147.65625 -43.59375, 149.0625 -43.59...</td>
+      <td>980360</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>POLYGON ((115.3125 -32.34375, 116.71875 -32.34...</td>
+      <td>911524</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>POLYGON ((146.25 -19.6875, 147.65625 -19.6875,...</td>
+      <td>831335</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8994</th>
+      <td>POLYGON ((-150.46875 -70.3125, -149.0625 -70.3...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8995</th>
+      <td>POLYGON ((-146.25 -87.1875, -144.84375 -87.187...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8996</th>
+      <td>POLYGON ((-167.34375 -78.75, -165.9375 -78.75,...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8997</th>
+      <td>POLYGON ((-178.59375 -73.125, -177.1875 -73.12...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8998</th>
+      <td>POLYGON ((-175.78125 -75.9375, -174.375 -75.93...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>8999 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>Note that the occurence rages from 1 to very large numbers (<code class="docutils literal notranslate"><span class="pre">~10e6</span></code>). We need to log-normalize the colors for better visualization. After that, we can plot the two side.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">colors</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">norm</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">()</span>
+
+<span class="n">projection</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+    <span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">"projection"</span><span class="p">:</span> <span class="n">projection</span><span class="p">},</span>
+    <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">column</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span>
+    <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(),</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">legend_kwds</span><span class="o">=</span><span class="p">{</span><span class="s2">"label"</span><span class="p">:</span> <span class="s2">"OBIS Occurrences"</span><span class="p">},</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax0</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">cs</span> <span class="o">=</span> <span class="n">chlor_a</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/be6b7f0329987aaf3a2803963286e22cecf74b59c122a231596842ddf73942d1.png" src="../../../_images/be6b7f0329987aaf3a2803963286e22cecf74b59c122a231596842ddf73942d1.png" />
+</div>
+</div>
+<p>We can see some features, like a higher density near the coast, currents, and the oligotrophic areas at the gyres centers. As expected, OBIS data density falls off quickly outside of the North Atlantic. However, there is a clear “Gulf Stream signal” in the dataset that is absent in the PACE data. We can envison some sort of interpolation that will use the OBIS data to increase precision and PACE to augument the spatial resolution.</p>
+<p>We won’t be doing any of that here though. Our goal is to demostrate how to fetch matching data and display them side-by-side. In order to test a better “qualitative” way to compare the data we will average out the PACE data to the OBIS occurrences geometry, and put the data on an hexagonal hierarchical geospatial indexing system (H3) for plotting and comparing each hexagon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">average_chlor_a</span><span class="p">(</span><span class="n">geom</span><span class="p">):</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">geom</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">chlor_a</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">xmin</span> <span class="o">&lt;=</span> <span class="n">chlor_a</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">])</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">chlor_a</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">xmax</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">ymin</span> <span class="o">&lt;=</span> <span class="n">chlor_a</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">])</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">chlor_a</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ymax</span><span class="p">),</span>
+        <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will use joblib’s <code class="docutils literal notranslate"><span class="pre">Parallel</span></code> to speed up the averages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+
+<span class="n">num_cores</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">]</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">chlor_avg</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">num_cores</span><span class="p">)(</span>
+    <span class="n">delayed</span><span class="p">(</span><span class="n">average_chlor_a</span><span class="p">)(</span><span class="n">geom</span><span class="p">)</span> <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">bounds</span>
+<span class="p">)</span>
+
+<span class="n">gdf</span><span class="p">[</span><span class="s2">"chlor_avg"</span><span class="p">]</span> <span class="o">=</span> <span class="n">chlor_avg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now make the H3 index for both datasets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h3pandas</span>  <span class="c1"># noqa I001</span>
+
+<span class="n">gdf</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">]</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span>
+<span class="n">gdf</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">]</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span>
+
+<span class="c1"># The resolution goes from 0-15, using 2 b/c that is the closest to the OBIS squares.</span>
+<span class="n">resolution</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[[</span><span class="s2">"x"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">,</span> <span class="s2">"n"</span><span class="p">,</span> <span class="s2">"chlor_avg"</span><span class="p">]]</span>
+
+<span class="n">dfh3</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">h3</span><span class="o">.</span><span class="n">geo_to_h3</span><span class="p">(</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">,</span>
+    <span class="n">lat_col</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span>
+    <span class="n">lng_col</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span>
+    <span class="n">set_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">dfh3</span> <span class="o">=</span> <span class="n">dfh3</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"x"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">dfh3</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">gdfh3</span> <span class="o">=</span> <span class="n">dfh3</span><span class="o">.</span><span class="n">h3</span><span class="o">.</span><span class="n">h3_to_geo_boundary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need to correct the longitudes for better plotting at the dateline.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fix_geom</span><span class="p">(</span><span class="n">geom</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">shapely</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+
+    <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">boundary</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">xy</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lons</span><span class="p">)))</span> <span class="o">&gt;</span> <span class="mi">180</span><span class="p">:</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">360</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lons</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Polygon</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">lats</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">geom</span>
+
+
+<span class="n">gdfh3</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdfh3</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">fix_geom</span><span class="p">)</span>
+<span class="n">gdfh3</span><span class="p">[</span><span class="s2">"log_n"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gdfh3</span><span class="p">[</span><span class="s2">"n"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s take a quick look at the data to see if we are getting the structure we are looking for.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdfh3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n</th>
+      <th>chlor_avg</th>
+      <th>geometry</th>
+      <th>log_n</th>
+    </tr>
+    <tr>
+      <th>h3_02</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>820007fffffffff</th>
+      <td>667</td>
+      <td>2.514208</td>
+      <td>POLYGON ((36.42872 77.68575, 43.86177 78.00915...</td>
+      <td>6.502790</td>
+    </tr>
+    <tr>
+      <th>82000ffffffffff</th>
+      <td>1891</td>
+      <td>3.735855</td>
+      <td>POLYGON ((30.78838 80.33975, 40.19373 80.81642...</td>
+      <td>7.544861</td>
+    </tr>
+    <tr>
+      <th>820017fffffffff</th>
+      <td>119</td>
+      <td>1.853077</td>
+      <td>POLYGON ((48.58085 76.68007, 55.65377 76.66744...</td>
+      <td>4.779123</td>
+    </tr>
+    <tr>
+      <th>82001ffffffffff</th>
+      <td>1085</td>
+      <td>3.568005</td>
+      <td>POLYGON ((46.68072 79.52276, 55.75077 79.55833...</td>
+      <td>6.989335</td>
+    </tr>
+    <tr>
+      <th>820027fffffffff</th>
+      <td>2371</td>
+      <td>6.709328</td>
+      <td>POLYGON ((29.20747 75.65094, 35.20921 76.15221...</td>
+      <td>7.771067</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>82f31ffffffffff</th>
+      <td>9</td>
+      <td>5.836377</td>
+      <td>POLYGON ((-168.19092 -76.36649, -170.0979 -77....</td>
+      <td>2.197225</td>
+    </tr>
+    <tr>
+      <th>82f337fffffffff</th>
+      <td>71</td>
+      <td>1.949622</td>
+      <td>POLYGON ((180.32561 -73.31022, 177.7638 -74.58...</td>
+      <td>4.262680</td>
+    </tr>
+    <tr>
+      <th>82f367fffffffff</th>
+      <td>1</td>
+      <td>0.113506</td>
+      <td>POLYGON ((-151.74413 -69.84475, -151.56695 -71...</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>82f3a7fffffffff</th>
+      <td>18</td>
+      <td>1.966249</td>
+      <td>POLYGON ((170.97665 -77.08353, 166.42141 -78.2...</td>
+      <td>2.890372</td>
+    </tr>
+    <tr>
+      <th>82f3b7fffffffff</th>
+      <td>870</td>
+      <td>0.000000</td>
+      <td>POLYGON ((159.6908 -77.80316, 153.57501 -78.79...</td>
+      <td>6.768493</td>
+    </tr>
+  </tbody>
+</table>
+<p>3341 rows × 4 columns</p>
+</div></div></div>
+</div>
+<p>Finally, let’s plot the OBIS data at the top and PACE at the lower panel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">gdfh3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">column</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax0</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="n">gdfh3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">column</span><span class="o">=</span><span class="s2">"chlor_avg"</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"OBIS: Number of Phytoplankton Occurrences"</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"PACE: Average Chlorophyll-a Concentration"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/c4955ef051207634181be8275d3030e957b63b5de8ed012916fc34e6bb596d92.png" src="../../../_images/c4955ef051207634181be8275d3030e957b63b5de8ed012916fc34e6bb596d92.png" />
+</div>
+</div>
+<p>Done! Hopefully this example will be useful for those using these different data sources.</p>
+<p>We would expect to see some rough alignment of higher concentrations of phytoplankton species occurrences (OBIS) with higher concentrations of Chlorophyll-a (PACE). And we do see some of that off Europe and the Gulf Stream. However, we do need to consider that the observing tool for PACE is satellite observations, so that is only presenting surface observations. Whereas OBIS occurrences are the total number of records for one geographic cell, regardless of the depth at which they observed the animal (think of a CTD profile where bottles were collected at the same station but different depths. The OBIS records would be the summation of all the occurrences for that animal at that station, regardless of depth). Additionally, PACE is a snapshot from 2025-01-01 to 2025-12-31 versus OBIS as a cummulative total from 1972-2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/code_gallery/data_access_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2024-09-17-CKAN_API_Query.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Programmatically query the IOOS Data Catalog for a specific observation type</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../data_analysis_and_visualization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Analysis And Visualization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By IOOS
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href=https://ioos.noaa.gov> ioos.noaa.gov </a> &nbsp <a href=https://www.facebook.com/usioosgov> Facebook </a> &nbsp <a href=https://www.twitter.com/usioosgov> Twitter </a> &nbsp <a href="mailto:data.ioos@noaa.gov">Contact Us</a> <br> U.S. Integrated Ocean Observing System Program <br> 1315 East-West Highway <br> SSMC3, 2nd Floor <br> Silver Spring, MD 20910 <br> (240) 533-9444
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -518,13 +519,13 @@
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))],</span>
-        <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">48.6256</span><span class="p">,</span>
-        <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">27.5717</span><span class="p">,</span>
-        <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="s2">&quot;u&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
-        <span class="s2">&quot;v&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
-        <span class="s2">&quot;station&quot;</span><span class="p">:</span> <span class="s2">&quot;fake buoy&quot;</span><span class="p">,</span>
+        <span class="s2">"time"</span><span class="p">:</span> <span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))],</span>
+        <span class="s2">"longitude"</span><span class="p">:</span> <span class="o">-</span><span class="mf">48.6256</span><span class="p">,</span>
+        <span class="s2">"latitude"</span><span class="p">:</span> <span class="o">-</span><span class="mf">27.5717</span><span class="p">,</span>
+        <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s2">"u"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+        <span class="s2">"v"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+        <span class="s2">"station"</span><span class="p">:</span> <span class="s2">"fake buoy"</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">)</span>
 
@@ -622,11 +623,11 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">oceans.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">stick_plot</span>
 
-<span class="n">q</span> <span class="o">=</span> <span class="n">stick_plot</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">])</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">stick_plot</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="s2">"u"</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">"v"</span><span class="p">])</span>
 
 <span class="n">ref</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">qk</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">quiverkey</span><span class="p">(</span>
-    <span class="n">q</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ref</span><span class="si">}</span><span class="s2"> m s$^</span><span class="si">{</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">labelpos</span><span class="o">=</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="s2">&quot;axes&quot;</span>
+    <span class="n">q</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ref</span><span class="si">}</span><span class="s2"> m s$^</span><span class="si">{</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">labelpos</span><span class="o">=</span><span class="s2">"N"</span><span class="p">,</span> <span class="n">coordinates</span><span class="o">=</span><span class="s2">"axes"</span>
 <span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">70</span><span class="p">);</span>
@@ -642,46 +643,46 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;global&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Fake mooring&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Vector current meter ADCP @ 10 m&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;institution&quot;</span><span class="p">:</span> <span class="s2">&quot;Restaurant at the end of the universe&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cdm_timeseries_variables&quot;</span><span class="p">:</span> <span class="s2">&quot;station&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;subsetVariables&quot;</span><span class="p">:</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
+    <span class="s2">"global"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Fake mooring"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Vector current meter ADCP @ 10 m"</span><span class="p">,</span>
+        <span class="s2">"institution"</span><span class="p">:</span> <span class="s2">"Restaurant at the end of the universe"</span><span class="p">,</span>
+        <span class="s2">"cdm_timeseries_variables"</span><span class="p">:</span> <span class="s2">"station"</span><span class="p">,</span>
+        <span class="s2">"subsetVariables"</span><span class="p">:</span> <span class="s2">"depth"</span><span class="p">,</span>
         <span class="c1"># These are only the required attributions from</span>
         <span class="c1"># https://ioos.github.io/ioos-metadata/ioos-metadata-profile-v1-2.html#attribution</span>
-        <span class="s2">&quot;creator_country&quot;</span><span class="p">:</span> <span class="s2">&quot;USA&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;creator_email&quot;</span><span class="p">:</span> <span class="s2">&quot;fake_email@somedomain.org&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;creator_institution&quot;</span><span class="p">:</span> <span class="s2">&quot;IOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;creator_sector&quot;</span><span class="p">:</span> <span class="s2">&quot;academic&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;creator_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://ioos.github.io/ioos_code_lab/content/intro.html&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;publisher_country&quot;</span><span class="p">:</span> <span class="s2">&quot;USA&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;publisher_email&quot;</span><span class="p">:</span> <span class="s2">&quot;fake_email@somedomain.org&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;publisher_institution&quot;</span><span class="p">:</span> <span class="s2">&quot;IOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;publisher_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://ioos.github.io/ioos_code_lab/content/intro.html&quot;</span><span class="p">,</span>
+        <span class="s2">"creator_country"</span><span class="p">:</span> <span class="s2">"USA"</span><span class="p">,</span>
+        <span class="s2">"creator_email"</span><span class="p">:</span> <span class="s2">"fake_email@somedomain.org"</span><span class="p">,</span>
+        <span class="s2">"creator_institution"</span><span class="p">:</span> <span class="s2">"IOOS"</span><span class="p">,</span>
+        <span class="s2">"creator_sector"</span><span class="p">:</span> <span class="s2">"academic"</span><span class="p">,</span>
+        <span class="s2">"creator_url"</span><span class="p">:</span> <span class="s2">"https://ioos.github.io/ioos_code_lab/content/intro.html"</span><span class="p">,</span>
+        <span class="s2">"publisher_country"</span><span class="p">:</span> <span class="s2">"USA"</span><span class="p">,</span>
+        <span class="s2">"publisher_email"</span><span class="p">:</span> <span class="s2">"fake_email@somedomain.org"</span><span class="p">,</span>
+        <span class="s2">"publisher_institution"</span><span class="p">:</span> <span class="s2">"IOOS"</span><span class="p">,</span>
+        <span class="s2">"publisher_url"</span><span class="p">:</span> <span class="s2">"https://ioos.github.io/ioos_code_lab/content/intro.html"</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;degrees_east&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="s2">"longitude"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"units"</span><span class="p">:</span> <span class="s2">"degrees_east"</span><span class="p">,</span>
+        <span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"longitude"</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;degrees_north&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="s2">"latitude"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"units"</span><span class="p">:</span> <span class="s2">"degrees_north"</span><span class="p">,</span>
+        <span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"latitude"</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="s2">&quot;down&quot;</span><span class="p">,</span>
+    <span class="s2">"z"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"units"</span><span class="p">:</span> <span class="s2">"m"</span><span class="p">,</span>
+        <span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"depth"</span><span class="p">,</span>
+        <span class="s2">"positive"</span><span class="p">:</span> <span class="s2">"down"</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s2">&quot;u&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;eastward_sea_water_velocity&quot;</span><span class="p">,</span>
+    <span class="s2">"u"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"units"</span><span class="p">:</span> <span class="s2">"m/s"</span><span class="p">,</span>
+        <span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"eastward_sea_water_velocity"</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s2">&quot;v&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;m/s&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;northward_sea_water_velocity&quot;</span><span class="p">,</span>
+    <span class="s2">"v"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"units"</span><span class="p">:</span> <span class="s2">"m/s"</span><span class="p">,</span>
+        <span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"northward_sea_water_velocity"</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s2">&quot;station&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;cf_role&quot;</span><span class="p">:</span> <span class="s2">&quot;timeseries_id&quot;</span><span class="p">},</span>
+    <span class="s2">"station"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"cf_role"</span><span class="p">:</span> <span class="s2">"timeseries_id"</span><span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -690,7 +691,7 @@
 <p>We also need to map the our data axes to <code class="docutils literal notranslate"><span class="pre">pocean</span></code>’s defaults. This step is not needed if the data axes are already named like the default ones.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="s2">&quot;depth&quot;</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"t"</span><span class="p">:</span> <span class="s2">"time"</span><span class="p">,</span> <span class="s2">"x"</span><span class="p">:</span> <span class="s2">"longitude"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">:</span> <span class="s2">"latitude"</span><span class="p">,</span> <span class="s2">"z"</span><span class="p">:</span> <span class="s2">"depth"</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -703,7 +704,7 @@
 <span class="n">df</span> <span class="o">=</span> <span class="n">downcast_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>  <span class="c1"># safely cast depth np.int64 to np.int32</span>
 <span class="n">dsg</span> <span class="o">=</span> <span class="n">OrthogonalMultidimensionalTimeseries</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span>
     <span class="n">df</span><span class="p">,</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;fake_buoy.nc&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">"fake_buoy.nc"</span><span class="p">,</span>
     <span class="n">attributes</span><span class="o">=</span><span class="n">attributes</span><span class="p">,</span>
     <span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">,</span>
 <span class="p">)</span>
@@ -726,53 +727,53 @@ dimensions:
 variables:
 	int crs ;
 	double time(time) ;
-		time:units = &quot;seconds since 1990-01-01 00:00:00Z&quot; ;
-		time:standard_name = &quot;time&quot; ;
-		time:axis = &quot;T&quot; ;
+		time:units = "seconds since 1990-01-01 00:00:00Z" ;
+		time:standard_name = "time" ;
+		time:axis = "T" ;
 	string station(station) ;
-		station:cf_role = &quot;timeseries_id&quot; ;
-		station:long_name = &quot;station identifier&quot; ;
+		station:cf_role = "timeseries_id" ;
+		station:long_name = "station identifier" ;
 	double latitude(station) ;
-		latitude:axis = &quot;Y&quot; ;
-		latitude:units = &quot;degrees_north&quot; ;
-		latitude:standard_name = &quot;latitude&quot; ;
+		latitude:axis = "Y" ;
+		latitude:units = "degrees_north" ;
+		latitude:standard_name = "latitude" ;
 	double longitude(station) ;
-		longitude:axis = &quot;X&quot; ;
-		longitude:units = &quot;degrees_east&quot; ;
-		longitude:standard_name = &quot;longitude&quot; ;
+		longitude:axis = "X" ;
+		longitude:units = "degrees_east" ;
+		longitude:standard_name = "longitude" ;
 	int depth(station) ;
 		depth:_FillValue = 0 ;
-		depth:axis = &quot;Z&quot; ;
+		depth:axis = "Z" ;
 	double u(station, time) ;
 		u:_FillValue = 0. ;
-		u:units = &quot;m/s&quot; ;
-		u:standard_name = &quot;eastward_sea_water_velocity&quot; ;
-		u:coordinates = &quot;time depth longitude latitude&quot; ;
+		u:units = "m/s" ;
+		u:standard_name = "eastward_sea_water_velocity" ;
+		u:coordinates = "time depth longitude latitude" ;
 	double v(station, time) ;
 		v:_FillValue = 0. ;
-		v:units = &quot;m/s&quot; ;
-		v:standard_name = &quot;northward_sea_water_velocity&quot; ;
-		v:coordinates = &quot;time depth longitude latitude&quot; ;
+		v:units = "m/s" ;
+		v:standard_name = "northward_sea_water_velocity" ;
+		v:coordinates = "time depth longitude latitude" ;
 
 // global attributes:
-		:Conventions = &quot;CF-1.6&quot; ;
-		:date_created = &quot;2026-05-04T20:12:00Z&quot; ;
-		:featureType = &quot;timeseries&quot; ;
-		:cdm_data_type = &quot;Timeseries&quot; ;
-		:title = &quot;Fake mooring&quot; ;
-		:summary = &quot;Vector current meter ADCP @ 10 m&quot; ;
-		:institution = &quot;Restaurant at the end of the universe&quot; ;
-		:cdm_timeseries_variables = &quot;station&quot; ;
-		:subsetVariables = &quot;depth&quot; ;
-		:creator_country = &quot;USA&quot; ;
-		:creator_email = &quot;fake_email@somedomain.org&quot; ;
-		:creator_institution = &quot;IOOS&quot; ;
-		:creator_sector = &quot;academic&quot; ;
-		:creator_url = &quot;https://ioos.github.io/ioos_code_lab/content/intro.html&quot; ;
-		:publisher_country = &quot;USA&quot; ;
-		:publisher_email = &quot;fake_email@somedomain.org&quot; ;
-		:publisher_institution = &quot;IOOS&quot; ;
-		:publisher_url = &quot;https://ioos.github.io/ioos_code_lab/content/intro.html&quot; ;
+		:Conventions = "CF-1.6" ;
+		:date_created = "2026-05-04T20:12:00Z" ;
+		:featureType = "timeseries" ;
+		:cdm_data_type = "Timeseries" ;
+		:title = "Fake mooring" ;
+		:summary = "Vector current meter ADCP @ 10 m" ;
+		:institution = "Restaurant at the end of the universe" ;
+		:cdm_timeseries_variables = "station" ;
+		:subsetVariables = "depth" ;
+		:creator_country = "USA" ;
+		:creator_email = "fake_email@somedomain.org" ;
+		:creator_institution = "IOOS" ;
+		:creator_sector = "academic" ;
+		:creator_url = "https://ioos.github.io/ioos_code_lab/content/intro.html" ;
+		:publisher_country = "USA" ;
+		:publisher_email = "fake_email@somedomain.org" ;
+		:publisher_institution = "IOOS" ;
+		:publisher_url = "https://ioos.github.io/ioos_code_lab/content/intro.html" ;
 }
 </pre></div>
 </div>
@@ -781,12 +782,12 @@ variables:
 <p>It also outputs the dsg object for inspection. Let us check a few things to see if our objects was created as expected. (Note that some of the metadata was “free” due t the built-in defaults in <code class="docutils literal notranslate"><span class="pre">pocean</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="s2">&quot;featureType&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="s2">"featureType"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;timeseries&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'timeseries'
 </pre></div>
 </div>
 </div>
@@ -811,19 +812,19 @@ variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;eastward_sea_water_velocity&#39;, &#39;northward_sea_water_velocity&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['eastward_sea_water_velocity', 'northward_sea_water_velocity']
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="s2">"T"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;class &#39;netCDF4.Variable&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;class 'netCDF4.Variable'&gt;
  float64 time(time)
      units: seconds since 1990-01-01 00:00:00Z
      standard_name: time
@@ -837,12 +838,12 @@ variables:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="s2">"Z"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;class &#39;netCDF4.Variable&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;class 'netCDF4.Variable'&gt;
  int32 depth(station)
      _FillValue: 0
      axis: Z
@@ -855,39 +856,39 @@ variables:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">vatts</span><span class="p">(</span><span class="s2">&quot;station&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">vatts</span><span class="p">(</span><span class="s2">"station"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;cf_role&#39;: &#39;timeseries_id&#39;, &#39;long_name&#39;: &#39;station identifier&#39;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'cf_role': 'timeseries_id', 'long_name': 'station identifier'}
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="p">[</span><span class="s2">&quot;station&quot;</span><span class="p">][:]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="p">[</span><span class="s2">"station"</span><span class="p">][:]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;fake buoy&#39;], dtype=object)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array(['fake buoy'], dtype=object)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">vatts</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">vatts</span><span class="p">(</span><span class="s2">"u"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;_FillValue&#39;: np.float64(0.0),
- &#39;units&#39;: &#39;m/s&#39;,
- &#39;standard_name&#39;: &#39;eastward_sea_water_velocity&#39;,
- &#39;coordinates&#39;: &#39;time depth longitude latitude&#39;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'_FillValue': np.float64(0.0),
+ 'units': 'm/s',
+ 'standard_name': 'eastward_sea_water_velocity',
+ 'coordinates': 'time depth longitude latitude'}
 </pre></div>
 </div>
 </div>

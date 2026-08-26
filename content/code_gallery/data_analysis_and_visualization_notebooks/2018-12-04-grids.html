@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -511,53 +512,53 @@ to extract a <a class="reference external" href="https://geojson.org/"><code cla
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;DOPPIO&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="s2">&quot;MARACOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://tds.marine.rutgers.edu/thredds/dodsC/roms/doppio/2017_da/avg/Averages_Best_Excluding_Day1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"DOPPIO"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="s2">"MARACOOS"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://tds.marine.rutgers.edu/thredds/dodsC/roms/doppio/2017_da/avg/Averages_Best_Excluding_Day1"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"sea_water_potential_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;NYHOPS&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="s2">&quot;MARACOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://colossus.dl.stevens-tech.edu:8080/thredds/dodsC/latest/Complete_gcmplt.nc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sea_water_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"NYHOPS"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="s2">"MARACOOS"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://colossus.dl.stevens-tech.edu:8080/thredds/dodsC/latest/Complete_gcmplt.nc"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"sea_water_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;NECOFS-GOM3&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="s2">&quot;NERACOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_GOM3_FORECAST.nc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"NECOFS-GOM3"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="s2">"NERACOOS"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_GOM3_FORECAST.nc"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"sea_water_potential_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;NECOFS-MASSBAY&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="s2">&quot;NERACOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_FVCOM_OCEAN_MASSBAY_FORECAST.nc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"NECOFS-MASSBAY"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="s2">"NERACOOS"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_FVCOM_OCEAN_MASSBAY_FORECAST.nc"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"sea_water_potential_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;CNAPS&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="s2">&quot;SECOORA&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://thredds.secoora.org/thredds/dodsC/SECOORA_NCSU_CNAPS.nc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"CNAPS"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="s2">"SECOORA"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://thredds.secoora.org/thredds/dodsC/SECOORA_NCSU_CNAPS.nc"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"sea_water_potential_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;CMOP-SELFE&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="s2">&quot;NANOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://amb6400b.stccmop.org:8080/thredds/dodsC/model_data/forecast&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;average_sea_water_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"CMOP-SELFE"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="s2">"NANOOS"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://amb6400b.stccmop.org:8080/thredds/dodsC/model_data/forecast"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"average_sea_water_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;OSU-ROMS&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="s2">&quot;NANOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://ona.coas.oregonstate.edu:8080/thredds/dodsC/NANOOS/OCOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"OSU-ROMS"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="s2">"NANOOS"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://ona.coas.oregonstate.edu:8080/thredds/dodsC/NANOOS/OCOS"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"sea_water_potential_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;Hawaii-ROMS&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="s2">&quot;PacIOOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://oos.soest.hawaii.edu/thredds/dodsC/hioos/roms_forec/hiig/ROMS_Hawaii_Regional_Ocean_Model_best.ncd&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"Hawaii-ROMS"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="s2">"PacIOOS"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://oos.soest.hawaii.edu/thredds/dodsC/hioos/roms_forec/hiig/ROMS_Hawaii_Regional_Ocean_Model_best.ncd"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"sea_water_potential_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;WCOFS&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://opendap.co-ops.nos.noaa.gov/thredds/dodsC/WCOFS/fmrc/Aggregated_7_day_WCOFS_Fields_Forecast_best.ncd&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sea_water_temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"WCOFS"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://opendap.co-ops.nos.noaa.gov/thredds/dodsC/WCOFS/fmrc/Aggregated_7_day_WCOFS_Fields_Forecast_best.ncd"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"standard_name"</span><span class="p">:</span> <span class="s2">"sea_water_temperature"</span><span class="p">},</span>
     <span class="p">},</span>
-    <span class="s2">&quot;WestCoastUCSC&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://oceanmodeling.pmc.ucsc.edu:8080/thredds/dodsC/ccsra_2016a_phys_agg_zlevs/fmrc/CCSRA_2016a_Phys_ROMS_z-level_(depth)_Aggregation_best.ncd&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;long_name&quot;</span><span class="p">:</span> <span class="s2">&quot;potential temperature&quot;</span><span class="p">},</span>
+    <span class="s2">"WestCoastUCSC"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://oceanmodeling.pmc.ucsc.edu:8080/thredds/dodsC/ccsra_2016a_phys_agg_zlevs/fmrc/CCSRA_2016a_Phys_ROMS_z-level_(depth)_Aggregation_best.ncd"</span><span class="p">,</span>
+        <span class="s2">"var"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"long_name"</span><span class="p">:</span> <span class="s2">"potential temperature"</span><span class="p">},</span>
     <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
@@ -576,11 +577,11 @@ and feed it to <code class="docutils literal notranslate"><span class="pre">Grid
 
 <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">nc</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">])</span>
-        <span class="n">models</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;nc&quot;</span><span class="p">:</span> <span class="n">nc</span><span class="p">})</span>
-        <span class="n">models</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;grid&quot;</span><span class="p">:</span> <span class="n">GridGeo</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;var&quot;</span><span class="p">])})</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s2">"url"</span><span class="p">])</span>
+        <span class="n">models</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"nc"</span><span class="p">:</span> <span class="n">nc</span><span class="p">})</span>
+        <span class="n">models</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"grid"</span><span class="p">:</span> <span class="n">GridGeo</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="p">[</span><span class="s2">"var"</span><span class="p">])})</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Could not download </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Could not download </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
         <span class="n">models</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
         <span class="k">continue</span>
 </pre></div>
@@ -612,7 +613,7 @@ Note:Caching=1
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Could not download http://amb6400b.stccmop.org:8080/thredds/dodsC/model_data/forecast
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error:curl error: Couldn&#39;t resolve host name
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error:curl error: Couldn't resolve host name
 curl error details: 
 Warning:oc_open: Could not read url
 Note:Caching=1
@@ -659,19 +660,19 @@ However, we need those functions to extract grid statistics and to easily plot t
 <span class="kn">from</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="kn">import</span> <span class="n">COLORS</span><span class="p">,</span> <span class="n">NaturalEarthFeature</span>
 
 <span class="n">LAND</span> <span class="o">=</span> <span class="n">NaturalEarthFeature</span><span class="p">(</span>
-    <span class="s2">&quot;physical&quot;</span><span class="p">,</span> <span class="s2">&quot;land&quot;</span><span class="p">,</span> <span class="s2">&quot;10m&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;face&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">COLORS</span><span class="p">[</span><span class="s2">&quot;land&quot;</span><span class="p">]</span>
+    <span class="s2">"physical"</span><span class="p">,</span> <span class="s2">"land"</span><span class="p">,</span> <span class="s2">"10m"</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"face"</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">COLORS</span><span class="p">[</span><span class="s2">"land"</span><span class="p">]</span>
 <span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkgray&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"darkgray"</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
         <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
-        <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()},</span>
+        <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">"projection"</span><span class="p">:</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()},</span>
     <span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">LAND</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">LAND</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">grid</span><span class="o">.</span><span class="n">mesh</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;unknown_1d&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown_2d&quot;</span><span class="p">,</span> <span class="s2">&quot;sgrid&quot;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">grid</span><span class="o">.</span><span class="n">mesh</span> <span class="o">==</span> <span class="s2">&quot;unknown_1d&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">grid</span><span class="o">.</span><span class="n">mesh</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"unknown_1d"</span><span class="p">,</span> <span class="s2">"unknown_2d"</span><span class="p">,</span> <span class="s2">"sgrid"</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">grid</span><span class="o">.</span><span class="n">mesh</span> <span class="o">==</span> <span class="s2">"unknown_1d"</span><span class="p">:</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">y</span>
@@ -684,11 +685,11 @@ However, we need those functions to extract grid statistics and to easily plot t
             <span class="n">color</span><span class="p">,</span>
             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
         <span class="p">)</span>
-    <span class="k">elif</span> <span class="n">grid</span><span class="o">.</span><span class="n">mesh</span> <span class="o">==</span> <span class="s2">&quot;ugrid&quot;</span><span class="p">:</span>
-        <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">grid</span><span class="o">.</span><span class="n">mesh</span> <span class="o">==</span> <span class="s2">"ugrid"</span><span class="p">:</span>
+        <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">"-"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">triang</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unrecognized grid type </span><span class="si">{</span><span class="n">grid</span><span class="o">.</span><span class="n">mesh</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unrecognized grid type </span><span class="si">{</span><span class="n">grid</span><span class="o">.</span><span class="n">mesh</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
 
 
@@ -696,7 +697,7 @@ However, we need those functions to extract grid statistics and to easily plot t
     <span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">num2date</span>
 
     <span class="n">times</span> <span class="o">=</span> <span class="n">time</span><span class="p">[:]</span>
-    <span class="n">calendar</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="s2">&quot;calendar&quot;</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">)</span>
+    <span class="n">calendar</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="s2">"calendar"</span><span class="p">,</span> <span class="s2">"standard"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">num2date</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">time</span><span class="o">.</span><span class="n">units</span><span class="p">,</span> <span class="n">calendar</span><span class="o">=</span><span class="n">calendar</span><span class="p">)</span>
 
 
@@ -733,7 +734,7 @@ However, we need those functions to extract grid statistics and to easily plot t
         <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">))])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="s2">"unknown"</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
         <span class="n">res</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">res</span>
@@ -742,26 +743,26 @@ However, we need those functions to extract grid statistics and to easily plot t
 <span class="k">def</span><span class="w"> </span><span class="nf">get_stats</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">gridgeo.cfvariable</span><span class="w"> </span><span class="kn">import</span> <span class="n">CFVariable</span>
 
-    <span class="n">var</span> <span class="o">=</span> <span class="n">CFVariable</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;nc&quot;</span><span class="p">],</span> <span class="o">**</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;var&quot;</span><span class="p">])</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">CFVariable</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">"nc"</span><span class="p">],</span> <span class="o">**</span><span class="n">model</span><span class="p">[</span><span class="s2">"var"</span><span class="p">])</span>
     <span class="n">vlevel</span> <span class="o">=</span> <span class="n">_vlevel</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
     <span class="n">tstep</span> <span class="o">=</span> <span class="n">_tstep</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">_res</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;RA&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;RA&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NA&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> meters&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;grid type&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;vertical levels&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">vlevel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;time step&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tstep</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">,</span>
+        <span class="s2">"RA"</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"RA"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NA"</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
+        <span class="s2">"resolution"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> meters"</span><span class="p">,</span>
+        <span class="s2">"grid type"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"vertical levels"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">vlevel</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"time step"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">tstep</span><span class="si">}</span><span class="s2"> seconds"</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">"index"</span><span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">df</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">to_html</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="n">classes</span> <span class="o">=</span> <span class="s2">&quot;table table-striped table-hover table-condensed table-responsive&quot;</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="s2">"table table-striped table-hover table-condensed table-responsive"</span>
     <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -845,8 +846,8 @@ or not represent the whole grid like grid spacing on unstructured models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_grid</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mesh</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_grid</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">"grid"</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="s2">"grid"</span><span class="p">]</span><span class="o">.</span><span class="n">mesh</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -866,7 +867,7 @@ it is quite complicated to create a meaningful visualization even at lower zoom 
 <span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-    <span class="n">geojson</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">outline</span><span class="o">.</span><span class="n">__geo_interface__</span>
+    <span class="n">geojson</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">"grid"</span><span class="p">]</span><span class="o">.</span><span class="n">outline</span><span class="o">.</span><span class="n">__geo_interface__</span>
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">get_stats</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
     <span class="n">html</span> <span class="o">=</span> <span class="n">to_html</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>

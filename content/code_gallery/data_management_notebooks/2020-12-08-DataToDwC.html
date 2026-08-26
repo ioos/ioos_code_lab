@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -537,10 +538,10 @@ original data and aligning it to Darwin Core. It has been adapted from the R mar
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;https://raw.githubusercontent.com/ioos/ioos_code_lab/main/&quot;</span>
-    <span class="s2">&quot;jupyterbook/content/code_gallery/data/&quot;</span>
+    <span class="s2">"https://raw.githubusercontent.com/ioos/ioos_code_lab/main/"</span>
+    <span class="s2">"jupyterbook/content/code_gallery/data/"</span>
 <span class="p">)</span>
-<span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;MadeUpDataForBiologicalDataTraining.csv&quot;</span>
+<span class="n">file</span> <span class="o">=</span> <span class="s2">"MadeUpDataForBiologicalDataTraining.csv"</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">file</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -680,10 +681,10 @@ original data and aligning it to Darwin Core. It has been adapted from the R mar
 <p>First let’s create the <code class="docutils literal notranslate"><span class="pre">eventID</span></code> and <code class="docutils literal notranslate"><span class="pre">occurrenceID</span></code> in the original file so that information can be reused for all necessary files down the line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;eventID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;region&quot;</span><span class="p">,</span> <span class="s2">&quot;station&quot;</span><span class="p">,</span> <span class="s2">&quot;transect&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">"eventID"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"station"</span><span class="p">,</span> <span class="s2">"transect"</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">"_"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
 <span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;occurrenceID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"occurrenceID"</span><span class="p">]</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -700,15 +701,15 @@ to the event file.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
     <span class="p">[</span>
-        <span class="s2">&quot;date&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lat&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lon&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;region&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;station&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;transect&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;bottom type&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eventID&quot;</span><span class="p">,</span>
+        <span class="s2">"date"</span><span class="p">,</span>
+        <span class="s2">"lat"</span><span class="p">,</span>
+        <span class="s2">"lon"</span><span class="p">,</span>
+        <span class="s2">"region"</span><span class="p">,</span>
+        <span class="s2">"station"</span><span class="p">,</span>
+        <span class="s2">"transect"</span><span class="p">,</span>
+        <span class="s2">"depth"</span><span class="p">,</span>
+        <span class="s2">"bottom type"</span><span class="p">,</span>
+        <span class="s2">"eventID"</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </pre></div>
@@ -718,12 +719,12 @@ to the event file.</p>
 <p>Next we need to rename any columns of data to match directly to Darwin Core.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;decimalLatitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
-<span class="n">event</span><span class="p">[</span><span class="s2">&quot;decimalLongitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span>
-<span class="n">event</span><span class="p">[</span><span class="s2">&quot;minimumDepthInMeters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;depth&quot;</span><span class="p">]</span>
-<span class="n">event</span><span class="p">[</span><span class="s2">&quot;maximumDepthInMeters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;depth&quot;</span><span class="p">]</span>
-<span class="n">event</span><span class="p">[</span><span class="s2">&quot;habitat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;bottom type&quot;</span><span class="p">]</span>
-<span class="n">event</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span><span class="p">[</span><span class="s2">"decimalLatitude"</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">]</span>
+<span class="n">event</span><span class="p">[</span><span class="s2">"decimalLongitude"</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">]</span>
+<span class="n">event</span><span class="p">[</span><span class="s2">"minimumDepthInMeters"</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">"depth"</span><span class="p">]</span>
+<span class="n">event</span><span class="p">[</span><span class="s2">"maximumDepthInMeters"</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">"depth"</span><span class="p">]</span>
+<span class="n">event</span><span class="p">[</span><span class="s2">"habitat"</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">"bottom type"</span><span class="p">]</span>
+<span class="n">event</span><span class="p">[</span><span class="s2">"island"</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -731,9 +732,9 @@ to the event file.</p>
 <p>We need to appropriately read in the date field, so we can export it to <a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601">ISO format</a>. Also add any missing, required, fields.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;eventDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%Y&quot;</span><span class="p">)</span>
-<span class="n">event</span><span class="p">[</span><span class="s2">&quot;basisOfRecord&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;HumanObservation&quot;</span>
-<span class="n">event</span><span class="p">[</span><span class="s2">&quot;geodeticDatum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;EPSG:4326 WGS84&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span><span class="p">[</span><span class="s2">"eventDate"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">"date"</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"%m/</span><span class="si">%d</span><span class="s2">/%Y"</span><span class="p">)</span>
+<span class="n">event</span><span class="p">[</span><span class="s2">"basisOfRecord"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"HumanObservation"</span>
+<span class="n">event</span><span class="p">[</span><span class="s2">"geodeticDatum"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"EPSG:4326 WGS84"</span>
 </pre></div>
 </div>
 </div>
@@ -743,14 +744,14 @@ to the event file.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
     <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;date&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lat&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lon&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;region&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;station&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;transect&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;bottom type&quot;</span><span class="p">,</span>
+        <span class="s2">"date"</span><span class="p">,</span>
+        <span class="s2">"lat"</span><span class="p">,</span>
+        <span class="s2">"lon"</span><span class="p">,</span>
+        <span class="s2">"region"</span><span class="p">,</span>
+        <span class="s2">"station"</span><span class="p">,</span>
+        <span class="s2">"transect"</span><span class="p">,</span>
+        <span class="s2">"depth"</span><span class="p">,</span>
+        <span class="s2">"bottom type"</span><span class="p">,</span>
     <span class="p">],</span>
     <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
@@ -762,7 +763,7 @@ to the event file.</p>
 is a unique identifier for each sampling event in the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;eventID&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">"eventID"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -772,8 +773,8 @@ is a unique identifier for each sampling event in the data.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;MadeUpData_event.csv&quot;</span><span class="p">)</span>
-<span class="n">event</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"../data"</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">"MadeUpData_event.csv"</span><span class="p">)</span>
+<span class="n">event</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">event</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -886,10 +887,10 @@ is a unique identifier for each sampling event in the data.</p>
 <p>For creating the <strong>occurrence</strong> file, we start by creating the DataFrame and renaming the fields that align directly with Darwin Core. Then, we’ll add the required information that is missing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">occurrence</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;scientific name&quot;</span><span class="p">,</span> <span class="s2">&quot;eventID&quot;</span><span class="p">,</span> <span class="s2">&quot;occurrenceID&quot;</span><span class="p">,</span> <span class="s2">&quot;percent cover&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">occurrence</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">occurrence</span><span class="p">[</span><span class="s2">&quot;scientific name&quot;</span><span class="p">]</span>
-<span class="n">occurrence</span><span class="p">[</span><span class="s2">&quot;occurrenceStatus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
-    <span class="n">occurrence</span><span class="p">[</span><span class="s2">&quot;percent cover&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;absent&quot;</span><span class="p">,</span> <span class="s2">&quot;present&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">occurrence</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"scientific name"</span><span class="p">,</span> <span class="s2">"eventID"</span><span class="p">,</span> <span class="s2">"occurrenceID"</span><span class="p">,</span> <span class="s2">"percent cover"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">occurrence</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">]</span> <span class="o">=</span> <span class="n">occurrence</span><span class="p">[</span><span class="s2">"scientific name"</span><span class="p">]</span>
+<span class="n">occurrence</span><span class="p">[</span><span class="s2">"occurrenceStatus"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+    <span class="n">occurrence</span><span class="p">[</span><span class="s2">"percent cover"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"absent"</span><span class="p">,</span> <span class="s2">"present"</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -905,7 +906,7 @@ information. So, we create a lookup table of the unique scientific names found i
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lut_worms</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">occurrence</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">occurrence</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -915,21 +916,21 @@ information. So, we create a lookup table of the unique scientific names found i
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;acceptedname&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;acceptedID&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;scientificNameID&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;kingdom&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;phylum&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;class&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;order&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;family&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;genus&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;scientificNameAuthorship&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;taxonRank&quot;</span><span class="p">,</span>
+    <span class="s2">"acceptedname"</span><span class="p">,</span>
+    <span class="s2">"acceptedID"</span><span class="p">,</span>
+    <span class="s2">"scientificNameID"</span><span class="p">,</span>
+    <span class="s2">"kingdom"</span><span class="p">,</span>
+    <span class="s2">"phylum"</span><span class="p">,</span>
+    <span class="s2">"class"</span><span class="p">,</span>
+    <span class="s2">"order"</span><span class="p">,</span>
+    <span class="s2">"family"</span><span class="p">,</span>
+    <span class="s2">"genus"</span><span class="p">,</span>
+    <span class="s2">"scientificNameAuthorship"</span><span class="p">,</span>
+    <span class="s2">"taxonRank"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">head</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
-    <span class="n">lut_worms</span><span class="p">[</span><span class="n">head</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">lut_worms</span><span class="p">[</span><span class="n">head</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
 </pre></div>
 </div>
 </div>
@@ -939,159 +940,159 @@ information. So, we create a lookup table of the unique scientific names found i
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lut_worms</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">**Searching for scientific name = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
-    <span class="n">resp</span> <span class="o">=</span> <span class="n">pyworms</span><span class="o">.</span><span class="n">aphiaRecordsByMatchNames</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">**Searching for scientific name = </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">]</span><span class="si">}</span><span class="s2">**"</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">pyworms</span><span class="o">.</span><span class="n">aphiaRecordsByMatchNames</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;acceptedname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;valid_name&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;acceptedID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;valid_AphiaID&quot;</span><span class="p">])</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;scientificNameID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;lsid&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;kingdom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;kingdom&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;phylum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;phylum&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;order&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;order&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;family&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;family&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;genus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;genus&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;scientificNameAuthorship&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;authority&quot;</span><span class="p">]</span>
-    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;taxonRank&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"acceptedname"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"valid_name"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"acceptedID"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">"valid_AphiaID"</span><span class="p">])</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"scientificNameID"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"lsid"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"kingdom"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"kingdom"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"phylum"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"phylum"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"class"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"class"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"order"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"order"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"family"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"family"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"genus"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"genus"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"scientificNameAuthorship"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"authority"</span><span class="p">]</span>
+    <span class="n">lut_worms</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"taxonRank"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">"rank"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**Searching for scientific name = Acropora cervicornis**
-{&#39;AphiaID&#39;: 206989,
- &#39;authority&#39;: &#39;(Lamarck, 1816)&#39;,
- &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List &#39;
-             &#39;of Scleractinia. Acropora cervicornis (Lamarck, 1816). Accessed &#39;
-             &#39;through: World Register of Marine Species at: &#39;
-             &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=206989 &#39;
-             &#39;on 2026-05-04&#39;,
- &#39;class&#39;: &#39;Hexacorallia&#39;,
- &#39;family&#39;: &#39;Acroporidae&#39;,
- &#39;genus&#39;: &#39;Acropora&#39;,
- &#39;isBrackish&#39;: None,
- &#39;isExtinct&#39;: None,
- &#39;isFreshwater&#39;: 0,
- &#39;isMarine&#39;: 1,
- &#39;isTerrestrial&#39;: 0,
- &#39;kingdom&#39;: &#39;Animalia&#39;,
- &#39;lsid&#39;: &#39;urn:lsid:marinespecies.org:taxname:206989&#39;,
- &#39;match_type&#39;: &#39;exact&#39;,
- &#39;modified&#39;: &#39;2022-05-29T06:08:19.927Z&#39;,
- &#39;order&#39;: &#39;Scleractinia&#39;,
- &#39;originalNameUsageID&#39;: 738916,
- &#39;parentNameUsageID&#39;: 205469,
- &#39;phylum&#39;: &#39;Cnidaria&#39;,
- &#39;rank&#39;: &#39;Species&#39;,
- &#39;scientificname&#39;: &#39;Acropora cervicornis&#39;,
- &#39;status&#39;: &#39;accepted&#39;,
- &#39;taxonRankID&#39;: 220,
- &#39;unacceptreason&#39;: None,
- &#39;url&#39;: &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=206989&#39;,
- &#39;valid_AphiaID&#39;: 206989,
- &#39;valid_authority&#39;: &#39;(Lamarck, 1816)&#39;,
- &#39;valid_name&#39;: &#39;Acropora cervicornis&#39;}
+{'AphiaID': 206989,
+ 'authority': '(Lamarck, 1816)',
+ 'citation': 'Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List '
+             'of Scleractinia. Acropora cervicornis (Lamarck, 1816). Accessed '
+             'through: World Register of Marine Species at: '
+             'https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=206989 '
+             'on 2026-05-04',
+ 'class': 'Hexacorallia',
+ 'family': 'Acroporidae',
+ 'genus': 'Acropora',
+ 'isBrackish': None,
+ 'isExtinct': None,
+ 'isFreshwater': 0,
+ 'isMarine': 1,
+ 'isTerrestrial': 0,
+ 'kingdom': 'Animalia',
+ 'lsid': 'urn:lsid:marinespecies.org:taxname:206989',
+ 'match_type': 'exact',
+ 'modified': '2022-05-29T06:08:19.927Z',
+ 'order': 'Scleractinia',
+ 'originalNameUsageID': 738916,
+ 'parentNameUsageID': 205469,
+ 'phylum': 'Cnidaria',
+ 'rank': 'Species',
+ 'scientificname': 'Acropora cervicornis',
+ 'status': 'accepted',
+ 'taxonRankID': 220,
+ 'unacceptreason': None,
+ 'url': 'https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=206989',
+ 'valid_AphiaID': 206989,
+ 'valid_authority': '(Lamarck, 1816)',
+ 'valid_name': 'Acropora cervicornis'}
 
 **Searching for scientific name = Madracis auretenra**
-{&#39;AphiaID&#39;: 430664,
- &#39;authority&#39;: &#39;Locke, Weil &amp; Coates, 2007&#39;,
- &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List &#39;
-             &#39;of Scleractinia. Madracis auretenra Locke, Weil &amp; Coates, 2007. &#39;
-             &#39;Accessed through: World Register of Marine Species at: &#39;
-             &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=430664 &#39;
-             &#39;on 2026-05-04&#39;,
- &#39;class&#39;: &#39;Hexacorallia&#39;,
- &#39;family&#39;: &#39;Pocilloporidae&#39;,
- &#39;genus&#39;: &#39;Madracis&#39;,
- &#39;isBrackish&#39;: None,
- &#39;isExtinct&#39;: None,
- &#39;isFreshwater&#39;: 0,
- &#39;isMarine&#39;: 1,
- &#39;isTerrestrial&#39;: 0,
- &#39;kingdom&#39;: &#39;Animalia&#39;,
- &#39;lsid&#39;: &#39;urn:lsid:marinespecies.org:taxname:430664&#39;,
- &#39;match_type&#39;: &#39;exact&#39;,
- &#39;modified&#39;: &#39;2022-12-30T10:18:02.270Z&#39;,
- &#39;order&#39;: &#39;Scleractinia&#39;,
- &#39;originalNameUsageID&#39;: 430664,
- &#39;parentNameUsageID&#39;: 135125,
- &#39;phylum&#39;: &#39;Cnidaria&#39;,
- &#39;rank&#39;: &#39;Species&#39;,
- &#39;scientificname&#39;: &#39;Madracis auretenra&#39;,
- &#39;status&#39;: &#39;accepted&#39;,
- &#39;taxonRankID&#39;: 220,
- &#39;unacceptreason&#39;: None,
- &#39;url&#39;: &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=430664&#39;,
- &#39;valid_AphiaID&#39;: 430664,
- &#39;valid_authority&#39;: &#39;Locke, Weil &amp; Coates, 2007&#39;,
- &#39;valid_name&#39;: &#39;Madracis auretenra&#39;}
+{'AphiaID': 430664,
+ 'authority': 'Locke, Weil &amp; Coates, 2007',
+ 'citation': 'Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List '
+             'of Scleractinia. Madracis auretenra Locke, Weil &amp; Coates, 2007. '
+             'Accessed through: World Register of Marine Species at: '
+             'https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=430664 '
+             'on 2026-05-04',
+ 'class': 'Hexacorallia',
+ 'family': 'Pocilloporidae',
+ 'genus': 'Madracis',
+ 'isBrackish': None,
+ 'isExtinct': None,
+ 'isFreshwater': 0,
+ 'isMarine': 1,
+ 'isTerrestrial': 0,
+ 'kingdom': 'Animalia',
+ 'lsid': 'urn:lsid:marinespecies.org:taxname:430664',
+ 'match_type': 'exact',
+ 'modified': '2022-12-30T10:18:02.270Z',
+ 'order': 'Scleractinia',
+ 'originalNameUsageID': 430664,
+ 'parentNameUsageID': 135125,
+ 'phylum': 'Cnidaria',
+ 'rank': 'Species',
+ 'scientificname': 'Madracis auretenra',
+ 'status': 'accepted',
+ 'taxonRankID': 220,
+ 'unacceptreason': None,
+ 'url': 'https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=430664',
+ 'valid_AphiaID': 430664,
+ 'valid_authority': 'Locke, Weil &amp; Coates, 2007',
+ 'valid_name': 'Madracis auretenra'}
 
 **Searching for scientific name = Mussa angulosa**
-{&#39;AphiaID&#39;: 216135,
- &#39;authority&#39;: &#39;(Pallas, 1766)&#39;,
- &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List &#39;
-             &#39;of Scleractinia. Mussa angulosa (Pallas, 1766). Accessed &#39;
-             &#39;through: World Register of Marine Species at: &#39;
-             &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=216135 &#39;
-             &#39;on 2026-05-04&#39;,
- &#39;class&#39;: &#39;Hexacorallia&#39;,
- &#39;family&#39;: &#39;Faviidae&#39;,
- &#39;genus&#39;: &#39;Mussa&#39;,
- &#39;isBrackish&#39;: None,
- &#39;isExtinct&#39;: 0,
- &#39;isFreshwater&#39;: 0,
- &#39;isMarine&#39;: 1,
- &#39;isTerrestrial&#39;: 0,
- &#39;kingdom&#39;: &#39;Animalia&#39;,
- &#39;lsid&#39;: &#39;urn:lsid:marinespecies.org:taxname:216135&#39;,
- &#39;match_type&#39;: &#39;exact&#39;,
- &#39;modified&#39;: &#39;2022-05-26T06:45:21.380Z&#39;,
- &#39;order&#39;: &#39;Scleractinia&#39;,
- &#39;originalNameUsageID&#39;: 718670,
- &#39;parentNameUsageID&#39;: 206306,
- &#39;phylum&#39;: &#39;Cnidaria&#39;,
- &#39;rank&#39;: &#39;Species&#39;,
- &#39;scientificname&#39;: &#39;Mussa angulosa&#39;,
- &#39;status&#39;: &#39;accepted&#39;,
- &#39;taxonRankID&#39;: 220,
- &#39;unacceptreason&#39;: None,
- &#39;url&#39;: &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=216135&#39;,
- &#39;valid_AphiaID&#39;: 216135,
- &#39;valid_authority&#39;: &#39;(Pallas, 1766)&#39;,
- &#39;valid_name&#39;: &#39;Mussa angulosa&#39;}
+{'AphiaID': 216135,
+ 'authority': '(Pallas, 1766)',
+ 'citation': 'Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List '
+             'of Scleractinia. Mussa angulosa (Pallas, 1766). Accessed '
+             'through: World Register of Marine Species at: '
+             'https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=216135 '
+             'on 2026-05-04',
+ 'class': 'Hexacorallia',
+ 'family': 'Faviidae',
+ 'genus': 'Mussa',
+ 'isBrackish': None,
+ 'isExtinct': 0,
+ 'isFreshwater': 0,
+ 'isMarine': 1,
+ 'isTerrestrial': 0,
+ 'kingdom': 'Animalia',
+ 'lsid': 'urn:lsid:marinespecies.org:taxname:216135',
+ 'match_type': 'exact',
+ 'modified': '2022-05-26T06:45:21.380Z',
+ 'order': 'Scleractinia',
+ 'originalNameUsageID': 718670,
+ 'parentNameUsageID': 206306,
+ 'phylum': 'Cnidaria',
+ 'rank': 'Species',
+ 'scientificname': 'Mussa angulosa',
+ 'status': 'accepted',
+ 'taxonRankID': 220,
+ 'unacceptreason': None,
+ 'url': 'https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=216135',
+ 'valid_AphiaID': 216135,
+ 'valid_authority': '(Pallas, 1766)',
+ 'valid_name': 'Mussa angulosa'}
 
 **Searching for scientific name = Siderastrea radians**
-{&#39;AphiaID&#39;: 207517,
- &#39;authority&#39;: &#39;(Pallas, 1766)&#39;,
- &#39;citation&#39;: &#39;Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List &#39;
-             &#39;of Scleractinia. Siderastrea radians (Pallas, 1766). Accessed &#39;
-             &#39;through: World Register of Marine Species at: &#39;
-             &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=207517 &#39;
-             &#39;on 2026-05-04&#39;,
- &#39;class&#39;: &#39;Hexacorallia&#39;,
- &#39;family&#39;: &#39;Rhizangiidae&#39;,
- &#39;genus&#39;: &#39;Siderastrea&#39;,
- &#39;isBrackish&#39;: None,
- &#39;isExtinct&#39;: None,
- &#39;isFreshwater&#39;: 0,
- &#39;isMarine&#39;: 1,
- &#39;isTerrestrial&#39;: 0,
- &#39;kingdom&#39;: &#39;Animalia&#39;,
- &#39;lsid&#39;: &#39;urn:lsid:marinespecies.org:taxname:207517&#39;,
- &#39;match_type&#39;: &#39;exact&#39;,
- &#39;modified&#39;: &#39;2022-05-26T06:45:21.380Z&#39;,
- &#39;order&#39;: &#39;Scleractinia&#39;,
- &#39;originalNameUsageID&#39;: 742106,
- &#39;parentNameUsageID&#39;: 204291,
- &#39;phylum&#39;: &#39;Cnidaria&#39;,
- &#39;rank&#39;: &#39;Species&#39;,
- &#39;scientificname&#39;: &#39;Siderastrea radians&#39;,
- &#39;status&#39;: &#39;accepted&#39;,
- &#39;taxonRankID&#39;: 220,
- &#39;unacceptreason&#39;: None,
- &#39;url&#39;: &#39;https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=207517&#39;,
- &#39;valid_AphiaID&#39;: 207517,
- &#39;valid_authority&#39;: &#39;(Pallas, 1766)&#39;,
- &#39;valid_name&#39;: &#39;Siderastrea radians&#39;}
+{'AphiaID': 207517,
+ 'authority': '(Pallas, 1766)',
+ 'citation': 'Hoeksema, B. W.; Cairns, S.; Samimi-Namin, K. (2026). World List '
+             'of Scleractinia. Siderastrea radians (Pallas, 1766). Accessed '
+             'through: World Register of Marine Species at: '
+             'https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=207517 '
+             'on 2026-05-04',
+ 'class': 'Hexacorallia',
+ 'family': 'Rhizangiidae',
+ 'genus': 'Siderastrea',
+ 'isBrackish': None,
+ 'isExtinct': None,
+ 'isFreshwater': 0,
+ 'isMarine': 1,
+ 'isTerrestrial': 0,
+ 'kingdom': 'Animalia',
+ 'lsid': 'urn:lsid:marinespecies.org:taxname:207517',
+ 'match_type': 'exact',
+ 'modified': '2022-05-26T06:45:21.380Z',
+ 'order': 'Scleractinia',
+ 'originalNameUsageID': 742106,
+ 'parentNameUsageID': 204291,
+ 'phylum': 'Cnidaria',
+ 'rank': 'Species',
+ 'scientificname': 'Siderastrea radians',
+ 'status': 'accepted',
+ 'taxonRankID': 220,
+ 'unacceptreason': None,
+ 'url': 'https://www.marinespecies.org/aphia.php?p=taxdetails&amp;id=207517',
+ 'valid_AphiaID': 207517,
+ 'valid_authority': '(Pallas, 1766)',
+ 'valid_name': 'Siderastrea radians'}
 </pre></div>
 </div>
 </div>
@@ -1099,9 +1100,9 @@ information. So, we create a lookup table of the unique scientific names found i
 <p>We then merge the lookup table of unique scientific names back into the <strong>occurrence</strong> data. Matching on the field <code class="docutils literal notranslate"><span class="pre">scientificName</span></code>. Then, we remove any unnecessary columns to clean up the DataFrame for writing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">occurrence</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">occurrence</span><span class="p">,</span> <span class="n">lut_worms</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;scientificName&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">occurrence</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">occurrence</span><span class="p">,</span> <span class="n">lut_worms</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"scientificName"</span><span class="p">)</span>
 
-<span class="n">occurrence</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;scientific name&quot;</span><span class="p">,</span> <span class="s2">&quot;percent cover&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">occurrence</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"scientific name"</span><span class="p">,</span> <span class="s2">"percent cover"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1110,30 +1111,30 @@ information. So, we create a lookup table of the unique scientific names found i
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sort the columns on scientificName</span>
-<span class="n">occurrence</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;scientificName&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">occurrence</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"scientificName"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># reorganize column order to be consistent with R example:</span>
 <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;scientificName&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;eventID&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;occurrenceID&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;occurrenceStatus&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;acceptedname&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;acceptedID&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;scientificNameID&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;kingdom&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;phylum&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;class&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;order&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;family&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;genus&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;scientificNameAuthorship&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;taxonRank&quot;</span><span class="p">,</span>
+    <span class="s2">"scientificName"</span><span class="p">,</span>
+    <span class="s2">"eventID"</span><span class="p">,</span>
+    <span class="s2">"occurrenceID"</span><span class="p">,</span>
+    <span class="s2">"occurrenceStatus"</span><span class="p">,</span>
+    <span class="s2">"acceptedname"</span><span class="p">,</span>
+    <span class="s2">"acceptedID"</span><span class="p">,</span>
+    <span class="s2">"scientificNameID"</span><span class="p">,</span>
+    <span class="s2">"kingdom"</span><span class="p">,</span>
+    <span class="s2">"phylum"</span><span class="p">,</span>
+    <span class="s2">"class"</span><span class="p">,</span>
+    <span class="s2">"order"</span><span class="p">,</span>
+    <span class="s2">"family"</span><span class="p">,</span>
+    <span class="s2">"genus"</span><span class="p">,</span>
+    <span class="s2">"scientificNameAuthorship"</span><span class="p">,</span>
+    <span class="s2">"taxonRank"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/ioos/notebooks_demos/raw/master/notebooks/data/dwc/processed/&quot;</span>
-<span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;MadeUpData_Occurrence.csv&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://github.com/ioos/notebooks_demos/raw/master/notebooks/data/dwc/processed/"</span>
+<span class="n">file</span> <span class="o">=</span> <span class="s2">"MadeUpData_Occurrence.csv"</span>
 
 <span class="n">occurrence</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
     <span class="n">url</span> <span class="o">+</span> <span class="n">file</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_ALL</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span>
@@ -1375,52 +1376,52 @@ information. So, we create a lookup table of the unique scientific names found i
 <p>Below we walk through creating three independent DataFrames for <em>temperature</em>, <em>rugosity</em>, and <em>percent cover</em>. Populating each DataFrame with all of the information we have available and removing duplicative fields. We finally concatenate all the <strong>extended measurements or facts</strong> together into one DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;eventID&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;occurrenceID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;temperature&quot;</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementTypeID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P25/current/WTEMP/&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"eventID"</span><span class="p">,</span> <span class="s2">"temperature"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"occurrenceID"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"measurementType"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"temperature"</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"measurementTypeID"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"http://vocab.nerc.ac.uk/collection/P25/current/WTEMP/"</span>
 <span class="p">)</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementUnit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Celsius&quot;</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementUnitID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P06/current/UPAA/&quot;</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"measurementValue"</span><span class="p">]</span> <span class="o">=</span> <span class="n">temperature</span><span class="p">[</span><span class="s2">"temperature"</span><span class="p">]</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"measurementUnit"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Celsius"</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"measurementUnitID"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"http://vocab.nerc.ac.uk/collection/P06/current/UPAA/"</span>
 <span class="p">)</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementAccuracy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementDeterminedDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
-    <span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%Y&quot;</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"measurementAccuracy"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"measurementDeterminedDate"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="p">[</span><span class="s2">"date"</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"%m/</span><span class="si">%d</span><span class="s2">/%Y"</span>
 <span class="p">)</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;measurementMethod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">temperature</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"measurementMethod"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">temperature</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">rugosity</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;eventID&quot;</span><span class="p">,</span> <span class="s2">&quot;rugosity&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;occurrenceID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;measurementType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;rugosity&quot;</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;measurementTypeID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;measurementValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;rugosity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.6f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;measurementUnit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;measurementUnitID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;measurementAccuracy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;measurementDeterminedDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
-    <span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%Y&quot;</span>
+<span class="n">rugosity</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"eventID"</span><span class="p">,</span> <span class="s2">"rugosity"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"occurrenceID"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"measurementType"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"rugosity"</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"measurementTypeID"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"measurementValue"</span><span class="p">]</span> <span class="o">=</span> <span class="n">rugosity</span><span class="p">[</span><span class="s2">"rugosity"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">"</span><span class="si">{:,.6f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"measurementUnit"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"measurementUnitID"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"measurementAccuracy"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"measurementDeterminedDate"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+    <span class="n">rugosity</span><span class="p">[</span><span class="s2">"date"</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"%m/</span><span class="si">%d</span><span class="s2">/%Y"</span>
 <span class="p">)</span>
-<span class="n">rugosity</span><span class="p">[</span><span class="s2">&quot;measurementMethod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">rugosity</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rugosity&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rugosity</span><span class="p">[</span><span class="s2">"measurementMethod"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">rugosity</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"rugosity"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">percent_cover</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;eventID&quot;</span><span class="p">,</span> <span class="s2">&quot;occurrenceID&quot;</span><span class="p">,</span> <span class="s2">&quot;percent cover&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Percent Cover&quot;</span>
-<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementTypeID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;http://vocab.nerc.ac.uk/collection/P01/current/SDBIOL10/&quot;</span>
+<span class="n">percent_cover</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"eventID"</span><span class="p">,</span> <span class="s2">"occurrenceID"</span><span class="p">,</span> <span class="s2">"percent cover"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">"measurementType"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Percent Cover"</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">"measurementTypeID"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"http://vocab.nerc.ac.uk/collection/P01/current/SDBIOL10/"</span>
 <span class="p">)</span>
-<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;percent cover&quot;</span><span class="p">]</span>
-<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementUnit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Percent/100m^2&quot;</span>
-<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementUnitID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementAccuracy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementDeterminedDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
-    <span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%Y&quot;</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">"measurementValue"</span><span class="p">]</span> <span class="o">=</span> <span class="n">percent_cover</span><span class="p">[</span><span class="s2">"percent cover"</span><span class="p">]</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">"measurementUnit"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Percent/100m^2"</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">"measurementUnitID"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">"measurementAccuracy"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">"measurementDeterminedDate"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+    <span class="n">percent_cover</span><span class="p">[</span><span class="s2">"date"</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"%m/</span><span class="si">%d</span><span class="s2">/%Y"</span>
 <span class="p">)</span>
-<span class="n">percent_cover</span><span class="p">[</span><span class="s2">&quot;measurementMethod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">percent_cover</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;percent cover&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">percent_cover</span><span class="p">[</span><span class="s2">"measurementMethod"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">percent_cover</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"percent cover"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">measurementorfact</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">temperature</span><span class="p">,</span> <span class="n">rugosity</span><span class="p">,</span> <span class="n">percent_cover</span><span class="p">])</span>
 </pre></div>
@@ -1430,10 +1431,10 @@ information. So, we create a lookup table of the unique scientific names found i
 <p>Finally, we write the <a class="reference external" href="https://github.com/ioos/notebooks_demos/blob/master/notebooks/data/dwc/processed/MadeUpData_mof.csv">measurement or fact file</a>, again specifying the ISO date format. We’ve printed ten random rows of the DataFrame to give an example of what the resultant file will look like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/ioos/notebooks_demos/raw/master/notebooks/data/dwc/processed/&quot;</span>
-<span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;MadeUpData_mof.csv&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">"https://github.com/ioos/notebooks_demos/raw/master/notebooks/data/dwc/processed/"</span>
+<span class="n">file</span> <span class="o">=</span> <span class="s2">"MadeUpData_mof.csv"</span>
 
-<span class="n">measurementorfact</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">measurementorfact</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">measurementorfact</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>

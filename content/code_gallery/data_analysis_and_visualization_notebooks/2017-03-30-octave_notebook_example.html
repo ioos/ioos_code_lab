@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -551,7 +552,7 @@ z =  14
 First we need to add it to the path.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="nb">addpath</span><span class="p">(</span><span class="nb">genpath</span><span class="p">(</span><span class="s">&#39;t_tide_v1.3beta&#39;</span><span class="p">))</span>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="nb">addpath</span><span class="p">(</span><span class="nb">genpath</span><span class="p">(</span><span class="s">'t_tide_v1.3beta'</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -573,13 +574,13 @@ This step is not necessary on <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ echo (&#39;on&#39;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ echo ('on')
 + ## Load the example.
-+ load (&#39;t_example&#39;)
++ load ('t_example')
 warning: load: file found in load path
 + ## Define inference parameters.
-+ infername = [&#39;P1&#39;; &#39;K2&#39;];
-+ inferfrom = [&#39;K1&#39;; &#39;S2&#39;];
++ infername = ['P1'; 'K2'];
++ inferfrom = ['K1'; 'S2'];
 + infamp = [.33093; .27215];
 + infphase = [-7.07; -22.40];
 + ## The call (see t_demo code for details).
@@ -593,7 +594,7 @@ warning: load: file found in load path
 + ## Add a shallow-water constituent 
 
 + ## coloured boostrap CI
-+ [tidestruc, pout] = t_tide (tuk_elev, &#39;interval&#39;, 1, &#39;start&#39;, tuk_time (1), &#39;latitude&#39;, 69 + 27 / 60, &#39;inference&#39;, infername, inferfrom, infamp, infphase, &#39;shallow&#39;, &#39;M10&#39;, &#39;error&#39;, &#39;linear&#39;, &#39;synthesis&#39;, 1);
++ [tidestruc, pout] = t_tide (tuk_elev, 'interval', 1, 'start', tuk_time (1), 'latitude', 69 + 27 / 60, 'inference', infername, inferfrom, infamp, infphase, 'shallow', 'M10', 'error', 'linear', 'synthesis', 1);
 warning: /home/filipe/IOOS/notebooks_demos/notebooks/t_tide_v1.3beta/t_tide.m: possible Matlab-style short-circuit operator at line 443, column 18
 warning: /home/filipe/IOOS/notebooks_demos/notebooks/t_tide_v1.3beta/t_tide.m: possible Matlab-style short-circuit operator at line 637, column 19
 warning: load: file found in load path
@@ -670,7 +671,7 @@ tide   freq       amp     amp_err    pha    pha_err     snr
  M8   0.3220456    0.0030    0.003    42.43    56.78     0.86
  M10  0.4025570    0.0009    0.003   198.23   195.47     0.07
 + ## Use SNR=1 for synthesis. 
-+ echo (&#39;off&#39;)
++ echo ('off')
 warning: get: allowing linewi to match line property linewidth
 error: get: ambiguous text property name vertical; possible matches:
 

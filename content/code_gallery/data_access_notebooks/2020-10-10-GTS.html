@@ -215,6 +215,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -530,8 +531,8 @@ The reports contain the following fields:</p>
 <p>The first step is to pick the appropriate date range of interest.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_date</span> <span class="o">=</span> <span class="s2">&quot;2021-07-01&quot;</span>
-<span class="n">end_date</span> <span class="o">=</span> <span class="s2">&quot;2021-10-30&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_date</span> <span class="o">=</span> <span class="s2">"2021-07-01"</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="s2">"2021-10-30"</span>
 </pre></div>
 </div>
 </div>
@@ -545,8 +546,8 @@ The reports contain the following fields:</p>
 
 <span class="c1"># example https://www.ndbc.noaa.gov/ioosstats/rpts/2021_03_ioos_regional.csv</span>
 
-<span class="n">start</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># build an array for days between dates</span>
 <span class="n">date_array</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">days</span><span class="p">))</span>
@@ -554,14 +555,14 @@ The reports contain the following fields:</p>
 <span class="c1"># get a unique list of year-months for url build</span>
 <span class="n">months</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">date_object</span> <span class="ow">in</span> <span class="n">date_array</span><span class="p">:</span>
-    <span class="n">months</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date_object</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m&quot;</span><span class="p">))</span>
+    <span class="n">months</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date_object</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m"</span><span class="p">))</span>
 <span class="n">months</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">months</span><span class="p">))</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;locationID&quot;</span><span class="p">,</span> <span class="s2">&quot;region&quot;</span><span class="p">,</span> <span class="s2">&quot;sponsor&quot;</span><span class="p">,</span> <span class="s2">&quot;met&quot;</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"locationID"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">,</span> <span class="s2">"sponsor"</span><span class="p">,</span> <span class="s2">"met"</span><span class="p">,</span> <span class="s2">"wave"</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">months</span><span class="p">:</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://www.ndbc.noaa.gov/ioosstats/rpts/</span><span class="si">{</span><span class="n">month</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="si">}</span><span class="s2">_ioos_regional.csv&quot;</span>
-    <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;met&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">})</span>
-    <span class="n">df1</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">month</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://www.ndbc.noaa.gov/ioosstats/rpts/</span><span class="si">{</span><span class="n">month</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span><span class="w"> </span><span class="s2">"_"</span><span class="p">)</span><span class="si">}</span><span class="s2">_ioos_regional.csv"</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s2">"met"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">"wave"</span><span class="p">:</span> <span class="nb">float</span><span class="p">})</span>
+    <span class="n">df1</span><span class="p">[</span><span class="s2">"time (UTC)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">month</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df1</span><span class="p">])</span>
 
 <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
@@ -625,16 +626,16 @@ The reports contain the following fields:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;locationID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;locationID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">"locationID"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"locationID"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"time (UTC)"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;DatetimeArray&gt;
-[&#39;2021-07-01 00:00:00&#39;, &#39;2021-08-01 00:00:00&#39;, &#39;2021-09-01 00:00:00&#39;,
- &#39;2021-10-01 00:00:00&#39;]
+['2021-07-01 00:00:00', '2021-08-01 00:00:00', '2021-09-01 00:00:00',
+ '2021-10-01 00:00:00']
 Length: 4, dtype: datetime64[us]
 </pre></div>
 </div>
@@ -643,16 +644,16 @@ Length: 4, dtype: datetime64[us]
 <p>The table has all the ingest data. We can now explore it grouping the data by IOOS Regional Association (RA).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;met&quot;</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">,</span> <span class="s2">&quot;region&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"met"</span><span class="p">,</span> <span class="s2">"wave"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"region"</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">3.75</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">3.75</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">get_major_formatter</span><span class="p">()</span><span class="o">.</span><span class="n">set_scientific</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;# observations&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"# observations"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;# observations&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, '# observations')
 </pre></div>
 </div>
 <img alt="../../../_images/7ecf56387ed781e8ce525dad9effd0930d5970b3a9232db1f99a470b578f87a1.png" src="../../../_images/7ecf56387ed781e8ce525dad9effd0930d5970b3a9232db1f99a470b578f87a1.png" />
@@ -663,12 +664,12 @@ Length: 4, dtype: datetime64[us]
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"time (UTC)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"time (UTC)"</span><span class="p">])</span>
 
 <span class="c1"># Remove time-zone info for easier plotting, it is all UTC.</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"time (UTC)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"time (UTC)"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
-<span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;ME&quot;</span><span class="p">))</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"time (UTC)"</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"ME"</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -676,14 +677,14 @@ Length: 4, dtype: datetime64[us]
 <p>We can create a table of observations per month,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[[</span><span class="s2">&quot;met&quot;</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>  <span class="c1"># reducing the columns so the summary is digestable</span>
-<span class="n">totals</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;met&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;wave&quot;</span><span class="p">])</span>
-<span class="n">totals</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">totals</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">groups</span><span class="p">[[</span><span class="s2">"met"</span><span class="p">,</span> <span class="s2">"wave"</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>  <span class="c1"># reducing the columns so the summary is digestable</span>
+<span class="n">totals</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s2">"met"</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="s2">"wave"</span><span class="p">])</span>
+<span class="n">totals</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">totals</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">"M"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monthly totals:</span><span class="se">\n</span><span class="si">{</span><span class="n">totals</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Monthly totals:</span><span class="se">\n</span><span class="si">{</span><span class="n">totals</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;Sum for time period </span><span class="si">{</span><span class="n">totals</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">totals</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">totals</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">"Sum for time period </span><span class="si">{</span><span class="n">totals</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">totals</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">totals</span><span class="p">[</span><span class="s1">'total'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -709,20 +710,20 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">3.75</span><span class="p">))</span>
 
-<span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span>
-    <span class="n">labels</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%b&quot;</span><span class="p">),</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%b"</span><span class="p">),</span>
     <span class="n">rotation</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
-    <span class="n">rotation_mode</span><span class="o">=</span><span class="s2">&quot;anchor&quot;</span><span class="p">,</span>
-    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+    <span class="n">rotation_mode</span><span class="o">=</span><span class="s2">"anchor"</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">get_major_formatter</span><span class="p">()</span><span class="o">.</span><span class="n">set_scientific</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;# observations&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"# observations"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;# observations&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, '# observations')
 </pre></div>
 </div>
 <img alt="../../../_images/720d9c721c5d7bc5ce77e4705a0a2db771c8a937520786bce175220cf1f35915.png" src="../../../_images/720d9c721c5d7bc5ce77e4705a0a2db771c8a937520786bce175220cf1f35915.png" />
@@ -739,17 +740,17 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_ndbc_table</span><span class="p">():</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.ndbc.noaa.gov/activestations.xml&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://www.ndbc.noaa.gov/activestations.xml"</span>
     <span class="k">with</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
         <span class="n">elems</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">elem</span><span class="o">.</span><span class="n">attrib</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">elems</span><span class="p">)])</span>
-    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span>
 
 
 <span class="n">buoys</span> <span class="o">=</span> <span class="n">make_ndbc_table</span><span class="p">()</span>
-<span class="n">buoys</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buoys</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">buoys</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buoys</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">buoys</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">]</span> <span class="o">=</span> <span class="n">buoys</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">buoys</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">]</span> <span class="o">=</span> <span class="n">buoys</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 
 <span class="n">buoys</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -879,7 +880,7 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
 <p>For simplificty we will plot the total of observations per buoys.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;locationID&quot;</span><span class="p">,</span> <span class="s2">&quot;met&quot;</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;locationID&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"locationID"</span><span class="p">,</span> <span class="s2">"met"</span><span class="p">,</span> <span class="s2">"wave"</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"locationID"</span><span class="p">)</span>
 <span class="n">location_sum</span> <span class="o">=</span> <span class="n">groups</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -890,10 +891,10 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buoys</span> <span class="o">=</span> <span class="n">buoys</span><span class="o">.</span><span class="n">T</span>
 
 <span class="n">extra_cols</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">buoys</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">location_sum</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()})</span><span class="o">.</span><span class="n">T</span>
-<span class="n">extra_cols</span> <span class="o">=</span> <span class="n">extra_cols</span><span class="p">[[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;pgm&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]]</span>
+<span class="n">extra_cols</span> <span class="o">=</span> <span class="n">extra_cols</span><span class="p">[[</span><span class="s2">"lat"</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">,</span> <span class="s2">"pgm"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">]]</span>
 
 <span class="n">map_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">location_sum</span><span class="p">,</span> <span class="n">extra_cols</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">map_df</span> <span class="o">=</span> <span class="n">map_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">map_df</span><span class="p">[</span><span class="s2">&quot;met&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">map_df</span><span class="p">[</span><span class="s2">&quot;wave&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">map_df</span> <span class="o">=</span> <span class="n">map_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">map_df</span><span class="p">[</span><span class="s2">"met"</span><span class="p">]</span> <span class="o">+</span> <span class="n">map_df</span><span class="p">[</span><span class="s2">"wave"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -908,32 +909,32 @@ Sum for time period 2021-07 to 2021-10: 4656444.0
 <span class="n">m</span><span class="o">.</span><span class="n">add_control</span><span class="p">(</span><span class="n">FullScreenControl</span><span class="p">())</span>
 
 <span class="n">legend</span> <span class="o">=</span> <span class="n">LegendControl</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;wave&quot;</span><span class="p">:</span> <span class="s2">&quot;#FF0000&quot;</span><span class="p">,</span> <span class="s2">&quot;met&quot;</span><span class="p">:</span> <span class="s2">&quot;#FFA500&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">:</span> <span class="s2">&quot;#008000&quot;</span><span class="p">},</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;GTS&quot;</span><span class="p">,</span>
-    <span class="n">position</span><span class="o">=</span><span class="s2">&quot;bottomright&quot;</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">"wave"</span><span class="p">:</span> <span class="s2">"#FF0000"</span><span class="p">,</span> <span class="s2">"met"</span><span class="p">:</span> <span class="s2">"#FFA500"</span><span class="p">,</span> <span class="s2">"both"</span><span class="p">:</span> <span class="s2">"#008000"</span><span class="p">},</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"GTS"</span><span class="p">,</span>
+    <span class="n">position</span><span class="o">=</span><span class="s2">"bottomright"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">add_control</span><span class="p">(</span><span class="n">legend</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_popup</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
-    <span class="n">classes</span> <span class="o">=</span> <span class="s2">&quot;table table-striped table-hover table-condensed table-responsive&quot;</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">row</span><span class="p">[[</span><span class="s2">&quot;met&quot;</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;pgm&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="s2">"table table-striped table-hover table-condensed table-responsive"</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">row</span><span class="p">[[</span><span class="s2">"met"</span><span class="p">,</span> <span class="s2">"wave"</span><span class="p">,</span> <span class="s2">"type"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"pgm"</span><span class="p">]])</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
         <span class="n">classes</span><span class="o">=</span><span class="n">classes</span>
     <span class="p">)</span>
 
 
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">map_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;met&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;wave&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">location</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;met&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span>
-        <span class="k">elif</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;wave&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"met"</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s2">"wave"</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">"met"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s2">"red"</span>
+        <span class="k">elif</span> <span class="n">row</span><span class="p">[</span><span class="s2">"wave"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s2">"orange"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s2">"green"</span>
         <span class="n">marker</span> <span class="o">=</span> <span class="n">Marker</span><span class="p">(</span>
             <span class="n">draggable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">icon</span><span class="o">=</span><span class="n">AwesomeIcon</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;life-ring&quot;</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="n">color</span><span class="p">),</span>
+            <span class="n">icon</span><span class="o">=</span><span class="n">AwesomeIcon</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"life-ring"</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="n">color</span><span class="p">),</span>
             <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">()</span>

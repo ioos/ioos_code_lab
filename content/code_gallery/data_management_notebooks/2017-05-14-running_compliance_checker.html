@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -549,7 +550,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to the Scripps Pier Data.</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://gliders.ioos.us/thredds/fileServer/deployments/rutgers/ru29-20150623T1046/ru29-20150623T1046.nc3.nc&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://gliders.ioos.us/thredds/fileServer/deployments/rutgers/ru29-20150623T1046/ru29-20150623T1046.nc3.nc"</span>
 </pre></div>
 </div>
 </div>
@@ -559,16 +560,16 @@
 <p>This code is written with all the arguments spelled out, following the usage instructions on the README section of compliance checker github page: <a class="github reference external" href="https://github.com/ioos/compliance-checker">ioos/compliance-checker</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_file</span> <span class="o">=</span> <span class="s2">&quot;buoy_testCC.txt&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_file</span> <span class="o">=</span> <span class="s2">"buoy_testCC.txt"</span>
 
 <span class="n">return_value</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">ComplianceChecker</span><span class="o">.</span><span class="n">run_checker</span><span class="p">(</span>
     <span class="n">ds_loc</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
-    <span class="n">checker_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cf:1.9&quot;</span><span class="p">,</span> <span class="s2">&quot;acdd&quot;</span><span class="p">],</span>
+    <span class="n">checker_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"cf:1.9"</span><span class="p">,</span> <span class="s2">"acdd"</span><span class="p">],</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">criteria</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span>
+    <span class="n">criteria</span><span class="o">=</span><span class="s2">"normal"</span><span class="p">,</span>
     <span class="n">skip_checks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">output_filename</span><span class="o">=</span><span class="n">output_file</span><span class="p">,</span>
-    <span class="n">output_format</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+    <span class="n">output_format</span><span class="o">=</span><span class="s2">"text"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -596,31 +597,31 @@ ru29-20150623T1046.nc3.nc has 11 potential issues
                                Highly Recommended                               
 --------------------------------------------------------------------------------
 Global Attributes
-* Conventions does not contain &#39;ACDD-1.3&#39;
+* Conventions does not contain 'ACDD-1.3'
 
-variable &quot;conductivity&quot; missing the following attributes:
+variable "conductivity" missing the following attributes:
 * coverage_content_type
 
-variable &quot;density&quot; missing the following attributes:
+variable "density" missing the following attributes:
 * coverage_content_type
 
-variable &quot;platform_meta&quot; missing the following attributes:
+variable "platform_meta" missing the following attributes:
 * coverage_content_type
 * standard_name
 
-variable &quot;pressure&quot; missing the following attributes:
+variable "pressure" missing the following attributes:
 * coverage_content_type
 
-variable &quot;salinity&quot; missing the following attributes:
+variable "salinity" missing the following attributes:
 * coverage_content_type
 
-variable &quot;temperature&quot; missing the following attributes:
+variable "temperature" missing the following attributes:
 * coverage_content_type
 
-variable &quot;u&quot; missing the following attributes:
+variable "u" missing the following attributes:
 * coverage_content_type
 
-variable &quot;v&quot; missing the following attributes:
+variable "v" missing the following attributes:
 * coverage_content_type
 
 

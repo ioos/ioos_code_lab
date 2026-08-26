@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -507,8 +508,8 @@ you select Oxygen and click on the only returned value, the Moss Landing Marine 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ERDDAP</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;http://erddap.sensors.ioos.us/erddap&quot;</span>
-<span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tabledap&quot;</span><span class="p">)</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s2">"http://erddap.sensors.ioos.us/erddap"</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">"tabledap"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -518,7 +519,7 @@ you select Oxygen and click on the only returned value, the Moss Landing Marine 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="s2">&quot;dissolved oxygen moss landing&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="s2">"dissolved oxygen moss landing"</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">"csv"</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -613,11 +614,11 @@ you select Oxygen and click on the only returned value, the Moss Landing Marine 
 Let’s investigate the datasets we found and try to figure out why there is a discrepancy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;Summary&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">dataset_id</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">]</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span>
-    <span class="n">summary</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;Summary&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"Dataset ID"</span><span class="p">,</span> <span class="s2">"Title"</span><span class="p">,</span> <span class="s2">"Summary"</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">dataset_id</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">"Dataset ID"</span><span class="p">]</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">"Title"</span><span class="p">]</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">"Summary"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">n"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -685,9 +686,9 @@ sea_water_temperature (Water Temperature, degree_Celsius)
 <p>Let’s request the ERDDAP info on the latter to try to understand why it is available on the server but did not make into the Sensor Map. We usually suspect some sort of cut off due to the time coverage.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_info_url</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;mlml_monterey&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_info_url</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="s2">"mlml_monterey"</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">"csv"</span><span class="p">))</span>
 
-<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Attribute Name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;time_coverage_end&quot;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Attribute Name"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"time_coverage_end"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -735,11 +736,11 @@ The sensor map only shows real-time observations (past 4-hours).</p>
 <p>For the sake of simplicity let’s use only the <code class="docutils literal notranslate"><span class="pre">mlml_mlml_sea</span></code> and download the last month of data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;mlml_mlml_sea&quot;</span>
-<span class="n">e</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;mole_concentration_of_dissolved_molecular_oxygen_in_sea_water&quot;</span><span class="p">]</span>
-<span class="n">e</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&gt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;now-30days&quot;</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">"mlml_mlml_sea"</span>
+<span class="n">e</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"time"</span><span class="p">,</span> <span class="s2">"mole_concentration_of_dissolved_molecular_oxygen_in_sea_water"</span><span class="p">]</span>
+<span class="n">e</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"time&gt;="</span><span class="p">:</span> <span class="s2">"now-30days"</span><span class="p">}</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span><span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span><span class="n">index_col</span><span class="o">=</span><span class="s2">"time (UTC)"</span><span class="p">)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
 </pre></div>
 </div>

@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -521,26 +522,26 @@ along the hurricane track.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">load_best_track</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s2">&quot;al14&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="s2">&quot;2018&quot;</span><span class="p">):</span>
-    <span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">code</span><span class="si">}{</span><span class="n">year</span><span class="si">}</span><span class="s2">_best_track.zip&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_best_track</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s2">"al14"</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="s2">"2018"</span><span class="p">):</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">code</span><span class="si">}{</span><span class="n">year</span><span class="si">}</span><span class="s2">_best_track.zip"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">fname</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://www.nhc.noaa.gov/gis/best_track/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://www.nhc.noaa.gov/gis/best_track/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">"</span>
         <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
 
-    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CPL_ZIP_ENCODING&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;UTF-8&quot;</span>
-    <span class="n">radii</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;zip://</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">code</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}{</span><span class="n">year</span><span class="si">}</span><span class="s2">_radii.shp&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"CPL_ZIP_ENCODING"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"UTF-8"</span>
+    <span class="n">radii</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="sa">f</span><span class="s2">"zip://</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">code</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}{</span><span class="n">year</span><span class="si">}</span><span class="s2">_radii.shp"</span><span class="p">)</span>
 
-    <span class="n">pts</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;zip://</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">code</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}{</span><span class="n">year</span><span class="si">}</span><span class="s2">_pts.shp&quot;</span><span class="p">)</span>
+    <span class="n">pts</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="sa">f</span><span class="s2">"zip://</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">code</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}{</span><span class="n">year</span><span class="si">}</span><span class="s2">_pts.shp"</span><span class="p">)</span>
 
-    <span class="n">pts</span><span class="p">[</span><span class="s2">&quot;str&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[</span><span class="s2">&quot;DTG&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">pts</span><span class="p">[</span><span class="s2">"str"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[</span><span class="s2">"DTG"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
-    <span class="n">pts</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="s2">&quot;str&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">%H&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">pts</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="s2">"str"</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">%H"</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
 
     <span class="n">radii</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
-        <span class="n">radii</span><span class="p">[</span><span class="s2">&quot;SYNOPTIME&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">%H&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span>
+        <span class="n">radii</span><span class="p">[</span><span class="s2">"SYNOPTIME"</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">%H"</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span>
     <span class="p">)</span><span class="o">.</span><span class="n">values</span>
     <span class="k">return</span> <span class="n">radii</span><span class="p">,</span> <span class="n">pts</span>
 </pre></div>
@@ -550,19 +551,19 @@ along the hurricane track.</p>
 <p>With this functions we can figure out the geographic bounding box and the start/end dates of the event.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">radii</span><span class="p">,</span> <span class="n">pts</span> <span class="o">=</span> <span class="n">load_best_track</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s2">&quot;al14&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="s2">&quot;2018&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">radii</span><span class="p">,</span> <span class="n">pts</span> <span class="o">=</span> <span class="n">load_best_track</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s2">"al14"</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="s2">"2018"</span><span class="p">)</span>
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">radii</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">end</span> <span class="o">=</span> <span class="n">radii</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">bbox</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">radii</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">)</span>
+<span class="n">bbox</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">radii</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">]</span><span class="o">.</span><span class="n">total_bounds</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">strbbox</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot;.2f&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bbox</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bbox: </span><span class="si">{</span><span class="n">strbbox</span><span class="si">}</span><span class="se">\n</span><span class="s2">start: </span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="se">\n</span><span class="s2">  end: </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">strbbox</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">".2f"</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bbox</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"bbox: </span><span class="si">{</span><span class="n">strbbox</span><span class="si">}</span><span class="se">\n</span><span class="s2">start: </span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="se">\n</span><span class="s2">  end: </span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -579,7 +580,7 @@ start: 2018-10-07 12:00:00
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
 
-<span class="n">coords</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="s2">&quot;LON&quot;</span><span class="p">],</span> <span class="n">pts</span><span class="p">[</span><span class="s2">&quot;LAT&quot;</span><span class="p">])</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="s2">"LON"</span><span class="p">],</span> <span class="n">pts</span><span class="p">[</span><span class="s2">"LAT"</span><span class="p">])</span>
 <span class="n">track</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">LineString</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -613,23 +614,23 @@ start: 2018-10-07 12:00:00
     <span class="n">data</span> <span class="o">=</span> <span class="n">collector2table</span><span class="p">(</span>
         <span class="n">collector</span><span class="o">=</span><span class="n">collector</span><span class="p">,</span>
         <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-        <span class="n">col</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sos_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">units</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cf_units</span><span class="o">.</span><span class="n">UT_ISO_8859_1</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">col</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sos_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">units</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cf_units</span><span class="o">.</span><span class="n">UT_ISO_8859_1</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># Clean the table.</span>
     <span class="n">table</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-        <span class="n">station_name</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;station_name&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
-        <span class="n">station_code</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;station_code&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
-        <span class="n">sensor</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sensor&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
-        <span class="n">lon</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lon&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
-        <span class="n">lat</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lat&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
-        <span class="n">depth</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;depth&quot;</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
+        <span class="n">station_name</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"station_name"</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
+        <span class="n">station_code</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"station_code"</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
+        <span class="n">sensor</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sensor"</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
+        <span class="n">lon</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lon"</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
+        <span class="n">lat</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lat"</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
+        <span class="n">depth</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"depth"</span><span class="p">,</span> <span class="s2">"NA"</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span>
     <span class="p">)</span>
 
-    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;station_name&quot;</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"station_name"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Collector offerings&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ofrs</span><span class="p">)</span><span class="si">}</span><span class="s2"> offerings&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Collector offerings"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ofrs</span><span class="p">)</span><span class="si">}</span><span class="s2"> offerings"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">table</span>
 </pre></div>
 </div>
@@ -641,8 +642,8 @@ start: 2018-10-07 12:00:00
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="p">,</span> <span class="n">ssh_table</span> <span class="o">=</span> <span class="n">get_coops</span><span class="p">(</span>
     <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
     <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span>
-    <span class="n">sos_name</span><span class="o">=</span><span class="s2">&quot;water_surface_height_above_reference_datum&quot;</span><span class="p">,</span>
-    <span class="n">units</span><span class="o">=</span><span class="n">cf_units</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;meters&quot;</span><span class="p">),</span>
+    <span class="n">sos_name</span><span class="o">=</span><span class="s2">"water_surface_height_above_reference_datum"</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="n">cf_units</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"meters"</span><span class="p">),</span>
     <span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -735,8 +736,8 @@ start: 2018-10-07 12:00:00
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wind_speed</span><span class="p">,</span> <span class="n">wind_speed_table</span> <span class="o">=</span> <span class="n">get_coops</span><span class="p">(</span>
     <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
     <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span>
-    <span class="n">sos_name</span><span class="o">=</span><span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-    <span class="n">units</span><span class="o">=</span><span class="n">cf_units</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;m/s&quot;</span><span class="p">),</span>
+    <span class="n">sos_name</span><span class="o">=</span><span class="s2">"wind_speed"</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="n">cf_units</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"m/s"</span><span class="p">),</span>
     <span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -826,14 +827,14 @@ start: 2018-10-07 12:00:00
 <p>We only want the stations were we have both sea level and wind speed, so let’s try to find a set where that is true.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">common</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ssh_table</span><span class="p">[</span><span class="s2">&quot;station_code&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">wind_speed_table</span><span class="p">[</span><span class="s2">&quot;station_code&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">common</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ssh_table</span><span class="p">[</span><span class="s2">"station_code"</span><span class="p">])</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">wind_speed_table</span><span class="p">[</span><span class="s2">"station_code"</span><span class="p">])</span>
 
 <span class="n">ssh_obs</span><span class="p">,</span> <span class="n">win_obs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">station</span> <span class="ow">in</span> <span class="n">common</span><span class="p">:</span>
-    <span class="n">ssh_obs</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">obs</span> <span class="k">for</span> <span class="n">obs</span> <span class="ow">in</span> <span class="n">ssh</span> <span class="k">if</span> <span class="n">obs</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;station_code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">station</span><span class="p">])</span>
+    <span class="n">ssh_obs</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">obs</span> <span class="k">for</span> <span class="n">obs</span> <span class="ow">in</span> <span class="n">ssh</span> <span class="k">if</span> <span class="n">obs</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">"station_code"</span><span class="p">]</span> <span class="o">==</span> <span class="n">station</span><span class="p">])</span>
     <span class="n">win_obs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">obs</span> <span class="k">for</span> <span class="n">obs</span> <span class="ow">in</span> <span class="n">wind_speed</span> <span class="k">if</span> <span class="n">obs</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;station_code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">station</span><span class="p">]</span>
+        <span class="p">[</span><span class="n">obs</span> <span class="k">for</span> <span class="n">obs</span> <span class="ow">in</span> <span class="n">wind_speed</span> <span class="k">if</span> <span class="n">obs</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">"station_code"</span><span class="p">]</span> <span class="o">==</span> <span class="n">station</span><span class="p">]</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -843,25 +844,25 @@ start: 2018-10-07 12:00:00
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span>
-    <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;15min&quot;</span>
+    <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"15min"</span>
 <span class="p">)</span>
 
 <span class="n">ssh_observations</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">series</span> <span class="ow">in</span> <span class="n">ssh_obs</span><span class="p">:</span>
     <span class="n">_metadata</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">_metadata</span>
     <span class="n">series</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">obs</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"nearest"</span><span class="p">)</span>
     <span class="n">obs</span><span class="o">.</span><span class="n">_metadata</span> <span class="o">=</span> <span class="n">_metadata</span>
-    <span class="n">obs</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;station_name&quot;</span><span class="p">]</span>
+    <span class="n">obs</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">_metadata</span><span class="p">[</span><span class="s2">"station_name"</span><span class="p">]</span>
     <span class="n">ssh_observations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
 
 <span class="n">winds_observations</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">series</span> <span class="ow">in</span> <span class="n">win_obs</span><span class="p">:</span>
     <span class="n">_metadata</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">_metadata</span>
     <span class="n">series</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">obs</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"nearest"</span><span class="p">)</span>
     <span class="n">obs</span><span class="o">.</span><span class="n">_metadata</span> <span class="o">=</span> <span class="n">_metadata</span>
-    <span class="n">obs</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;station_name&quot;</span><span class="p">]</span>
+    <span class="n">obs</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">_metadata</span><span class="p">[</span><span class="s2">"station_name"</span><span class="p">]</span>
     <span class="n">winds_observations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -877,7 +878,7 @@ start: 2018-10-07 12:00:00
 <span class="kn">from</span><span class="w"> </span><span class="nn">folium</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFrame</span>
 
 <span class="c1"># Plot defaults.</span>
-<span class="n">tools</span> <span class="o">=</span> <span class="s2">&quot;pan,box_zoom,reset&quot;</span>
+<span class="n">tools</span> <span class="o">=</span> <span class="s2">"pan,box_zoom,reset"</span>
 <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">250</span>
 </pre></div>
 </div>
@@ -887,53 +888,53 @@ start: 2018-10-07 12:00:00
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_plot</span><span class="p">(</span><span class="n">ssh</span><span class="p">,</span> <span class="n">wind</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span>
-        <span class="n">toolbar_location</span><span class="o">=</span><span class="s2">&quot;above&quot;</span><span class="p">,</span>
-        <span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span>
+        <span class="n">toolbar_location</span><span class="o">=</span><span class="s2">"above"</span><span class="p">,</span>
+        <span class="n">x_axis_type</span><span class="o">=</span><span class="s2">"datetime"</span><span class="p">,</span>
         <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
         <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
         <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span>
         <span class="n">title</span><span class="o">=</span><span class="n">ssh</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">&quot;wind speed (m/s)&quot;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s2">"wind speed (m/s)"</span>
     <span class="n">l0</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
         <span class="n">x</span><span class="o">=</span><span class="n">wind</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
         <span class="n">y</span><span class="o">=</span><span class="n">wind</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
         <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-        <span class="n">line_cap</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span>
+        <span class="n">line_cap</span><span class="o">=</span><span class="s2">"round"</span><span class="p">,</span>
         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-        <span class="n">line_join</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span>
-        <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;wind speed (m/s)&quot;</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#9900cc&quot;</span><span class="p">,</span>
+        <span class="n">line_join</span><span class="o">=</span><span class="s2">"round"</span><span class="p">,</span>
+        <span class="n">legend_label</span><span class="o">=</span><span class="s2">"wind speed (m/s)"</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">"#9900cc"</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">p</span><span class="o">.</span><span class="n">extra_y_ranges</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">extra_y_ranges</span><span class="p">[</span><span class="s2">&quot;y2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Range1d</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">add_layout</span><span class="p">(</span><span class="n">LinearAxis</span><span class="p">(</span><span class="n">y_range_name</span><span class="o">=</span><span class="s2">&quot;y2&quot;</span><span class="p">,</span> <span class="n">axis_label</span><span class="o">=</span><span class="s2">&quot;ssh (m)&quot;</span><span class="p">),</span> <span class="s2">&quot;right&quot;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">extra_y_ranges</span><span class="p">[</span><span class="s2">"y2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">Range1d</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_layout</span><span class="p">(</span><span class="n">LinearAxis</span><span class="p">(</span><span class="n">y_range_name</span><span class="o">=</span><span class="s2">"y2"</span><span class="p">,</span> <span class="n">axis_label</span><span class="o">=</span><span class="s2">"ssh (m)"</span><span class="p">),</span> <span class="s2">"right"</span><span class="p">)</span>
 
     <span class="n">l1</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
         <span class="n">x</span><span class="o">=</span><span class="n">ssh</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
         <span class="n">y</span><span class="o">=</span><span class="n">ssh</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
         <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-        <span class="n">line_cap</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span>
-        <span class="n">line_join</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span>
-        <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;ssh (m)&quot;</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#0000ff&quot;</span><span class="p">,</span>
+        <span class="n">line_cap</span><span class="o">=</span><span class="s2">"round"</span><span class="p">,</span>
+        <span class="n">line_join</span><span class="o">=</span><span class="s2">"round"</span><span class="p">,</span>
+        <span class="n">legend_label</span><span class="o">=</span><span class="s2">"ssh (m)"</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">"#0000ff"</span><span class="p">,</span>
         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-        <span class="n">y_range_name</span><span class="o">=</span><span class="s2">&quot;y2&quot;</span><span class="p">,</span>
+        <span class="n">y_range_name</span><span class="o">=</span><span class="s2">"y2"</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s2">&quot;top_left&quot;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s2">"top_left"</span>
     <span class="n">p</span><span class="o">.</span><span class="n">add_tools</span><span class="p">(</span>
         <span class="n">HoverTool</span><span class="p">(</span>
             <span class="n">tooltips</span><span class="o">=</span><span class="p">[</span>
-                <span class="p">(</span><span class="s2">&quot;wind speed (m/s)&quot;</span><span class="p">,</span> <span class="s2">&quot;@y&quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"wind speed (m/s)"</span><span class="p">,</span> <span class="s2">"@y"</span><span class="p">),</span>
             <span class="p">],</span>
             <span class="n">renderers</span><span class="o">=</span><span class="p">[</span><span class="n">l0</span><span class="p">],</span>
         <span class="p">),</span>
         <span class="n">HoverTool</span><span class="p">(</span>
             <span class="n">tooltips</span><span class="o">=</span><span class="p">[</span>
-                <span class="p">(</span><span class="s2">&quot;ssh (m)&quot;</span><span class="p">,</span> <span class="s2">&quot;@y&quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"ssh (m)"</span><span class="p">,</span> <span class="s2">"@y"</span><span class="p">),</span>
             <span class="p">],</span>
             <span class="n">renderers</span><span class="o">=</span><span class="p">[</span><span class="n">l1</span><span class="p">],</span>
         <span class="p">),</span>
@@ -951,7 +952,7 @@ start: 2018-10-07 12:00:00
     <span class="n">iframe</span> <span class="o">=</span> <span class="n">IFrame</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span> <span class="o">+</span> <span class="mi">45</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span> <span class="o">+</span> <span class="mi">80</span><span class="p">)</span>
 
     <span class="n">popup</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Popup</span><span class="p">(</span><span class="n">iframe</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">2650</span><span class="p">)</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">"stats"</span><span class="p">)</span>
     <span class="n">marker</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">popup</span><span class="o">=</span><span class="n">popup</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="n">icon</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">marker</span>
 </pre></div>
@@ -968,11 +969,11 @@ start: 2018-10-07 12:00:00
 <span class="n">lon</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span>
 <span class="n">lat</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span>
 
-<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s2">&quot;OpenStreetMap&quot;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s2">"OpenStreetMap"</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-<span class="n">Fullscreen</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="s2">&quot;topright&quot;</span><span class="p">,</span> <span class="n">force_separate_button</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">Fullscreen</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="s2">"topright"</span><span class="p">,</span> <span class="n">force_separate_button</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 
-<span class="n">marker_cluster0</span> <span class="o">=</span> <span class="n">MarkerCluster</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
+<span class="n">marker_cluster0</span> <span class="o">=</span> <span class="n">MarkerCluster</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Observations"</span><span class="p">)</span>
 <span class="n">marker_cluster0</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -982,28 +983,28 @@ start: 2018-10-07 12:00:00
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;LO&quot;</span><span class="p">:</span> <span class="s2">&quot;lightyellow&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;EX&quot;</span><span class="p">:</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TD&quot;</span><span class="p">:</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TS&quot;</span><span class="p">:</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;HU&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span>
+    <span class="s2">"LO"</span><span class="p">:</span> <span class="s2">"lightyellow"</span><span class="p">,</span>
+    <span class="s2">"EX"</span><span class="p">:</span> <span class="s2">"yellow"</span><span class="p">,</span>
+    <span class="s2">"TD"</span><span class="p">:</span> <span class="s2">"yellow"</span><span class="p">,</span>
+    <span class="s2">"TS"</span><span class="p">:</span> <span class="s2">"orange"</span><span class="p">,</span>
+    <span class="s2">"HU"</span><span class="p">:</span> <span class="s2">"red"</span><span class="p">,</span>
 <span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">style_function</span><span class="p">(</span><span class="n">feature</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;fillOpacity&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;stroke&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
-        <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="s2">"fillOpacity"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"black"</span><span class="p">,</span>
+        <span class="s2">"stroke"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"weight"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s2">"opacity"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="p">}</span>
 
 
 <span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">pts</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">storm_type</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;STORMTYPE&quot;</span><span class="p">]</span>
-    <span class="n">location</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;LAT&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;LON&quot;</span><span class="p">]</span>
-    <span class="n">popup</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="si">{</span><span class="n">storm_type</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">storm_type</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"STORMTYPE"</span><span class="p">]</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"LAT"</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">"LON"</span><span class="p">]</span>
+    <span class="n">popup</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="si">{</span><span class="n">storm_type</span><span class="si">}</span><span class="s2">"</span>
     <span class="n">folium</span><span class="o">.</span><span class="n">CircleMarker</span><span class="p">(</span>
         <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
         <span class="n">radius</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -1019,15 +1020,15 @@ start: 2018-10-07 12:00:00
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ssh</span><span class="p">,</span> <span class="n">wind</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ssh_observations</span><span class="p">,</span> <span class="n">winds_observations</span><span class="p">):</span>
-    <span class="n">fname</span> <span class="o">=</span> <span class="n">ssh</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;station_code&quot;</span><span class="p">]</span>
-    <span class="n">location</span> <span class="o">=</span> <span class="n">ssh</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span> <span class="n">ssh</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="n">ssh</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">"station_code"</span><span class="p">]</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">ssh</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">],</span> <span class="n">ssh</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">"lon"</span><span class="p">]</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">make_plot</span><span class="p">(</span><span class="n">ssh</span><span class="p">,</span> <span class="n">wind</span><span class="p">)</span>
     <span class="n">marker</span> <span class="o">=</span> <span class="n">make_marker</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="n">fname</span><span class="p">)</span>
     <span class="n">marker</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">marker_cluster0</span><span class="p">)</span>
 
 <span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 
-<span class="n">p</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">PolyLine</span><span class="p">(</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">bbox</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#009933&quot;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">PolyLine</span><span class="p">(</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">bbox</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#009933"</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
 </pre></div>

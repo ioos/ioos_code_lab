@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -514,13 +515,13 @@ library(obistools)
 
 
 species &lt;- c(
-    &#39;Caretta caretta&#39;,
-    &#39;Chelonia mydas&#39;,
-    &#39;Dermochelys coriacea&#39;,
-    &#39;Eretmochelys imbricata&#39;,
-    &#39;Lepidochelys kempii&#39;,
-    &#39;Lepidochelys olivacea&#39;,
-    &#39;Natator depressa&#39;
+    'Caretta caretta',
+    'Chelonia mydas',
+    'Dermochelys coriacea',
+    'Eretmochelys imbricata',
+    'Lepidochelys kempii',
+    'Lepidochelys olivacea',
+    'Natator depressa'
 )
 
 matches = match_taxa(species, ask=FALSE)
@@ -619,11 +620,11 @@ matches = match_taxa(species, ask=FALSE)
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span>
 
-<span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;oceans.shp&quot;</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">".."</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">,</span> <span class="s2">"oceans.shp"</span><span class="p">)</span>
 
 <span class="n">gdf</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
-<span class="n">sa</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;Oceans&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;South Atlantic Ocean&quot;</span><span class="p">][</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sa</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s2">"Oceans"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"South Atlantic Ocean"</span><span class="p">][</span><span class="s2">"geometry"</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="n">atlantic</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">wkt</span>
 </pre></div>
@@ -650,84 +651,84 @@ names(turtles)
 Retrieved 5620 records of approximately 5620 (100%)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  [1] &quot;date_year&quot;                     &quot;scientificNameID&quot;             
-  [3] &quot;scientificName&quot;                &quot;dynamicProperties&quot;            
-  [5] &quot;superfamilyid&quot;                 &quot;individualCount&quot;              
-  [7] &quot;associatedReferences&quot;          &quot;dropped&quot;                      
-  [9] &quot;aphiaID&quot;                       &quot;decimalLatitude&quot;              
- [11] &quot;type&quot;                          &quot;taxonRemarks&quot;                 
- [13] &quot;phylumid&quot;                      &quot;familyid&quot;                     
- [15] &quot;catalogNumber&quot;                 &quot;occurrenceStatus&quot;             
- [17] &quot;basisOfRecord&quot;                 &quot;superclass&quot;                   
- [19] &quot;modified&quot;                      &quot;id&quot;                           
- [21] &quot;order&quot;                         &quot;recordNumber&quot;                 
- [23] &quot;georeferencedDate&quot;             &quot;superclassid&quot;                 
- [25] &quot;verbatimEventDate&quot;             &quot;dataset_id&quot;                   
- [27] &quot;decimalLongitude&quot;              &quot;collectionCode&quot;               
- [29] &quot;date_end&quot;                      &quot;speciesid&quot;                    
- [31] &quot;occurrenceID&quot;                  &quot;superfamily&quot;                  
- [33] &quot;suborderid&quot;                    &quot;license&quot;                      
- [35] &quot;date_start&quot;                    &quot;organismID&quot;                   
- [37] &quot;genus&quot;                         &quot;dateIdentified&quot;               
- [39] &quot;ownerInstitutionCode&quot;          &quot;bibliographicCitation&quot;        
- [41] &quot;eventDate&quot;                     &quot;scientificNameAuthorship&quot;     
- [43] &quot;absence&quot;                       &quot;taxonRank&quot;                    
- [45] &quot;genusid&quot;                       &quot;originalScientificName&quot;       
- [47] &quot;marine&quot;                        &quot;subphylumid&quot;                  
- [49] &quot;vernacularName&quot;                &quot;institutionCode&quot;              
- [51] &quot;date_mid&quot;                      &quot;identificationRemarks&quot;        
- [53] &quot;class&quot;                         &quot;suborder&quot;                     
- [55] &quot;nomenclaturalCode&quot;             &quot;orderid&quot;                      
- [57] &quot;datasetName&quot;                   &quot;geodeticDatum&quot;                
- [59] &quot;taxonomicStatus&quot;               &quot;kingdom&quot;                      
- [61] &quot;waterBody&quot;                     &quot;specificEpithet&quot;              
- [63] &quot;classid&quot;                       &quot;phylum&quot;                       
- [65] &quot;species&quot;                       &quot;coordinatePrecision&quot;          
- [67] &quot;organismRemarks&quot;               &quot;subphylum&quot;                    
- [69] &quot;datasetID&quot;                     &quot;occurrenceRemarks&quot;            
- [71] &quot;family&quot;                        &quot;category&quot;                     
- [73] &quot;kingdomid&quot;                     &quot;node_id&quot;                      
- [75] &quot;flags&quot;                         &quot;sss&quot;                          
- [77] &quot;shoredistance&quot;                 &quot;sst&quot;                          
- [79] &quot;bathymetry&quot;                    &quot;coordinateUncertaintyInMeters&quot;
- [81] &quot;eventTime&quot;                     &quot;sex&quot;                          
- [83] &quot;footprintWKT&quot;                  &quot;lifeStage&quot;                    
- [85] &quot;wrims&quot;                         &quot;references&quot;                   
- [87] &quot;year&quot;                          &quot;language&quot;                     
- [89] &quot;day&quot;                           &quot;locality&quot;                     
- [91] &quot;month&quot;                         &quot;samplingProtocol&quot;             
- [93] &quot;eventID&quot;                       &quot;startDayOfYear&quot;               
- [95] &quot;accessRights&quot;                  &quot;country&quot;                      
- [97] &quot;habitat&quot;                       &quot;municipality&quot;                 
- [99] &quot;stateProvince&quot;                 &quot;behavior&quot;                     
-[101] &quot;recordedBy&quot;                    &quot;maximumDepthInMeters&quot;         
-[103] &quot;georeferenceRemarks&quot;           &quot;minimumElevationInMeters&quot;     
-[105] &quot;maximumElevationInMeters&quot;      &quot;minimumDepthInMeters&quot;         
-[107] &quot;depth&quot;                         &quot;continent&quot;                    
-[109] &quot;fieldNotes&quot;                    &quot;rightsHolder&quot;                 
-[111] &quot;associatedMedia&quot;               &quot;taxonConceptID&quot;               
-[113] &quot;organismQuantity&quot;              &quot;organismQuantityType&quot;         
-[115] &quot;fieldNumber&quot;                   &quot;eventRemarks&quot;                 
-[117] &quot;preparations&quot;                  &quot;identifiedBy&quot;                 
-[119] &quot;typeStatus&quot;                    &quot;otherCatalogNumbers&quot;          
-[121] &quot;locationID&quot;                   
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  [1] "date_year"                     "scientificNameID"             
+  [3] "scientificName"                "dynamicProperties"            
+  [5] "superfamilyid"                 "individualCount"              
+  [7] "associatedReferences"          "dropped"                      
+  [9] "aphiaID"                       "decimalLatitude"              
+ [11] "type"                          "taxonRemarks"                 
+ [13] "phylumid"                      "familyid"                     
+ [15] "catalogNumber"                 "occurrenceStatus"             
+ [17] "basisOfRecord"                 "superclass"                   
+ [19] "modified"                      "id"                           
+ [21] "order"                         "recordNumber"                 
+ [23] "georeferencedDate"             "superclassid"                 
+ [25] "verbatimEventDate"             "dataset_id"                   
+ [27] "decimalLongitude"              "collectionCode"               
+ [29] "date_end"                      "speciesid"                    
+ [31] "occurrenceID"                  "superfamily"                  
+ [33] "suborderid"                    "license"                      
+ [35] "date_start"                    "organismID"                   
+ [37] "genus"                         "dateIdentified"               
+ [39] "ownerInstitutionCode"          "bibliographicCitation"        
+ [41] "eventDate"                     "scientificNameAuthorship"     
+ [43] "absence"                       "taxonRank"                    
+ [45] "genusid"                       "originalScientificName"       
+ [47] "marine"                        "subphylumid"                  
+ [49] "vernacularName"                "institutionCode"              
+ [51] "date_mid"                      "identificationRemarks"        
+ [53] "class"                         "suborder"                     
+ [55] "nomenclaturalCode"             "orderid"                      
+ [57] "datasetName"                   "geodeticDatum"                
+ [59] "taxonomicStatus"               "kingdom"                      
+ [61] "waterBody"                     "specificEpithet"              
+ [63] "classid"                       "phylum"                       
+ [65] "species"                       "coordinatePrecision"          
+ [67] "organismRemarks"               "subphylum"                    
+ [69] "datasetID"                     "occurrenceRemarks"            
+ [71] "family"                        "category"                     
+ [73] "kingdomid"                     "node_id"                      
+ [75] "flags"                         "sss"                          
+ [77] "shoredistance"                 "sst"                          
+ [79] "bathymetry"                    "coordinateUncertaintyInMeters"
+ [81] "eventTime"                     "sex"                          
+ [83] "footprintWKT"                  "lifeStage"                    
+ [85] "wrims"                         "references"                   
+ [87] "year"                          "language"                     
+ [89] "day"                           "locality"                     
+ [91] "month"                         "samplingProtocol"             
+ [93] "eventID"                       "startDayOfYear"               
+ [95] "accessRights"                  "country"                      
+ [97] "habitat"                       "municipality"                 
+ [99] "stateProvince"                 "behavior"                     
+[101] "recordedBy"                    "maximumDepthInMeters"         
+[103] "georeferenceRemarks"           "minimumElevationInMeters"     
+[105] "maximumElevationInMeters"      "minimumDepthInMeters"         
+[107] "depth"                         "continent"                    
+[109] "fieldNotes"                    "rightsHolder"                 
+[111] "associatedMedia"               "taxonConceptID"               
+[113] "organismQuantity"              "organismQuantityType"         
+[115] "fieldNumber"                   "eventRemarks"                 
+[117] "preparations"                  "identifiedBy"                 
+[119] "typeStatus"                    "otherCatalogNumbers"          
+[121] "locationID"                   
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">turtles</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">turtles</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Caretta caretta&#39;,
- &#39;Chelonia mydas&#39;,
- &#39;Dermochelys coriacea&#39;,
- &#39;Eretmochelys imbricata&#39;,
- &#39;Lepidochelys kempii&#39;,
- &#39;Lepidochelys olivacea&#39;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'Caretta caretta',
+ 'Chelonia mydas',
+ 'Dermochelys coriacea',
+ 'Eretmochelys imbricata',
+ 'Lepidochelys kempii',
+ 'Lepidochelys olivacea'}
 </pre></div>
 </div>
 </div>
@@ -739,7 +740,7 @@ The Flatback sea turtle can only be found in the waters around the Australian co
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span>
 
-turtles$year &lt;- as.numeric(format(as.Date(turtles$eventDate), &quot;%Y&quot;))
+turtles$year &lt;- as.numeric(format(as.Date(turtles$eventDate), "%Y"))
 table(turtles$year)
 
 library(ggplot2)
@@ -749,7 +750,7 @@ ggplot() +
      data=turtles,
      aes(x=year, fill=scientificName),
      binwidth=5) +
- scale_fill_brewer(palette=&#39;Paired&#39;)
+ scale_fill_brewer(palette='Paired')
 </pre></div>
 </div>
 </div>
@@ -765,7 +766,7 @@ ggplot() +
 
 library(dplyr)
 
-coriacea &lt;- turtles %&gt;% filter(species==&#39;Dermochelys coriacea&#39;)
+coriacea &lt;- turtles %&gt;% filter(species=='Dermochelys coriacea')
 plot_map(coriacea, zoom=TRUE)
 </pre></div>
 </div>
@@ -796,17 +797,17 @@ R[write to console]: The following objects are masked from ‘package:base’:
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">filter_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;institutionCode&quot;</span><span class="p">,</span> <span class="s2">&quot;individualCount&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;eventDate&quot;</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"institutionCode"</span><span class="p">,</span> <span class="s2">"individualCount"</span><span class="p">,</span> <span class="s2">"sex"</span><span class="p">,</span> <span class="s2">"eventDate"</span><span class="p">]]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_popup</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
-    <span class="n">classes</span> <span class="o">=</span> <span class="s2">&quot;table table-striped table-hover table-condensed table-responsive&quot;</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="s2">"table table-striped table-hover table-condensed table-responsive"</span>
     <span class="n">html</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">folium</span><span class="o">.</span><span class="n">Popup</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_marker</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">popup</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">location</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;decimalLatitude&quot;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;decimalLongitude&quot;</span><span class="p">]</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"decimalLatitude"</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s2">"decimalLongitude"</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span> <span class="n">popup</span><span class="o">=</span><span class="n">popup</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -816,7 +817,7 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">folium.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">MarkerCluster</span>
 
-<span class="n">species_found</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">turtles</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">]))</span>
+<span class="n">species_found</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">turtles</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">]))</span>
 
 <span class="n">clusters</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">MarkerCluster</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">species_found</span><span class="p">}</span>
 <span class="n">groups</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">folium</span><span class="o">.</span><span class="n">FeatureGroup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">species_found</span><span class="p">}</span>
@@ -1147,7 +1148,7 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">turtle</span> <span class="ow">in</span> <span class="n">species_found</span><span class="p">:</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">turtles</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">turtles</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">turtle</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">turtles</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">turtles</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">]</span> <span class="o">==</span> <span class="n">turtle</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
         <span class="n">popup</span> <span class="o">=</span> <span class="n">make_popup</span><span class="p">(</span><span class="n">filter_df</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
         <span class="n">make_marker</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">popup</span><span class="o">=</span><span class="n">popup</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="n">turtle</span><span class="p">])</span>
@@ -1183,8 +1184,8 @@ plot_map(land, zoom=TRUE)
 <p>First let’s remove the entries that are on land.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">turtles</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">land</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">turtles</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">land</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">turtles</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">land</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 <span class="n">ocean</span> <span class="o">=</span> <span class="n">turtles</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
 </pre></div>
@@ -1205,9 +1206,9 @@ plot_map(land, zoom=TRUE)
 <span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">turtle</span> <span class="ow">in</span> <span class="n">species_found</span><span class="p">:</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">ocean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ocean</span><span class="p">[</span><span class="s2">&quot;scientificName&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">turtle</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ocean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ocean</span><span class="p">[</span><span class="s2">"scientificName"</span><span class="p">]</span> <span class="o">==</span> <span class="n">turtle</span><span class="p">]</span>
     <span class="n">positions</span> <span class="o">=</span> <span class="n">MultiPoint</span><span class="p">(</span>
-        <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;decimalLongitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;decimalLatitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+        <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"decimalLongitude"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">"decimalLatitude"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
     <span class="p">)</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">folium</span><span class="o">.</span><span class="n">GeoJson</span><span class="p">(</span>
         <span class="n">positions</span><span class="o">.</span><span class="n">__geo_interface__</span><span class="p">,</span>

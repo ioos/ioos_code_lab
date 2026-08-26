@@ -212,6 +212,7 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2024-09-17-CKAN_API_Query.html">Programmatically query the IOOS Data Catalog for a specific observation type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2026-08-25-PACE-OBIS.html">Investigating PACE and OBIS as a data source for phytoplankton observations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -525,9 +526,9 @@ including <a class="reference external" href="https://scitools-iris.readthedocs.
 <span class="nb">print</span><span class="p">(</span><span class="n">cf_xarray</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://tds.marine.rutgers.edu/thredds/dodsC/roms/espresso/2013_da/his/ESPRESSO_Real-Time_v2_History_fmrc.ncd&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"http://tds.marine.rutgers.edu/thredds/dodsC/roms/espresso/2013_da/his/ESPRESSO_Real-Time_v2_History_fmrc.ncd"</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
-    <span class="n">url</span><span class="p">,</span> <span class="n">drop_variables</span><span class="o">=</span><span class="s2">&quot;time&quot;</span>
+    <span class="n">url</span><span class="p">,</span> <span class="n">drop_variables</span><span class="o">=</span><span class="s2">"time"</span>
 <span class="p">)</span>  <span class="c1"># see https://github.com/pydata/xarray/issues/2233 for more context on dropping the time variable here.</span>
 <span class="n">ds</span><span class="o">.</span><span class="n">cf</span>
 </pre></div>
@@ -538,28 +539,28 @@ including <a class="reference external" href="https://scitools-iris.readthedocs.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SGRID:
-             CF role:   grid_topology: [&#39;grid&#39;]
+             CF role:   grid_topology: ['grid']
 
-                Axes: * X: [&#39;xi_psi&#39;, &#39;xi_rho&#39;, &#39;xi_u&#39;, &#39;xi_v&#39;]
-                      * Y: [&#39;eta_psi&#39;, &#39;eta_rho&#39;, &#39;eta_u&#39;, &#39;eta_v&#39;]
-                      * Z: [&#39;s_rho&#39;, &#39;s_w&#39;]
+                Axes: * X: ['xi_psi', 'xi_rho', 'xi_u', 'xi_v']
+                      * Y: ['eta_psi', 'eta_rho', 'eta_u', 'eta_v']
+                      * Z: ['s_rho', 's_w']
 
 Coordinates:
-             CF Axes: * Z: [&#39;s_rho&#39;, &#39;s_w&#39;]
-                      * T: [&#39;ocean_time&#39;]
+             CF Axes: * Z: ['s_rho', 's_w']
+                      * T: ['ocean_time']
                         X, Y: n/a
 
-      CF Coordinates:   longitude: [&#39;lon_psi&#39;, &#39;lon_rho&#39;, &#39;lon_u&#39;, &#39;lon_v&#39;]
-                        latitude: [&#39;lat_psi&#39;, &#39;lat_rho&#39;, &#39;lat_u&#39;, &#39;lat_v&#39;]
-                      * vertical: [&#39;s_rho&#39;, &#39;s_w&#39;]
-                      * time: [&#39;ocean_time&#39;]
+      CF Coordinates:   longitude: ['lon_psi', 'lon_rho', 'lon_u', 'lon_v']
+                        latitude: ['lat_psi', 'lat_rho', 'lat_u', 'lat_v']
+                      * vertical: ['s_rho', 's_w']
+                      * time: ['ocean_time']
 
        Cell Measures:   area, volume: n/a
 
-      Standard Names: * forecast_reference_time: [&#39;run&#39;]
-                        latitude: [&#39;lat_psi&#39;, &#39;lat_rho&#39;, &#39;lat_u&#39;, &#39;lat_v&#39;]
-                        longitude: [&#39;lon_psi&#39;, &#39;lon_rho&#39;, &#39;lon_u&#39;, &#39;lon_v&#39;]
-                      * ocean_s_coordinate_g1: [&#39;s_rho&#39;, &#39;s_w&#39;]
+      Standard Names: * forecast_reference_time: ['run']
+                        latitude: ['lat_psi', 'lat_rho', 'lat_u', 'lat_v']
+                        longitude: ['lon_psi', 'lon_rho', 'lon_u', 'lon_v']
+                      * ocean_s_coordinate_g1: ['s_rho', 's_w']
 
               Bounds:   n/a
 
@@ -568,12 +569,12 @@ Coordinates:
 Data Variables:
        Cell Measures:   area, volume: n/a
 
-      Standard Names:   sea_floor_depth_below_sea_surface: [&#39;h&#39;]
-                        sea_surface_elevation_anomaly: [&#39;zeta&#39;]
-                        sea_water_potential_temperature: [&#39;temp&#39;]
-                        sea_water_practical_salinity: [&#39;salt&#39;]
-                        sea_water_x_velocity: [&#39;u&#39;]
-                        sea_water_y_velocity: [&#39;v&#39;]
+      Standard Names:   sea_floor_depth_below_sea_surface: ['h']
+                        sea_surface_elevation_anomaly: ['zeta']
+                        sea_water_potential_temperature: ['temp']
+                        sea_water_practical_salinity: ['salt']
+                        sea_water_x_velocity: ['u']
+                        sea_water_y_velocity: ['v']
 
               Bounds:   n/a
 
@@ -590,21 +591,21 @@ Data Variables:
 <span class="c1"># Our ocean slice:</span>
 <span class="n">run</span><span class="p">,</span> <span class="n">ocean_time</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span>
 
-<span class="n">s</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;s_rho&quot;</span><span class="p">]</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;Cs_r&quot;</span><span class="p">]</span>
-<span class="n">eta</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;zeta&quot;</span><span class="p">][</span><span class="n">run</span><span class="p">,</span> <span class="n">ocean_time</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
-<span class="n">depth</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">][</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
-<span class="n">depth_c</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;hc&quot;</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">"s_rho"</span><span class="p">]</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">"Cs_r"</span><span class="p">]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">"zeta"</span><span class="p">][</span><span class="n">run</span><span class="p">,</span> <span class="n">ocean_time</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">depth</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">"h"</span><span class="p">][</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">depth_c</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">"hc"</span><span class="p">]</span>
 
 <span class="n">z</span> <span class="o">=</span> <span class="n">ocean_s_coordinate_g1</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">depth_c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_20527/1323880464.py:8: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
-  eta = ds.cf[&quot;zeta&quot;][run, ocean_time, x, y]
-/tmp/ipykernel_20527/1323880464.py:9: UserWarning: Variables {&#39;&#39;} not found in object but are referred to in the CF attributes.
-  depth = ds.cf[&quot;h&quot;][x, y]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_20527/1323880464.py:8: UserWarning: Variables {'', 'time'} not found in object but are referred to in the CF attributes.
+  eta = ds.cf["zeta"][run, ocean_time, x, y]
+/tmp/ipykernel_20527/1323880464.py:9: UserWarning: Variables {''} not found in object but are referred to in the CF attributes.
+  depth = ds.cf["h"][x, y]
 </pre></div>
 </div>
 </div>
@@ -622,15 +623,15 @@ Data Variables:
 <p>** only in iris at the moment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;sea_water_potential_temperature&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">"sea_water_potential_temperature"</span><span class="p">]</span>
 
 <span class="n">temp</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_20527/4185694592.py:1: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
-  temp = ds.cf[&quot;sea_water_potential_temperature&quot;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_20527/4185694592.py:1: UserWarning: Variables {'', 'time'} not found in object but are referred to in the CF attributes.
+  temp = ds.cf["sea_water_potential_temperature"]
 </pre></div>
 </div>
 <div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
@@ -1104,7 +1105,7 @@ Right now <code class="docutils literal notranslate"><span class="pre">pyugrid</
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyugrid</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://test.opendap.org:8080/opendap/ugrid/NECOFS_GOM3_FORECAST.nc&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"http://test.opendap.org:8080/opendap/ugrid/NECOFS_GOM3_FORECAST.nc"</span>
 <span class="n">ugrid</span> <span class="o">=</span> <span class="n">pyugrid</span><span class="o">.</span><span class="n">UGrid</span><span class="o">.</span><span class="n">from_ncfile</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1138,7 +1139,7 @@ if the data is <code class="docutils literal notranslate"><span class="pre">UGRI
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_map</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s2">&quot;50m&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s2">"50m"</span><span class="p">)</span>
     <span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">draw_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">gl</span><span class="o">.</span><span class="n">top_labels</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">right_labels</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">gl</span><span class="o">.</span><span class="n">xformatter</span> <span class="o">=</span> <span class="n">LONGITUDE_FORMATTER</span>
@@ -1148,7 +1149,7 @@ if the data is <code class="docutils literal notranslate"><span class="pre">UGRI
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">make_map</span><span class="p">()</span>
 
-<span class="n">kw</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;linestyle&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;darkgray&quot;</span><span class="p">}</span>
+<span class="n">kw</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"marker"</span><span class="p">:</span> <span class="s2">"."</span><span class="p">,</span> <span class="s2">"linestyle"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span> <span class="s2">"alpha"</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"darkgray"</span><span class="p">}</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">triangles</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">();</span>
 </pre></div>
@@ -1170,7 +1171,7 @@ The specs are detailed in <a class="reference external" href="https://sgrid.gith
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pysgrid</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://tds.marine.rutgers.edu/thredds/dodsC/roms/doppio/2017_da/avg/Averages_Best_Excluding_Day1&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://tds.marine.rutgers.edu/thredds/dodsC/roms/doppio/2017_da/avg/Averages_Best_Excluding_Day1"</span>
 <span class="n">sgrid</span> <span class="o">=</span> <span class="n">pysgrid</span><span class="o">.</span><span class="n">load_grid</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1184,9 +1185,9 @@ The specs are detailed in <a class="reference external" href="https://sgrid.gith
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;lon_u&#39;, &#39;lat_u&#39;),
- &#39;xi_u: xi_psi eta_u: eta_psi (padding: both)&#39;,
- [GridPadding(mesh_topology_var=&#39;grid&#39;, face_dim=&#39;eta_u&#39;, node_dim=&#39;eta_psi&#39;, padding=&#39;both&#39;)])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(('lon_u', 'lat_u'),
+ 'xi_u: xi_psi eta_u: eta_psi (padding: both)',
+ [GridPadding(mesh_topology_var='grid', face_dim='eta_u', node_dim='eta_psi', padding='both')])
 </pre></div>
 </div>
 </div>
@@ -1274,7 +1275,7 @@ There is plenty of room to create convenience methods using the low level access
 </div>
 </div>
 <p>** CF convention does describe the angle variable for grids that needs rotation, but there is no action expected. For example, in the formula_terms, pysgrid must be improved to abstract that action when needed via a simpler method.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;entry</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;angle_of_rotation_from_east_to_x&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;entry</span><span class="w"> </span><span class="na">id=</span><span class="s">"angle_of_rotation_from_east_to_x"</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;canonical_units&gt;</span>degree<span class="nt">&lt;/canonical_units&gt;</span>
 <span class="w">    </span><span class="nt">&lt;grib&gt;&lt;/grib&gt;</span>
 <span class="w">    </span><span class="nt">&lt;amip&gt;&lt;/amip&gt;</span>
@@ -1312,7 +1313,7 @@ There is plenty of room to create convenience methods using the low level access
 
 <span class="k">def</span><span class="w"> </span><span class="nf">extent_bounds</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">bound_position</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_monotonic</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Array </span><span class="si">{!r}</span><span class="s2"> must be monotonic to guess bounds&quot;</span><span class="o">.</span><span class="n">format</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">"Array </span><span class="si">{!r}</span><span class="s2"> must be monotonic to guess bounds"</span><span class="o">.</span><span class="n">format</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
 
     <span class="n">x</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -1367,12 +1368,12 @@ There is plenty of room to create convenience methods using the low level access
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">make_map</span><span class="p">()</span>
 
-<span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">scale</span><span class="p">,</span> <span class="n">pivot</span><span class="o">=</span><span class="s2">&quot;middle&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">scale</span><span class="p">,</span> <span class="n">pivot</span><span class="o">=</span><span class="s2">"middle"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 <span class="n">q</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">)</span>
 
-<span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="s2">&quot;10m&quot;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="s2">"10m"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
