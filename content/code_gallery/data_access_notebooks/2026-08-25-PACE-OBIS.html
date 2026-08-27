@@ -493,41 +493,7 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-
-<span class="n">COLAB</span> <span class="o">=</span> <span class="s2">"google.colab"</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_install</span><span class="p">(</span><span class="n">package</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">COLAB</span><span class="p">:</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Install </span><span class="si">{</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="si">}</span><span class="s2">? [y/n]:"</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ans</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"y"</span><span class="p">,</span> <span class="s2">"yes"</span><span class="p">]:</span>
-            <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"pip"</span><span class="p">,</span> <span class="s2">"install"</span><span class="p">,</span> <span class="s2">"--quiet"</span><span class="p">,</span> <span class="n">package</span><span class="p">]</span>
-            <span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="si">}</span><span class="s2"> installed!"</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_colab_install_missing_deps</span><span class="p">(</span><span class="n">deps</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
-
-    <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">deps</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">dep</span> <span class="o">==</span> <span class="s2">"iris"</span><span class="p">:</span>
-                <span class="n">dep</span> <span class="o">=</span> <span class="s2">"scitools-iris"</span>
-            <span class="n">_install</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span>
-
-
-<span class="n">deps</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"pyobis"</span><span class="p">,</span> <span class="s2">"joblib"</span><span class="p">]</span>
-<span class="n">_colab_install_missing_deps</span><span class="p">(</span><span class="n">deps</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="investigating-pace-and-obis-as-a-data-source-for-phytoplankton-observations">
+  <section class="tex2jax_ignore mathjax_ignore" id="investigating-pace-and-obis-as-a-data-source-for-phytoplankton-observations">
 <h1>Investigating PACE and OBIS as a data source for phytoplankton observations<a class="headerlink" href="#investigating-pace-and-obis-as-a-data-source-for-phytoplankton-observations" title="Link to this heading">#</a></h1>
 <p>Created: 2026-08-25</p>
 <p>The Plankton, Aerosol, Cloud, ocean Ecosystem (PACE) and the Ocean Biodiversity Information System (OBIS) both provide information about phytoplankton distribution on a global scale. PACE Chlorophyll is the near-surface concentration of the green pigment, chlorophyll a, at the ocean surface. Found in tiny photosynthetic organisms – phytoplankton – chlorophyll is a measure of ocean ecosystem health (<a class="reference external" href="https://pace.oceansciences.org/recentmapdata.htm">link</a>). On the other hand, OBIS is the world’s largest global open-access infrastructure for marine biodiversity data, providing occurrence records at species levels.</p>
