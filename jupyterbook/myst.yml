@@ -23,7 +23,7 @@ project:
     - title: Video Tutorials
       children:
         - pattern: content/Video_Demo_Markdown/*.md
-    
+
 site:
   template: book-theme
   options:
