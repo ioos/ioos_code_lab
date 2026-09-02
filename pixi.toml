@@ -12,3 +12,4 @@ linkcheck = { cmd = "jupyter-book build jupyterbook --builder linkcheck" }
 
 [dependencies]
 jupyter-book = ">=2.1.6,<3"
+nodejs = ">=18.0.0,<26.8.0"
