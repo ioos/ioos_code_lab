@@ -1,0 +1,31 @@
+version: 1
+project:
+  id: f52c9f46-1d93-487d-88d0-98c68a254f0b
+  title: IOOS CodeLab
+  github: https://github.com/ioos/ioos_code_lab
+  toc:
+    - file: content/intro.md
+    - title: Getting Started
+      children:
+        - file: content/ioos_installation_conda.md
+    - title: Code Gallery
+      children:
+        - file: content/code_gallery/gallery.md
+        - file: content/code_gallery/data_access.md
+          children:
+            - pattern: "content/code_gallery/data_access_notebooks/*.ipynb"
+        - file: content/code_gallery/data_analysis_and_visualization.md
+          children:
+            - pattern: "content/code_gallery/data_analysis_and_visualization_notebooks/*.ipynb"
+        - file: content/code_gallery/data_management.md
+          children:
+            - pattern: "content/code_gallery/data_management_notebooks/*.ipynb"
+    - title: Video Tutorials
+      children:
+        - pattern: content/Video_Demo_Markdown/*.md
+
+site:
+  template: book-theme
+  options:
+    favicon: images/favicon.png
+    logo: images/IOOS_logo.png
