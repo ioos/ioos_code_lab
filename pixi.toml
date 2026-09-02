@@ -6,10 +6,9 @@ platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
-build_html = { cmd = ["jupyter-book", "build", "jupyterbook"] }
+build_html = { cmd = "cd jupyterbook && jupyter-book build --html" }
 jb = { cmd = "python jupyterbook/add_header.py", depends-on=["build_html"] }
 linkcheck = { cmd = "jupyter-book build jupyterbook --builder linkcheck" }
 
 [dependencies]
-jupyter-book = ">=1.0.4,<2"
-pydata-sphinx-theme = "==0.16.1"
+jupyter-book = ">=2.1.6,<3"

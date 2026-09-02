@@ -11,11 +11,3 @@ services (SOS, THREDDS, ERDDAP, etc) and tools for scientists and managers looki
 Matlab, R, etc).
 
 For more information on accessing IOOS data, see <https://ioos.noaa.gov/data/access-ioos-data/>.
-
-______________________________________________________________________
-
-## Chapter table of contents
-
-```{tableofcontents}
-
-```

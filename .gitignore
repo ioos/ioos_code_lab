@@ -7,5 +7,6 @@ index.html
 !.pixi/config.toml
 pixi.lock
 .vscode/
+_build
 jupyterbook/content/code_gallery/data_access_notebooks/.dodsrc
 jupyterbook/content/code_gallery/data_access_notebooks/chlor_a.nc
