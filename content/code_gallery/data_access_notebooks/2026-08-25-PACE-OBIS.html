@@ -509,20 +509,6 @@
 </div>
 </div>
 <p>We can not define our search bounding box, time span, and filter for the 1 degree dataset only, the 4 km results will also be fetched. Because it can be a lot of data, we will avoid the 4km high resolution for now with a simple filter to the results and get only the files that end with <code class="docutils literal notranslate"><span class="pre">1deg.nc</span></code> string.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="o">.</span><span class="n">search_data</span><span class="p">(</span>
-    <span class="n">short_name</span><span class="o">=</span><span class="s2">"PACE_OCI_L3M_CHL"</span><span class="p">,</span>
-    <span class="n">temporal</span><span class="o">=</span><span class="p">(</span><span class="s2">"2025-01-01"</span><span class="p">,</span> <span class="s2">"2025-12-31"</span><span class="p">),</span>
-    <span class="n">bounding_box</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">75.0</span><span class="p">,</span> <span class="mf">47.0</span><span class="p">),</span>
-<span class="p">)</span>
-
-<span class="n">fileset</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-<span class="n">one_degree</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fileset</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">full_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"1deg.nc"</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>The next loop downloads and save the data. We will re-download the data if we do not have it already. The local cache will save us some time and ensure we always have the data even if the server is down.</p>
 <p>Local caching is always a good practice to preserver the data and avoid putting a lot of strain on servers with multiple identical requests.</p>
 <div class="cell docutils container">
@@ -534,27 +520,29 @@
 
 <span class="n">fname</span> <span class="o">=</span> <span class="s2">"chlor_a.nc"</span>
 
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fake_time</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"product_name"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ds</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">[</span><span class="n">time</span><span class="p">])</span>
+
+
 <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">fake_time</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
-        <span class="n">time</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"product_name"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
-        <span class="n">time</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-        <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">assign_coords</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">one_degree</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="n">fake_time</span><span class="p">)</span>
-    <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
-        <span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span><span class="o">.</span><span class="n">display_max</span><span class="p">)</span>
-        <span class="o">&amp;</span> <span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span><span class="o">.</span><span class="n">display_min</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="o">.</span><span class="n">search_data</span><span class="p">(</span>
+        <span class="n">short_name</span><span class="o">=</span><span class="s2">"PACE_OCI_L3M_BGC"</span><span class="p">,</span>
+        <span class="n">temporal</span><span class="o">=</span><span class="p">(</span><span class="s2">"2025"</span><span class="p">,</span> <span class="s2">"2025"</span><span class="p">),</span>
+        <span class="n">granule_name</span><span class="o">=</span><span class="s2">"*.DAY.*.0p1deg.*"</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="n">day_0p1deg</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">day_0p1deg</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="n">fake_time</span><span class="p">)</span>
+    <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span>
+    <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="p">(</span><span class="n">chlor_a</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"valid_min"</span><span class="p">,</span> <span class="s2">"valid_max"</span><span class="p">))</span>
+    <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">chlor_a</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">chlor_a</span> <span class="o">&gt;=</span> <span class="n">vmin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">chlor_a</span> <span class="o">&lt;=</span> <span class="n">vmax</span><span class="p">))</span>
     <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">chlor_a</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s2">"time"</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="n">chlor_a</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-
-
-<span class="c1"># DataArray for the chlor_a variable only.</span>
-<span class="n">chlor_a</span> <span class="o">=</span> <span class="n">chlor_a</span><span class="p">[</span><span class="s2">"chlor_a"</span><span class="p">]</span>
+    <span class="n">chlor_a</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataarray</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -603,11 +591,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-08-26 11:10:04 - pyobis.cache.cache - INFO - Cache initialized at C:\Users\Mathew.Biddle\AppData\Local\pyobis
-2026-08-26 11:10:04 - pyobis.obisutils - INFO - 100 to be fetched. Estimated time =0.064834473133087160 seconds
-2026-08-26 11:10:04 - pyobis.obisutils - INFO - Fetching: [████████████████████████████████████████████████████████████████████████████████████████████████████] 100/100
-2026-08-26 11:10:04 - pyobis.cache.cache - INFO - Cache initialized at C:\Users\Mathew.Biddle\AppData\Local\pyobis
-2026-08-26 11:10:04 - pyobis.obisutils - INFO - Fetched 100 records.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-09-09 11:58:46 - pyobis.cache.cache - INFO - Cache initialized at /home/filipe/.cache/pyobis
+2026-09-09 11:58:46 - pyobis.obisutils - INFO - 100 to be fetched. Estimated time =0.0299275445938110350 seconds
+2026-09-09 11:58:46 - pyobis.obisutils - INFO - Fetching: [████████████████████████████████████████████████████████████████████████████████████████████████████] 100/100
+2026-09-09 11:58:46 - pyobis.cache.cache - INFO - Cache initialized at /home/filipe/.cache/pyobis
+2026-09-09 11:58:46 - pyobis.obisutils - INFO - Fetched 100 records.
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -948,8 +936,8 @@ Name: date_year, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-08-26 11:12:20 - pyobis.cache.cache - INFO - Cache initialized at C:\Users\Mathew.Biddle\AppData\Local\pyobis
-2026-08-26 11:12:20 - pyobis.cache.cache - INFO - Cache initialized at C:\Users\Mathew.Biddle\AppData\Local\pyobis
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-09-09 11:58:46 - pyobis.cache.cache - INFO - Cache initialized at /home/filipe/.cache/pyobis
+2026-09-09 11:58:46 - pyobis.cache.cache - INFO - Cache initialized at /home/filipe/.cache/pyobis
 </pre></div>
 </div>
 </div>
@@ -1080,7 +1068,7 @@ Name: date_year, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/be6b7f0329987aaf3a2803963286e22cecf74b59c122a231596842ddf73942d1.png" src="../../../_images/be6b7f0329987aaf3a2803963286e22cecf74b59c122a231596842ddf73942d1.png" />
+<img alt="../../../_images/13e6290faa637515a99d95b43e155170d3d5df05cf5362eedbb34200fe56bf22.png" src="../../../_images/13e6290faa637515a99d95b43e155170d3d5df05cf5362eedbb34200fe56bf22.png" />
 </div>
 </div>
 <p>We can see some features, like a higher density near the coast, currents, and the oligotrophic areas at the gyres centers. As expected, OBIS data density falls off quickly outside of the North Atlantic. However, there is a clear “Gulf Stream signal” in the dataset that is absent in the PACE data. We can envison some sort of interpolation that will use the OBIS data to increase precision and PACE to augument the spatial resolution.</p>
@@ -1215,35 +1203,35 @@ Name: date_year, dtype: object
     <tr>
       <th>820007fffffffff</th>
       <td>667</td>
-      <td>2.514208</td>
+      <td>2.652190</td>
       <td>POLYGON ((36.42872 77.68575, 43.86177 78.00915...</td>
       <td>6.502790</td>
     </tr>
     <tr>
       <th>82000ffffffffff</th>
       <td>1891</td>
-      <td>3.735855</td>
+      <td>4.241199</td>
       <td>POLYGON ((30.78838 80.33975, 40.19373 80.81642...</td>
       <td>7.544861</td>
     </tr>
     <tr>
       <th>820017fffffffff</th>
       <td>119</td>
-      <td>1.853077</td>
+      <td>1.914717</td>
       <td>POLYGON ((48.58085 76.68007, 55.65377 76.66744...</td>
       <td>4.779123</td>
     </tr>
     <tr>
       <th>82001ffffffffff</th>
       <td>1085</td>
-      <td>3.568005</td>
+      <td>4.166355</td>
       <td>POLYGON ((46.68072 79.52276, 55.75077 79.55833...</td>
       <td>6.989335</td>
     </tr>
     <tr>
       <th>820027fffffffff</th>
       <td>2371</td>
-      <td>6.709328</td>
+      <td>6.677391</td>
       <td>POLYGON ((29.20747 75.65094, 35.20921 76.15221...</td>
       <td>7.771067</td>
     </tr>
@@ -1257,35 +1245,35 @@ Name: date_year, dtype: object
     <tr>
       <th>82f31ffffffffff</th>
       <td>9</td>
-      <td>5.836377</td>
+      <td>6.233580</td>
       <td>POLYGON ((-168.19092 -76.36649, -170.0979 -77....</td>
       <td>2.197225</td>
     </tr>
     <tr>
       <th>82f337fffffffff</th>
       <td>71</td>
-      <td>1.949622</td>
+      <td>2.348154</td>
       <td>POLYGON ((180.32561 -73.31022, 177.7638 -74.58...</td>
       <td>4.262680</td>
     </tr>
     <tr>
       <th>82f367fffffffff</th>
       <td>1</td>
-      <td>0.113506</td>
+      <td>0.105472</td>
       <td>POLYGON ((-151.74413 -69.84475, -151.56695 -71...</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>82f3a7fffffffff</th>
       <td>18</td>
-      <td>1.966249</td>
+      <td>2.022184</td>
       <td>POLYGON ((170.97665 -77.08353, 166.42141 -78.2...</td>
       <td>2.890372</td>
     </tr>
     <tr>
       <th>82f3b7fffffffff</th>
       <td>870</td>
-      <td>0.000000</td>
+      <td>0.601789</td>
       <td>POLYGON ((159.6908 -77.80316, 153.57501 -78.79...</td>
       <td>6.768493</td>
     </tr>
@@ -1319,7 +1307,7 @@ Name: date_year, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c4955ef051207634181be8275d3030e957b63b5de8ed012916fc34e6bb596d92.png" src="../../../_images/c4955ef051207634181be8275d3030e957b63b5de8ed012916fc34e6bb596d92.png" />
+<img alt="../../../_images/bc34e2991ce5bb99953cc719e3a9455b1227f1c10ae85ecc5115192bf2bd45f0.png" src="../../../_images/bc34e2991ce5bb99953cc719e3a9455b1227f1c10ae85ecc5115192bf2bd45f0.png" />
 </div>
 </div>
 <p>Done! Hopefully this example will be useful for those using these different data sources.</p>
