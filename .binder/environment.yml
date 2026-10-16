@@ -27,6 +27,7 @@ dependencies:
   - jupyter
   - lxml
   - matplotlib-base
+  - mlcroissant
   - nbclassic
   - netcdf4
   - numpy
@@ -36,6 +37,7 @@ dependencies:
   - palettable
   - pandas
   - pocean-core>=3.3.0
+  - prometheus_client
   - pyobis
   - pysgrid
   - pyugrid
