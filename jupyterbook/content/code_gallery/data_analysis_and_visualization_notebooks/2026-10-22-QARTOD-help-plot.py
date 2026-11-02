@@ -9,7 +9,21 @@ import gsw
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
+import pooch
+import xarray as xr
 from ioos_qc.qartod import QartodFlags
+
+def get_data():
+    url = "https://erddap.observations.voiceoftheocean.org/erddap/files/OG_complete_SEA044_M109/"
+    fname = "sea044_20250905T0639_delayed.nc"
+    filehash = "0bce25b78fc40bd7888a76909faa60b4f6490afd44b68a7f1f56c9d7611020ab"
+    #   VOTO's file hashes are not public as of September 2026. I've computed it using Python's 'hashlib'
+
+    download = pooch.retrieve(
+        url=f"{url}{fname}",
+        known_hash=f"sha256:{filehash}"
+    )
+    return(xr.open_dataset(download))
 
 #   Tying each flag to a label and a color
 flag_style = {
