@@ -11,7 +11,7 @@ dependencies:
   - compliance-checker
   - dask
   - earthaccess
-  - erddapy
+  - erddapy>=3.3.2
   - folium
   - gdal
   - geopandas
@@ -37,7 +37,6 @@ dependencies:
   - palettable
   - pandas
   - pocean-core>=3.3.0
-  - prometheus_client
   - pyobis
   - pysgrid
   - pyugrid
