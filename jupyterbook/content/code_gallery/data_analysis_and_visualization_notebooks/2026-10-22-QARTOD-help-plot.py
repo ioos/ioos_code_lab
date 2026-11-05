@@ -523,7 +523,7 @@ def pressure_cycle_figure(time, pres, profile, flags_pres, flags_pres_float, dow
     ax_top.invert_yaxis()
     ax_top.set_ylabel("Pressure (dbar)")
     ax_top.set_title(
-        f"pressure_test(PRES, direction, pad=0.01): profiles {down} (down) and {up} (up)",
+        f"pressure_test(PRES, direction, pad=0.01 dbar): profiles {down} (down) and {up} (up)",
         fontfamily="monospace", fontsize=10,
     )
     date_axis(ax_top, "%d %b %H:%M")
@@ -532,7 +532,7 @@ def pressure_cycle_figure(time, pres, profile, flags_pres, flags_pres_float, dow
     for col, (t0, t1) in enumerate(zooms):
         ax_top.axvspan(t0, t1, color="k", alpha=0.08, lw=0)
         m = (t_c >= t0) & (t_c <= t1)
-        for row, flags, label in [(1, fp, "pad=0.01"), (2, ff, "pad=0.01, assess_floating=True")]:
+        for row, flags, label in [(1, fp, "pad=0.01 dbar"), (2, ff, "pad=0.01 dbar, assess_floating=True")]:
             ax = zoom_axs[row - 1, col] = fig.add_subplot(gs[row, col])
             ax.plot(t_c[m], p_c[m], lw=0.6, zorder=1)
             plot_flags(ax, t_c[m], p_c[m], flags[m], s=3, legend=False)
