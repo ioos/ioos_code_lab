@@ -122,7 +122,15 @@ def _range_spans(lo, hi, fail_span, suspect_span):
 
 #   Preliminary data check section
 def overview_figure(
-    lon, lat, time, pres, temp, psal, extent, map_step=50, section_step=10,
+    lon,
+    lat,
+    time,
+    pres,
+    temp,
+    psal,
+    extent,
+    map_step=50,
+    section_step=10,
 ):
     fig = plt.figure(figsize=(12, 7.5), layout="constrained")
     gs = fig.add_gridspec(2, 2, width_ratios=[1, 1.6])
@@ -173,7 +181,13 @@ def overview_figure(
 
 #   Timing/gap tests
 def impossible_date_figure(
-    time_bad, flags_date, flags_date_window, window, injected, labels, step=500,
+    time_bad,
+    flags_date,
+    flags_date_window,
+    window,
+    injected,
+    labels,
+    step=500,
 ):
     """``injected`` are the indices of the altered timestamps, ``labels`` maps some of them to annotations."""
     idx = np.unique(np.r_[np.arange(0, time_bad.size, step), list(injected)])
@@ -212,7 +226,10 @@ def impossible_date_figure(
             ax.set_ylim(ylim)
             if col == 1:
                 ax.axhspan(
-                    *window, color=flag_style[QartodFlags.GOOD][1], alpha=0.2, lw=0,
+                    *window,
+                    color=flag_style[QartodFlags.GOOD][1],
+                    alpha=0.2,
+                    lw=0,
                 )
             for i, text in labels.items():
                 #   Ring each injected timestamp, and label it where it stands apart from the mission
@@ -318,19 +335,30 @@ def data_reception_figure(time, pres, flags_rx, check_time, max_age_hours):
 def time_gap_figure(dt_seconds, time_gappy, pres_gappy, flags_gap, gap_start, gap_end):
     #   A binned hist, with a vis of the timeseries with a hole in it
     fig, axs = plt.subplots(
-        1, 2, figsize=(12, 4.5), layout="constrained", width_ratios=[1, 1.5],
+        1,
+        2,
+        figsize=(12, 4.5),
+        layout="constrained",
+        width_ratios=[1, 1.5],
     )
     fail_color = flag_style[QartodFlags.FAIL][1]
     bins = np.logspace(0, 4, 41)
     axs[0].hist(
-        np.clip(dt_seconds, 1, None), bins=bins, edgecolor="#262626", linewidth=0.4,
+        np.clip(dt_seconds, 1, None),
+        bins=bins,
+        edgecolor="#262626",
+        linewidth=0.4,
     )
     axs[0].set_xscale("log")
     axs[0].set_yscale("log")
     for span, label in [(60, "1 min"), (7200, "2 h")]:
         axs[0].axvline(span, color=fail_color, ls="--", lw=1)
         axs[0].text(
-            span, axs[0].get_ylim()[1] * 0.3, f" {label}", color=fail_color, fontsize=8,
+            span,
+            axs[0].get_ylim()[1] * 0.3,
+            f" {label}",
+            color=fail_color,
+            fontsize=8,
         )
     axs[0].set_xlabel("Time between consecutive measurements (s)")
     axs[0].set_ylabel("Count")
@@ -406,7 +434,12 @@ def syntax_figure(records, flags_char, flags_field, good_len, good_field, damage
     ]:
         colors = [flag_style[f][1] for f in np.ma.getdata(flags)]
         ax.barh(
-            rec, values, color=colors, edgecolor="#262626", linewidth=0.3, height=0.8,
+            rec,
+            values,
+            color=colors,
+            edgecolor="#262626",
+            linewidth=0.3,
+            height=0.8,
         )
         ax.axvline(expected, color="k", ls="--", lw=0.8)
         ax.set_title(title, fontfamily="monospace", fontsize=9)
@@ -429,7 +462,15 @@ def syntax_figure(records, flags_char, flags_field, good_len, good_field, damage
 
 #   Location tests
 def location_distance_figure(
-    time, lon_bad, lat_bad, flags_loc, range_max, i_swap, i_typo, i_half, i_none,
+    time,
+    lon_bad,
+    lat_bad,
+    flags_loc,
+    range_max,
+    i_swap,
+    i_typo,
+    i_half,
+    i_none,
 ):
     time = np.asarray(time)
     d_bad = np.r_[0, gsw.distance(np.asarray(lon_bad), np.asarray(lat_bad))]
@@ -462,7 +503,11 @@ def location_distance_figure(
         )
 
     ax.axvline(
-        time[i_half], color=flag_style[QartodFlags.FAIL][1], lw=0.8, zorder=1, ls="--",
+        time[i_half],
+        color=flag_style[QartodFlags.FAIL][1],
+        lw=0.8,
+        zorder=1,
+        ls="--",
     )
     ax.axvline(
         time[i_none],
@@ -483,7 +528,12 @@ def location_distance_figure(
 
 
 def land_zoom_figure(
-    lon, lat, flags, extent, res=0.0005, title="location_on_land_test(lon, lat)",
+    lon,
+    lat,
+    flags,
+    extent,
+    res=0.0005,
+    title="location_on_land_test(lon, lat)",
 ):
     fig, ax = plt.subplots(figsize=(8, 7), layout="constrained")
     land_background(ax, extent=extent, res=res)
@@ -493,10 +543,21 @@ def land_zoom_figure(
 
 
 def land_and_bounds_figure(
-    lon, lat, flags_land, flags_bounds, extent, operating_area, exclusion_zone,
+    lon,
+    lat,
+    flags_land,
+    flags_bounds,
+    extent,
+    operating_area,
+    exclusion_zone,
 ):
     fig, axs = plt.subplots(
-        1, 2, figsize=(13, 6.5), sharex=True, sharey=True, layout="constrained",
+        1,
+        2,
+        figsize=(13, 6.5),
+        sharex=True,
+        sharey=True,
+        layout="constrained",
     )
     for ax, flags, title in [
         (axs[0], flags_land, "location_on_land_test(lon, lat)"),
@@ -516,7 +577,10 @@ def land_and_bounds_figure(
     )
 
     axs[1].plot(
-        *operating_area.exterior.xy, color="blue", lw=1.5, label="Operating area",
+        *operating_area.exterior.xy,
+        color="blue",
+        lw=1.5,
+        label="Operating area",
     )
     axs[1].fill(
         *exclusion_zone.exterior.xy,
@@ -533,10 +597,22 @@ def land_and_bounds_figure(
 
 #   Gross range and percentile range tests
 def gross_range_figure_pres(
-    time, pres, values, flags, fail_span, suspect_span, label, title, bins,
+    time,
+    pres,
+    values,
+    flags,
+    fail_span,
+    suspect_span,
+    label,
+    title,
+    bins,
 ):
     fig, axs = plt.subplots(
-        1, 2, figsize=(12, 4.5), width_ratios=[1, 1.6], layout="constrained",
+        1,
+        2,
+        figsize=(12, 4.5),
+        width_ratios=[1, 1.6],
+        layout="constrained",
     )
     ax = axs[0]
     ax.hist(values[~np.isnan(values)], bins=bins, linewidth=0.3)
@@ -563,15 +639,29 @@ def gross_range_figure_pres(
 
 
 def gross_range_figure_val(
-    time, values, flags, fail_span, suspect_span, bins, ylabel: str = "",
+    time,
+    values,
+    flags,
+    fail_span,
+    suspect_span,
+    bins,
+    ylabel: str = "",
 ):
     """Improvement - stack hist sideways and keep the ranges on throughout"""
     fig, axs = plt.subplots(
-        1, 2, figsize=(12, 4.5), width_ratios=[1, 3], sharey=True, layout="constrained",
+        1,
+        2,
+        figsize=(12, 4.5),
+        width_ratios=[1, 3],
+        sharey=True,
+        layout="constrained",
     )
     ax = axs[0]
     ax.hist(
-        values[~np.isnan(values)], bins=bins, orientation="horizontal", linewidth=0.3,
+        values[~np.isnan(values)],
+        bins=bins,
+        orientation="horizontal",
+        linewidth=0.3,
     )
     ax.set_xscale("log")
     ax.set_ylabel(ylabel)
@@ -611,7 +701,8 @@ def percentile_range_figure(time, pres, temp, pct_runs, pct_flags, bins):
     )
     for row, (name, kw) in zip(axs, pct_runs.items(), strict=True):
         low, hi = np.nanpercentile(
-            temp, [kw.get("low_percentile", 5), kw.get("hi_percentile", 95)],
+            temp,
+            [kw.get("low_percentile", 5), kw.get("hi_percentile", 95)],
         )
         pad = kw.get("pad", 0)
         flags = pct_flags[name]
@@ -635,7 +726,9 @@ def percentile_range_figure(time, pres, temp, pct_runs, pct_flags, bins):
         ax.set_ylabel("Pressure (dbar)")
         args = "".join(f", {k}={v}" for k, v in kw.items())
         ax.set_title(
-            f"percentile_range_test(TEMP{args})", fontfamily="monospace", fontsize=9,
+            f"percentile_range_test(TEMP{args})",
+            fontfamily="monospace",
+            fontsize=9,
         )
         date_axis(ax)
 
@@ -655,7 +748,9 @@ def percentile_range_figure(time, pres, temp, pct_runs, pct_flags, bins):
         fig.colorbar(sc, ax=ax, label="Temperature (°C)")
         ax.sharey(row[1])
         ax.set_title(
-            f"TEMP: {vmin:.2f} to {vmax:.2f}", fontfamily="monospace", fontsize=9,
+            f"TEMP: {vmin:.2f} to {vmax:.2f}",
+            fontfamily="monospace",
+            fontsize=9,
         )
         date_axis(ax)
 
@@ -680,7 +775,11 @@ def _tint(color, alpha=0.25):
 
 
 def climatology_figure(
-    temp, depth, flags, config, title="climatology_test(config, TEMP, TIME, depth)",
+    temp,
+    depth,
+    flags,
+    config,
+    title="climatology_test(config, TEMP, TIME, depth)",
 ):
     """Shades the SUSPECT (outside vspan) and FAIL (outside fspan) zones of each climatology window.
 
@@ -732,7 +831,12 @@ def climatology_figure(
             if b > a:
                 ax.add_patch(
                     plt.Rectangle(
-                        (a, z0), b - a, z1 - z0, facecolor=color, lw=0, zorder=z_fill,
+                        (a, z0),
+                        b - a,
+                        z1 - z0,
+                        facecolor=color,
+                        lw=0,
+                        zorder=z_fill,
                     ),
                 )
         ax.add_patch(
@@ -765,7 +869,11 @@ def climatology_figure(
     handles, _ = ax.get_legend_handles_labels()
     handles.append(
         plt.Line2D(
-            [], [], color=flag_style[QartodFlags.SUSPECT][1], ls="--", label="vspan",
+            [],
+            [],
+            color=flag_style[QartodFlags.SUSPECT][1],
+            ls="--",
+            label="vspan",
         ),
     )
     if any(w["fspan"] is not None for w in windows):
@@ -939,7 +1047,11 @@ def density_inversion_figure(
     d_prof = np.r_[np.nan, np.sign(np.diff(p_prof)) * np.diff(s_prof)]
 
     fig, axs = plt.subplots(
-        1, 3, figsize=(13, 6), width_ratios=[1, 1, 1.6], layout="constrained",
+        1,
+        3,
+        figsize=(13, 6),
+        width_ratios=[1, 1, 1.6],
+        layout="constrained",
     )
     ax = axs[0]
     ax.plot(s_prof, p_prof, lw=0.6, zorder=1)
