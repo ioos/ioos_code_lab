@@ -523,7 +523,7 @@ def pressure_cycle_figure(time, pres, profile, flags_pres, flags_pres_float, dow
     ax_top.invert_yaxis()
     ax_top.set_ylabel("Pressure (dbar)")
     ax_top.set_title(
-        f"pressure_test(PRES, direction, pad=0.01 dbar): profiles {down} (down) and {up} (up)",
+        f"pressure_test(PRES, direction, pad=0.01 dbar): profiles {down} (downcast) and {up} (upcast)",
         fontfamily="monospace", fontsize=10,
     )
     date_axis(ax_top, "%d %b %H:%M")
