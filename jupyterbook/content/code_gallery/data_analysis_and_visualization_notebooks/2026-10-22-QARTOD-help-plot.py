@@ -6,11 +6,13 @@ from functools import cache
 
 import cmocean
 import gsw
+import matplotlib.colors as mcolors
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
 import pooch
 import xarray as xr
+from ioos_qc import qartod
 from ioos_qc.qartod import QartodFlags
 
 def get_data():
@@ -438,30 +440,60 @@ def _climatology_axes(temp, depth, flags, title):
     return fig, ax
 
 
-def climatology_figure(temp, depth, flags, boxes, title="climatology_test(config, TEMP, TIME, depth)"):
-    """``boxes`` is a list of ((z0, z1), (v0, v1)) drawn as dashed rectangles."""
-    fig, ax = _climatology_axes(temp, depth, flags, title)
-    for (z0, z1), (v0, v1) in boxes:
-        ax.add_patch(plt.Rectangle((v0, z0), v1 - v0, z1 - z0, fill=False, edgecolor="black", ls="--", lw=1))
-    return fig, ax
+def _tint(color, alpha=0.25):
+    #   Opaque equivalent of `color` at `alpha` over white, so later windows can fully cover earlier ones
+    return tuple(1 - alpha * (1 - c) for c in mcolors.to_rgb(color))
 
 
-def climatology_windows_figure(temp, depth, flags, clim_windows,
-                               title="climatology_test(clim_windows, TEMP, TIME, depth)"):
-    """Draws the vspan (suspect) and fspan (fail) boxes of each window in a ``ClimatologyConfig``."""
+def climatology_figure(temp, depth, flags, config, title="climatology_test(config, TEMP, TIME, depth)"):
+    """Shades the SUSPECT (outside vspan) and FAIL (outside fspan) zones of each climatology window.
+
+    ``config`` is anything ``climatology_config`` accepts: a legacy ``ClimatologyConfig``, or a list of window
+    dicts. Windows are drawn in order, so where they overlap the last one shows, matching the test itself.
+    Time spans are ignored here, so this is only a faithful picture when the windows cover the same times.
+    """
+    windows = qartod.climatology_config(config)
     fig, ax = _climatology_axes(temp, depth, flags, title)
-    for w in clim_windows:
-        z0, z1 = w["zspan"]
-        for span, f, ls in [(w["vspan"], QartodFlags.SUSPECT, "--"), (w["fspan"], QartodFlags.FAIL, "-")]:
-            if span is not None:
-                ax.add_patch(plt.Rectangle((span.minv, z0), span.maxv - span.minv, z1 - z0, fill=False,
-                                           edgecolor=flag_style[f][1], ls=ls, lw=1.2))
+
+    #   Fit x to the data and every span edge, so no box is cut off at the sides
+    edges = [v for w in windows for k in ("vspan", "fspan") if w[k] is not None for v in w[k]]
+    xlo = min(np.nanmin(temp), *edges)
+    xhi = max(np.nanmax(temp), *edges)
+    pad = 0.02 * (xhi - xlo)
+    xlo, xhi = xlo - pad, xhi + pad
+    ytop, ybot = ax.get_ylim()[1], ax.get_ylim()[0]   #   Inverted axis: (bottom, top) = (deep, shallow)
+
+    suspect, fail = (_tint(flag_style[f][1]) for f in (QartodFlags.SUSPECT, QartodFlags.FAIL))
+    for i, w in enumerate(windows):
+        #   Each window stacks above the last (fills, then outlines), all below the scatter at zorder 2
+        z_fill, z_line = (2 * i) / (2 * len(windows)), (2 * i + 1) / (2 * len(windows))
+        #   Clip the depth band to the visible axis; no zspan means the window applies at all depths
+        z0, z1 = w["zspan"] if w["zspan"] is not None else (ytop, ybot)
+        z0, z1 = max(z0, ytop), min(z1, ybot)
+        if z1 <= z0:
+            continue
+        v0, v1 = w["vspan"]
+        f0, f1 = w["fspan"] if w["fspan"] is not None else (xlo, xhi)
+        bands = [
+            (xlo, xhi, "white"),    #   Blank the row first so this window replaces earlier ones
+            (xlo, v0, suspect), (v1, xhi, suspect),
+            (xlo, f0, fail), (f1, xhi, fail),
+        ]
+        for a, b, color in bands:
+            if b > a:
+                ax.add_patch(plt.Rectangle((a, z0), b - a, z1 - z0, facecolor=color, lw=0, zorder=z_fill))
+        ax.add_patch(plt.Rectangle((v0, z0), v1 - v0, z1 - z0, fill=False, zorder=z_line,
+                                   edgecolor=flag_style[QartodFlags.SUSPECT][1], ls="--", lw=1.2))
+        if w["fspan"] is not None:
+            ax.add_patch(plt.Rectangle((f0, z0), f1 - f0, z1 - z0, fill=False, zorder=z_line,
+                                       edgecolor=flag_style[QartodFlags.FAIL][1], lw=1.2))
+    ax.set_xlim(xlo, xhi)
+    ax.set_ylim(ybot, ytop)
 
     handles, _ = ax.get_legend_handles_labels()
-    handles += [
-        plt.Line2D([], [], color=flag_style[QartodFlags.SUSPECT][1], ls="--", label="vspan"),
-        plt.Line2D([], [], color=flag_style[QartodFlags.FAIL][1], label="fspan"),
-    ]
+    handles.append(plt.Line2D([], [], color=flag_style[QartodFlags.SUSPECT][1], ls="--", label="vspan"))
+    if any(w["fspan"] is not None for w in windows):
+        handles.append(plt.Line2D([], [], color=flag_style[QartodFlags.FAIL][1], label="fspan"))
     ax.legend(handles=handles, loc="lower right", markerscale=2, fontsize=8)
     return fig, ax
 
