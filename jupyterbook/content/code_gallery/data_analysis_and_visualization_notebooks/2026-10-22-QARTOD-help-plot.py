@@ -360,20 +360,26 @@ def gross_range_figure_pres(time, pres, values, flags, fail_span, suspect_span, 
     return fig, axs
 
 
-def gross_range_figure_val(time, values, flags, fail_span, suspect_span, bins):
+def gross_range_figure_val(time, values, flags, fail_span, suspect_span, bins, ylabel:str=""):
     """Improvement - stack hist sideways and keep the ranges on throughout"""
     fig, axs = plt.subplots(1, 2, figsize=(12, 4.5), width_ratios=[1, 3], sharey=True, layout="constrained")
-    lo, hi = bins[0], bins[-1]
+    ax = axs[0]
+    ax.hist(values[~np.isnan(values)], bins=bins, orientation="horizontal", linewidth=0.3)
+    ax.set_xscale("log")
+    ax.set_ylabel(ylabel)
+    ax.set_title("Variable histogram", fontfamily="monospace", fontsize=9)
+    ax = axs[1]
+    plot_flags(ax, time, values, flags, s=2, thin=20)
+    ax.set_title("Flagged timeseries with ranges", fontfamily="monospace", fontsize=9)
+
+    #   Fit the axis to the bins, widened to the data so nothing (e.g. clipped values) is cut off
+    lo = min(bins[0], np.nanmin(values))
+    hi = max(bins[-1], np.nanmax(values))
     for ax in axs:
         for a, b, f in _range_spans(lo, hi, fail_span, suspect_span):
             if b > a:
                 ax.axhspan(max(a, lo), min(b, hi), color=flag_style[f][1], alpha=0.25, lw=0, zorder=0)
-
-    ax = axs[0]
-    ax.hist(values[~np.isnan(values)], bins=bins, orientation="horizontal", linewidth=0.3)
-    ax.set_xscale("log")
-    ax = axs[1]
-    plot_flags(ax, time, values, flags, s=2, thin=20)
+        ax.set_ylim(lo, hi)   #   Stop axhspan from changing the limits
     return fig, axs
 
 
