@@ -289,12 +289,11 @@ def location_distance_figure(time, lon_bad, lat_bad, flags_loc, range_max, i_swa
     ax.axhline(range_max, color="k", ls="--", lw=0.8)
     ax.text(time[-1], range_max, f"range_max = {range_max / 1000} km ", ha="right", va="bottom", fontsize=8)
 
-    for i, what in [(i_swap, "lat/lon swapped"), (i_typo, "lat = lat+100 N")]:
-        ax.annotate(what, xy=(time[i], d_bad[i]), xytext=(15, -5), textcoords="offset points", fontsize=8,
+    #   For adding in lots of annotations - shifts down and right from the point
+    for i, what in [(i_swap, "lat/lon swapped,\nthen jump back to track (2 pts)"), (i_typo, "lat = lat+100 N")]:
+        ax.annotate(what, xy=(time[i], d_bad[i]), xytext=(15, -15), textcoords="offset points", fontsize=8,
                     arrowprops={"arrowstyle": "->"})
-    ax.annotate("jump back to track", xy=(time[i_swap + 1], d_bad[i_swap + 1]), xytext=(15, -20),
-                textcoords="offset points", fontsize=8, arrowprops={"arrowstyle": "->"})
-
+    
     ax.axvline(time[i_half], color=flag_style[QartodFlags.FAIL][1], lw=0.8, zorder=1, ls="--")
     ax.axvline(time[i_none], color=flag_style[QartodFlags.MISSING][1], lw=0.5, zorder=1, ls="--")
 
