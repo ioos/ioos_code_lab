@@ -15,43 +15,51 @@ import xarray as xr
 from ioos_qc import qartod
 from ioos_qc.qartod import QartodFlags
 
+
 def get_data():
     url = "https://erddap.observations.voiceoftheocean.org/erddap/files/OG_complete_SEA044_M109/"
     fname = "sea044_20250905T0639_delayed.nc"
     filehash = "0bce25b78fc40bd7888a76909faa60b4f6490afd44b68a7f1f56c9d7611020ab"
     #   VOTO's file hashes are not public as of September 2026. I've computed it using Python's 'hashlib'
 
-    download = pooch.retrieve(
-        url=f"{url}{fname}",
-        known_hash=f"sha256:{filehash}"
-    )
-    return(xr.open_dataset(download))
+    download = pooch.retrieve(url=f"{url}{fname}", known_hash=f"sha256:{filehash}")
+    return xr.open_dataset(download)
+
 
 def flag_counts(flags, name=""):
     flags = np.ma.getdata(flags)
     parts = [
-        f"{flag_style[f][0]}={np.count_nonzero(flags == f):,}" for f in order if np.any(flags == f)
+        f"{flag_style[f][0]}={np.count_nonzero(flags == f):,}"
+        for f in order
+        if np.any(flags == f)
     ]
     print(f"{name:<28s}" + ", ".join(parts))
 
+
 #   Tying each flag to a label and a color
 flag_style = {
-    QartodFlags.GOOD:    ("GOOD", "#77AC30"),
+    QartodFlags.GOOD: ("GOOD", "#77AC30"),
     QartodFlags.UNKNOWN: ("UNKNOWN", "#4DBEEE"),
     QartodFlags.SUSPECT: ("SUSPECT", "#EDB120"),
-    QartodFlags.FAIL:    ("FAIL", "#A2142F"),
+    QartodFlags.FAIL: ("FAIL", "#A2142F"),
     QartodFlags.MISSING: ("MISSING", "#7F7F7F"),
 }
 
 #   Drawing order, so the worst flags end up on top
-order = [QartodFlags.UNKNOWN, QartodFlags.GOOD, QartodFlags.MISSING, QartodFlags.SUSPECT, QartodFlags.FAIL]
+order = [
+    QartodFlags.UNKNOWN,
+    QartodFlags.GOOD,
+    QartodFlags.MISSING,
+    QartodFlags.SUSPECT,
+    QartodFlags.FAIL,
+]
 
 
 def plot_flags(ax, x, y, flags, s=4, thin=1, legend=True, **kwargs):
     x, y, flags = np.asarray(x), np.asarray(y), np.ma.getdata(flags)
     for zorder, f in enumerate(order):
         idx = np.flatnonzero(flags == f)
-        if idx.size == 0:   #   No flags of this type, skip rather than break
+        if idx.size == 0:  #   No flags of this type, skip rather than break
             continue
         label, color = flag_style[f]
         size = s
@@ -83,6 +91,7 @@ def date_axis(ax, fmt="%d %b"):
 def _landmask():
     #   Imported here so the module loads even without roaring_landmask, and built once
     from roaring_landmask import RoaringLandmask
+
     return RoaringLandmask.new()
 
 
@@ -104,13 +113,17 @@ def land_background(ax, extent, res=0.01):
 def _range_spans(lo, hi, fail_span, suspect_span):
     #   (start, end, flag) for the fail and suspect bands outside the good range
     return [
-        (lo, fail_span[0], QartodFlags.FAIL), (fail_span[1], hi, QartodFlags.FAIL),
-        (fail_span[0], suspect_span[0], QartodFlags.SUSPECT), (suspect_span[1], fail_span[1], QartodFlags.SUSPECT),
+        (lo, fail_span[0], QartodFlags.FAIL),
+        (fail_span[1], hi, QartodFlags.FAIL),
+        (fail_span[0], suspect_span[0], QartodFlags.SUSPECT),
+        (suspect_span[1], fail_span[1], QartodFlags.SUSPECT),
     ]
 
 
 #   Preliminary data check section
-def overview_figure(lon, lat, time, pres, temp, psal, extent, map_step=50, section_step=10):
+def overview_figure(
+    lon, lat, time, pres, temp, psal, extent, map_step=50, section_step=10,
+):
     fig = plt.figure(figsize=(12, 7.5), layout="constrained")
     gs = fig.add_gridspec(2, 2, width_ratios=[1, 1.6])
     ax_map = fig.add_subplot(gs[:, 0])
@@ -119,8 +132,12 @@ def overview_figure(lon, lat, time, pres, temp, psal, extent, map_step=50, secti
 
     land_background(ax_map, extent=extent)
     sc = ax_map.scatter(
-        np.asarray(lon)[::map_step], np.asarray(lat)[::map_step], c=mdates.date2num(time[::map_step]),
-        s=2, cmap=cmocean.cm.tempo, rasterized=True,
+        np.asarray(lon)[::map_step],
+        np.asarray(lat)[::map_step],
+        c=mdates.date2num(time[::map_step]),
+        s=2,
+        cmap=cmocean.cm.tempo,
+        rasterized=True,
     )
     cb = fig.colorbar(sc, ax=ax_map, orientation="horizontal", pad=0.02)
     cb.ax.xaxis.set_major_locator(mdates.DayLocator(interval=5))
@@ -134,8 +151,14 @@ def overview_figure(lon, lat, time, pres, temp, psal, extent, map_step=50, secti
         (ax_t, temp, cmocean.cm.thermal, "Temperature (°C)"),
         (ax_s, psal, cmocean.cm.haline, "Practical salinity"),
     ]:
-        sc = ax.scatter(time[::section_step], pres[::section_step], c=var[::section_step], s=1, cmap=cmap,
-                        rasterized=True)
+        sc = ax.scatter(
+            time[::section_step],
+            pres[::section_step],
+            c=var[::section_step],
+            s=1,
+            cmap=cmap,
+            rasterized=True,
+        )
         if var is psal:
             sc.set_clim(np.nanpercentile(psal, [1, 99.9]))
         fig.colorbar(sc, ax=ax, label=label)
@@ -149,7 +172,9 @@ def overview_figure(lon, lat, time, pres, temp, psal, extent, map_step=50, secti
 
 
 #   Timing/gap tests
-def impossible_date_figure(time_bad, flags_date, flags_date_window, window, injected, labels, step=500):
+def impossible_date_figure(
+    time_bad, flags_date, flags_date_window, window, injected, labels, step=500,
+):
     """``injected`` are the indices of the altered timestamps, ``labels`` maps some of them to annotations."""
     idx = np.unique(np.r_[np.arange(0, time_bad.size, step), list(injected)])
     nat = np.isnat(time_bad[idx])
@@ -159,37 +184,100 @@ def impossible_date_figure(time_bad, flags_date, flags_date_window, window, inje
     ]
 
     fig, axs = plt.subplots(2, 2, figsize=(12, 7.5), sharex=True, layout="constrained")
-    for col, (flags, title) in enumerate([
-        (flags_date, "impossible_date_test(TIME)"),
-        (flags_date_window, "impossible_date_test(TIME, fail_span=window)"),
-    ]):
+    for col, (flags, title) in enumerate(
+        [
+            (flags_date, "impossible_date_test(TIME)"),
+            (flags_date_window, "impossible_date_test(TIME, fail_span=window)"),
+        ],
+    ):
         for row, ylim in enumerate(ylims):
             ax = axs[row, col]
-            plot_flags(ax, idx[~nat], time_bad[idx][~nat], np.ma.getdata(flags)[idx][~nat], s=6, legend=False)
-            ax.scatter(idx[nat], np.full(nat.sum(), ylim[0]), marker="x", color=flag_style[QartodFlags.MISSING][1],
-                       s=50, clip_on=False, zorder=10)
+            plot_flags(
+                ax,
+                idx[~nat],
+                time_bad[idx][~nat],
+                np.ma.getdata(flags)[idx][~nat],
+                s=6,
+                legend=False,
+            )
+            ax.scatter(
+                idx[nat],
+                np.full(nat.sum(), ylim[0]),
+                marker="x",
+                color=flag_style[QartodFlags.MISSING][1],
+                s=50,
+                clip_on=False,
+                zorder=10,
+            )
             ax.set_ylim(ylim)
             if col == 1:
-                ax.axhspan(*window, color=flag_style[QartodFlags.GOOD][1], alpha=0.2, lw=0)
+                ax.axhspan(
+                    *window, color=flag_style[QartodFlags.GOOD][1], alpha=0.2, lw=0,
+                )
             for i, text in labels.items():
                 #   Ring each injected timestamp, and label it where it stands apart from the mission
-                off_mission = row == 1 or not (window[0] - np.timedelta64(60, "D") < time_bad[i] < window[1])
+                off_mission = row == 1 or not (
+                    window[0] - np.timedelta64(60, "D") < time_bad[i] < window[1]
+                )
                 if ylim[0] < time_bad[i] < ylim[1] and off_mission:
-                    ax.scatter(i, time_bad[i], s=90, facecolors="none", edgecolors="k", linewidths=0.6, zorder=10)
-                    ax.annotate(text, xy=(i, time_bad[i]), xytext=(9, 6), textcoords="offset points", fontsize=8)
+                    ax.scatter(
+                        i,
+                        time_bad[i],
+                        s=90,
+                        facecolors="none",
+                        edgecolors="k",
+                        linewidths=0.6,
+                        zorder=10,
+                    )
+                    ax.annotate(
+                        text,
+                        xy=(i, time_bad[i]),
+                        xytext=(9, 6),
+                        textcoords="offset points",
+                        fontsize=8,
+                    )
         axs[0, col].set_title(title, fontfamily="monospace", fontsize=10)
         axs[0, col].axhline(np.datetime64("now"), color="k", ls="--", lw=0.8)
-        axs[0, col].text(time_bad.size, np.datetime64("now"), "now ", ha="right", va="bottom", fontsize=8)
+        axs[0, col].text(
+            time_bad.size,
+            np.datetime64("now"),
+            "now ",
+            ha="right",
+            va="bottom",
+            fontsize=8,
+        )
         axs[1, col].set_xlabel("Measurement index")
         axs[1, col].yaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
-        axs[1, col].xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v / 1e6:.1f}M"))
+        axs[1, col].xaxis.set_major_formatter(
+            plt.FuncFormatter(lambda v, _: f"{v / 1e6:.1f}M"),
+        )
     axs[0, 0].set_ylabel("TIME (full range)")
     axs[1, 0].set_ylabel("TIME (zoomed to the mission-ish)")
-    axs[0, 0].legend(handles=[
-        plt.Line2D([], [], marker="o", ls="", color=flag_style[f][1], label=flag_style[f][0])
-        for f in (QartodFlags.GOOD, QartodFlags.FAIL)
-    ] + [plt.Line2D([], [], marker="x", ls="", color=flag_style[QartodFlags.MISSING][1], label="MISSING (NaT)")],
-        loc="lower right", fontsize=8)
+    axs[0, 0].legend(
+        handles=[
+            plt.Line2D(
+                [],
+                [],
+                marker="o",
+                ls="",
+                color=flag_style[f][1],
+                label=flag_style[f][0],
+            )
+            for f in (QartodFlags.GOOD, QartodFlags.FAIL)
+        ]
+        + [
+            plt.Line2D(
+                [],
+                [],
+                marker="x",
+                ls="",
+                color=flag_style[QartodFlags.MISSING][1],
+                label="MISSING (NaT)",
+            ),
+        ],
+        loc="lower right",
+        fontsize=8,
+    )
     axs[1, 1].text(5e4, window[1], "deployment window", va="bottom", fontsize=8)
     return fig, axs
 
@@ -200,14 +288,24 @@ def data_reception_figure(time, pres, flags_rx, check_time, max_age_hours):
     plot_flags(axs[0], time, pres, flags_rx, s=1, thin=10)
     axs[0].invert_yaxis()
     axs[0].set_ylabel("Pressure (dbar)")
-    axs[0].set_title(f"data_reception_test(TIME, fail_span={max_age_hours}, from_time=check_time)",
-                     fontfamily="monospace", fontsize=10)
+    axs[0].set_title(
+        f"data_reception_test(TIME, fail_span={max_age_hours}, from_time=check_time)",
+        fontfamily="monospace",
+        fontsize=10,
+    )
 
     #   Age of the data in hours - relative to our check time
     age_hours = (check_time - time) / np.timedelta64(1, "h")
     plot_flags(axs[1], time, age_hours, flags_rx, s=1, thin=100, legend=False)
     axs[1].axhline(max_age_hours, color="k", ls="--", lw=0.8)
-    axs[1].text(time[-1], max_age_hours, f"fail_span = {max_age_hours} h ", ha="right", va="bottom", fontsize=8)
+    axs[1].text(
+        time[-1],
+        max_age_hours,
+        f"fail_span = {max_age_hours} h ",
+        ha="right",
+        va="bottom",
+        fontsize=8,
+    )
     axs[1].axhline(0, color="k", lw=0.5)
     axs[1].set_ylabel("Age at check time (h)")
     for ax in axs:
@@ -219,33 +317,65 @@ def data_reception_figure(time, pres, flags_rx, check_time, max_age_hours):
 
 def time_gap_figure(dt_seconds, time_gappy, pres_gappy, flags_gap, gap_start, gap_end):
     #   A binned hist, with a vis of the timeseries with a hole in it
-    fig, axs = plt.subplots(1, 2, figsize=(12, 4.5), layout="constrained", width_ratios=[1, 1.5])
+    fig, axs = plt.subplots(
+        1, 2, figsize=(12, 4.5), layout="constrained", width_ratios=[1, 1.5],
+    )
     fail_color = flag_style[QartodFlags.FAIL][1]
     bins = np.logspace(0, 4, 41)
-    axs[0].hist(np.clip(dt_seconds, 1, None), bins=bins, edgecolor="#262626", linewidth=0.4)
+    axs[0].hist(
+        np.clip(dt_seconds, 1, None), bins=bins, edgecolor="#262626", linewidth=0.4,
+    )
     axs[0].set_xscale("log")
     axs[0].set_yscale("log")
     for span, label in [(60, "1 min"), (7200, "2 h")]:
         axs[0].axvline(span, color=fail_color, ls="--", lw=1)
-        axs[0].text(span, axs[0].get_ylim()[1] * 0.3, f" {label}", color=fail_color, fontsize=8)
+        axs[0].text(
+            span, axs[0].get_ylim()[1] * 0.3, f" {label}", color=fail_color, fontsize=8,
+        )
     axs[0].set_xlabel("Time between consecutive measurements (s)")
     axs[0].set_ylabel("Count")
     axs[0].set_title("Sampling interval, real data")
 
     flags_gap = np.ma.getdata(flags_gap)
-    near = (time_gappy > gap_start - np.timedelta64(8, "h")) & (time_gappy < gap_end + np.timedelta64(8, "h"))
+    near = (time_gappy > gap_start - np.timedelta64(8, "h")) & (
+        time_gappy < gap_end + np.timedelta64(8, "h")
+    )
     axs[1].plot(time_gappy[near], pres_gappy[near], lw=0.6, zorder=1)
-    plot_flags(axs[1], time_gappy[near], pres_gappy[near], flags_gap[near], s=2, thin=5, legend=False)
+    plot_flags(
+        axs[1],
+        time_gappy[near],
+        pres_gappy[near],
+        flags_gap[near],
+        s=2,
+        thin=5,
+        legend=False,
+    )
     axs[1].legend(loc="center", markerscale=2, fontsize=8)
     axs[1].axvspan(gap_start, gap_end, color=fail_color, alpha=0.1, lw=0)
     hours = (gap_end - gap_start) / np.timedelta64(1, "h")
-    axs[1].text(gap_start + (gap_end - gap_start) / 2, 20, f"{hours:g} h of\ndeleted data", ha="center", va="top",
-                fontsize=8)
-    axs[1].annotate("first point after the gap", xy=(gap_end, pres_gappy[flags_gap == QartodFlags.FAIL][0]),
-                    xytext=(30, 30), textcoords="offset points", fontsize=8, arrowprops={"arrowstyle": "->", "lw": 0.6})
+    axs[1].text(
+        gap_start + (gap_end - gap_start) / 2,
+        20,
+        f"{hours:g} h of\ndeleted data",
+        ha="center",
+        va="top",
+        fontsize=8,
+    )
+    axs[1].annotate(
+        "first point after the gap",
+        xy=(gap_end, pres_gappy[flags_gap == QartodFlags.FAIL][0]),
+        xytext=(30, 30),
+        textcoords="offset points",
+        fontsize=8,
+        arrowprops={"arrowstyle": "->", "lw": 0.6},
+    )
     axs[1].invert_yaxis()
     axs[1].set_ylabel("Pressure (dbar)")
-    axs[1].set_title("time_gap_test(TIME, fail_span=2), simulated dropout", fontfamily="monospace", fontsize=10)
+    axs[1].set_title(
+        "time_gap_test(TIME, fail_span=2), simulated dropout",
+        fontfamily="monospace",
+        fontsize=10,
+    )
     date_axis(axs[1], "%d %b\n%H:%M")
     return fig, axs
 
@@ -259,11 +389,25 @@ def syntax_figure(records, flags_char, flags_field, good_len, good_field, damage
 
     fig, axs = plt.subplots(1, 2, figsize=(12, 5.5), sharey=True, layout="constrained")
     for ax, values, expected, flags, title in [
-        (axs[0], n_chars, good_len, flags_char, f'syntax_test(records, nchar={good_len}, lentype="char")'),
-        (axs[1], n_fields, good_field, flags_field, f'syntax_test(records, nchar={good_field}, delimiter=";")'),
+        (
+            axs[0],
+            n_chars,
+            good_len,
+            flags_char,
+            f'syntax_test(records, nchar={good_len}, lentype="char")',
+        ),
+        (
+            axs[1],
+            n_fields,
+            good_field,
+            flags_field,
+            f'syntax_test(records, nchar={good_field}, delimiter=";")',
+        ),
     ]:
         colors = [flag_style[f][1] for f in np.ma.getdata(flags)]
-        ax.barh(rec, values, color=colors, edgecolor="#262626", linewidth=0.3, height=0.8)
+        ax.barh(
+            rec, values, color=colors, edgecolor="#262626", linewidth=0.3, height=0.8,
+        )
         ax.axvline(expected, color="k", ls="--", lw=0.8)
         ax.set_title(title, fontfamily="monospace", fontsize=9)
         ax.set_xlim(0, values.max() * 1.25)
@@ -273,15 +417,20 @@ def syntax_figure(records, flags_char, flags_field, good_len, good_field, damage
     axs[1].set_xlabel("Fields per record")
     axs[0].set_ylabel("Record number")
     axs[0].invert_yaxis()
-    axs[1].legend(handles=[
-        plt.Rectangle((0, 0), 1, 1, color=flag_style[f][1], label=flag_style[f][0])
-        for f in (QartodFlags.GOOD, QartodFlags.FAIL)
-    ], loc="lower right")
+    axs[1].legend(
+        handles=[
+            plt.Rectangle((0, 0), 1, 1, color=flag_style[f][1], label=flag_style[f][0])
+            for f in (QartodFlags.GOOD, QartodFlags.FAIL)
+        ],
+        loc="lower right",
+    )
     return fig, axs
 
 
 #   Location tests
-def location_distance_figure(time, lon_bad, lat_bad, flags_loc, range_max, i_swap, i_typo, i_half, i_none):
+def location_distance_figure(
+    time, lon_bad, lat_bad, flags_loc, range_max, i_swap, i_typo, i_half, i_none,
+):
     time = np.asarray(time)
     d_bad = np.r_[0, gsw.distance(np.asarray(lon_bad), np.asarray(lat_bad))]
 
@@ -289,24 +438,53 @@ def location_distance_figure(time, lon_bad, lat_bad, flags_loc, range_max, i_swa
     plot_flags(ax, time, np.clip(d_bad, 0.01, None), flags_loc, s=3, thin=5)
     ax.set_yscale("log")
     ax.axhline(range_max, color="k", ls="--", lw=0.8)
-    ax.text(time[-1], range_max, f"range_max = {range_max / 1000} km ", ha="right", va="bottom", fontsize=8)
+    ax.text(
+        time[-1],
+        range_max,
+        f"range_max = {range_max / 1000} km ",
+        ha="right",
+        va="bottom",
+        fontsize=8,
+    )
 
     #   For adding in lots of annotations - shifts down and right from the point
-    for i, what in [(i_swap, "lat/lon swapped,\nthen jump back to track (2 pts)"), (i_typo, "lat = lat+100 N")]:
-        ax.annotate(what, xy=(time[i], d_bad[i]), xytext=(15, -15), textcoords="offset points", fontsize=8,
-                    arrowprops={"arrowstyle": "->"})
-    
-    ax.axvline(time[i_half], color=flag_style[QartodFlags.FAIL][1], lw=0.8, zorder=1, ls="--")
-    ax.axvline(time[i_none], color=flag_style[QartodFlags.MISSING][1], lw=0.5, zorder=1, ls="--")
+    for i, what in [
+        (i_swap, "lat/lon swapped,\nthen jump back to track (2 pts)"),
+        (i_typo, "lat = lat+100 N"),
+    ]:
+        ax.annotate(
+            what,
+            xy=(time[i], d_bad[i]),
+            xytext=(15, -15),
+            textcoords="offset points",
+            fontsize=8,
+            arrowprops={"arrowstyle": "->"},
+        )
+
+    ax.axvline(
+        time[i_half], color=flag_style[QartodFlags.FAIL][1], lw=0.8, zorder=1, ls="--",
+    )
+    ax.axvline(
+        time[i_none],
+        color=flag_style[QartodFlags.MISSING][1],
+        lw=0.5,
+        zorder=1,
+        ls="--",
+    )
 
     ax.set_ylabel("Distance from previous fix (m)")
-    ax.set_title(f'location_test(lon, lat, range_max={range_max}, range_method="wgs84")', fontfamily="monospace",
-                 fontsize=10)
+    ax.set_title(
+        f'location_test(lon, lat, range_max={range_max}, range_method="wgs84")',
+        fontfamily="monospace",
+        fontsize=10,
+    )
     date_axis(ax)
     return fig, ax
 
 
-def land_zoom_figure(lon, lat, flags, extent, res=0.0005, title="location_on_land_test(lon, lat)"):
+def land_zoom_figure(
+    lon, lat, flags, extent, res=0.0005, title="location_on_land_test(lon, lat)",
+):
     fig, ax = plt.subplots(figsize=(8, 7), layout="constrained")
     land_background(ax, extent=extent, res=res)
     plot_flags(ax, lon, lat, flags, s=3)
@@ -314,8 +492,12 @@ def land_zoom_figure(lon, lat, flags, extent, res=0.0005, title="location_on_lan
     return fig, ax
 
 
-def land_and_bounds_figure(lon, lat, flags_land, flags_bounds, extent, operating_area, exclusion_zone):
-    fig, axs = plt.subplots(1, 2, figsize=(13, 6.5), sharex=True, sharey=True, layout="constrained")
+def land_and_bounds_figure(
+    lon, lat, flags_land, flags_bounds, extent, operating_area, exclusion_zone,
+):
+    fig, axs = plt.subplots(
+        1, 2, figsize=(13, 6.5), sharex=True, sharey=True, layout="constrained",
+    )
     for ax, flags, title in [
         (axs[0], flags_land, "location_on_land_test(lon, lat)"),
         (axs[1], flags_bounds, "location_bounds_test(...), outside + inside"),
@@ -324,20 +506,38 @@ def land_and_bounds_figure(lon, lat, flags_land, flags_bounds, extent, operating
         plot_flags(ax, lon, lat, flags, s=3, thin=10)
         ax.set_title(title, fontfamily="monospace", fontsize=10)
 
-    axs[0].annotate("Bad data\nshifted 0.9° north", xy=(9.72, 58.84), xytext=(9.72, 58.25), fontsize=8, ha="center",
-            arrowprops={"arrowstyle": "->", "lw": 0.6})
+    axs[0].annotate(
+        "Bad data\nshifted 0.9° north",
+        xy=(9.72, 58.84),
+        xytext=(9.72, 58.25),
+        fontsize=8,
+        ha="center",
+        arrowprops={"arrowstyle": "->", "lw": 0.6},
+    )
 
-    axs[1].plot(*operating_area.exterior.xy, color="blue", lw=1.5, label="Operating area")
-    axs[1].fill(*exclusion_zone.exterior.xy, facecolor="none", edgecolor="red", hatch="///", lw=1,
-                label="Exclusion zone")
+    axs[1].plot(
+        *operating_area.exterior.xy, color="blue", lw=1.5, label="Operating area",
+    )
+    axs[1].fill(
+        *exclusion_zone.exterior.xy,
+        facecolor="none",
+        edgecolor="red",
+        hatch="///",
+        lw=1,
+        label="Exclusion zone",
+    )
     axs[1].legend(loc="lower right", fontsize=8, markerscale=2)
-    
+
     return fig, axs
 
 
 #   Gross range and percentile range tests
-def gross_range_figure_pres(time, pres, values, flags, fail_span, suspect_span, label, title, bins):
-    fig, axs = plt.subplots(1, 2, figsize=(12, 4.5), width_ratios=[1, 1.6], layout="constrained")
+def gross_range_figure_pres(
+    time, pres, values, flags, fail_span, suspect_span, label, title, bins,
+):
+    fig, axs = plt.subplots(
+        1, 2, figsize=(12, 4.5), width_ratios=[1, 1.6], layout="constrained",
+    )
     ax = axs[0]
     ax.hist(values[~np.isnan(values)], bins=bins, linewidth=0.3)
     ax.set_yscale("log")
@@ -362,11 +562,17 @@ def gross_range_figure_pres(time, pres, values, flags, fail_span, suspect_span, 
     return fig, axs
 
 
-def gross_range_figure_val(time, values, flags, fail_span, suspect_span, bins, ylabel:str=""):
+def gross_range_figure_val(
+    time, values, flags, fail_span, suspect_span, bins, ylabel: str = "",
+):
     """Improvement - stack hist sideways and keep the ranges on throughout"""
-    fig, axs = plt.subplots(1, 2, figsize=(12, 4.5), width_ratios=[1, 3], sharey=True, layout="constrained")
+    fig, axs = plt.subplots(
+        1, 2, figsize=(12, 4.5), width_ratios=[1, 3], sharey=True, layout="constrained",
+    )
     ax = axs[0]
-    ax.hist(values[~np.isnan(values)], bins=bins, orientation="horizontal", linewidth=0.3)
+    ax.hist(
+        values[~np.isnan(values)], bins=bins, orientation="horizontal", linewidth=0.3,
+    )
     ax.set_xscale("log")
     ax.set_ylabel(ylabel)
     ax.set_title("Variable histogram", fontfamily="monospace", fontsize=9)
@@ -380,21 +586,37 @@ def gross_range_figure_val(time, values, flags, fail_span, suspect_span, bins, y
     for ax in axs:
         for a, b, f in _range_spans(lo, hi, fail_span, suspect_span):
             if b > a:
-                ax.axhspan(max(a, lo), min(b, hi), color=flag_style[f][1], alpha=0.25, lw=0, zorder=0)
-        ax.set_ylim(lo, hi)   #   Stop axhspan from changing the limits
+                ax.axhspan(
+                    max(a, lo),
+                    min(b, hi),
+                    color=flag_style[f][1],
+                    alpha=0.25,
+                    lw=0,
+                    zorder=0,
+                )
+        ax.set_ylim(lo, hi)  #   Stop axhspan from changing the limits
     return fig, axs
 
 
 def percentile_range_figure(time, pres, temp, pct_runs, pct_flags, bins):
     """One row per run: histogram with bounds, flagged section, and the section colored to the bounds."""
-    fig, axs = plt.subplots(len(pct_runs), 3, figsize=(17, 4 * len(pct_runs)), width_ratios=[1, 1.6, 1.6],
-                            sharex="col", layout="constrained", squeeze=False)
+    fig, axs = plt.subplots(
+        len(pct_runs),
+        3,
+        figsize=(17, 4 * len(pct_runs)),
+        width_ratios=[1, 1.6, 1.6],
+        sharex="col",
+        layout="constrained",
+        squeeze=False,
+    )
     for row, (name, kw) in zip(axs, pct_runs.items(), strict=True):
-        low, hi = np.nanpercentile(temp, [kw.get("low_percentile", 5), kw.get("hi_percentile", 95)])
+        low, hi = np.nanpercentile(
+            temp, [kw.get("low_percentile", 5), kw.get("hi_percentile", 95)],
+        )
         pad = kw.get("pad", 0)
         flags = pct_flags[name]
 
-        ax = row[0] #   Histogram
+        ax = row[0]  #   Histogram
         ax.hist(temp[~np.isnan(temp)], bins=bins, linewidth=0.3)
         ax.set_yscale("log")
         for a, b in [(bins[0], low - pad), (hi + pad, bins[-1])]:
@@ -412,17 +634,29 @@ def percentile_range_figure(time, pres, temp, pct_runs, pct_flags, bins):
         ax.invert_yaxis()
         ax.set_ylabel("Pressure (dbar)")
         args = "".join(f", {k}={v}" for k, v in kw.items())
-        ax.set_title(f"percentile_range_test(TEMP{args})", fontfamily="monospace", fontsize=9)
+        ax.set_title(
+            f"percentile_range_test(TEMP{args})", fontfamily="monospace", fontsize=9,
+        )
         date_axis(ax)
 
         ax = row[2]
         vmin = low - pad
         vmax = hi + pad
-        sc = ax.scatter(time[::20], pres[::20], c=temp[::20], s=0.5, cmap=cmocean.cm.thermal,
-                        vmin=vmin, vmax=vmax, rasterized=True)
+        sc = ax.scatter(
+            time[::20],
+            pres[::20],
+            c=temp[::20],
+            s=0.5,
+            cmap=cmocean.cm.thermal,
+            vmin=vmin,
+            vmax=vmax,
+            rasterized=True,
+        )
         fig.colorbar(sc, ax=ax, label="Temperature (°C)")
         ax.sharey(row[1])
-        ax.set_title(f"TEMP: {vmin:.2f} to {vmax:.2f}", fontfamily="monospace", fontsize=9)
+        ax.set_title(
+            f"TEMP: {vmin:.2f} to {vmax:.2f}", fontfamily="monospace", fontsize=9,
+        )
         date_axis(ax)
 
     axs[-1, 0].set_xlabel("Temperature (°C)")
@@ -445,7 +679,9 @@ def _tint(color, alpha=0.25):
     return tuple(1 - alpha * (1 - c) for c in mcolors.to_rgb(color))
 
 
-def climatology_figure(temp, depth, flags, config, title="climatology_test(config, TEMP, TIME, depth)"):
+def climatology_figure(
+    temp, depth, flags, config, title="climatology_test(config, TEMP, TIME, depth)",
+):
     """Shades the SUSPECT (outside vspan) and FAIL (outside fspan) zones of each climatology window.
 
     ``config`` is anything ``climatology_config`` accepts: a legacy ``ClimatologyConfig``, or a list of window
@@ -456,14 +692,21 @@ def climatology_figure(temp, depth, flags, config, title="climatology_test(confi
     fig, ax = _climatology_axes(temp, depth, flags, title)
 
     #   Fit x to the data and every span edge, so no box is cut off at the sides
-    edges = [v for w in windows for k in ("vspan", "fspan") if w[k] is not None for v in w[k]]
+    edges = [
+        v for w in windows for k in ("vspan", "fspan") if w[k] is not None for v in w[k]
+    ]
     xlo = min(np.nanmin(temp), *edges)
     xhi = max(np.nanmax(temp), *edges)
     pad = 0.02 * (xhi - xlo)
     xlo, xhi = xlo - pad, xhi + pad
-    ytop, ybot = ax.get_ylim()[1], ax.get_ylim()[0]   #   Inverted axis: (bottom, top) = (deep, shallow)
+    ytop, ybot = (
+        ax.get_ylim()[1],
+        ax.get_ylim()[0],
+    )  #   Inverted axis: (bottom, top) = (deep, shallow)
 
-    suspect, fail = (_tint(flag_style[f][1]) for f in (QartodFlags.SUSPECT, QartodFlags.FAIL))
+    suspect, fail = (
+        _tint(flag_style[f][1]) for f in (QartodFlags.SUSPECT, QartodFlags.FAIL)
+    )
     for i, w in enumerate(windows):
         #   Each window stacks above the last (fills, then outlines), all below the scatter at zorder 2
         z_fill, z_line = (2 * i) / (2 * len(windows)), (2 * i + 1) / (2 * len(windows))
@@ -475,25 +718,60 @@ def climatology_figure(temp, depth, flags, config, title="climatology_test(confi
         v0, v1 = w["vspan"]
         f0, f1 = w["fspan"] if w["fspan"] is not None else (xlo, xhi)
         bands = [
-            (xlo, xhi, "white"),    #   Blank the row first so this window replaces earlier ones
-            (xlo, v0, suspect), (v1, xhi, suspect),
-            (xlo, f0, fail), (f1, xhi, fail),
+            (
+                xlo,
+                xhi,
+                "white",
+            ),  #   Blank the row first so this window replaces earlier ones
+            (xlo, v0, suspect),
+            (v1, xhi, suspect),
+            (xlo, f0, fail),
+            (f1, xhi, fail),
         ]
         for a, b, color in bands:
             if b > a:
-                ax.add_patch(plt.Rectangle((a, z0), b - a, z1 - z0, facecolor=color, lw=0, zorder=z_fill))
-        ax.add_patch(plt.Rectangle((v0, z0), v1 - v0, z1 - z0, fill=False, zorder=z_line,
-                                   edgecolor=flag_style[QartodFlags.SUSPECT][1], ls="--", lw=1.2))
+                ax.add_patch(
+                    plt.Rectangle(
+                        (a, z0), b - a, z1 - z0, facecolor=color, lw=0, zorder=z_fill,
+                    ),
+                )
+        ax.add_patch(
+            plt.Rectangle(
+                (v0, z0),
+                v1 - v0,
+                z1 - z0,
+                fill=False,
+                zorder=z_line,
+                edgecolor=flag_style[QartodFlags.SUSPECT][1],
+                ls="--",
+                lw=1.2,
+            ),
+        )
         if w["fspan"] is not None:
-            ax.add_patch(plt.Rectangle((f0, z0), f1 - f0, z1 - z0, fill=False, zorder=z_line,
-                                       edgecolor=flag_style[QartodFlags.FAIL][1], lw=1.2))
+            ax.add_patch(
+                plt.Rectangle(
+                    (f0, z0),
+                    f1 - f0,
+                    z1 - z0,
+                    fill=False,
+                    zorder=z_line,
+                    edgecolor=flag_style[QartodFlags.FAIL][1],
+                    lw=1.2,
+                ),
+            )
     ax.set_xlim(xlo, xhi)
     ax.set_ylim(ybot, ytop)
 
     handles, _ = ax.get_legend_handles_labels()
-    handles.append(plt.Line2D([], [], color=flag_style[QartodFlags.SUSPECT][1], ls="--", label="vspan"))
+    handles.append(
+        plt.Line2D(
+            [], [], color=flag_style[QartodFlags.SUSPECT][1], ls="--", label="vspan",
+        ),
+    )
     if any(w["fspan"] is not None for w in windows):
-        handles.append(plt.Line2D([], [], color=flag_style[QartodFlags.FAIL][1], label="fspan"))
+        handles.append(
+            plt.Line2D([], [], color=flag_style[QartodFlags.FAIL][1], label="fspan"),
+        )
     ax.legend(handles=handles, loc="lower right", markerscale=2, fontsize=8)
     return fig, ax
 
@@ -508,11 +786,19 @@ def pressure_cycle_figure(time, pres, profile, flags_pres, flags_pres_float, dow
 
     #   Shading regions: the period at the bottom and the period back at the surface
     i_bottom = np.nanargmax(p_c)
-    i_surface = np.flatnonzero(p_c < 2)[-1] #   TODO: Handle plotting blue/downcast transmission sections at the beginning.
+    i_surface = np.flatnonzero(p_c < 2)[
+        -1
+    ]  #   TODO: Handle plotting blue/downcast transmission sections at the beginning.
     zooms = [
-        (t_c[i_bottom] - np.timedelta64(2, "m"), t_c[i_bottom] + np.timedelta64(3, "m")),
-        (t_c[np.flatnonzero(p_c[i_bottom:] < 4)[0] + i_bottom] - np.timedelta64(1, "m"),
-         t_c[i_surface] + np.timedelta64(1, "m")),
+        (
+            t_c[i_bottom] - np.timedelta64(2, "m"),
+            t_c[i_bottom] + np.timedelta64(3, "m"),
+        ),
+        (
+            t_c[np.flatnonzero(p_c[i_bottom:] < 4)[0] + i_bottom]
+            - np.timedelta64(1, "m"),
+            t_c[i_surface] + np.timedelta64(1, "m"),
+        ),
     ]
 
     fig = plt.figure(figsize=(12, 9), layout="constrained")
@@ -524,7 +810,8 @@ def pressure_cycle_figure(time, pres, profile, flags_pres, flags_pres_float, dow
     ax_top.set_ylabel("Pressure (dbar)")
     ax_top.set_title(
         f"pressure_test(PRES, direction, pad=0.01 dbar): profiles {down} (downcast) and {up} (upcast)",
-        fontfamily="monospace", fontsize=10,
+        fontfamily="monospace",
+        fontsize=10,
     )
     date_axis(ax_top, "%d %b %H:%M")
 
@@ -532,14 +819,25 @@ def pressure_cycle_figure(time, pres, profile, flags_pres, flags_pres_float, dow
     for col, (t0, t1) in enumerate(zooms):
         ax_top.axvspan(t0, t1, color="k", alpha=0.08, lw=0)
         m = (t_c >= t0) & (t_c <= t1)
-        for row, flags, label in [(1, fp, "pad=0.01 dbar"), (2, ff, "pad=0.01 dbar, assess_floating=True")]:
+        for row, flags, label in [
+            (1, fp, "pad=0.01 dbar"),
+            (2, ff, "pad=0.01 dbar, assess_floating=True"),
+        ]:
             ax = zoom_axs[row - 1, col] = fig.add_subplot(gs[row, col])
             ax.plot(t_c[m], p_c[m], lw=0.6, zorder=1)
             plot_flags(ax, t_c[m], p_c[m], flags[m], s=3, legend=False)
             if row == 2:
                 added = m & (ff != fp)
-                ax.scatter(t_c[added], p_c[added], s=40, facecolors="none", edgecolors="k", linewidths=0.6,
-                           zorder=10, label=f"added by assess_floating ({added.sum()})")
+                ax.scatter(
+                    t_c[added],
+                    p_c[added],
+                    s=40,
+                    facecolors="none",
+                    edgecolors="k",
+                    linewidths=0.6,
+                    zorder=10,
+                    label=f"added by assess_floating ({added.sum()})",
+                )
             if col == 1:
                 ax.legend(loc="lower right", markerscale=2, fontsize=8)
             ax.invert_yaxis()
@@ -550,10 +848,23 @@ def pressure_cycle_figure(time, pres, profile, flags_pres, flags_pres_float, dow
     return fig, (ax_top, zoom_axs)
 
 
-def suspect_share_figure(flags, profile_slices, profile, direction,
-                         title="Share of each profile flagged by pressure_test (assess_floating=True)"):
+def suspect_share_figure(
+    flags,
+    profile_slices,
+    profile,
+    direction,
+    title="Share of each profile flagged by pressure_test (assess_floating=True)",
+):
     starts = np.array([s.start for s in profile_slices])
-    frac_suspect = np.array([np.mean(np.ma.getdata(flags)[s] == QartodFlags.SUSPECT) for s in profile_slices]) * 100
+    frac_suspect = (
+        np.array(
+            [
+                np.mean(np.ma.getdata(flags)[s] == QartodFlags.SUSPECT)
+                for s in profile_slices
+            ],
+        )
+        * 100
+    )
     prof_num = profile[starts]
     is_down = direction[starts] == 1
 
@@ -576,16 +887,28 @@ def profile_panels_figure(pres, profile, pnum, panels, flags=None, title=None):
     If ``flags`` is given, SUSPECT and FAIL points are marked on every panel.
     """
     s = profile == pnum
-    fig, axs = plt.subplots(1, len(panels), figsize=(4 * len(panels), 6), sharey=True, layout="constrained",
-                            squeeze=False)
+    fig, axs = plt.subplots(
+        1,
+        len(panels),
+        figsize=(4 * len(panels), 6),
+        sharey=True,
+        layout="constrained",
+        squeeze=False,
+    )
     axs = axs[0]
     for ax, (values, label) in zip(axs, panels, strict=True):
         ax.plot(values[s], pres[s], lw=0.8)
         if flags is not None:
             for f in (QartodFlags.SUSPECT, QartodFlags.FAIL):
                 m = np.ma.getdata(flags)[s] == f
-                ax.scatter(values[s][m], pres[s][m], s=25, color=flag_style[f][1], zorder=3,
-                           label=f"{flag_style[f][0]} ({m.sum()})")
+                ax.scatter(
+                    values[s][m],
+                    pres[s][m],
+                    s=25,
+                    color=flag_style[f][1],
+                    zorder=3,
+                    label=f"{flag_style[f][0]} ({m.sum()})",
+                )
         ax.set_xlabel(label)
     axs[0].invert_yaxis()
     axs[0].set_ylabel("Pressure (dbar)")
@@ -595,8 +918,19 @@ def profile_panels_figure(pres, profile, pnum, panels, flags=None, title=None):
     return fig, axs
 
 
-def density_inversion_figure(time, pres, sigma0, profile, direction, profile_slices, flags_dens, pnum,
-                             di_suspect, di_fail, step=25):
+def density_inversion_figure(
+    time,
+    pres,
+    sigma0,
+    profile,
+    direction,
+    profile_slices,
+    flags_dens,
+    pnum,
+    di_suspect,
+    di_fail,
+    step=25,
+):
     """One profile's sigma0 and signed density change, next to the flagged section for the whole mission."""
     prof_num = profile[[s.start for s in profile_slices]]
     s = profile_slices[int(np.flatnonzero(prof_num == pnum)[0])]
@@ -604,11 +938,15 @@ def density_inversion_figure(time, pres, sigma0, profile, direction, profile_sli
     p_prof, s_prof, f_prof = pres[s], sigma0[s], flags_dens[s]
     d_prof = np.r_[np.nan, np.sign(np.diff(p_prof)) * np.diff(s_prof)]
 
-    fig, axs = plt.subplots(1, 3, figsize=(13, 6), width_ratios=[1, 1, 1.6], layout="constrained")
+    fig, axs = plt.subplots(
+        1, 3, figsize=(13, 6), width_ratios=[1, 1, 1.6], layout="constrained",
+    )
     ax = axs[0]
     ax.plot(s_prof, p_prof, lw=0.6, zorder=1)
     plot_flags(ax, s_prof, p_prof, f_prof, s=3)
-    ax.set_xlim(np.nanpercentile(s_prof, [1, 100]) + [-0.3, 0.3])  # ignore the odd fresh surface sample
+    ax.set_xlim(
+        np.nanpercentile(s_prof, [1, 100]) + [-0.3, 0.3],
+    )  # ignore the odd fresh surface sample
     ax.set_xlabel(r"$\sigma_0$ (kg m$^{-3}$)")
     ax.set_ylabel("Pressure (dbar)")
     ax.set_title(f"Profile {pnum} ({'down' if direction[s.start] == 1 else 'up'})")
@@ -629,8 +967,11 @@ def density_inversion_figure(time, pres, sigma0, profile, direction, profile_sli
     bad = flags_dens >= QartodFlags.SUSPECT
     plot_flags(ax, time[bad], pres[bad], flags_dens[bad], s=1.5)
     ax.set_ylabel("Pressure (dbar)")
-    ax.set_title(f"density_inversion_test(SIGMA0, PRES, {di_suspect}, {di_fail})", fontfamily="monospace",
-                 fontsize=9)
+    ax.set_title(
+        f"density_inversion_test(SIGMA0, PRES, {di_suspect}, {di_fail})",
+        fontfamily="monospace",
+        fontsize=9,
+    )
     ax.invert_yaxis()
     date_axis(ax)
     return fig, axs
