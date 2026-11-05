@@ -25,6 +25,13 @@ def get_data():
     )
     return(xr.open_dataset(download))
 
+def flag_counts(flags, name=""):
+    flags = np.ma.getdata(flags)
+    parts = [
+        f"{flag_style[f][0]}={np.count_nonzero(flags == f):,}" for f in order if np.any(flags == f)
+    ]
+    print(f"{name:<28s}" + ", ".join(parts))
+
 #   Tying each flag to a label and a color
 flag_style = {
     QartodFlags.GOOD:    ("GOOD", "#77AC30"),
