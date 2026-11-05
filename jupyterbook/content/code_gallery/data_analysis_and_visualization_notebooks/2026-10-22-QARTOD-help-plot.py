@@ -322,13 +322,14 @@ def land_and_bounds_figure(lon, lat, flags_land, flags_bounds, extent, operating
         plot_flags(ax, lon, lat, flags, s=3, thin=10)
         ax.set_title(title, fontfamily="monospace", fontsize=10)
 
+    axs[0].annotate("Bad data\nshifted 0.9° north", xy=(9.72, 58.84), xytext=(9.72, 58.25), fontsize=8, ha="center",
+            arrowprops={"arrowstyle": "->", "lw": 0.6})
+
     axs[1].plot(*operating_area.exterior.xy, color="blue", lw=1.5, label="Operating area")
     axs[1].fill(*exclusion_zone.exterior.xy, facecolor="none", edgecolor="red", hatch="///", lw=1,
                 label="Exclusion zone")
     axs[1].legend(loc="lower right", fontsize=8, markerscale=2)
-    for ax in axs:
-        ax.annotate("shifted 0.9° north", xy=(10.3, 59.0), xytext=(10.55, 58.7), fontsize=8,
-                    arrowprops={"arrowstyle": "->", "lw": 0.6})
+    
     return fig, axs
 
 
