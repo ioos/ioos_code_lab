@@ -11,7 +11,7 @@ dependencies:
   - compliance-checker
   - dask
   - earthaccess
-  - erddapy
+  - erddapy>=3.3.2
   - folium
   - gdal
   - geopandas
@@ -27,6 +27,7 @@ dependencies:
   - jupyter
   - lxml
   - matplotlib-base
+  - mlcroissant
   - nbclassic
   - netcdf4
   - numpy
